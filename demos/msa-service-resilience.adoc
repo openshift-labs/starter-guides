@@ -35,7 +35,7 @@ https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEG
 and added automatically to the load-balancer. If one container fails,
 there will be another container that can service requests
 
-image::/images/demo/msa-resilience-scaled.png[Scaled Up,width=540,align=center]
+image::/images/demos/msa-resilience-scaled.png[Scaled Up,width=540,align=center]
 
 * Click on the blue circle
 * Explain that the list of pods backing the *Coolstore GW* is displayed
@@ -48,7 +48,7 @@ image::/images/demo/msa-resilience-scaled.png[Scaled Up,width=540,align=center]
 ** Health and number of times its restarted +
 * Click on *Actions* button and then *Delete* to delete this pod
 
-image::/images/demo/msa-resilience-delete-pod.png[Delete Pod,width=920,align=center]
+image::/images/demos/msa-resilience-delete-pod.png[Delete Pod,width=920,align=center]
 
 * Click on *Overview* in the left sidebar menu
 * Explain that OpenShift immediately realizes that number of pods
@@ -56,7 +56,7 @@ backing the *CoolStore GW* service is reduced to 1 while it was declared
 to have 2 pods backing this service for high-availability. OpenShift
 restarts the removed pod in order to bring the number of pods back to 2 pods.
 
-image::/images/demo/msa-resilience-auto-healing.png[Auto Healing,width=540,align=center]
+image::/images/demos/msa-resilience-auto-healing.png[Auto Healing,width=540,align=center]
 
 * Explain that OpenShift allows distinguishing between failures that
 might resolve with a restart and more severe issues that need required

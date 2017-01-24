@@ -37,7 +37,7 @@ step would be integrated into Slack or other chat systems and would be
 controlled via a chat bot. In this demo, we will use Jenkins directly to
 approve deployments.
 
-image::/images/demo/msa-cicd-eap-pipeline-manual.png[OpenShift Pipelines Manual Step,width=1000,align=center]
+image::/images/demos/msa-cicd-eap-pipeline-manual.png[OpenShift Pipelines Manual Step,width=1000,align=center]
 
 * Explain zero-downtime deployment strategies (e.g. blue/green) using
 https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_0_465[the sides] and
@@ -49,7 +49,7 @@ user traffic is not switched to the new version and would happen after approval.
 * Click on the projects drop-down list on top of the page and then on
 *CoolStore PROD*
 
-image::/images/demo/msa-cicd-eap-projectlist.png[Projects List,width=820,align=center]
+image::/images/demos/msa-cicd-eap-projectlist.png[Projects List,width=820,align=center]
 
 * Scroll down to the *Inventory Live* service
 * Explain that there are two version of inventory deployed in
@@ -61,13 +61,13 @@ the screenshot). Adjust the traffic split to other ratios (for example
 90% and 10%) allows performing other deployment patterns such as canary
 release or even A/B testing.
 
-image::/images/demo/msa-cicd-eap-trafficsplit.png[Blue/Green Traffic Split,width=820,align=center]
+image::/images/demos/msa-cicd-eap-trafficsplit.png[Blue/Green Traffic Split,width=820,align=center]
 
 * In the *Web UI* service group, click on the route url
 * Explain that the recalled product (Solid Performance Polo) is still
 shows up in-stock on the CoolStore and is possible to order the product.
 
-image::/images/demo/msa-cicd-eap-coolstore.png[CoolStore Products,width=920,align=center]
+image::/images/demos/msa-cicd-eap-coolstore.png[CoolStore Products,width=920,align=center]
 
 * Explain that when *Go Live* is approved, the router switches the
 traffic to the inventory-green that holds the new version of *Inventory*
@@ -89,7 +89,7 @@ on top of the page and then on *CI/CD*. On the left sidebar menu, click on
 * Explain that the pipeline is finished successfully and the new version
 is Live now
 
-image::/images/demo/msa-cicd-eap-pipeline.png[OpenShift Pipeline,width=1000,align=center]
+image::/images/demos/msa-cicd-eap-pipeline.png[OpenShift Pipeline,width=1000,align=center]
 
 * In the OpenShift web console, click on *CoolStore PROD* project
 * In the *Web UI* service group, click on the route url
