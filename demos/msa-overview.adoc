@@ -1,0 +1,86 @@
+## Containerized Microservices
+
+[format="csv",cols="2"]
+|======
+*Length*,TBD
+*Difficulty*,Easy
+*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_2_27
+*Video*,TBD
+*Simulation (Mac)*,TBD
+|======
+
+
+### Explain the Demo Concepts
+
+* Explain microservices architecture concept using the https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_0_514[demo slides]
+* Explain the CoolStore application architecture using the https://docs.google.com/a/redhat.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit?usp=sharing[demo slides]
+
+### Demonstrate the CoolStore web application
+
+* Go to *CoolStore Web UI* in the *CoolStore PROD* project: {{COOLSTORE_WEB_PROD_URL}}
+
+====
+TIP: You can find the *CoolStore Web UI* url by going to the OpenShift web console,
+clicking on *CoolStore PROD* project, and in the *Web UI* service group, clicking on the route url
+====
+
+* Explain the catalog and inventory microservices in the *CoolStore Web UI*
+
+image::/images/demos/msa-overview-coolstore-web.png[CoolStore Web UI,width=920,align=center]
+
+* Click on *Add to Cart* on a product
+* Click on *Your Shopping Cart* tab and show the shopping cart
+* Explain the shopping cart microservice
+
+### Demonstrate the CoolStore deployment and containers
+
+* In the OpenShift web console, Click on *Overview* in the left sidebar menu
+* Explain the NodeJS container in *Web UI*
+* Explain other service groups (Inventory, etc) and the microservices deployed in containers
+
+### Demonstrate Inventory service container (JBoss EAP-based microservices)
+
+* Go to OpenShift web console
+* Scroll to the *Inventory* service group
+* Explain the containers in the *Inventory* service group: JBoss EAP and PostgreSQL database
+* Explain how a microservices can be deployed on JBoss EAP
+* Click on JBoss EAP (inventory-service) pod circle
+* Explain the service concept and load balancing between the pods list (currently one pod)
+* Click on *inventory-xxxxx* in the list
+* Explain some of the container details displayed such as status, ip address, image name, etc
+* Click on *Metrics* tab and explain the metrics
+* Click on *Logs* tab and show the logs
+* Point out JBoss EAP in the logs
+
+image::/images/demos/msa-overview-eap-logs.png[JBoss EAP Container Logs,width=920,align=center]
+
+* Explain the central log management with Elastic and Kibana
+* Click on *Terminal* and explain remote shell access to the container
+* Type +ps aux+in the terminal and press *Enter* to display the processes running inside the container
+
+### Demonstrate Inventory service persistent database container (PostgreSQL)
+
+* In the OpenShift web console, Click on *Overview* in the left sidebar menu
+* Explain (again!) the service concept and how JBoss EAP finds its PostgreSQL database
+* Explain the persistence concept
+* Click on *Storage* on the left sidebar menu
+* Explain requesting storage and dynamic provisioning
+
+### Demonstrate Catalog service container (JBoss Web Server-based microservice)
+
+* In the OpenShift web console, Click on *Overview* in the left sidebar menu
+* Scroll to *Catalog* service group
+* Explain the containers in the *Catalog* service group: JBoss Web Server and MongoDB database
+* Explain how a microservices can be deployed on JBoss Web Server
+* Click on JBoss Web Server (catalog) pod circle
+* Click on *catalog-xxxxx* in the list
+* Click on *Logs* tab and show the logs
+* Point out JBoss Web Server in the logs
+
+image::/images/demos/msa-overview-jws-logs.png[JBoss Web Server Container Logs,width=920,align=center]
+
+### Demonstrate CoolStore Gateway container (Fuse Integration Services, Camel and Netflix OSS)
+
+* In the OpenShift web console, Click on *Overview* in the left sidebar menu
+* Scroll to *Coolstore GW* service group
+* Explain Camel integration and Netflix OSS

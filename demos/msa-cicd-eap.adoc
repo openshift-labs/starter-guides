@@ -1,0 +1,96 @@
+## Increasing Delivery Speed with CI/CD
+
+[format="csv",cols="2"]
+|======
+*Length*,TBD
+*Difficulty*,Medium
+*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_0
+*Video*,TBD
+*Simulation (Mac)*,TBD
+|======
+
+### Explain the Demo Concepts
+
+* Explain Continuous Integration and Continuous Delivery using the
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_4[slides]
+* Explain the CoolStore pipeline
+using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_9[the slides]
+
+### Demonstrate Automated Deployments via CI/CD Pipelines
+* In the OpenShift web console, go to *CI/CD* project
+* On the left sidebar menu, click on *Builds* and then *Pipelines*
+* Explain that *inventory-pipeline* is an OpenShift pipeline that takes
+any change committed to the *coolstore-microservices* team Git repository
+through various steps until it is deployed in production.
+* If coming from previous modules, explain that the pipeline was
+triggered when team member (code reviewer) merged the _Pull Request_ in
+the repository. The pipeline has taken the code changes through DEV
+environment and after test succeeded, it has promoted the changes to the
+TEST environment to run system-integration tests with all dependent
+services deployed. When tests succeed, then the new version is promoted
+to the PROD parallel to the existing version that is serving customers .
+It is waiting for the release managers manual approval to Go Live and
+redirect the production traffic to the new version. The manual approval
+is typically integrated into existing IT workflow management services
+such as ServiceNow, EMC Remedy and JIRA Service Desk. In ChatOps, this
+step would be integrated into Slack or other chat systems and would be
+controlled via a chat bot. In this demo, we will use Jenkins directly to
+approve deployments.
+
+image::/images/demos/msa-cicd-eap-pipeline-manual.png[OpenShift Pipelines Manual Step,width=1000,align=center]
+
+* Explain zero-downtime deployment strategies (e.g. blue/green) using
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_0_465[the sides] and
+how every minute of downtime for an e-commerce company equals lost revenue.
+* Explain the blue/green deployment in the pipeline using
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_9[the slides]
+and point that changes are already deployed in production but
+user traffic is not switched to the new version and would happen after approval.
+* Click on the projects drop-down list on top of the page and then on
+*CoolStore PROD*
+
+image::/images/demos/msa-cicd-eap-projectlist.png[Projects List,width=820,align=center]
+
+* Scroll down to the *Inventory Live* service
+* Explain that there are two version of inventory deployed in
+production: *inventory-blue* and *inventory-green*. The traffic split shows
+that 100% of traffic is going to *inventory-blue* and 0% is going to
+*inventory-green*. Comparing the deployment times shows that the code
+changes are deployed to the *inventory-green* (deployed 7 minutes ago in
+the screenshot). Adjust the traffic split to other ratios (for example
+90% and 10%) allows performing other deployment patterns such as canary
+release or even A/B testing.
+
+image::/images/demos/msa-cicd-eap-trafficsplit.png[Blue/Green Traffic Split,width=820,align=center]
+
+* In the *Web UI* service group, click on the route url
+* Explain that the recalled product (Solid Performance Polo) is still
+shows up in-stock on the CoolStore and is possible to order the product.
+
+image::/images/demos/msa-cicd-eap-coolstore.png[CoolStore Products,width=920,align=center]
+
+* Explain that when *Go Live* is approved, the router switches the
+traffic to the inventory-green that holds the new version of *Inventory*
+service. If not approved, the *Live* version stays the same as before and
+the new version gets discarded.
+* Click on the *Input Required* link under the *Approve Go Live* stage. Jenkins opens in a new tab.
+** Jenkins URL: {{JENKINS_URL}}
+* Explain that Jenkins can integrate into OpenShift authorization mechanism so that
+users can log in using their OpenShift credentials.
+* Log in using your OpenShift credentials
+* Explain that in Jenkins, you can enable role-based authorization and
+people with correct privileges will be able to approve going live in
+production
+* Click on *Proceed* button to approve the *Go Live*. The Jenkins page shows
+the pipeline logs as it proceeds.
+* Go back to OpenShift web console, click on the projects drop-down list
+on top of the page and then on *CI/CD*. On the left sidebar menu, click on
+*Builds* and then *Pipelines*.
+* Explain that the pipeline is finished successfully and the new version
+is Live now
+
+image::/images/demos/msa-cicd-eap-pipeline.png[OpenShift Pipeline,width=1000,align=center]
+
+* In the OpenShift web console, click on *CoolStore PROD* project
+* In the *Web UI* service group, click on the route url
+* Explain that the the recalled product is out of stock.

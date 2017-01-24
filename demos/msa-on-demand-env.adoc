@@ -1,0 +1,127 @@
+## Creating On-Demand Environment
+
+[format="csv",cols="2"]
+|======
+*Length*,5 min
+*Difficulty*,Easy
+*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_15
+*Video*,https://drive.google.com/open?id=0B630TpgzAhO_ZXg2TnF0UnZIX0U
+*Simulation (Mac)*,https://drive.google.com/open?id=0B630TpgzAhO_N190WDBZTnowdVk
+|======
+
+### Explain the Demo Concepts
+
+* Explain the use-case: a JIRA issue is assigned to the developer to fix
+a bug in the *Inventory* microservice which runs on JBoss EAP 7. He needs
+to deploy the exact version of the source code containing the issue in a
+environment to investigate and possibly correct the problem. Since
+ordering new servers used to take 6 weeks, he usually repurposed one of
+the existing allocated servers. He would then spent only 1 day cleaning
+up the server, installing JDK and middleware and deploy the application
+on it so that he can start investigating. Taking advantage of containers
+and self-service, all that is reduced to a few minutes.
+
+### Demonstrate Creating Personal Repository from Project Repository
+
+====
+NOTE: *Gogs* git server is used in this demo as the Git repository and it is deployed in the *CI/CD* project and accessible at {{GOGS_URL}}. Open *Gogs* in your browser in a new tab by entering the correct URL. Alternatively, click on *OpenShift Container Platform* logo in the header,
+then on *CI/CD* project and then on *Gogs* route URL to open *Gogs* in a new tab.
+====
+
+* Explain *Gogs* as the team source repository where the CoolStore
+application source code and configuration is stored and managed
+* In *Gogs* web, click on *Sign In* and enter the developer credentials
+** Username: _{{GOGS_DEV_USER}}_
+** Password: _{{GOGS_DEV_PASSWORD}}_
+
+image::/images/demos/msa-ondemand-gogs-web.png[Gogs Web,width=920,align=center]
+
+* In top navigation, click on Explore
+
+image::/images/demos/msa-ondemand-gogs-explore.png[Gogs Web,width=920,align=center]
+
+* Explain that the source code for the application is stored in the
+*coolstore-microservice* team repository. Click on
+*coolstore-microservice* repository.
+
+image::/images/demos/msa-ondemand-gogs-team.png[Team Repository,width=920,align=center]
+
+* Explain the teams quality process using the
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_24[slides]:
+no change is allowed to be directly committed in the team code
+repository. Team members should create a copy of the the source repo via
+forking the repo, make the changes in their personal repository and send
+a _Pull Request_ to the team repository. Pull requests are merged to the
+team repository after being reviewed by senior members of the team. This
+process allows to discover issues and bugs as close as possible to the
+developers while their mind is fresh.
+* Click on *Fork* button, to create a copy of the repository in the
+developers account. The number on the button shows the number of times
+this repository is forked. Click then on *Fork Repository*.
+
+image::/images/demos/msa-ondemand-gogs-fork.png[Fork Repository,width=800,align=center]
+
+* Explain that the repository is created now on the developer account as
+a fork of the team account.
+
+image::/images/demos/msa-ondemand-gogs-forked.png[Forked Repository,width=800,align=center]
+
+* Click on the *Copy* icon and write down the Git repo url which will be
+used in the next steps.
+
+image::/images/demos/msa-ondemand-gogs-copyurl.png[Copy Git URL,width=920,align=center]
+
+### Demonstrate On-demand Deployment in Developer Project
+
+* Click on *OpenShift Container Platform* logo in the header to list projects
+* Explain that if admin allows a user to create projects, a button with
+the label New Project would appear above all projects on the right side.
+The user can click on *New Project* button to create new projects.
+
+image::/images/demos/msa-ondemand-newproject.png[Create New Project,width=860,align=center]
+
+====
+IMPORTANT: The demo environment might not allow creating new projects and therefore the *New Project* button might not be visible.
+====
+
+* Explain that developer has a personal project called *Developer
+Project* that only he has access to as a private working space
+* Click on *Developer Project* in the list of projects
+* Explain that currently nothing is deployed in this project and the
+developer wants to provision the application in his project using his
+forked repository created in previous steps
+* Click on *Add to Project*
+* Explain that using templates, developer can deploy an entire
+application with all its components at once
+* Scroll down and find the *inventory* template in the catalog
+
+image::/images/demos/msa-ondemand-template.png[Application Template,width=920,align=center]
+
+* Explain that the tags assigned to the template such as _microservices_,
+_jboss_ and _angularjs_ are searchable and allow developers to filter
+templates based on tags
+* Click on the *inventory* template
+* Explain that developer can customize the deployment via the template
+parameters. For example the *Git repository* and *Git branch/tag* parameters
+specify which repository and branch contain the application source
+code.
+
+====
+NOTE: The default values of all parameters are set correctly
+for this demo. The *Git repository* parameter contains the URL to the forked
+repository in the previous steps: {{GOGS_DEV_REPO_URL}}
+====
+
+* Paste the Git repository URL forked in previous steps for the *Git repository* parameter
+* Click on *Create* button to deploy the *inventory* service
+* Explain the Source-to-Image mechanism using the
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_29[slides] and
+that it gets started, clones the source code from developers forked Git
+repository and starts building the application.
+
+image::/images/demos/msa-ondemand-template-deployed.png[Deployed Template,width=800,align=center]
+
+* Explain that the developer now has a personal environment with the
+correct version of *Inventory* service deployed so he can start
+investigating the issue. Took just a minute compared to days and weeks
+before!

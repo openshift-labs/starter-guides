@@ -1,0 +1,49 @@
+### Agile Integration
+
+[format="csv",cols="2"]
+|======
+*Length*,TBD
+*Difficulty*,Medium
+*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_5
+*Video*,TBD
+*Simulation (Mac)*,TBD
+|======
+
+### Explain the Demo Concepts
+* Explain agile integration using the
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_5[demo slides]
+
+### Demonstrate API Aggregation with Camel (Fuse Integration Services)
+
+* Explain API aggregation using the
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_5[demo
+slides]
+* In the OpenShift web console, go to *CoolStore PROD* project
+* In the *Coolstore GW* service group, click on the route url to go to the Swagger UI
+
+image::/images/demos/msa-int-swagger-ui.png[Coolstore GW Swagger UI,width=800,align=center]
+
+* In the *Swagger UI*, explain the +/product+ API
+* Click on +/product+ API and then *GET*
+* Click on *Try it out!* to invoke the API
+
+image::/images/demos/msa-int-swagger-api.png[Products API,width=700,align=center]
+
+* Point out the returned product list under *Response Body*
+* Go to OpenShift web console
+* Click on *CoolStore GW* pod circle and then *coolstore-gw-xxxxx*
+* Click on *Logs* tab
+* Point out that the *CoolStore GW* is an Spring Boot application
+
+image::/images/demos/msa-int-springboot-logs.png[Spring Boot,width=920,align=center]
+
+* Click on *Details* tab
+* Click on *Open Java Console*
+
+image::/images/demos/msa-int-java-console.png[Java Console,width=920,align=center]
+
+* Explain the list of routes briefly in the left sidebar
+* Click on *Route Diagram* tab
+* Explain the routes briefly and point out the route structures and message counts
+
+image::/images/demos/msa-int-camel-routes.png[Camel Routes,width=920,align=center]
