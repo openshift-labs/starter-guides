@@ -4,9 +4,9 @@
 |======
 *Length*,5 min
 *Difficulty*,Easy
-*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_15
-*Video*,https://drive.google.com/open?id=0B630TpgzAhO_ZXg2TnF0UnZIX0U
-*Simulation (Mac)*,https://drive.google.com/open?id=0B630TpgzAhO_N190WDBZTnowdVk
+*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_15[Google Slide]
+*Video*,https://drive.google.com/open?id=0B630TpgzAhO_ZXg2TnF0UnZIX0U[Google Drive]
+*Simulation (Mac)*,https://drive.google.com/open?id=0B630TpgzAhO_N190WDBZTnowdVk[Google Drive]
 |======
 
 ### Explain the Demo Concepts
@@ -34,17 +34,17 @@ application source code and configuration is stored and managed
 ** Username: _{{GOGS_DEV_USER}}_
 ** Password: _{{GOGS_DEV_PASSWORD}}_
 
-image::/images/demos/msa-ondemand-gogs-web.png[Gogs Web,width=920,align=center]
+image::demos/msa-ondemand-gogs-web.png[Gogs Web,width=920,align=center]
 
 * In top navigation, click on Explore
 
-image::/images/demos/msa-ondemand-gogs-explore.png[Gogs Web,width=920,align=center]
+image::demos/msa-ondemand-gogs-explore.png[Gogs Web,width=920,align=center]
 
 * Explain that the source code for the application is stored in the
 *coolstore-microservice* team repository. Click on
 *coolstore-microservice* repository.
 
-image::/images/demos/msa-ondemand-gogs-team.png[Team Repository,width=920,align=center]
+image::demos/msa-ondemand-gogs-team.png[Team Repository,width=920,align=center]
 
 * Explain the teams quality process using the
 https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_24[slides]:
@@ -59,17 +59,17 @@ developers while their mind is fresh.
 developers account. The number on the button shows the number of times
 this repository is forked. Click then on *Fork Repository*.
 
-image::/images/demos/msa-ondemand-gogs-fork.png[Fork Repository,width=800,align=center]
+image::demos/msa-ondemand-gogs-fork.png[Fork Repository,width=800,align=center]
 
 * Explain that the repository is created now on the developer account as
 a fork of the team account.
 
-image::/images/demos/msa-ondemand-gogs-forked.png[Forked Repository,width=800,align=center]
+image::demos/msa-ondemand-gogs-forked.png[Forked Repository,width=800,align=center]
 
 * Click on the *Copy* icon and write down the Git repo url which will be
 used in the next steps.
 
-image::/images/demos/msa-ondemand-gogs-copyurl.png[Copy Git URL,width=920,align=center]
+image::demos/msa-ondemand-gogs-copyurl.png[Copy Git URL,width=920,align=center]
 
 ### Demonstrate On-demand Deployment in Developer Project
 
@@ -78,7 +78,7 @@ image::/images/demos/msa-ondemand-gogs-copyurl.png[Copy Git URL,width=920,align=
 the label New Project would appear above all projects on the right side.
 The user can click on *New Project* button to create new projects.
 
-image::/images/demos/msa-ondemand-newproject.png[Create New Project,width=860,align=center]
+image::demos/msa-ondemand-newproject.png[Create New Project,width=860,align=center]
 
 ====
 IMPORTANT: The demo environment might not allow creating new projects and therefore the *New Project* button might not be visible.
@@ -95,7 +95,7 @@ forked repository created in previous steps
 application with all its components at once
 * Scroll down and find the *inventory* template in the catalog
 
-image::/images/demos/msa-ondemand-template.png[Application Template,width=920,align=center]
+image::demos/msa-ondemand-template.png[Application Template,width=920,align=center]
 
 * Explain that the tags assigned to the template such as _microservices_,
 _jboss_ and _angularjs_ are searchable and allow developers to filter
@@ -119,7 +119,7 @@ https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEG
 that it gets started, clones the source code from developers forked Git
 repository and starts building the application.
 
-image::/images/demos/msa-ondemand-template-deployed.png[Deployed Template,width=800,align=center]
+image::demos/msa-ondemand-template-deployed.png[Deployed Template,width=800,align=center]
 
 * Explain that the developer now has a personal environment with the
 correct version of *Inventory* service deployed so he can start
