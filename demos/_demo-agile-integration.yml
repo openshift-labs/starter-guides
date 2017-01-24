@@ -11,6 +11,6 @@ vars:
   GOGS_REVIEWER_PASSWORD: "team"
 modules:
   activate:
-    - demo_msa-overview
-    - demo_msa-agile-integration
-    - demo_msa-service-resilience
+    - demos_msa-overview
+    - demos_msa-agile-integration
+    - demos_msa-service-resilience

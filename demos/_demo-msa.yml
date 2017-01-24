@@ -10,10 +10,10 @@ vars:
   GOGS_REVIEWER_PASSWORD: "team"
 modules:
   activate:
-    - demo_msa-overview
-    - demo_msa-agile-integration
-    - demo_msa-service-resilience
-    - demo_msa-on-demand-env
-    - demo_msa-dev-productivity
-    - demo_msa-dev-process
-    - demo_msa-cicd-eap
+    - demos_msa-overview
+    - demos_msa-agile-integration
+    - demos_msa-service-resilience
+    - demos_msa-on-demand-env
+    - demos_msa-dev-productivity
+    - demos_msa-dev-process
+    - demos_msa-cicd-eap
