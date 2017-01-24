@@ -84,3 +84,19 @@ modules:
     name: Running a container as a non Root user
   gcp-bigquery:
     name: Integrating with Google Compute Service BigQuery
+  demos_msa-overview:
+    name: Containerized Microservices
+  demos_msa-agile-integration:
+    name: Agile Integration for Microservices
+  demos_msa-service-resilience:
+    name: Service Resilience and Fault Tolerance
+  demos_msa-on-demand-env:
+    name: Creating On-Demand Environment
+  demos_msa-dev-productivity:
+    name: Increase Developer Productivity with Containers
+  demos_msa-dev-process:
+    name: Building Quality into Development Process
+    requires:
+      - demos_msa-dev-productivity
+  demos_msa-cicd-eap:
+    name: Increasing Delivery Speed with CI/CD
