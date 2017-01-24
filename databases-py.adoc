@@ -5,7 +5,7 @@ In this lab, we're going to deploy a Mongo database that will be used to store t
 
 Finally, we will mark the `nationalparks` application as a backend for the map visualization tool, so that it can be dynamically discovered by the `parksmap` component using the OpenShift discovery mechanism and the map will be displayed automatically.
 
-image::/images/roadshow-app-architecture-nationalparks-2.png[Application architecture,800,align="center"]
+image::roadshow-app-architecture-nationalparks-2.png[Application architecture,800,align="center"]
 
 ### Background: Storage
 Most useful applications are "stateful" or "dynamic" in some way, and this is
@@ -49,7 +49,7 @@ You will notice that there are several MongoDB templates available, some of
 which come with application servers pre-configured. We just need a database,
 though, so `mongodb-ephemeral` is what you should choose.
 
-image::/images/ocp-mongodb-template.png[MongoDB]
+image::ocp-mongodb-template.png[MongoDB]
 
 When we performed the application build we selected the
 builder image to use and OpenShift presented us the standard build workflow.
@@ -58,7 +58,7 @@ parameters that can be customized. In our case, the parameters we are concerned
 with are the environment variables discussed before (user, password, database, and
 admin password).
 
-image::/images/ocp-mongo-template-deploy.png[MongoDB]
+image::ocp-mongo-template-deploy.png[MongoDB]
 
 You can see that some of the fields say *"generated if empty"*. This is a
 feature of *Templates* in OpenShift that will be covered in the next lab. For
@@ -74,7 +74,7 @@ You can leave the rest of the values as their defaults, and then click
 quickly be deployed.
 
 
-image::/images/mongo-group-db-1.png[Service Groups]
+image::mongo-group-db-1.png[Service Groups]
 
 You can group services in OpenShift Console in order to display related services
 together in one panel. Click on the chain icon on the right-top corner of the
@@ -82,7 +82,7 @@ together in one panel. Click on the chain icon on the right-top corner of the
 *Group Service to nationalparks* dialog and click on *OK*. The `nationalparks` and
  `mongodb` services are groups and displayed together.
 
-image::/images/mongo-group-db-2.png[Service Groups]
+image::mongo-group-db-2.png[Service Groups]
 
 
 #### Exercise: Wiring the Application and the Database
@@ -319,6 +319,6 @@ If you check your browser now:
 http://parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/
 ----
 
-image::/images/parksmap-new-parks.png[MongoDB]
+image::parksmap-new-parks.png[MongoDB]
 
 You'll notice that the parks suddenly are showing up. That's really cool!

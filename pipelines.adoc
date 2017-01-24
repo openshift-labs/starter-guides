@@ -18,7 +18,7 @@ you will create a more complex workflow by creating a pipeline that extends the 
 functionality by adding more steps to the build and deploy process. The following
 diagram shows the pipeline you will create in this lab.
 
-image::/images/pipeline-diagram.png[CI/CD Pipeline Diagram,800,align="center"]
+image::pipeline-diagram.png[CI/CD Pipeline Diagram,800,align="center"]
 
 There are two environments for the `nationalparks` application in this pipeline.
 *Dev* container is the for development and test purposes where all code and
@@ -51,26 +51,26 @@ OpenShift provides a supported Jenkins image which includes a rich set of
 plugins that enable the full pipeline flow. Click on the *Add to project*
 button, find the `jenkins-ephemeral` template, and click on it.
 
-image::/images/pipeline-jenkins-catalog.png[Jenkins Ephemeral]
+image::pipeline-jenkins-catalog.png[Jenkins Ephemeral]
 
 You can customize the Jenkins properties such as service name, admin password, memory
 allocation, etc through the parameters in the web console. Specify _openshift3_ for
 *Jenkins Password* and leave the rest of parameters with the default values. Click on
 *Create* to deploy Jenkins.
 
-image::/images/pipeline-jenkins-params.png[Jenkins Template]
+image::pipeline-jenkins-params.png[Jenkins Template]
 
 OpenShift deploys a Jenkins pod and also creates a service and route for the
 deployed container.
 
-image::/images/pipeline-jenkins-pods.png[Jenkins Pods]
+image::pipeline-jenkins-pods.png[Jenkins Pods]
 
 Click on the Jenkins route in order to open Jenkins Console. Login in Jenkins
 using the admin credentials and explore the Jenkins Console.
 
 NOTE: The admin credentials for Jenkins are: admin/openshift3
 
-image::/images/pipeline-jenkins-console.png[Jenkins Console]
+image::pipeline-jenkins-console.png[Jenkins Console]
 
 Essentially, the OpenShift Jenkins plugin uses the OpenShift REST API in order
 to integrate into various OpenShift operations and therefore you should grant
@@ -143,7 +143,7 @@ Now you can create the *Live* deployment based on the same `nationalparks`
 Docker image created in link:java[previous labs]. Click on *Builds* &rarr;
 *Images* and then `nationalparks` to inspect the *ImageStream*.
 
-image::/images/pipeline-live-image.png[National Parks Image Stream]
+image::pipeline-live-image.png[National Parks Image Stream]
 
 The default behavior for OpenShift has every
 https://{{DOCS_URL}}/latest/architecture/core_concepts/builds_and_image_streams.html[S2I
@@ -199,7 +199,7 @@ exists as our *Dev* Deployment.
 
 {% if modules.configmap %}
 
-image::/images/pipeline-live-deploy-config.png[National Parks Live Deploy]
+image::pipeline-live-deploy-config.png[National Parks Live Deploy]
 
 {% else %}
 
@@ -211,7 +211,7 @@ Specify the following environment variable to wire the *Live* container to the
 * `MONGODB_PASSWORD`: `mongodb`
 * `MONGODB_DATABASE`: `mongodb`
 
-image::/images/pipeline-live-deploy-env.png[National Parks Live Deploy]
+image::pipeline-live-deploy-env.png[National Parks Live Deploy]
 
 {% endif %}
 
@@ -238,7 +238,7 @@ Group the *Live* services
 by clicking on the *Group Service* on the right side of *NATIONALPARKS LIVE*
 container and choosing `mongodb-live` from the drop-down list.
 
-image::/images/pipeline-live.png[National Parks Live]
+image::pipeline-live.png[National Parks Live]
 
 #### Add Route
 If you look at the web console, you will notice that, when you create the
@@ -284,7 +284,7 @@ and click on *Create*
 NOTE: Specify the name of the project (e.g. `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}`) where
 `nationalparks` *Dev* and *Live* containers are deployed.
 
-image::/images/pipeline-template.png[Pipeline Template]
+image::pipeline-template.png[Pipeline Template]
 
 In order to start the pipeline that you created in a previous step, Go to
 *Builds* &rarr; *Pipelines* on the left side-bar. Click `nationalparks-pipeline`
@@ -294,13 +294,13 @@ on *Build #N* to see the details of this specific pipeline execution as well as
 the pipeline definition using the
 https://jenkins.io/doc/book/pipeline/overview/[Jenkins DSL].
 
-image::/images/pipeline-details.png[Pipeline Details]
+image::pipeline-details.png[Pipeline Details]
 
 Because of the way the pipeline was defined, if you return to the overview page
 you will also see the pipeline status there, associated with the relevant
 deployments:
 
-image::/images/pipeline-deploy-dev.png[Pipeline - Deploy to Dev]
+image::pipeline-deploy-dev.png[Pipeline - Deploy to Dev]
 
 Pipeline execution will pause after running automated tests against the *Dev*
 container. Visit the `nationalparks` *Dev* web service to query for data and
@@ -314,7 +314,7 @@ http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/
 After the test stage, pipeline waits for manual approval in order to deploy to the
 *Live* container.
 
-image::/images/pipeline-input.png[Manual Approval]
+image::pipeline-input.png[Manual Approval]
 
 Click on *Input Required* link which takes you to the Jenkins Console for approving
 the deployment. This step typically will be integrated into your workflow process
@@ -322,7 +322,7 @@ the deployment. This step typically will be integrated into your workflow proces
 deployment process without interacting directly with Jenkins. For simplicity in
 this lab, click on *Proceed* button to approve the build.
 
-image::/images/pipeline-jenkins-input.png[Jenkins Approval,1000,align=center]
+image::pipeline-jenkins-input.png[Jenkins Approval,1000,align=center]
 
 Pipeline execution continues to promote and deploy the `nationalparks` image.
 This is achieved by tagging the image that was just built and tested as "live",
@@ -337,7 +337,7 @@ signal a bad change in the code or configuration.
 NOTE: Build metrics are generated and displayed after a few executions of the pipeline
 to determine trends.
 
-image::/images/pipeline-history.png[OpenShift History]
+image::pipeline-history.png[OpenShift History]
 
 Congratulations! Now you have a CI/CD Pipeline for the `nationalparks`
 application. If you visit the parks map again, you should see the map points!

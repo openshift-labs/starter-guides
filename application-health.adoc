@@ -53,7 +53,7 @@ _Readiness Probe_
 * Initial Delay: `20`
 * Timeout: `1`
 
-image::/images/pipeline-readiness.png[Readiness Probe]
+image::pipeline-readiness.png[Readiness Probe]
 
 _Liveness Probe_
 
@@ -61,7 +61,7 @@ _Liveness Probe_
 * Initial Delay: `120`
 * Timeout: `1`
 
-image::/images/pipeline-liveness.png[Liveness Probe]
+image::pipeline-liveness.png[Liveness Probe]
 
 Click *Save* and then click the *Overview* button in the left navigation. You
 will notice that these changes caused a new deployment -- they counted as a
@@ -71,4 +71,4 @@ You will also notice that the circle around the new deployment stays light blue
 for a while. This is a sign that the pod(s) have not yet passed their readiness
 checks -- it's working!
 
-image::/images/apphealth-status.png[Application Health]
+image::apphealth-status.png[Application Health]

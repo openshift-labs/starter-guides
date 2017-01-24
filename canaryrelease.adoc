@@ -10,13 +10,13 @@ Commit the change to trigger the pipeline and wait at "Input Required" in pipeli
 
 Go to *Applications* -> *Routes* and click on `nationalparks-live`. Edit the route
 
-image::/images/canary-edit-route.png[Edit Route]
+image::canary-edit-route.png[Edit Route]
 
-image::/images/canary-split-link.png[Split Traffic Link]
+image::canary-split-link.png[Split Traffic Link]
 
-image::/images/canary-alt-service.png[Choose Alternative Service]
+image::canary-alt-service.png[Choose Alternative Service]
 
-image::/images/canary-split-traffic.png[Split Traffic]
+image::canary-split-traffic.png[Split Traffic]
 
 Make Router to do round robin
 

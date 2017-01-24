@@ -85,7 +85,7 @@ right?).
 
 Click it.
 
-image::/images/new-parksmap-deploy.png[Deploy Button]
+image::new-parksmap-deploy.png[Deploy Button]
 
 You'll see that a new deployment is immediately started. Return to the overview
 page and watch it happen. You might not be fast enough! If you look at the logs

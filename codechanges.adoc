@@ -22,7 +22,7 @@ then *Configuration* tab.
 On this screen you will see the option to copy the *generic* webhook URL as shown
 in the following image:
 
-image::/images/ocp-webhook1-pipeline.png[Webhook]
+image::ocp-webhook1-pipeline.png[Webhook]
 {% else %}
 In the OpenShift web console, navigate to your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` *Project*, and
 then mouse-over *Browse* and then *Builds*. Click the `nationalparks` build.
@@ -30,7 +30,7 @@ then mouse-over *Browse* and then *Builds*. Click the `nationalparks` build.
 On this screen you will see the option to copy the *generic* webhook URL as shown
 in the following image:
 
-image::/images/ocp-webhook1.png[Webhook]
+image::ocp-webhook1.png[Webhook]
 {% endif %}
 
 
@@ -57,13 +57,13 @@ Password: {{GITLAB_PASSWORD}}
 
 Click the Settings link on the top right of the screen, and then click "Webhooks":
 
-image::/images/ocp-webhook2.png[Webhook]
+image::ocp-webhook2.png[Webhook]
 
 In the next screen, paste your link into the "URL" field. You can leave the
 secret token field blank -- the secret is already in the URL and does not need
 to be in the payload.
 
-image::/images/ocp-webhook3.png[Webhook]
+image::ocp-webhook3.png[Webhook]
 
 Scroll to the bottom of the page. Make sure you *un-check* the SSL verification
 box. Remember that OpenShift's API is not presenting an SSL certificate signed
@@ -72,7 +72,7 @@ webhook will fail.
 
 Finally, click on "Add webhook".
 
-image::/images/ocp-webhook4.png[Webhook]
+image::ocp-webhook4.png[Webhook]
 
 Boom! From now on, every time you commit new source code to your GitLab
 repository, a new build and deploy will occur inside of OpenShift.  Let's try
@@ -90,7 +90,7 @@ root path and click on the `wsgi.py` file.
 Once you have the file on the screen, click the edit button in the top right
 hand corner as shown here:
 
-image::/images/ocp-webhook5-py.png[Webhook]
+image::ocp-webhook5-py.png[Webhook]
 
 Change line number 35:
 
@@ -123,7 +123,7 @@ Then click on the `BackendController.java` file.
 Once you have the file on the screen, click the edit button in the top right
 hand corner as shown here:
 
-image::/images/ocp-webhook5.png[Webhook]
+image::ocp-webhook5.png[Webhook]
 
 Change line number 20:
 
@@ -150,13 +150,13 @@ Once you have committed your changes, the `nationalparks-pipeline` should almost
 instantaneously be triggered in OpenShift. Look at the *Builds* &rarr; *Pipelines*
 page in OpenShift Console to verify the pipeline is running:
 
-image::/images/ocp-webhook6-pipeline.png[Pipeline Running]
+image::ocp-webhook6-pipeline.png[Pipeline Running]
 
 After the test stage, pipeline waits for manual approval in order to deploy to the
 *Live* container. Click on *Input Required* link which takes you to the Jenkins Console
 for approving the deployment and then *Proceed* button.
 
-image::/images/pipeline-jenkins-input.png[Pipline Manual Approval,1000,align=center]
+image::pipeline-jenkins-input.png[Pipline Manual Approval,1000,align=center]
 
 Once the pipeline execution is finished, verify your new Docker image was
 automatically deployed by viewing the application in your browser:

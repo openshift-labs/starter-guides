@@ -5,7 +5,7 @@ In this lab, we're going to deploy a complete backend application, consisting of
 
 The information displayed by this map is the average temperature registered by every public weather sensor in the link:https://cloud.google.com/bigquery/public-data/noaa-gsod[NOAA Global Surface Summary of the Day Weather Data].
 
-image::/images/roadshow-app-architecture-publicweatherdata.png[Application architecture,800,align="center"]
+image::roadshow-app-architecture-publicweatherdata.png[Application architecture,800,align="center"]
 
 NOTE: As the information provided by this backend is really extensive, query and visualization has been limited to certain level of zooms, so in order to see information, you will probably need to `zoom in`.
 

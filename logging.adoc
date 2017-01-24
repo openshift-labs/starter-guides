@@ -31,7 +31,7 @@ logs. In the web console, find your way back to the *Pod* details page
 (Applications -> Pods -> specific pod) and then click on the "Logs" tab. You
 should see a nice view of the *Pod*'s logs:
 
-image::/images/parksmap-console-logs.png[Application Logs]
+image::parksmap-console-logs.png[Application Logs]
 
 It appears there are some errors in the log, and that's OK. We'll remedy those
 in a little bit.
@@ -86,7 +86,7 @@ Clicking this link takes you to the Kibana web interface. This interface is
 secured with OpenShift's role-based access controls, so you can only see logs
 for projects that you have access to. 
 
-image::/images/kibana-parksmap.png[Kibana Interface]
+image::kibana-parksmap.png[Kibana Interface]
 
 [WARNING]
 ====
@@ -117,7 +117,7 @@ click "add" for `kubernetes_pod_name`, you'll then see your old *Pod*'s logs,
 too. Remember, we scaled them down before coming here, so you can see how the
 log system is keeping a historical record.
 
-image::/images/kibana-parksmap-headers.png[Kibana Interface]
+image::kibana-parksmap-headers.png[Kibana Interface]
 
 Try the following search string:
 
