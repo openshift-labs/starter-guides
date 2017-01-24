@@ -26,7 +26,7 @@ clicking on *CoolStore PROD* project, and in the *Web UI* service group, clickin
 
 * Explain the catalog and inventory microservices in the *CoolStore Web UI*
 
-image::/images/demos/msa-overview-coolstore-web.png[CoolStore Web UI,width=920,align=center]
+image::demos/msa-overview-coolstore-web.png[CoolStore Web UI,width=920,align=center]
 
 * Click on *Add to Cart* on a product
 * Click on *Your Shopping Cart* tab and show the shopping cart
@@ -52,7 +52,7 @@ image::/images/demos/msa-overview-coolstore-web.png[CoolStore Web UI,width=920,a
 * Click on *Logs* tab and show the logs
 * Point out JBoss EAP in the logs
 
-image::/images/demos/msa-overview-eap-logs.png[JBoss EAP Container Logs,width=920,align=center]
+image::demos/msa-overview-eap-logs.png[JBoss EAP Container Logs,width=920,align=center]
 
 * Explain the central log management with Elastic and Kibana
 * Click on *Terminal* and explain remote shell access to the container
@@ -77,7 +77,7 @@ image::/images/demos/msa-overview-eap-logs.png[JBoss EAP Container Logs,width=92
 * Click on *Logs* tab and show the logs
 * Point out JBoss Web Server in the logs
 
-image::/images/demos/msa-overview-jws-logs.png[JBoss Web Server Container Logs,width=920,align=center]
+image::demos/msa-overview-jws-logs.png[JBoss Web Server Container Logs,width=920,align=center]
 
 ### Demonstrate CoolStore Gateway container (Fuse Integration Services, Camel and Netflix OSS)
 
