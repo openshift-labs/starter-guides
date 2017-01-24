@@ -1,0 +1,19 @@
+name: "Multi-product Demos: Modern Application Architecture"
+vars:
+  GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
+  GOGS_DEV_REPO_URL: "http://gogs-ci-USERNAME.cloudapps.test.openshift.opentlc.com/developer/coolstore-microservice.git"
+  JENKINS_URL: "http://jenkins-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
+  COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
+  GOGS_DEV_USER: "developer"
+  GOGS_DEV_PASSWORD: "developer"
+  GOGS_REVIEWER_USER: "team"
+  GOGS_REVIEWER_PASSWORD: "team"
+modules:
+  activate:
+    - demo_msa-overview
+    - demo_msa-agile-integration
+    - demo_msa-service-resilience
+    - demo_msa-on-demand-env
+    - demo_msa-dev-productivity
+    - demo_msa-dev-process
+    - demo_msa-cicd-eap
