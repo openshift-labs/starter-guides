@@ -3,7 +3,7 @@
 ### Application description
 In this lab, we're going to deploy the web component of the ParksMap application which is also called `parksmap` and uses OpenShift service discovery mechanism to discover the backend services deployed and shows their data on the map.
 
-image::/images/roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
+image::roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
 
 ### Exercise: Deploying your first Image
 
@@ -30,7 +30,7 @@ docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 
 Your screen will end up looking something like this:
 
-image::/images/parksmap-image.png[Explore Project]
+image::parksmap-image.png[Explore Project]
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
 out to the Docker registry specified and interrogate the image. You then are
@@ -41,7 +41,7 @@ and etc. -- which we will learn about later.
 
 For now, change the application name:
 
-image::/images/parksmap-image-options.png[Explore Project]
+image::parksmap-image-options.png[Explore Project]
 
 {% endif %}
 

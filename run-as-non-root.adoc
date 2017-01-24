@@ -98,7 +98,7 @@ just trigger another deploy.
 
 In the web console - go to the running pod and then click on the terminal tab.
 
-image::/images/terminal.png[]
+image::terminal.png[]
 
 This is a terminal into your pod. Go ahead and click on the terminal and then type in `$ whoami`.
 You will see that you are running your container as root.

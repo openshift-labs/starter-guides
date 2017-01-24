@@ -4,7 +4,7 @@
 In this lab, we're going to deploy a backend service, developed in Java programming language that will expose 2 main REST endpoints to the visualizer application (`parksmap` web component that was deployed in the previous labs). The application will query for national parks information (including it's coordinates) that is stored in a Mongo database.
 This application will also provide an external access point, so that the API provided can be directly used by the end user.
 
-image::/images/roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
+image::roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
 
 ### Background: Source-to-Image (S2I)
 
@@ -83,7 +83,7 @@ click the *"Add to Project"* button. You will see a number of runtimes that you
 can choose from, but you will want to select the one titled
 `simple-java-s2i:latest`.
 
-image::/images/ocp-runtimes.png[Runtimes]
+image::ocp-runtimes.png[Runtimes]
 
 After you click `simple-java-s2i:latest`, on the next screen you will need to enter a
 name and a Git repository URL. For the name, enter `nationalparks`, and for
@@ -97,7 +97,7 @@ http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks.gi
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
-image::/images/new-national-parks-1.png[Runtimes]
+image::new-national-parks-1.png[Runtimes]
 
 These labs were written against specific points in time for these
 applications. With Git as our version control system (VCS), we are using the
@@ -105,7 +105,7 @@ concept of *Branches/Tags*. Click on *Show advanced routing, build, and deployme
 options*. In the *Git Reference* field enter "{{NATIONALPARKS_VERSION}}". This will cause the S2I
 process to grab that specific tag in the code repository.
 
-image::/images/nationalparks-tag.png[Runtimes]
+image::nationalparks-tag.png[Runtimes]
 
 {% if USE_MAVEN %}
 
@@ -115,7 +115,7 @@ scroll down to *Build Configuration* and add an environment variable named
 *MAVEN_MIRROR_URL* with value
 `http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public`
 
-image::/images/new-national-parks-2.png[Runtimes]
+image::new-national-parks-2.png[Runtimes]
 {% endif %}
 
 You can then hit the button labeled *"Create"*. Then click *Continue to

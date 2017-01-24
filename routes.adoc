@@ -3,7 +3,7 @@
 ### Application description
 In this lab, we're going to make our application visible to the end users, so they can access it.
 
-image::/images/roadshow-app-architecture-parksmap-2.png[Application architecture,800,align="center"]
+image::roadshow-app-architecture-parksmap-2.png[Application architecture,800,align="center"]
 
 ### Background: Routes
 
@@ -62,8 +62,8 @@ parksmap   parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}  
 
 You can also verify the *Route* by looking at the project in the OpenShift web console:
 
-image::/images/parksmap-route.png[Route]
+image::parksmap-route.png[Route]
 
 Pretty nifty, huh?  This application is now available at the above URL:
 
-image::/images/parksmap-empty.png[Route]
+image::parksmap-empty.png[Route]

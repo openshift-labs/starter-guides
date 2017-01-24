@@ -112,13 +112,13 @@ Username: {{USER_NAME}}
 Password: {{USER_PASSWORD}}
 ----
 
-image::/images/ocp-login.png[OpenShift Login Screen]
+image::ocp-login.png[OpenShift Login Screen]
 
 After you have authenticated to the web console, you will be presented with a
 list of projects that your user has permission to work with. You will see
 something that looks like the following image:
 
-image::/images/explore-webconsole1.png[Web Console]
+image::explore-webconsole1.png[Web Console]
 
 Click on the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project. When you click on the
 *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project, you will be taken to the project overview page
@@ -126,7 +126,7 @@ which will list all of the routes, services, deployments, and pods that you have
 running as part of your project. There's nothing there now, but that's about to
 change.
 
-image::/images/explore-webconsole2.png[Explore Project]
+image::explore-webconsole2.png[Explore Project]
 
 {% if METRICS_ENABLED %}
 

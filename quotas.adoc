@@ -14,7 +14,7 @@ Container can consume.
 
 We have defined in project `Smoke Test` some quota and resource limits.
 
-image::/images/quota-1.png[ResourceQuota]
+image::quota-1.png[ResourceQuota]
 
 #### Exercise: Hit the Limits!
 
@@ -32,7 +32,7 @@ Let's scale our application up and see what happens. Run the following to create
 $ oc scale dc/smoke --replicas=2
 ----
 
-image::/images/quota-2.png[ResourceQuota]
+image::quota-2.png[ResourceQuota]
 
 As can be seen, now we have an indication on the resources we are consuming and the percentage of the total.
 
@@ -46,15 +46,15 @@ $ oc scale dc/smoke --replicas=6
 OpenShift starts creating new pods and after a short while 5 pods will be created
 however the number of pods never reaches to 6.
 
-image::/images/quota-3.png[ResourceQuota]
+image::quota-3.png[ResourceQuota]
 
 Go to project *Resources>Quota* and check out the resource limits. You should see a warning
 triangle near Pods stating you have reached the max limit of 5 Pods in your project.
 
-image::/images/quota-4.png[ResourceQuota]
+image::quota-4.png[ResourceQuota]
 
 Check out *Monitoring* then *View details* on the right hand side, 
 that shows you the *Events* in your project. You will see an event stating that
 platform has failed to create new pods due to reaching a limit of 5 Pods.
 
-image::/images/quota-5.png[ResourceQuota]
+image::quota-5.png[ResourceQuota]

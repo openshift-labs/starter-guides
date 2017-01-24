@@ -139,13 +139,13 @@ Username: {{USER_NAME}}
 Password: {{USER_PASSWORD}}
 ----
 
-image::/images/v3login.png[OpenShift Login Screen]
+image::v3login.png[OpenShift Login Screen]
 
 After you have authenticated to the web console, you will be presented with a
 list of projects that your user has permission to work with. You will see
 something that looks like the following image:
 
-image::/images/webconsole1.png[Web Console]
+image::webconsole1.png[Web Console]
 
 Click on the *smoke* project. When you click on the *smoke*
 project, you will be taken to the project overview page which will list all of
@@ -153,7 +153,7 @@ the routes, services, deployments, and pods that you have running as part of
 your project.  For this example, you will see a frontend that is deployed to
 two pods.
 
-image::/images/webconsole2.png[Web Console]
+image::webconsole2.png[Web Console]
 
 Once you have digested the information on the overview page, mouseover *Browse*
 tab on the left hand side of the screen, and explore the different menus. Play

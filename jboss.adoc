@@ -92,7 +92,7 @@ builder image that contains {{JAVA_BUILDER_PROPER}}.
 
 << NEEDS IMAGE >>
 
-image::/images/runtimes.png[Runtimes]
+image::runtimes.png[Runtimes]
 
 After you click *"Add to Project"*, on the next screen you will need to enter a
 name and a Git repository URL. For the name, enter `openshift3nationalparks`, and for
@@ -103,7 +103,7 @@ the Git repository URL, enter:
 NOTE: All of these runtimes shown are made available via *Templates*, which
 will be discussed in a later lab.
 
-image::/images/new_mlbparks_1.png[Runtimes]
+image::new_mlbparks_1.png[Runtimes]
 
 **NOTE:** To speed build process, a Sonatype Nexus server is running in the
 environment that will cache your dependencies as you pull them down. To use it,
@@ -111,7 +111,7 @@ you need to click on *Show advanced routing, build, and deployment options*,
 scroll down to *Build Configuration*, add an environment variable named
 *MAVEN_MIRROR_URL* with value *http://nexus.ci:8081/content/groups/public*
 
-image::/images/new_mlbparks_2.png[Runtimes]
+image::new_mlbparks_2.png[Runtimes]
 
 You can then hit the button labeled *"Create"*. Then click *Continue to
 overview*. You will see this in the web console:
@@ -190,7 +190,7 @@ http://openshift3nationalparks-nationalparks.{{ROUTER_ADDRESS}}
 
 Verify your application is working by viewing the URL in a web browser.  You should see the following:
 
-image::/images/mlbparks1.png[MLBParks]
+image::mlbparks1.png[MLBParks]
 
 Wait a second!  Why are the national parks not showing up?  Well, that is
 because we haven't actually added a database to the application yet.  We will do

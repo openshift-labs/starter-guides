@@ -3,7 +3,7 @@
 ### Application description
 In this lab, we're going to deploy a complete backend application, consisting of an REST API backend and a mongo database. The complete application will already be wired together and described as a backend for the map visualization tool, so that once the application is build and deployed, you will be able to see the new map.
 
-image::/images/roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
+image::roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
 
 ### Background: Templates
 Running all these individual commands can be tedious and error prone.
