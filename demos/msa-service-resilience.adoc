@@ -4,7 +4,7 @@
 |======
 *Length*,TBD
 *Difficulty*,Medium
-*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24
+*Slides*,https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[Google Slide]
 *Video*,TBD
 *Simulation (Mac)*,TBD
 |======
