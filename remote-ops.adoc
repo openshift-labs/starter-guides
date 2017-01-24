@@ -1,0 +1,113 @@
+## Lab: Remote Operations
+
+### Background
+
+Containers are treated as immutable infrastructure and therefore it is generally
+not recommended to modify the content of a container through SSH or running custom
+commands inside the container. Nevertheless, in some use-cases, such as debugging
+an application, it might be beneficial to get into a container and inspect the
+application.
+
+#### Exercise: Remote Shell Session to a Container
+
+OpenShift allows establishing remote shell sessions to a container without the
+need to run an SSH service inside each container. In order to establish an
+interactive session inside a container, you can use the `oc rsh` command. First
+get the list of available pods:
+
+[source]
+----
+oc get pods
+----
+
+You should an output similar to the following:
+
+[source]
+----
+NAME               READY     STATUS    RESTARTS   AGE
+parksmap-2-tegp4   1/1       Running   0          2m
+----
+
+Now you can establish a remote shell session into the pod by using the pod name:
+
+[source]
+----
+oc rsh parksmap-2-tegp4
+----
+
+You would see the following output:
+
+[source]
+----
+$ oc rsh parksmap-2-tegp4
+sh-4.2$
+----
+
+[NOTE]
+====
+The default shell used by `oc rsh` is `/bin/sh`. If the deployed container does
+not have *sh* installed and uses another shell, (e.g. *A Shell*) the shell command
+can be specified after the pod name in the issued command.
+====
+
+Run the following command to list the files in the top folder:
+
+[source]
+----
+$ ls /
+
+anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  parksmap.jar  proc  root  run  sbin  srv  sys  tmp  usr  var
+----
+
+#### Exercise: Execute a Command in a Container
+
+In addition to remote shell, it is also possible to run a command remotely in an
+already running container using the `oc exec` command. This does not require
+that a shell is installed, but only that the desired command is present and in
+the executable path.
+
+In order to show just the JAR file, run the following:
+
+[source]
+----
+$ oc exec parksmap-2-tegp4 -- ls -l /parksmap.jar
+
+-rw-r--r--. 1 root root 21753918 Nov 23 15:54 /parksmap.jar
+----
+
+[NOTE]
+====
+The `--` syntax in the `oc exec` command delineates where exec's options
+end and where the actual command to execute begins. Take a look at `oc exec
+--help` for more details.
+====
+
+You can also specify the shell commands to run directly with the *oc rsh* command:
+
+[source]
+----
+$ oc rsh parksmap-2-tegp4 whoami
+whoami: cannot find name for user ID 1000060000
+error: error executing remote command: error executing command in container: Error executing in Docker Container: 1
+----
+
+[WARNING]
+====
+It is important to understand that, for security reasons, OpenShift does not run
+Docker containers as the user specified in the Dockerfile by default. In fact,
+when OpenShift launches a container its user is actually randomized.
+
+If you want or need to allow OpenShift users to deploy Docker images that do
+expect to run as root (or any specific user), a small configuration change is
+needed. You can learn more about the
+https://{{DOCS_URL}}/latest/creating_images/guidelines.html[Docker guidelines]
+for OpenShift, or you can look at the section on
+https://{{DOCS_URL}}/latest/admin_guide/manage_scc.html#enable-images-to-run-with-user-in-the-dockerfile[enabling
+images to run with a USER in the dockerfile].
+====
+
+#### Exercise: Use the Web Console
+
+You can also access a terminal into a container from the web console. On the
+*Pod* details page, one of the tabs says *Terminal*. Try it!
+

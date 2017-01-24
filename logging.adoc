@@ -1,0 +1,129 @@
+## Lab: Exploring OpenShift's Logging Capabilities
+
+OpenShift provides some convenient mechanisms for viewing application logs.
+First and foremost is the ability to examine a *Pod*'s logs directly from the
+web console or via the command line.
+
+### Background: Container Logs
+
+OpenShift is constructed in such a way that it expects containers to log all
+information to `STDOUT`. In this way, both regular and error information is
+captured via standardized Docker mechanisms. When exploring the *Pod*'s logs
+directly, you are essentially going through the Docker daemon to access the
+container's logs, through OpenShift's API. Neat!
+
+[NOTE]
+====
+In some cases, applications may not have been designed to send all of their
+information to `STDOUT` and `STDERR`. In many cases, multiple local log files
+are used. While OpenShift cannot parse any information from these files, nothing
+prevents them from being created, either. In other cases, log information is
+sent to some external system using. Here, too, OpenShift does not prohibit these
+behaviors. If you have an application that does not log to `STDOUT`, either because it
+already sends log information to some "external" system or because it writes
+various log information to various files, fear not.
+====
+
+#### Exercise: Examining Logs
+
+Since we already deployed our application, we can take some time to examine its
+logs. In the web console, find your way back to the *Pod* details page
+(Applications -> Pods -> specific pod) and then click on the "Logs" tab. You
+should see a nice view of the *Pod*'s logs:
+
+image::/images/parksmap-console-logs.png[Application Logs]
+
+It appears there are some errors in the log, and that's OK. We'll remedy those
+in a little bit.
+
+You also have the option of viewing logs from the command line. Get the name of
+your *Pod*:
+
+[source]
+----
+oc get pods
+NAME               READY     STATUS    RESTARTS   AGE
+parksmap-1-hx0kv   1/1       Running   0          5h
+----
+
+And then use the `logs` command to view this *Pod*'s logs:
+
+[source]
+----
+oc logs parksmap-1-hx0kv
+----
+
+You will see all of the application logs scroll on your screen:
+
+[source]
+----
+15:34:25.844 [main] DEBUG io.fabric8.kubernetes.client.Config - Trying to configure client from Kubernetes config...
+15:34:25.937 [main] DEBUG io.fabric8.kubernetes.client.Config - Did not find Kubernetes config at: [/.kube/config]. Ignoring.
+15:34:25.937 [main] DEBUG io.fabric8.kubernetes.client.Config - Trying to configure client from service account...
+15:34:25.938 [main] DEBUG io.fabric8.kubernetes.client.Config - Found service account ca cert at: [/var/run/secrets/kubernetes.io/serviceaccount/ca.crt].
+15:34:25.960 [main] DEBUG io.fabric8.kubernetes.client.Config - Found service account token at: [/var/run/secrets/kubernetes.io/serviceaccount/token].
+15:34:25.961 [main] DEBUG io.fabric8.kubernetes.client.Config - Trying to configure client namespace from Kubernetes service account namespace path...
+15:34:25.962 [main] DEBUG io.fabric8.kubernetes.client.Config - Found service account namespace at: [/var/run/secrets/kubernetes.io/serviceaccount/namespace].
+....
+----
+
+#### Exercise: Aggregated Pod Logs
+
+When your application consists of only one *Pod* and it never fails, restarts,
+or has other issues, these ways to view logs may not be so bad. However in a
+scaled-out application where *Pods* may have restarted, been scaled up or down,
+or if you just want to get historical information, these mechanisms may be
+insufficient.
+
+Fortunately, OpenShift provides an optional system for log aggregation that uses
+Fluentd, Elasticsearch, and Kibana (EFK).
+
+In the OpenShift web console on the *Pod*'s logs page, at the right you will see
+a "View Archive" link. Go ahead and click it. You will need to accept the SSL
+certificate.
+
+Clicking this link takes you to the Kibana web interface. This interface is
+secured with OpenShift's role-based access controls, so you can only see logs
+for projects that you have access to. 
+
+image::/images/kibana-parksmap.png[Kibana Interface]
+
+[WARNING]
+====
+Kibana may give you an error about a default index. This
+is a known bug having to do with your first time visiting the Kibana interface.
+Close your browser, and then re-open it. At this point you should be good.
+====
+
+The "View Archive" link that you clicked takes you to a default view with a specific search term
+pre-populated. Kibana will only show you logs where the pod name is
+`parksmap-1-hx0kv` and in the *Project* (namespace) {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}. 
+
+[source]
+----
+kubernetes_pod_name:"parksmap-1-hx0kv" AND kubernetes_namespace_name:"{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}"
+----
+
+If you want to see all the historical logs for this *Project*, simply remove the
+pod name reference and click the magnifying glass.
+
+[source,role=copypaste]
+----
+kubernetes_namespace_name:"{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}"
+----
+
+If you click the "x" in the column for the container name, and, in the left bar,
+click "add" for `kubernetes_pod_name`, you'll then see your old *Pod*'s logs,
+too. Remember, we scaled them down before coming here, so you can see how the
+log system is keeping a historical record.
+
+image::/images/kibana-parksmap-headers.png[Kibana Interface]
+
+Try the following search string:
+
+[source,role=copypaste]
+----
+kubernetes_namespace_name:"{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" AND message:"Failure executing"
+----
+
+Service account? What's that?

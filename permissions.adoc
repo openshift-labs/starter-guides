@@ -1,0 +1,92 @@
+## Lab: OpenShift Role-Based Access Control
+
+### Background
+
+Almost every interaction with an OpenShift environment that you can think of
+requires going through the master's API. All API interactions are both
+authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to
+do what you are asking?).
+
+In the log aggregation lab we saw that there was an error in reference to a
+*Service Account*. Just like a user has permissions (AuthZ), sometimes we may
+wish for non-users to be able to perform actions against the API. These
+"non-users" are referred to as service accounts.
+
+OpenShift automatically creates a few special service accounts in every project.
+The **default** service account has its credentials automatically injected into
+every pod that is launched. By changing the permissions for that service
+account, we can do interesting things.
+
+### Exercise: Grant Service Account View Permissions
+The parksmap application wants to talk to the OpenShift API to learn about other
+*Pods*, *Services*, and resources within the *Project*. You'll learn why soon!
+
+[source,role=copypaste]
+----
+oc project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
+----
+
+Then:
+
+[source]
+----
+oc policy add-role-to-user view -z default
+----
+
+The `oc policy` command above is giving a defined _role_ (`view`) to a user. But
+we are using a special flag, `-z`. What does this flag do? From the `-h` output:
+
+[source]
+----
+-z, --serviceaccount=[]: service account in the current namespace to use as a user
+----
+
+The `-z` syntax is a special one that saves us from having to type out the
+entire string, which, in this case, is
+`system:serviceaccount:{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}:default`. It's a nifty shortcut.
+
+[NOTE]
+====
+The `-z` flag will only work for service accounts in the *current* namespace.
+Beware of this if you attempt to use it in the future.
+====
+
+Now that the default *Service Account* has **view** access, it can query the API
+to see what resources are within the *Project*. This also has the added benefit
+of supressing the error message! Although, in reality, we fixed the application.
+
+### Exercise: Grant User View Permissions
+If you create a project, you are that project's administrator. This means that
+you can grant access to other users, too. If you like, give your neighbor view
+access to your `explore` project using the following command:
+
+[source,role=copypaste]
+----
+oc policy add-role-to-user view user{{SUFFIX}}
+----
+
+Have them go to the project view by clicking the *Projects* button and verify
+that they can see your project and its resources. This type of arrangement (view
+but not edit) might be ideal for a developer getting visibility into a
+production application's project.
+
+### Exercise: Redeploy Application
+One more step is required. We need to re-deploy the application because it's
+given up trying to query the API.
+
+This time we'll use the web console. Find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project,
+and then click "Applications" and then "Deployments". You'll see your only
+application, `parksmap`, listed. Click that.
+
+The deployment screen tells you a lot about how the application will be
+deployed. At the top right, there is a button labeled "Deploy". This button will
+cause a new deployment (which you know creates a new *ReplicationController*,
+right?).
+
+Click it.
+
+image::/images/new-parksmap-deploy.png[Deploy Button]
+
+You'll see that a new deployment is immediately started. Return to the overview
+page and watch it happen. You might not be fast enough! If you look at the logs
+for the application now, you should see no errors.  That's great. 

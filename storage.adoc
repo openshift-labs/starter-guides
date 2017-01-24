@@ -1,0 +1,20 @@
+## Lab: Using Persistent Storage
+
+### Background
+
+#### Exercise: Kill Database
+
+* show data
+* kill db by deleting pod in ui
+* refresh data - no data!
+
+#### Exercise: Create Claim
+
+* click in UI
+* rwo, 2gi, called mongo
+
+#### Exercise: Attach Claim
+
+* oc volume dc/mongodb --add --claim-name=mongo -m /var/lib/mongodb/data --name mongodb-data --overwrite --type persistentVolumeClaim
+
+#### Exercise: Validate Storage

@@ -1,0 +1,85 @@
+environment:
+  name: Environment Overview
+install:
+  name: Installing the *oc* client tool
+  vars:
+    DOWNLOAD_CLIENT_WINDOWS: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-windows.zip"
+    DOWNLOAD_CLIENT_MAC: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-mac.zip"
+    DOWNLOAD_CLIENT_LIN32: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-32bit.tar.gz"
+    DOWNLOAD_CLIENT_LIN64: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-64bit.tar.gz"
+    OC_VERSION: "oc v1.3.0\nkubernetes v1.3.0+52492b4"
+  revisions:
+    ocp:
+      vars:
+        DOWNLOAD_CLIENT_WINDOWS: <win link>
+        DOWNLOAD_CLIENT_MAC: <mac link>
+        DOWNLOAD_CLIENT_LIN32: <lin link>
+        DOWNLOAD_CLIENT_LIN64: <lim link>
+        OC_VERSION: <status>
+explore:
+  name: Exploring the CLI and Web Console
+parksmap-architecture:
+  name: Architecture Overview of the ParksMap Application
+docker:
+  name: Deploying our First Docker Image
+scaling:
+  name: Scaling
+routes:
+  name: Creating Routes
+logging:
+  name: Exploring OpenShift's Logging Capabilities
+permissions:
+  name: Role-Based Access Control
+remote-ops:
+  name: Remote Operations
+java:
+  name: Deploying Java Code
+python:
+  name: Deploying Python Code
+databases:
+  name: Adding a Database (MongoDB)
+#  requires:
+#    - java
+databases-py:
+  name: Adding a Database (MongoDB)
+configmap:
+  name: Externalizing Application Configurations
+  requires:
+#    - java
+#    - databases
+application-health:
+  name: Application Health
+pipelines:
+  name: Automating Deployment with CI/CD Pipeline
+  requires:
+#    - java
+#    - databases
+    - application-health
+codechanges:
+  name: Using Source 2 Image for Code Changes
+  requires:
+#    - databases
+canaryrelease:
+  name: Canary Release to Production
+  requires:
+    - pipelines
+templates:
+  name: Using Application Templates
+  vars:
+    MW_NAME: "wildfly"
+    MW_TEXT: "WildFly"
+  revisions:
+    roadshow:
+      vars:
+        MW_NAME: "eap"
+        MW_TEXT: "JBoss EAP"
+clustering:
+  name: Clustering Stateful Java EE Applications
+  requires:
+    - permissions
+quotas:
+  name: Limiting application resource usage
+run-as-non-root:
+  name: Running a container as a non Root user
+gcp-bigquery:
+  name: Integrating with Google Compute Service BigQuery

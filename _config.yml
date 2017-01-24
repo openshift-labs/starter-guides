@@ -1,0 +1,5 @@
+vars:
+  CONSOLE_ADDRESS: 10.2.2.2:8443
+  ROUTER_ADDRESS: "apps.10.2.2.2.xip.io"
+  USER_NAME: "dev"
+  USER_PASSWORD: "dev"

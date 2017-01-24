@@ -1,0 +1,37 @@
+## Environment Overview
+
+You will be interacting with an OpenShift environment that is running on {{ENVIRONMENT}}. The environment consists of the following systems:
+
+* {{MASTERS}} master nodes
+* {{INFRA}} infrastructure nodes
+* {{NODES}} "application" nodes
+{% if NFS_ENABLED %}
+* An NFS server
+{% endif %}
+
+The infrastructure node is providing several services:
+
+{% if LOGGING_ENABLED %}
+* Aggregated logging
+{% endif %}
+{% if METRICS_ENABLED %}
+* Cluster metrics
+{% endif %}
+* GitLab
+* This lab manual
+* The OpenShift Docker registry
+* The OpenShift router
+
+Additionally, 100 user accounts have been provisioned. If you do not know your
+user number, please make sure you figure that out with your instructor.
+
+You will see various code and command blocks throughout these exercises. Some of
+the command blocks can be copy/pasted directly. Others will require
+modification of the command before execution. If you see a command block with a
+red border (see below), the command will require modification. Typically this is
+a substitution of your username or user number:
+
+[source,role=copypaste]
+----
+some command for userXX
+----
