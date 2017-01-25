@@ -2,10 +2,10 @@
 
 [format="csv",cols="2"]
 |======
-*Length*,TBD
+*Length*,5 min
 *Difficulty*,Easy
 *Slides*,TBD
-*Video*,TBD
+*Video*,https://drive.google.com/open?id=0B630TpgzAhO_QXJMUnp2LTFIMGc[Google Drive]
 *Simulation (Mac)*,TBD
 |======
 
