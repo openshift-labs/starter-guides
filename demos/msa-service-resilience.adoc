@@ -28,9 +28,18 @@ orders without knowing about the inventory.
 * Explain OpenShift container health management using
 https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[the slides]
 * In the OpenShift web console, go to *CoolStore PROD* project
-* Scroll down to find the *Inventory* service group
-* Explain that the blue circle shows the number containers that back *CoolStore GW* service
-* Click on the up arrow to scale the service to two containers
+* Scroll down to find the *Inventory Live* service group
+* Explain that the blue circle shows the number containers that back *inventory-green* service
+
+====
+CAUTION: *Inventory* routes traffic to *inventory-green* and *inventory-blue* services. All traffic by
+default is sent to *inventory-green* and in the rest of this section is mentioned as the active service.
+If all traffic is sent to *inventory-blue* in your environment, perform the instructions on *inventory-blue* instead.
+====
+
+image::demos/msa-resilience-inventory.png[Live Inventory Container,width=800,align=center]
+
+* Click on the up arrow to scale the inventory container with 100% traffic (*inventory-green* by default) to two containers.
 * Explain that in a few seconds, a new identical container is deployed
 and added automatically to the load-balancer. If one container fails,
 there will be another container that can service requests
@@ -38,8 +47,8 @@ there will be another container that can service requests
 image::demos/msa-resilience-scaled.png[Scaled Up,width=540,align=center]
 
 * Click on the blue circle
-* Explain that the list of pods backing the *Coolstore GW* is displayed
-* Click on one of the containers with a name similar to *coolstore-gw-n-nnnnn*
+* Explain that the list of pods backing the *inventory-green* is displayed
+* Click on one of the containers with a name similar to *inventory-green-n-nnnnn*
 * Explain that you can see the pod details such as
 ** The container image that is deployed
 ** The host that container is deployed on
@@ -64,30 +73,51 @@ further investigation. In latter cases, OpenShift is able to remove
 those pods from the load-balancer and send user to the healthy
 containers
 
-
-
-### Demonstrate Service Resilience and Preventing Cascading Failures [Work-In-Progress]
+### Demonstrate Service Resilience and Preventing Cascading Failures
 
 * Explain service resilience using
 https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[the slides]
 * Explain Netflix OSS using
 https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[the slides]
-* Click twice on the down arrow on *Coolstore GW* pods blue circle. Click
+* Click on *Web UI* route: {{COOLSTORE_WEB_PROD_URL}}
+
+image::demos/msa-resilience-web-inventory.png[Inventory Service,width=600,align=center]
+
+* Explain the inventory number displayed near each product coming from the inventory service
+* Go back to OpenShift Web Console and click on *Hystrix Dashboard* route URL and click on *Monitor Stream* button: {{HYSTRIX_PROD_URL}}
+
+image::demos/msa-resilience-hystrix.png[Hystrix Dashboard,width=800,align=center]
+
+* Explain that *Hystrix* is one of the components in *Netflix OSS* which implements
+the circuit breaker pattern. There are 3 circuits in the *Coolstore GW* service where
+API calls are made to the *Cart*, *Catalog* and *Inventory* back-end services. The circuit-breaker
+protects the gateway against cascading failures and black-lists failing back-ends for a configurable
+period of time so that services don't slow down because of back-end services failing. A fallback mechanism
+can be provided which tells *Hystrix* what to do instead of calling the failing back-end whenever the
+circuit for that specific back-end is *Open*. After a configuration amount of time, calls will be sent
+again to the back-end service with the hope that the service is recovered.
+
+image::demos/msa-resilience-hystrix-circuits.png[Hystrix Dashboard,width=800,align=center]
+
+* Go back to OpenShift Web Console and click twice on the down arrow on *inventory-green* pods blue circle. Click
 on *Scale Down* button when it asks for confirmation in order to scale to 0
-* Explain that the Coo
-* - Service Resilience: keep functioning when services fail
-*   - Explain the use case: Services fail. Sometimes die to hick up
-and just need to get restarted and sometimes severely. We need to build
-for both
-*   - Explain OpenShift health checks using slides
-*   - Explain cascading failures and circuit breaker using slides
-*   - Go to web ui
-*   - Explain the inventory microservice and point out the inventory
-for each product
-*   - Go to OpenShift console
-*   - Point out the inventory container
-*   - Delete the inventory container
-*   - Explain that platform detects it and and starts the container
-*   - Scale the container to zero
-*   - Go to web ui and refresh the page
-*   - Explain that effect of inventory service being down and reduce functionality instead of cascading failure
+* Go to *Web UI* again and refresh the page: {{COOLSTORE_WEB_PROD_URL}}
+* Explain that the inventory number has disappeared from the *CoolStore* since the back-end service is
+down, however the store does not fail because of that and continues to allow customers make orders despite
+the partial reduced functionality.
+
+image::demos/msa-resilience-web-inventory-down.png[Inventory Service Down,width=600,align=center]
+
+* Refresh the *Coolstore Web UI* multiple times (at least 5 times!)
+* Go back to OpenShift Web Console and click on *Hystrix Dashboard* route URL again and click on *Monitor Stream* button: {{HYSTRIX_PROD_URL}}
+* Explain that since the *Inventory* service is down, the inventory circuit in *Coolstore GW* has become *Open* which means it has been
+blacklisted for a period of time and no calls would be made to the *Inventory* service during that period.
+
+image::demos/msa-resilience-hystrix-circuits-open.png[Hystrix Dashboard,width=800,align=center]
+
+* Refresh *Hystrix Dashboard*
+* Explain that after a period of time (5 seconds in this demo), the circuit becomes *Closed* again and the *Inventory*
+service is removed from the blacklist. Expectedly, further failures would *Open* the circuit again.
+
+* * Go back to OpenShift Web Console and click on up arrow near *inventory-green* to scale the *Inventory*
+service back up to 1.
