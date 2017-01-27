@@ -91,6 +91,19 @@ Project* that only he has access to as a private working space
 developer wants to provision the application in his project using his
 forked repository created in previous steps
 * Click on *Add to Project*
+
+{% if OCP_VERSION == "3.3" %}
+* Explain that using templates, developer can deploy an entire
+application with all its components at once
+* Scroll down and find the *inventory* template in the catalog
+
+image::demos/msa-ondemand-template.png[Application Template,width=920,align=center]
+
+* Explain that the tags assigned to the template such as _microservices_,
+_jboss_ and _angularjs_ are searchable and allow developers to filter
+templates based on tags
+* Click on the *inventory* template
+{% else %}
 * Explain that using templates, developer can deploy an entire
 application with all its components at once. Templates are categorized into different
 sections to facilitate finding them. These categories are customizable and you can add
@@ -103,6 +116,7 @@ image::demos/msa-ondemand-template-browse.png[Application Template Browse,width=
 * Scroll down and click on the *inventory* template
 
 image::demos/msa-ondemand-template-inventory.png[Application Template,width=920,align=center]
+{% endif %}
 
 * Explain that developer can customize the deployment via the template
 parameters. For example the *Git repository* and *Git branch/tag* parameters

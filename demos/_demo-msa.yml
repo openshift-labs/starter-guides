@@ -9,6 +9,7 @@ vars:
   GOGS_DEV_PASSWORD: "developer"
   GOGS_REVIEWER_USER: "team"
   GOGS_REVIEWER_PASSWORD: "team"
+  OCP_VERSION: "3.3"
 modules:
   activate:
     - demos_msa-overview
