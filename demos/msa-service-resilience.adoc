@@ -119,5 +119,5 @@ image::demos/msa-resilience-hystrix-circuits-open.png[Hystrix Dashboard,width=80
 * Explain that after a period of time (5 seconds in this demo), the circuit becomes *Closed* again and the *Inventory*
 service is removed from the blacklist. Expectedly, further failures would *Open* the circuit again.
 
-* * Go back to OpenShift Web Console and click on up arrow near *inventory-green* to scale the *Inventory*
+* Go back to OpenShift Web Console and click on up arrow near *inventory-green* to scale the *Inventory*
 service back up to 1.

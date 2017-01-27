@@ -1,4 +1,4 @@
-name: "Multi-product Demos: Modern Application Architecture"
+name: "Multi-product Demo: Modern App Architecture"
 vars:
   GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
   GOGS_DEV_REPO_URL: "http://gogs-ci-USERNAME.cloudapps.test.openshift.opentlc.com/developer/coolstore-microservice.git"
