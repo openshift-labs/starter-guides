@@ -2,10 +2,10 @@
 
 [format="csv",cols="2"]
 |======
-*Length*,TBD
+*Length*, ~6 min
 *Difficulty*,Hard
 *Slides*,TBD
-*Video*,TBD
+*Video*,https://drive.google.com/open?id=0B630TpgzAhO_SE9QTTJNb04tQms[Google Drive]
 *Simulation (Mac)*,TBD
 |======
 
@@ -168,8 +168,7 @@ image::demos/msa-jbds-junit-passed.png[Unit Tests Passed,width=920,align=center]
 them on an environment similar to production with the same version of
 JBoss EAP 7, operating system, JDK, etc to make sure false-positives
 don't occur due to inconsistent environment.
-* In the *Servers* view, right-click on *inventory* and then *Incremental
-Publish*
+* In the *Servers* view, right-click on *inventory* and then *Full Publish*
 * Explain that only files that have been changed by the developer will
 be copied directly into the JBoss EAP 7 container on OpenShift where
 *Inventory* service is deployed
