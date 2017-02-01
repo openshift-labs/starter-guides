@@ -1,13 +1,14 @@
 ## Building Quality into Development Process
 
-[format="csv",cols="2"]
-|======
-*Length*,5 min
-*Difficulty*,Easy
-*Slides*,TBD
-*Video*,https://drive.google.com/open?id=0B630TpgzAhO_QXJMUnp2LTFIMGc[Google Drive]
-*Simulation (Mac)*,TBD
-|======
+[cols="1d,7v", width="80%"]
+|===
+|*Length*|~5 min
+|*Difficulty*|Easy
+|*Slides*|TBD
+|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_QXJMUnp2LTFIMGc[Google Drive]
+|*Simulation*|TBD
+|===
+
 
 ### Explain the Demo Concepts
 

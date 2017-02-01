@@ -1,13 +1,13 @@
 ## Increase Developer Productivity with Container
 
-[format="csv",cols="2"]
-|======
-*Length*, ~6 min
-*Difficulty*,Hard
-*Slides*,TBD
-*Video*,https://drive.google.com/open?id=0B630TpgzAhO_SE9QTTJNb04tQms[Google Drive]
-*Simulation (Mac)*,TBD
-|======
+[cols="1d,7v", width="80%"]
+|===
+|*Length*|~6 min
+|*Difficulty*|Hard
+|*Slides*|TBD
+|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_SE9QTTJNb04tQms[Google Drive]
+|*Simulation*|TBD
+|===
 
 ====
 IMPORTANT: JBoss Developer Studio (JBDS) should be installed on your
