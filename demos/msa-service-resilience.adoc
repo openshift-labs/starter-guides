@@ -2,11 +2,12 @@
 
 [cols="1d,7v", width="80%"]
 |===
-|*Length*|TBD
+|*Length*|~6 min
 |*Difficulty*|Medium
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[Google Slide]
-|*Video*|TBD
-|*Simulation*|TBD
+|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_ZkNFYmZPNGpUM0k[Google Drive]
+|*Simulation*|https://drive.google.com/open?id=0B630TpgzAhO_eTV4ZHFFbk04b2c[Mac]
+https://drive.google.com/open?id=0B630TpgzAhO_QVIzNTVoZHM3MWc[HTML]
 |===
 
 ### Explain the Demo Concepts

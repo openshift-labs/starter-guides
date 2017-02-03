@@ -4,9 +4,9 @@
 |===
 |*Length*|~6 min
 |*Difficulty*|Hard
-|*Slides*|TBD
+|*Slides*|NA
 |*Video*|https://drive.google.com/open?id=0B630TpgzAhO_SE9QTTJNb04tQms[Google Drive]
-|*Simulation*|-
+|*Simulation*|NA
 |===
 
 ====
