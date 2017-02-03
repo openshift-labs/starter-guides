@@ -1,4 +1,4 @@
-## Building Quality into Development Process
+## Building Quality into Development Process (with JBoss Developer Studio)
 
 [cols="1d,7v", width="80%"]
 |===

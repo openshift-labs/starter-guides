@@ -16,7 +16,7 @@ modules:
     - demos_msa-agile-integration
     - demos_msa-service-resilience
     - demos_msa-on-demand-env
-    - demos_msa-dev-productivity
+    - demos_msa-dev-productivity-jbds
     - demos_msa-pr-code-review-with-jbds
     - demos_msa-pr-code-review-without-jbds
     - demos_msa-cicd-eap

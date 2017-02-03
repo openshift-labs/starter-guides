@@ -1,4 +1,4 @@
-## Increase Developer Productivity with Container
+## Increase Developer Productivity with Container (with JBoss Developer Studio)
 
 [cols="1d,7v", width="80%"]
 |===
