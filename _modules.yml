@@ -94,7 +94,7 @@ modules:
     name: Creating On-Demand Environment
   demos_msa-dev-productivity:
     name: Increase Developer Productivity with Containers
-  demos_msa-dev-process:
+  demos_msa-dev-process-code-review:
     name: Building Quality into Development Process
     requires:
       - demos_msa-dev-productivity

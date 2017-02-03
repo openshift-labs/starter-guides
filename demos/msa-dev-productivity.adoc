@@ -6,7 +6,7 @@
 |*Difficulty*|Hard
 |*Slides*|TBD
 |*Video*|https://drive.google.com/open?id=0B630TpgzAhO_SE9QTTJNb04tQms[Google Drive]
-|*Simulation*|TBD
+|*Simulation*|-
 |===
 
 ====

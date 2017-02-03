@@ -17,5 +17,5 @@ modules:
     - demos_msa-service-resilience
     - demos_msa-on-demand-env
     - demos_msa-dev-productivity
-    - demos_msa-dev-process
+    - demos_msa-dev-process-code-review
     - demos_msa-cicd-eap

@@ -6,7 +6,8 @@
 |*Difficulty*|Medium
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_0[Google Slide]
 |*Video*|https://drive.google.com/open?id=0B630TpgzAhO_NEVwczJ1WDF2TE0[Google Drive]
-|*Simulation*|TBD
+|*Simulation*|https://drive.google.com/open?id=0B630TpgzAhO_cm5Za29sWFNDaDg[Mac]
+https://drive.google.com/open?id=0B630TpgzAhO_MmRzaXZiSVZwTk0[HTML]
 |===
 
 
@@ -64,7 +65,23 @@ release or even A/B testing.
 
 image::demos/msa-cicd-eap-trafficsplit.png[Blue/Green Traffic Split,width=820,align=center]
 
-* In the *Web UI* service group, click on the route url
+* In the *Inventory Live* service group, click on the route URL to open the Swagger UI in a new tab
+* Explain that Swagger UI is integrated into the service in order to allow testing the REST
+endpoints
+
+image::demos/msa-cicd-eap-swagger.png[Swagger UI,width=820,align=center]
+
+* Click on *GET /availability/{itemId}* to open the API block and enter _165613_ in the
+*itemId* field to be used as the API parameter. Click on *Try it out!*
+* Explain that the REST response is displayed on the screen in addition to details of how
+to use `curl` to call the API
+* Explain that the live service is still the previous version and shows the recalled product is in-stock
+
+image::demos/msa-cicd-eap-swagger-before.png[Recalled Product In-Stock,width=820,align=center]
+
+
+* Go back to *OpenShift Web Console* browser tab
+* In the *Web UI* service group, click on the route URL to open it in a new tab
 * Explain that the recalled product (Solid Performance Polo) is still
 shows up in-stock on the CoolStore and is possible to order the product.
 
@@ -93,5 +110,12 @@ is Live now
 image::demos/msa-cicd-eap-pipeline.png[OpenShift Pipeline,width=1000,align=center]
 
 * In the OpenShift web console, click on *CoolStore PROD* project
-* In the *Web UI* service group, click on the route url
+* In the *Inventory Live* service group, click on the route URL to open the Swagger UI in a new tab
+* Click on *GET /availability/{itemId}* to open the API block and enter _165613_ in the
+*itemId* field to be used as the API parameter. Click on *Try it out!*
+* Explain that the live service is updated and the recalled product is out-of-stock
+
+image::demos/msa-cicd-eap-swagger-after.png[Recalled Product In-Stock,width=820,align=center]
+
+* In the *Web UI* service group, click on the route URL in a new tab
 * Explain that the the recalled product is out of stock.
