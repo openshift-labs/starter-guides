@@ -128,7 +128,7 @@ code.
 ====
 NOTE: The default values of all parameters are set correctly
 for this demo. The *Git repository* parameter contains the URL to the forked
-repository in the previous steps: {{GOGS_DEV_REPO_URL}}
+repository in the previous steps: {{GOGS_DEV_REPO_URL_PREFIX}}.git
 ====
 
 * Paste the Git repository URL forked in previous steps for the *Git repository* parameter

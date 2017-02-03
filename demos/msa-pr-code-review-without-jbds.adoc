@@ -1,0 +1,109 @@
+## Building Quality into Development Process
+
+[cols="1d,7v", width="80%"]
+|===
+|*Length*|~5 min
+|*Difficulty*|Easy
+|*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_0_0[Google Slide]
+|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_QXJMUnp2LTFIMGc[Google Drive]
+|*Simulation*|https://drive.google.com/open?id=0B630TpgzAhO_YUNvV0ViS0g5cXM[Mac]
+https://drive.google.com/open?id=0B630TpgzAhO_dWxrZTlWeXV3Yjg[HTML]
+|===
+
+
+### Explain the Demo Concepts
+
+* Explain the quality process with fork, PR and code-review
+
+### Demonstrate Storing Code Changes in Git Repository
+
+* Explain that the developer should commit the code changes to his Git
+repository to be able to shared them for code-review with the team
+
+====
+NOTE: *Gogs* git server is used in this demo as the Git repository and it is deployed in the *CI/CD*
+project and accessible at {{GOGS_URL}}. Open *Gogs* in your browser in a new tab by entering the
+correct URL. Alternatively, click on *OpenShift Container Platform* logo in the header,
+then on *CI/CD* project and then on *Gogs* route URL to open *Gogs* in a new tab.
+====
+
+* Explain *Gogs* as the team source repository where the CoolStore
+application source code and configuration is stored and managed
+* In *Gogs* web, click on *Sign In* and enter the developer credentials
+** Username: _{{GOGS_DEV_USER}}_
+** Password: _{{GOGS_DEV_PASSWORD}}_
+
+image::demos/msa-dev-gogs-web.png[Gogs Web,width=920,align=center]
+
+* In *My Repositories*, click on *coolstore-microservices* repository
+* Browse the git repository to get to {{GOGS_DEV_REPO_URL_PREFIX}}/src/master/inventory-service/src/main/java/com/redhat/coolstore/service/InventoryService.java[`inventory-service\src\main\java\com\redhat\coolstore\service\InventoryService.java`]
+
+image::demos/msa-dev-gogs-browse.png[Browse Git Repository,width=920,align=center]
+
+* Click on the edit icon to open {{GOGS_DEV_REPO_URL_PREFIX}}/_edit/master/inventory-service/src/main/java/com/redhat/coolstore/service/InventoryService.java[`InventoryService.java`] in the text editor
+
+image::demos/msa-dev-gogs-edit.png[Edit Java Class,width=920,align=center]
+
+* Remove the `//` from the commented lines to uncomment them
+
+image::demos/msa-dev-gogs-edit-uncomment.png[Uncomment InventoryService.java,width=920,align=center]
+
+* Enter `Issue #312 fixed` in the field in the *Commit Changes* section and then click on
+*Commit Changes* button
+
+image::demos/msa-dev-gogs-commit.png[Commit Changes,width=920,align=center]
+
+* Explain that the changes are committed to the Git repository in order to show the recalled products out-of-stock
+
+* Click on the green compare button to see the
+differences between the developer Git repository and the teams Git
+repository
+
+image::demos/msa-dev-pullrequest.png[Create Pull Request,width=1000,align=center]
+
+* Scroll down and explain that the only change is the code you committed
+to the Git repository in the previous steps
+* Specify +Issue #312 fixed+ in the *Title* field and click on *Create Pull Request* button
+* Explain that the the _Pull Request_ is created now and the developer and
+can discuss the changes with code-reviewers in form of comments on this
+_Pull Request_ page
+
+### Demonstrate Code Review Process
+
+* Click on *User profile and more* icon and then *Sign Out*
+
+image::demos/msa-dev-signout.png[Sign Out,width=460,align=center]
+
+* Explain that you will login as a senior code reviewer with privileges
+to commit code to the team repository
+* In *Gogs* web, click on *Sign In* and enter the team credentials to log in as a code reviewer
+** Username: _{{GOGS_REVIEWER_USER}}_
+** Password: _{{GOGS_REVIEWER_PASSWORD}}_
+
+* In *My Repositories*, click on *coolstore-microservices* repository
+* Explain that the team repository does not contain the changes made by
+the developer since they are not reviewed yet. Point out the last commit
+which is different from the commit developer made in previous steps
+* Explain that there is one _Pull Request_ waiting on the repository to be
+reviewed
+* Click on the *Pull Request* tab and then on the *Issue #312 fixed* _Pull Request_
+
+image::demos/msa-dev-pullrequests.png[Pull Requests,width=1000,align=center]
+
+* Explain that code-reviewer can study the changes made by looking at
+the *Commits* and *Files changed* tabs and comment on the changes
+* Write a comment with ++1+ as the message and click on the
+*Comment* button to show your approval
+* Explain that in different teams, there are different conventions on
+how many ++1+s a _Pull Request_ should have to be eligible for merge to the
+team repository. In our demo, one is enough!
+* Click on *Merge Pull Request* button to merge the code changes to the
+team repository
+
+image::demos/msa-dev-pr-comments.png[Pull Request Comments,width=800,align=center]
+
+* Click on *Commits* tab
+* Explain that the team repository now contains the changes the
+developer made via his forked Git repository
+
+image::demos/msa-dev-commits.png[Git Repository Commits,width=920,align=center]

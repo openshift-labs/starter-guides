@@ -92,7 +92,6 @@ traffic to the inventory-green that holds the new version of *Inventory*
 service. If not approved, the *Live* version stays the same as before and
 the new version gets discarded.
 * Click on the *Input Required* link under the *Approve Go Live* stage. Jenkins opens in a new tab.
-** Jenkins URL: {{JENKINS_URL}}
 * Explain that Jenkins can integrate into OpenShift authorization mechanism so that
 users can log in using their OpenShift credentials.
 * Log in using your OpenShift credentials
