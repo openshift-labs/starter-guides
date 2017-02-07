@@ -5,7 +5,6 @@ vars:
   JENKINS_URL: "http://jenkins-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
   COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
   HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
-  PROJECT_SUFFIX: "-USERNAME"
   GOGS_DEV_USER: "developer"
   GOGS_DEV_PASSWORD: "developer"
   GOGS_REVIEWER_USER: "team"
