@@ -10,10 +10,9 @@
 https://drive.google.com/open?id=0B630TpgzAhO_dWxrZTlWeXV3Yjg[HTML]
 |===
 
-
 ### Explain the Demo Concepts
 
-* Explain the quality process with fork, PR and code-review
+* Explain the quality process with Git fork and pull-request process using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_2_0[the slides]
 
 ### Demonstrate Storing Code Changes in Git Repository
 * Explain that the developer should commit the code changes to his Git

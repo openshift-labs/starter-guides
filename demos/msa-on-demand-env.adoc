@@ -13,15 +13,15 @@ https://drive.google.com/open?id=0B630TpgzAhO_cklJWm5DX0syVDQ[HTML]
 
 ### Explain the Demo Concepts
 
-* Explain the use-case: a JIRA issue is assigned to the developer to fix
-a bug in the *Inventory* microservice which runs on JBoss EAP 7. He needs
+* Explain the use-case: a JIRA issue is assigned to you to fix
+a bug in the *Inventory* microservice which runs on JBoss EAP 7. You need
 to deploy the exact version of the source code containing the issue in a
 environment to investigate and possibly correct the problem. Since
-ordering new servers used to take 6 weeks, he usually repurposed one of
-the existing allocated servers. He would then spent only 1 day cleaning
-up the server, installing JDK and middleware and deploy the application
-on it so that he can start investigating. Taking advantage of containers
-and self-service, all that is reduced to a few minutes.
+ordering new VMs takes about 6 weeks, you want to see how you can use OpenShift
+and containers to quickly create a JBoss EAP environment for yourself to deploy 
+the code and start working on the JIRA issue.
+
+* Explain the development process using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1bc4f4b598_0_252[the slides]
 
 ### Demonstrate Creating Personal Repository from Project Repository
 

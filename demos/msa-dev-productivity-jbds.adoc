@@ -17,7 +17,12 @@ these instructions.
 
 ### Explain the Demo Concepts
 
-* Explain the use case: TBD.
+* Explain the use-case: one of our vendors has recalled a number of products from our 
+online shop. We are working to remove the products from our backoffice system that handles 
+inventory however it is an old ERP system and it takes a while till it is removed from the system. 
+Since having the products online would need us to pay financial damage to the vendor due to our 
+contract, we have decided to update the *Inventory* service that proxies calls to the backoffice ERP 
+system to return zero inventory for those specific products until the backoffice system is updated.
 
 ### Demonstrate connecting to OpenShift from JBoss Developer Studio (JBDS)
 * Explain that to be able to use the OpenShift 3 tooling in JBDS, you

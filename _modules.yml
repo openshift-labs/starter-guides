@@ -84,12 +84,20 @@ modules:
     name: Running a container as a non Root user
   gcp-bigquery:
     name: Integrating with Google Compute Service BigQuery
+  demos_msa-coolstore-overview:
+    name: CoolStore Demo Application Overview
   demos_msa-overview:
     name: Containerized Microservices
+    requires:
+      - demos_msa-coolstore-overview
   demos_msa-agile-integration:
     name: Agile Integration for Microservices
+    requires:
+      - demos_msa-coolstore-overview
   demos_msa-service-resilience:
     name: Service Resilience and Fault Tolerance
+    requires:
+      - demos_msa-coolstore-overview
   demos_msa-on-demand-env:
     name: Creating On-Demand Environment
   demos_msa-dev-productivity-jbds:
@@ -105,3 +113,6 @@ modules:
       - demos_msa-on-demand-env
   demos_msa-cicd-eap:
     name: Increasing Delivery Speed with CI/CD
+    requires:
+      - demos_msa-coolstore-overview
+      - demos_msa-pr-code-review-without-jbds

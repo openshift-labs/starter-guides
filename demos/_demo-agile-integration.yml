@@ -12,6 +12,7 @@ vars:
   OCP_VERSION: "3.3"
 modules:
   activate:
+    - demos_msa-coolstore-overview
     - demos_msa-overview
     - demos_msa-agile-integration
     - demos_msa-service-resilience

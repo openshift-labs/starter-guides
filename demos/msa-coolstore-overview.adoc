@@ -1,0 +1,16 @@
+### CoolStore Demo Application Overview
+
+[cols="1d,7v", width="80%"]
+|===
+|*Length*|~3 min
+|*Difficulty*|Easy
+|*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_6_67[Google Slide]
+|*Video*|NA
+|*Simulation*|NA
+|===
+
+### Explain the Demo Concepts
+
+* Explain CoolStore Application using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_6_67[these slides]
+* Explain and point at various services using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1cd9fdea25_0_8[these slides]
+* Explain CoolStore architecture using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_2_0[these slides]

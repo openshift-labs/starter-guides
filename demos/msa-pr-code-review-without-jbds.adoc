@@ -13,7 +13,15 @@ https://drive.google.com/open?id=0B630TpgzAhO_dWxrZTlWeXV3Yjg[HTML]
 
 ### Explain the Demo Concepts
 
-* Explain the quality process with fork, PR and code-review
+* Explain the quality process with Git fork and pull-request process using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_2_0[the slides]
+
+* Explain the use-case: one of our vendors has recalled a number of products from our 
+online shop. We are working to remove the products from our backoffice system that handles 
+inventory however it is an old ERP system and it takes a while till it is removed from the system. 
+Since having the products online would need us to pay financial damage to the vendor due to our 
+contract, we have decided to update the *Inventory* service that proxies calls to the backoffice ERP 
+system to return zero inventory for those specific products until the backoffice system is updated.
+
 
 ### Demonstrate Storing Code Changes in Git Repository
 

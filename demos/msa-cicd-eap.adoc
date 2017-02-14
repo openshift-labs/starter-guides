@@ -13,10 +13,16 @@ https://drive.google.com/open?id=0B630TpgzAhO_MmRzaXZiSVZwTk0[HTML]
 
 ### Explain the Demo Concepts
 
-* Explain Continuous Integration and Continuous Delivery using the
-https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_4[slides]
-* Explain the CoolStore pipeline
-using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_9[the slides]
+* Explain the CoolStore microservices application using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1bc4f4b598_0_307[these slides]
+* Explain the CoolStore deployment pipeline and application promotion process using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1bc4f4b598_0_184[these slides]
+* Explain the projects in the demo
+** *Developer Project*: developer's personal project for creating on-demand deployments
+** *Inventory TEST*: test environment for the *Inventory* microservice in order to run integration tests
+** *CoolStore TEST*: test environment for the *CoolStore* application with all services deployed to run user-acceptrance and system tests
+** *CoolStore PROD*: production environment for the *CoolStore* application with all services deployed 
+** *CI/CD*: continuous delivyer components such as Jenkins, Gogs, etc
+
+image::demos/msa-cicd-eap-projects.png[Projects,width=1000,align=center]
 
 ### Demonstrate Automated Deployments via CI/CD Pipelines
 * In the OpenShift web console, go to *CI/CD* project
