@@ -1,4 +1,4 @@
-name: "Multi-product Demo: Continous Delivery with JBoss EAP"
+name: "Multi-product Demo: Quick Code-to-Production without Downtime"
 vars:
   GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
   GOGS_DEV_REPO_URL_PREFIX: "http://gogs-ci-USERNAME.cloudapps.test.openshift.opentlc.com/developer/coolstore-microservice"
