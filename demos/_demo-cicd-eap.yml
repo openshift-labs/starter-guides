@@ -1,4 +1,4 @@
-name: "Multi-product Demo: Agile Integration"
+name: "Multi-product Demo: Continous Delivery with JBoss EAP"
 vars:
   GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
   GOGS_DEV_REPO_URL_PREFIX: "http://gogs-ci-USERNAME.cloudapps.test.openshift.opentlc.com/developer/coolstore-microservice"
@@ -15,5 +15,6 @@ modules:
   activate:
     - demos_msa-coolstore-overview
     - demos_msa-overview
-    - demos_msa-agile-integration
-    - demos_msa-service-resilience
+    - demos_msa-on-demand-env
+    - demos_msa-pr-code-review-without-jbds
+    - demos_msa-cicd-eap

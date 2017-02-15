@@ -22,7 +22,7 @@ https://drive.google.com/open?id=0B630TpgzAhO_MmRzaXZiSVZwTk0[HTML]
 ** *CoolStore PROD*: production environment for the *CoolStore* application with all services deployed 
 ** *CI/CD*: continuous delivyer components such as Jenkins, Gogs, etc
 
-image::demos/msa-cicd-eap-projects.png[Projects,width=1000,align=center]
+image::demos/msa-cicd-eap-projects.png[Projects,width=820,align=center]
 
 ### Demonstrate Automated Deployments via CI/CD Pipelines
 * In the OpenShift web console, go to *CI/CD* project
@@ -30,8 +30,7 @@ image::demos/msa-cicd-eap-projects.png[Projects,width=1000,align=center]
 * Explain that *inventory-pipeline* is an OpenShift pipeline that takes
 any change committed to the *coolstore-microservices* team Git repository
 through various steps until it is deployed in production.
-* If coming from previous modules, explain that the pipeline was
-triggered when team member (code reviewer) merged the _Pull Request_ in
+* Explain that the pipeline was triggered when team member (code reviewer) merged the _Pull Request_ in
 the repository. The pipeline has taken the code changes through DEV
 environment and after test succeeded, it has promoted the changes to the
 TEST environment to run system-integration tests with all dependent
@@ -47,13 +46,12 @@ approve deployments.
 
 image::demos/msa-cicd-eap-pipeline-manual.png[OpenShift Pipelines Manual Step,width=1000,align=center]
 
-* Explain zero-downtime deployment strategies (e.g. blue/green) using
-https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_0_465[the sides] and
+* Explain zero-downtime deployment via Blue/Green deployment strategy using
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1bc4f4b598_0_102[these sides] and
 how every minute of downtime for an e-commerce company equals lost revenue.
-* Explain the blue/green deployment in the pipeline using
-https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_9[the slides]
-and point that changes are already deployed in production but
-user traffic is not switched to the new version and would happen after approval.
+* Explain that when the pipeline is waiting for a manual approval to Go Live, the 
+changes are already deployed in production but user traffic is not switched to the 
+new version and that would happen after approval.
 * Click on the projects drop-down list on top of the page and then on
 *CoolStore PROD*
 
