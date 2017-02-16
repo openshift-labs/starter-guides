@@ -23,8 +23,8 @@ free of charge for managing OpenShift environments and it can itself run as a co
 
 * Go to *CloudForms* dashbaord and log in with the following credentials:
 ** CloudForms: {{CLOUDFORMS_URL}}
-** Username: {{CLOUDFORMS_USER}}
-** Password: {{CLOUDFORMS_PASSWORD}}
+** Username: _{{CLOUDFORMS_USER}}_
+** Password: _{{CLOUDFORMS_PASSWORD}}_
 
 * Explain that Red Hat CloudForms can manage any type of infrastructure such as OpenStack, Public Clouds (e.g. Amazon Web Service), 
 Virtualization and more but in this demo you will focus on container management capabilities.
