@@ -1,4 +1,4 @@
-name: "Multi-product Demo: Modern App Architecture"
+name: "Multi-product Demo: Module Library"
 vars:
   PROJECT_SUFFIX: "USERNAME"
   GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
@@ -25,3 +25,4 @@ modules:
     - demos_msa-pr-code-review-with-jbds
     - demos_msa-pr-code-review-without-jbds
     - demos_msa-cicd-eap
+    - demos_msa-continuous-security

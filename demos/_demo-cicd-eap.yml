@@ -1,5 +1,6 @@
 name: "Multi-product Demo: Quick Code-to-Production without Downtime"
 vars:
+  PROJECT_SUFFIX: "USERNAME"
   GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
   GOGS_DEV_REPO_URL_PREFIX: "http://gogs-ci-USERNAME.cloudapps.test.openshift.opentlc.com/developer/coolstore-microservice"
   JENKINS_URL: "http://jenkins-ci-USERNAME.cloudapps.na.openshift.opentlc.com"

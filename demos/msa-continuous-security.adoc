@@ -1,0 +1,106 @@
+## Continuous Security Compliance for Containers  
+
+[cols="1d,7v", width="80%"]
+|===
+|*Length*|~8 min
+|*Difficulty*|Medium
+|*Slides*|NA
+|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_YUJDNF8yVV9wdkE[Google Drive]
+|*Simulation*| Coming Soon
+|===
+
+
+### Explain the Demo Concepts
+
+* Explain that security is one of the largest concerns around containers and how organizations 
+need to gain visiliby into packages installed inside containers and make sure they don't container 
+critical security issues.
+
+* Explain that Red Hat CloudForms is a cloud managment solution that is included with OpenShift Container Platform 
+free of charge for managing OpenShift environments and it can itself run as a container deployed on OpenShift.
+
+### Demonstrate the OpenShift Overview
+
+* Go to *CloudForms* dashbaord and log in with the following credentials:
+** CloudForms: {{CLOUDFORMS_URL}}
+** Username: {{CLOUDFORMS_USER}}
+** Password: {{CLOUDFORMS_PASSWORD}}
+
+* Explain that Red Hat CloudForms can manage any type of infrastructure such as OpenStack, Public Clouds (e.g. Amazon Web Service), 
+Virtualization and more but in this demo you will focus on container management capabilities.
+
+* On the left sidebar menu, go to *Compute -> Containers -> Overview* 
+
+image::demos/msa-security-cf-dashboard.png[CloudForms Container Dashboard,width=920,align=center]
+
+* Explain the overview of resoures available in the OpenShift provider managed by CloudForms including nodes, 
+projects, container images, etc
+
+* Explain the memory, cpu and network graphes and utilization trends in order to do capability planning (right-sizing)
+
+* Explain that alerts can be defined in order to perform actions when utilization or metrics move outside acceptable ranges
+
+* Click on *Projects*
+
+image::demos/msa-security-cf-projects.png[Projects,width=800,align=center]
+
+* Explain that user would see an overview of projects that he has access to with details such as number of pods, containers, images, etc
+
+* Click on *coolstore-prod-{{PROJECT_SUFFIX}}* project to go to *CoolStore PROD* environments
+
+* Explain that the overview of *coolstore-prod-{{PROJECT_SUFFIX}}* is displayed with details on the number of objects existing in this project
+
+* Explain that you want to review the images built in production and check their Compliance
+
+* Click on *Container Images*
+
+image::demos/msa-security-cf-images.png[Container Images,width=680,align=center]
+
+* Click on *coolstore-prod-{{PROJECT_SUFFIX}}/web-ui* container image
+
+* Explain the metadata details of the image
+
+* Explain that the green check shows that the image is scanned against the policies defined in CloudForms 
+and it is compliant. The default policies are Red Hat Enterprise Linux 7 OpenScap rules which can be customized by 
+the admins running the platform. Explain that SCAP is a standardized compliance checking solution for
+enterprise-level Linux infrastructure and it contains a set of specifications for maintaining system security for enterprise systems.
+
+* Explain that as soon as an image is pushed to OpenShift image registry, a scan is scheduled and if 
+the scan marks the image non-compliant, CloudForms ensures security by rejecting the 
+image by default and preventing it from being deployed on OpenShift.
+
+image::demos/msa-security-cf-image-compliance.png[Container Images Compliance,width=680,align=center]
+
+* Explain that you can also get the list of all the OpenScap rules that are checked against 
+the container image and also download them as an HTML report.
+
+* Click on *OpenScap HTML* to download the report and open it in the browser
+
+image::demos/msa-security-cf-openscap-download.png[OpenScap Report,width=680,align=center]
+
+* Explain that the list of rules and their status is listed in the report in addition to the details of each rule 
+and the CVEs related to it
+
+* Go back to CloudForms dashboard
+
+* Click on *Packages* 
+
+* Explain that the list of packages inslides inside the container image in addition to the version and description is displayed
+
+* Click on browsers back button to go back to the *coolstore-prod-{{PROJECT_SUFFIX}}/web-ui* container image
+
+* Explain that when a container image is available in the registry, other teams might 
+deploy that in their environments in order to perform tests or else and therefore there 
+is a need to find out where an image is deployed.
+
+* Click on *Relationships* in the middle menu
+
+image::demos/msa-security-cf-image-relationships.png[OpenScap Report,width=680,align=center]
+
+* Explain that a list of relevant objects such as in which projects, pods, containers 
+and nodes the *coolstore-prod-{{PROJECT_SUFFIX}}/web-ui* is deployed
+
+* Click on *Pods (2)*
+
+* Explain the the image is deployed into 2 pods, one in the *CoolStore TEST* environment 
+and other in *CoolStore PROD*

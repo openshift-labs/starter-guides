@@ -116,3 +116,5 @@ modules:
     requires:
       - demos_msa-coolstore-overview
       - demos_msa-pr-code-review-without-jbds
+  demos_msa-continuous-security:
+    name: Continuous Security Compliance for Containers
