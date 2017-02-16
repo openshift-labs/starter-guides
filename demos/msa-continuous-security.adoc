@@ -6,7 +6,8 @@
 |*Difficulty*|Medium
 |*Slides*|NA
 |*Video*|https://drive.google.com/open?id=0B630TpgzAhO_YUJDNF8yVV9wdkE[Google Drive]
-|*Simulation*| Coming Soon
+|*Simulation*| https://drive.google.com/open?id=0B630TpgzAhO_RWlycTVpV3FraUE[Mac]
+https://drive.google.com/open?id=0B630TpgzAhO_bHROeW1lYUE2RHc[HTML]
 |===
 
 
