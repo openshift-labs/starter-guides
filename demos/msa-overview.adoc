@@ -2,11 +2,12 @@
 
 [cols="1d,7v", width="80%"]
 |===
-|*Length*|~5 min
+|*Length*|~12 min
 |*Difficulty*|Easy
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_2_27[Google Slide]
 |*Video*|https://drive.google.com/open?id=0B630TpgzAhO_X0NTcmYzYmkzVjQ[Google Drive]
-|*Simulation*|https://drive.google.com/open?id=0B630TpgzAhO_YjVxSERlRzUyMms[Mac]
+|*Simulation*  
+(https://drive.google.com/open?id=0B630TpgzAhO_eERmS2lJcDM2OVU[Tutorial]) |https://drive.google.com/open?id=0B630TpgzAhO_YjVxSERlRzUyMms[Mac]
 https://drive.google.com/open?id=0B630TpgzAhO_Vlgwa3RHUGg3MFE[HTML]
 |===
 

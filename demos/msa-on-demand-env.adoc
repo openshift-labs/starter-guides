@@ -6,7 +6,8 @@
 |*Difficulty*|Easy
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_15[Google Slide]
 |*Video*|https://drive.google.com/open?id=0B630TpgzAhO_ZXg2TnF0UnZIX0U[Google Drive]
-|*Simulation*|https://drive.google.com/open?id=0B630TpgzAhO_UHZjeVU3dlE4Wnc[Mac]
+|*Simulation*  
+(https://drive.google.com/open?id=0B630TpgzAhO_eERmS2lJcDM2OVU[Tutorial]) |https://drive.google.com/open?id=0B630TpgzAhO_UHZjeVU3dlE4Wnc[Mac]
 https://drive.google.com/open?id=0B630TpgzAhO_c2xnUDBfYmlTNm8[HTML]
 |===
 
