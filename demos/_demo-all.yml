@@ -1,4 +1,4 @@
-name: "Multi-product Demo: Module Library"
+name: "All Modules"
 vars:
   PROJECT_SUFFIX: "USERNAME"
   GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
