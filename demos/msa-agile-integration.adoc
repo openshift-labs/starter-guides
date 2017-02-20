@@ -2,24 +2,36 @@
 
 [cols="1d,7v", width="80%"]
 |===
-|*Length*|~5 min
+|*Length*|~6 min
 |*Difficulty*|Medium
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_5[Google Slide]
-|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_a3MzanhwUl9aWkE[Google Drive]
+|*Video*|https://drive.google.com/open?id=0BwYg9EJiu13fX0dMSlpId2pFTkk[Google Drive]
 |*Simulation*  
 (https://drive.google.com/open?id=0B630TpgzAhO_eERmS2lJcDM2OVU[Tutorial]) |https://drive.google.com/open?id=0B630TpgzAhO_cFBpTU4wNjVQcGM[Mac]  
 https://drive.google.com/open?id=0B630TpgzAhO_dXVMSVNIVWpvSkk[HTML]
 |===
 
 ### Explain the Demo Concepts
-* Explain agile integration using the
-https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_5[demo slides]
+* Explain agile integration using 
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g20c196b2f1_0_0[the slides]
+
+* Explain API aggregation using 
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g20ea0141cf_0_114[the slides]
+
+* Go to *CoolStore Web UI* in the *CoolStore PROD* project: {{COOLSTORE_WEB_PROD_URL}}
+
+====
+TIP: You can find the *CoolStore Web UI* url by going to the OpenShift web console,
+clicking on *CoolStore PROD* project, and in the *Web UI* service group, clicking on the route url
+====
+
+* Click on *Your Shopping Cart* tab and show the shopping cart
+* Explain the catalog, cart and inventory services in the CoolStore
+* Explain microservice composition using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g20e9165f6c_3_62[the slides]
 
 ### Demonstrate API Aggregation with Camel (Fuse Integration Services)
 
-* Explain API aggregation using the
-https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b64d8284a_0_5[demo
-slides]
+* Explain Open API specification (Swagger) and JBoss Fuse generating Swagger docs
 * In the OpenShift web console, go to *CoolStore PROD* project
 * In the *Coolstore GW* service group, click on the route url to go to the Swagger UI
 
@@ -32,6 +44,9 @@ image::demos/msa-int-swagger-ui.png[Coolstore GW Swagger UI,width=800,align=cent
 image::demos/msa-int-swagger-api.png[Products API,width=700,align=center]
 
 * Point out the returned product list under *Response Body*
+
+* Explain creating integrations with JBoss Fuse and Sprint Boot using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g20ea0141cf_0_5[the slides]
+
 * Go to OpenShift web console
 * Click on *CoolStore GW* pod circle and then *coolstore-gw-xxxxx*
 * Click on *Logs* tab

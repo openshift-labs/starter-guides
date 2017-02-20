@@ -5,7 +5,7 @@
 |*Length*|~6 min
 |*Difficulty*|Medium
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[Google Slide]
-|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_ZkNFYmZPNGpUM0k[Google Drive]
+|*Video*|https://drive.google.com/open?id=0B630TpgzAhO_bXN6eHR4SkNSOUU[Google Drive]
 |*Simulation*  
 (https://drive.google.com/open?id=0B630TpgzAhO_eERmS2lJcDM2OVU[Tutorial]) |https://drive.google.com/open?id=0B630TpgzAhO_N2VmZm5fc0hlc1E[Mac]
 https://drive.google.com/open?id=0B630TpgzAhO_LVk5WkstdVBudE0[HTML]
@@ -13,6 +13,7 @@ https://drive.google.com/open?id=0B630TpgzAhO_LVk5WkstdVBudE0[HTML]
 
 ### Explain the Demo Concepts
 
+* Explain service resilience using https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1bbea827f3_0_199[the slides]
 * Explain the use-case: services do fail. Sometimes there are temporary
 shortages in the infrastructure and sometimes its a severe application
 error that leads to failure. Its not a question if that happens, its a
@@ -24,6 +25,7 @@ to the entire CoolStore web failing and preventing customers from
 placing orders. When build for failure, Inventory failure would be
 limited to the inventory status and would allow users to keep placing
 orders without knowing about the inventory.
+
 
 ### Demonstrate Container Lifecycle Management
 
@@ -78,9 +80,7 @@ containers
 ### Demonstrate Service Resilience and Preventing Cascading Failures
 
 * Explain service resilience using
-https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[the slides]
-* Explain Netflix OSS using
-https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[the slides]
+https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g20ea0141cf_0_132[the slides]
 * Click on *Web UI* route: {{COOLSTORE_WEB_PROD_URL}}
 
 image::demos/msa-resilience-web-inventory.png[Inventory Service,width=600,align=center]
