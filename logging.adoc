@@ -48,7 +48,7 @@ parksmap-1-hx0kv   1/1       Running   0          5h
 
 And then use the `logs` command to view this *Pod*'s logs:
 
-[source]
+[source,role=copypaste]
 ----
 oc logs parksmap-1-hx0kv
 ----
@@ -87,13 +87,6 @@ secured with OpenShift's role-based access controls, so you can only see logs
 for projects that you have access to. 
 
 image::kibana-parksmap.png[Kibana Interface]
-
-[WARNING]
-====
-Kibana may give you an error about a default index. This
-is a known bug having to do with your first time visiting the Kibana interface.
-Close your browser, and then re-open it. At this point you should be good.
-====
 
 The "View Archive" link that you clicked takes you to a default view with a specific search term
 pre-populated. Kibana will only show you logs where the pod name is

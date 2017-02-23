@@ -32,7 +32,7 @@ contains the database credentials:
 
 [source,role=copypaste]
 ----
-http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/1.0.0/ose3/application-dev.properties
+http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-dev.properties
 ----
 
 Create a `ConfigMap` using the following command in the `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project:
@@ -52,7 +52,6 @@ database credentials:
 
 [source]
 ----
-oc get configmap
 oc describe configmap nationalparks
 
 Name:		nationalparks

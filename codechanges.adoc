@@ -42,7 +42,7 @@ that you have on your local GitLab:
 {% if PARKSMAP_PY %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}
 {% else %}
-http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks
 {% endif %}
 ----
 
@@ -55,7 +55,7 @@ Username: {{GITLAB_USER}}
 Password: {{GITLAB_PASSWORD}}
 ====
 
-Click the Settings link on the top right of the screen, and then click "Webhooks":
+Click the Settings link on the top right of the screen, and then click "Integrations":
 
 image::ocp-webhook2.png[Webhook]
 
@@ -81,6 +81,9 @@ this out.
 #### Exercise: Using GitLab Web Hooks
 
 {% if PARKSMAP_PY %}
+Be sure you return to the proper tag in the git repository:
+
+*link:http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[]*
 
 Click "Project" at the top of the GitLab page, and then "Files" towards the
 middle of the page. This is GitLab's repository view. Make sure that the
@@ -110,7 +113,7 @@ To
 
 Click "Project" at the top of the GitLab page, and then "Files" towards the
 middle of the page. This is GitLab's repository view. Make sure that the
-drop-down menu at the upper right is set for the `1.0.0` branch. Navigate to the
+drop-down menu at the upper right is set for the `{{NATIONALPARKS_VERSION}}` branch. Navigate to the
 following path:
 
 [source]
@@ -227,11 +230,16 @@ Now run the following command to rollback the latest code change:
 
 [source]
 ----
-oc rollback nationalparks
+oc rollback nationalparks-live
+----
 
-#3 rolled back to nationalparks-1
-Warning: the following images triggers were disabled: nationalparks:latest
-  You can re-enable them with: oc set triggers dc/nationalparks --auto
+You will see output like the following:
+
+[source]
+----
+#5 rolled back to nationalparks-live-3
+Warning: the following images triggers were disabled: nationalparks:live
+  You can re-enable them with: oc set triggers dc/nationalparks-live --auto
 ----
 
 Once the deploy is complete, verify that the page header is reverted to the
@@ -239,7 +247,7 @@ original header by viewing the application in your browser.
 
 [source,role=copypaste]
 ----
-http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info
+http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info
 ----
 
 [NOTE]
@@ -250,7 +258,7 @@ the automatic deployments run this:
 
 [source]
 ----
-oc deploy nationalparks --enable-triggers
+oc deploy nationalparks-live --enable-triggers
 ----
 ====
 
@@ -263,21 +271,27 @@ the same command. You'll notice above that when you requested a roll*back*, it
 caused a new deployment (#3). In essence, we always move forwards in OpenShift,
 even if we are going "back".
 
-* We know that the first deployment (#1) was the initial build.
-* We know that the second deployment (#2) was the new code (OpenShift National
-  Parks)
-* We know that the third deployment (#3) was our rollback to the first
-  "version".
+* We know that the first deployment (#1) was the initial definition.
+* We know that the second deployment (#2) was due to our configmap addition.
+* We know that the third deployment (#3) was our first run of the pipeline.
+* We know that the fourth deployment (#4) was our change to "OpenShift National
+  Parks".
+* We know that the fifth deployment (#5) was our rollback to "National Parks".
 
-So, if we want to return to the "new code" version, that is deployment #2.
+So, if we want to return to the "new code" version, that is deployment #4.
 
 [source]
 ----
-oc rollback nationalparks-2
-
-#4 rolled back to nationalparks-2
-Warning: the following images triggers were disabled: nationalparks:latest
-  You can re-enable them with: oc set triggers dc/nationalparks --auto
+oc rollback nationalparks-live-4
 ----
 
-Cool!
+And you will see the following:
+[source]
+----
+#6 rolled back to nationalparks-live-4
+Warning: the following images triggers were disabled: nationalparks:live
+  You can re-enable them with: oc set triggers dc/nationalparks-live --auto
+----
+
+Cool! Once the roll"back" is complete, verify you again see "OpenShift
+National Parks".

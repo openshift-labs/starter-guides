@@ -49,34 +49,47 @@ Let's move on to deploy `Jenkins` and create this pipeline on OpenShift.
 
 OpenShift provides a supported Jenkins image which includes a rich set of
 plugins that enable the full pipeline flow. Click on the *Add to project*
-button, find the `jenkins-ephemeral` template, and click on it.
+button. Then, scroll down to the *Technologies* section and click on *Continuous
+Integration & Deployment*:
+
+image::pipeline-technologies.png[CI/CD Technologies]
+
+Find the `jenkins-ephemeral` template, and click on it:
 
 image::pipeline-jenkins-catalog.png[Jenkins Ephemeral]
 
 You can customize the Jenkins properties such as service name, admin password, memory
-allocation, etc through the parameters in the web console. Specify _openshift3_ for
-*Jenkins Password* and leave the rest of parameters with the default values. Click on
-*Create* to deploy Jenkins.
-
-image::pipeline-jenkins-params.png[Jenkins Template]
+allocation, etc through the parameters in the web console. We can leave all of
+the default values, so just click on *Create* to deploy Jenkins.
 
 OpenShift deploys a Jenkins pod and also creates a service and route for the
 deployed container.
 
 image::pipeline-jenkins-pods.png[Jenkins Pods]
 
-Click on the Jenkins route in order to open Jenkins Console. Login in Jenkins
-using the admin credentials and explore the Jenkins Console.
+Click on the Jenkins route in order to open the Jenkins Console. You will again
+need to accept the certificate. The Jenkins image that is provided by Red Hat
+uses an OAuth integration with OpenShift. Your OpenShift user credentials also
+become the admin credentials for Jenkins:
 
-NOTE: The admin credentials for Jenkins are: admin/openshift3
+image::pipeline-jenkins-credentials.png[Login with OpenShift]
+
+Click *Login with OpenShift* and you will be taken to an OpenShift-branded login
+screen. Use your username (_{{USER_NAME}}_) and password (_{{USER_PASSWORD}}_) to
+access Jenkins. You will then be prompted to grant access:
+
+image::pipeline-jenkins-permissions.png[Grant Jenkins Permissions]
+
+Click *Allow selected permissions*.
 
 image::pipeline-jenkins-console.png[Jenkins Console]
 
-Essentially, the OpenShift Jenkins plugin uses the OpenShift REST API in order
-to integrate into various OpenShift operations and therefore you should grant
-permission to the Jenkins service account (created above automatically) to
-invoke these APIs. Run the following CLI command to allow Jenkins to retrieve
-information and invoke action in OpenShift.
+The OpenShift Jenkins plugin uses the OpenShift REST API in order to integrate
+into various OpenShift operations. Since we want Jenkins to be able to do more
+than just look at our project, we will need to grant additional permissions. A
+Jenkins service account was created automatically when deploying Jenkins via the
+template. Run the following CLI command to allow the Jenkins service account to
+retrieve information and invoke action in OpenShift:
 
 [source]
 ----
@@ -127,7 +140,7 @@ and create a distinct *ConfigMap*. The file is located here:
 
 [source,role=copypaste]
 ----
-http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/1.0.0/ose3/application-live.properties
+http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-live.properties
 ----
 
 Then, run the following command to create the live *ConfigMap*:
@@ -267,6 +280,24 @@ to the *Live* route:
 ----
 oc label route nationalparks-live type=parksmap-backend
 ----
+
+{% if DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE %}
+### Exercise: Disable Automatic Deployment of nationalparks (dev)
+When we created the `nationalparks` build earlier in the workshop, OpenShift
+configured the deployment of the image to occur automatically whenever the
+`:latest` tag was updated.
+
+In our pipeline example, Jenkins is going to handle telling OpenShift to deploy
+the dev version of `nationalparks` if it builds successfully. In order to
+prevent two deployments, we will need to disable automatic deployments with a
+simple CLI statement:
+
+[source]
+----
+oc set triggers dc/nationalparks --from-image=nationalparks:latest --remove
+----
+
+{% endif %}
 
 ### Exercise: Create OpenShift Pipeline
 
