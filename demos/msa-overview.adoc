@@ -14,10 +14,29 @@ https://drive.google.com/open?id=0B630TpgzAhO_Vlgwa3RHUGg3MFE[HTML]
 
 ### Explain the Demo Concepts
 
-* Explain microservices architecture concept using the https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_0_514[demo slides]
-* Explain the CoolStore application architecture using the https://docs.google.com/a/redhat.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit?usp=sharing[demo slides]
+* Explain microservices architecture concept using the https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g19ddf4bec2_0_514[demo slides]:
+****
+_Microservice architecture, or simply microservices, is a method of developing software that has grown in popularity in recent years. The idea is to break down traditional, monolithic applications into many small pieces of independently deployed software that talk to each other through a well-defined, lightweight mechanism to deliver the same functionality. There are many reasons why this approach is considered an easier way to develop large applications, for example:_
 
-### Demonstrate the CoolStore web application
+* _Flexiblity in developing the services independently and concurrently using multiple technologies_
+* _Faster and simpler deployment and rollback with smaller services_
+* _More resilience when services fail instead of the entire application failing_
+* _Simpler to scale since services can scale independently_
+* _Well suited for Continuous Delivery and Integration_
+****
+
+* Explain the CoolStore application architecture using the https://docs.google.com/a/redhat.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit?usp=sharing[demo slides]: 
+****
+_CoolStore online shop is a microservices application and is composed of multiple services using different frameworks and programming languages:_
+
+* _Catalog Service: Java application running on JBoss Web Server (Tomcat) and MongoDB, provides the list of products and prices_
+* _Cart Service: Java EE application running on JBoss EAP 7, manages shopping cart for each customer_
+* _Inventory Service: Java EE application running on JBoss EAP 7 and PostgreSQL, serves inventory and availability data for products_
+* _Coolstore Gateway: Spring Boot + Camel (JBoss Fuse Integration Services) application acts as an API aggregator for other services_
+* _Web UI: A frontend based on AngularJS and PatternFly running in a Node.js container._
+****
+
+### Demonstrate the CoolStore Online Shop Web Application
 
 * Go to *CoolStore Web UI* in the *CoolStore PROD* project: {{COOLSTORE_WEB_PROD_URL}}
 
@@ -28,28 +47,71 @@ clicking on *CoolStore PROD* project, and in the *Web UI* service group, clickin
 
 * Explain the catalog and inventory microservices in the *CoolStore Web UI*
 
+****
+_The list of products in the Coolstore online shop is provided by the Catalog service. The Web UI makes an API call to the CoolStore GW which is the API aggregor and the Coolstore GW redirects the call to the Catalog service to get the list of products. The number of products in-stock which is displayed under each product is provided by the Inventory service_
+****
+
 image::demos/msa-overview-coolstore-web.png[CoolStore Web UI,width=920,align=center]
 
 * Click on *Add to Cart* on a product
 * Click on *Your Shopping Cart* tab and show the shopping cart
 * Explain the shopping cart microservice
 
+****
+_The Cart service provides the shopping cart functionality for CoolStore online shop and keeps track of customers shopping cart status_
+****
+
 ### Demonstrate the CoolStore deployment and containers
 
 * In the OpenShift web console, Click on *Overview* in the left sidebar menu
 * Explain the NodeJS container in *Web UI*
+
+****
+_The Web UI container is the front-end of the CoolStore application built using NodeJS and AngularJS and provides the web experience demoed in the previous step_
+****
+
 * Explain other service groups (Inventory, etc) and the microservices deployed in containers
+
+****
+_The Cart, Inventory, Catalog and Coolstore GW services that were demoed in previous steps, are all running in separate containers in the displayed project which allows them to get deployed or scale independently._
+****
 
 ### Demonstrate Inventory service container (JBoss EAP-based microservices)
 
 * Go to OpenShift web console
 * Scroll to the *Inventory* service group
 * Explain the containers in the *Inventory* service group: JBoss EAP and PostgreSQL database
+
+****
+_The Inventory service is a Java EE application running on JBoss EAP 7 and uses a PostreSQL database to persist data. JBoss EAP and PostgreSQL each run in their own containers._
+****
+
 * Explain how a microservices can be deployed on JBoss EAP
+
+****
+_OpenShift provides a set of middleware service in order to simplify running traditional and cloud-native applications in containers. Microservices can be deployed on JBoss EAP running inside a container, or alternatively on other application and web servers like Tomcat (JBoss Web Server) or even as a fat jar directly inside the container like Spring Boot when running on OpenShift._
+****
+
 * Click on JBoss EAP (inventory-service) pod circle
 * Explain the service concept and load balancing between the pods list (currently one pod)
+
+****
+_An OpenShift service is a grouping of containers (pods in fact) that are running and provides internal load-balancing betweent them. Services are "cheap" and you can have many services within the cluster. Kubernetes services can efficiently power a microservice architecture. Backing containers can be added to or removed from a service arbitrarily while the service remains consistently available, enabling anything that depends on the service to refer to it at a consistent internal address. Currently there is only one container for the Inventory service. When the Inventory service is scaled to more containers, OpenShift would automatically load-balance requests between the Inventory containers._
+****
+
 * Click on *inventory-xxxxx* in the list
-* Explain some of the container details displayed such as status, ip address, image name, etc
+* Explain the container details displayed.
+
+****
+_The Details tab provides valuable information about the container:_
+
+* _Container IP and the node the container is running on_
+* _Health information like the number of times the container was restarted or what caused the last container restart (e.g. out of memory)._
+* _Container image version_
+* _CPU and memory allocated to the container_
+* _Persistent storage attached to the container_ 
+****
+
 * Click on *Metrics* tab and explain the metrics
 * Click on *Logs* tab and show the logs
 * Point out JBoss EAP in the logs
@@ -57,23 +119,46 @@ image::demos/msa-overview-coolstore-web.png[CoolStore Web UI,width=920,align=cen
 image::demos/msa-overview-eap-logs.png[JBoss EAP Container Logs,width=920,align=center]
 
 * Explain the central log management with Elastic and Kibana
+
+****
+_Container logs can be directly viewed in OpenShift without the need to go inside the container. Furthermore, OpenShift provides out-of-the-box central log management via Elastic and Kibana. All container logs are sent to Elastic and can be queried and monitored thorough Kibana even after the containers are removed._
+****
+
 * Click on *Terminal* and explain remote shell access to the container
 * Type +ps aux+in the terminal and press *Enter* to display the processes running inside the container
 
 ### Demonstrate Inventory service persistent database container (PostgreSQL)
 
 * In the OpenShift web console, Click on *Overview* in the left sidebar menu
-* Explain (again!) the service concept and how JBoss EAP finds its PostgreSQL database
+* Explain the service concept and how JBoss EAP finds its PostgreSQL database
+
+****
+_The Inventory application running on JBoss EAP does not need to know on which container the PostgreSQL is deployed in order to find it. An OpenShift service is defined for the database, inventory-postgresql, which performs the service discovery and always sends requests to the container that hosts the PostgreSQL database for Inventory service._
+****
+
 * Explain the persistence concept
+
+****
+_One of the problems with containerized applications is that they have to be stateless since when a container gets restarted, the data disappears. OpenShift solves this problem by allowing users to request persistent storage for a container and automatically creating and attaching it inside the container which allows the data to be available even if the container is restarted or removed. Persistent storage is an essential feature when running databases in connainers._
+****
+
 * Click on *Storage* on the left sidebar menu
 * Explain requesting storage and dynamic provisioning
+
+****
+_OpenShift supports dynamic provisioning which simplifies administration by allowing persistent volumes to be automatically created when users request it based on the rules and policies that the administrators have defined_.
+****
 
 ### Demonstrate Catalog service container (JBoss Web Server-based microservice)
 
 * In the OpenShift web console, Click on *Overview* in the left sidebar menu
 * Scroll to *Catalog* service group
 * Explain the containers in the *Catalog* service group: JBoss Web Server and MongoDB database
-* Explain how a microservices can be deployed on JBoss Web Server
+
+****
+_The Catalog service is a microservice running on JBoss Web Server (Tomcat) and uses a MongoDB databased to store data. JBoss Web Server and MongoDB each runs in its own container._
+****
+
 * Click on JBoss Web Server (catalog) pod circle
 * Click on *catalog-xxxxx* in the list
 * Click on *Logs* tab and show the logs
@@ -86,3 +171,9 @@ image::demos/msa-overview-jws-logs.png[JBoss Web Server Container Logs,width=920
 * In the OpenShift web console, Click on *Overview* in the left sidebar menu
 * Scroll to *Coolstore GW* service group
 * Explain Camel integration and Netflix OSS
+
+****
+_JBoss Fuse Integration Services (FIS) provides a set of tools that enable development, deployment, and management of integration microservices within OpenShift. Coolstore Gateway (GW) is a Spring Boot service that uses Apache Camel (part of JBoss FIS) to aggregate API calls to other services (Cart, Catalog and Inventory) and controls how data passes through to those services by applying the required data transformation, fail over, audit, load-balancing and more._
+
+_Netflix OSS is a set of components that can be used to implement microservices and can be integrated well with JBoss FIS and OpenShift. Coolstore GW uses Hystrix and Turbine from Netflix OSS to provide fault tolerance when calling other services by isolating problems and preventing cascading failures (one part failing causing the whole application to fail) in distributed systems._
+****
