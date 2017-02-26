@@ -1,8 +1,13 @@
 ## Lab: Deploying Java Code
 
 ### Application Description
-In this lab, we're going to deploy a backend service, developed in Java programming language that will expose 2 main REST endpoints to the visualizer application (`parksmap` web component that was deployed in the previous labs). The application will query for national parks information (including it's coordinates) that is stored in a Mongo database.
-This application will also provide an external access point, so that the API provided can be directly used by the end user.
+In this lab, we're going to deploy a backend service, developed in Java
+programming language that will expose 2 main REST endpoints to the visualizer
+application (`parksmap` web component that was deployed in the previous labs).
+The application will query for national parks information (including it's
+coordinates) that is stored in a Mongo database.  This application will also
+provide an external access point, so that the API provided can be directly used
+by the end user.
 
 image::roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
 
@@ -62,34 +67,39 @@ application code!
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
-http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}[http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}]
+[source,role=copypaste]
+----
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
+----
 
+[NOTE]
+====
 Your GitLab credentials are: *{{GITLAB_USER}}/{{GITLAB_PASSWORD}}*
+====
 
 Later in the lab, we want you to make a code change and then rebuild your
 application. This is a fairly simple Spring framework Java application.
 
 #### Build the Code on OpenShift
 
-While the `new-app` command makes it very easy to get OpenShift to build code
-from a GitHub/GitLab repository into a Docker image, we can also use the web console to
-do the same thing. Similar to how we used "Add to project" before with a
-Docker-formatted image, we can do the same for specifying a source code
-repository. Since for this lab you have your own GitLab repository let's use it with
-a simple Java S2I image.
+Similar to how we used "Add to project" before with a Docker-formatted image, we
+can do the same for specifying a source code repository. Since for this lab you
+have your own GitLab repository, let's use it with a simple Java S2I image.
 
 In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
-click the *"Add to Project"* button. You will see a number of runtimes that you
-can choose from, but you will want to select the one titled
-`simple-java-s2i:latest`.
+click the *"Add to Project"* button. You will see a list of categories of
+runtimes, and other types of components that you can deploy and run on OpenShift.
+
+Type _"simple"_ into the search box, and then select the item titled
+`simple-java-s2i`.
 
 image::ocp-runtimes.png[Runtimes]
 
-After you click `simple-java-s2i:latest`, on the next screen you will need to enter a
+After you click `simple-java-s2i`, on the next screen you will need to enter a
 name and a Git repository URL. For the name, enter `nationalparks`, and for
 the Git repository URL, enter:
 
-[source]
+[source,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks.git
 ----
@@ -199,11 +209,11 @@ http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
 ----
 
 Since this is a back-end application, it doesn't actually have a web interface.
-However, it can give us some data. All back ends that work with the parks map
+However, it can still be used with a browser. All back ends that work with the parks map
 front end are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
 
-[source]
+[source,role=copypaste]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
 ----

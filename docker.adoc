@@ -14,7 +14,7 @@ web console.
 
 Return to the web console:
 
-link:https://{{CONSOLE_ADDRESS}}[]
+*link:https://{{CONSOLE_ADDRESS}}[]*
 
 Find your *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project and click it. Next, click "Add to
 project" at the top of the screen.
@@ -109,7 +109,7 @@ following syntax:
 
 NOTE: Make sure you use the correct *Pod* name from your output.
 
-[source]
+[source,role=copypaste]
 ----
 oc get pod parksmap-1-hx0kv -o yaml
 ----
@@ -124,19 +124,22 @@ kind: Pod
 metadata:
   annotations:
     kubernetes.io/created-by: |
-      {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicationController","namespace":"{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}","name":"parksmap-1","uid":"b5ae65e9-897e-11e6-bdaa-2cc2602f8794","apiVersion":"v1","resourceVersion":"6924"}}
+      {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicationController","namespace":"explore-00","name":"parksmap-1","uid":"f1b37b1b-e3e2-11e6-81a2-0696d1181070","apiVersion":"v1","reso
+urceVersion":"36222"}}
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory request for container
+      parksmap; cpu, memory limit for container parksmap'
     openshift.io/deployment-config.latest-version: "1"
     openshift.io/deployment-config.name: parksmap
     openshift.io/deployment.name: parksmap-1
     openshift.io/generated-by: OpenShiftWebConsole
     openshift.io/scc: restricted
-  creationTimestamp: 2016-10-03T15:33:29Z
+  creationTimestamp: 2017-01-26T16:17:36Z
   generateName: parksmap-1-
   labels:
     app: parksmap
     deployment: parksmap-1
     deploymentconfig: parksmap
-  name: parksmap-1-hx0kv
+  name: parksmap-1-bvaz6
 ...............
 ----
 

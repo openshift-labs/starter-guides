@@ -1,7 +1,11 @@
 ## Lab: Using Templates
 
 ### Application description
-In this lab, we're going to deploy a complete backend application, consisting of an REST API backend and a mongo database. The complete application will already be wired together and described as a backend for the map visualization tool, so that once the application is build and deployed, you will be able to see the new map.
+In this lab, we're going to deploy a complete backend application, consisting of
+an REST API backend and a mongo database. The complete application will already
+be wired together and described as a backend for the map visualization tool, so
+that once the application is build and deployed, you will be able to see the new
+map.
 
 image::roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
 
@@ -58,8 +62,14 @@ your *Project*. You can see this with the following command:
 
 [source]
 ----
-{% if PARKSMAP_PY %}
 oc get template
+----
+
+You will see output like the following:
+
+[source]
+----
+{% if PARKSMAP_PY %}
 NAME          DESCRIPTION                                                                      PARAMETERS     OBJECTS
 mlbparks-py   Application template MLB Parks backend running on Python/Flask and using mongodb 14 (4 blank)   8
 {% else %}
@@ -72,7 +82,7 @@ Are you ready for the magic command?  Here it is:
 {% if USE_MAVEN %}
 [source]
 ----
-oc new-app mlbparks --name=mlbparks -p GIT_URI=https://github.com/openshift-roadshow/mlbparks -p GIT_REF={{MLBPARKS_VERSION}} -p MAVEN_MIRROR_URL=http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public
+oc new-app mlbparks --name=mlbparks -p GIT_REF={{MLBPARKS_VERSION}} -p MAVEN_MIRROR_URL=http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public
 ----
 
 {% else %}
@@ -81,10 +91,9 @@ oc new-app mlbparks --name=mlbparks -p GIT_URI=https://github.com/openshift-road
 {% if PARKSMAP_PY %}
 oc new-app mlbparks-py -p APPLICATION_NAME=mlbparks -p GIT_URI=https://github.com/openshift-roadshow/mlbparks-py -p GIT_REF={{MLBPARKS_VERSION}}
 {% else %}
-oc new-app mlbparks -p APPLICATION_NAME=mlbparks -p GIT_URI=https://github.com/openshift-roadshow/mlbparks -p GIT_REF={{MLBPARKS_VERSION}}
+oc new-app mlbparks -p APPLICATION_NAME=mlbparks -p GIT_REF={{MLBPARKS_VERSION}}
 {% endif %}
 ----
-
 {% endif %}
 
 You will see the following output:
@@ -103,7 +112,7 @@ You will see the following output:
         * Application route=
         * Mongodb App=mongodb-mlbparks
         * Git source repository=https://github.com/openshift-roadshow/mlbparks
-        * Git branch/tag reference=master
+        * Git branch/tag reference={{MLBPARKS_VERSION}}
         * Maven mirror url=http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public
         * Database name=mongodb
         * MONGODB_NOPREALLOC=
@@ -181,7 +190,7 @@ You will see the following output:
         * Application route=
         * Mongodb App=mongodb-mlbparks
         * Git source repository=https://github.com/openshift-roadshow/mlbparks
-        * Git branch/tag reference=master
+        * Git branch/tag reference={{MLBPARKS_VERSION}}
         * Database name=mongodb
         * MONGODB_NOPREALLOC=
         * MONGODB_SMALLFILES=

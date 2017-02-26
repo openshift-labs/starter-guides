@@ -21,7 +21,7 @@ That was just a fancy way of saying that we are going to deploy, yet again, a we
 Before you start, make sure you have already done the following steps:
 
 1. link:https://console.cloud.google.com/project?_ga=1.132090187.550669370.1466440172[Select or create a Cloud Platform project].
-2. link:https://support.google.com/cloud/answer/6293499#enable-billing[Enable billing for your project]
+2. link:https://support.google.com/cloud/answer/6293499#enable-billing[Enable billing for your project], if you already have a Google API or Google Cloud Platform account you may not need to do this.
 3. link:https://console.cloud.google.com/flows/enableapi?apiid=bigquery&_ga=1.103140804.550669370.1466440172[BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to Enable the BigQuery API]
 
 The BigQuery web UI provides an interface to query tables, including public tables offered by BigQuery, and link:https://bigquery.cloud.google.com/table/top-amplifier-139909:gsod.temp_20xx[the one used in this lab].
@@ -51,9 +51,7 @@ image:/images/bigquery-query.png[Big Query]
 #### Create web application credentials
 
 You need to allow the server side code to connect to your Google API. For this
-you will need a *service account*, which is an account that belongs to your application
-instead of to an individual end user. The application calls Google APIs on behalf of the
-service account, so users aren't directly involved.
+you will need a Google *service account*, which is an account that is used by your application to query Google APIs. The application calls Google APIs on behalf of the service account, so users aren't directly involved.
 
 To support server-to-server interactions, first create a service account for your project in the API Console
 
@@ -81,7 +79,9 @@ You can return to the link:https://console.developers.google.com/[API Console] a
 +
 image:/images/gcp_service_accounts.png[]
 
-Take note of the service account's email address and store the service account's P12 private key file in a location accessible to your application. Your application needs them to make authorized API calls.
+Take note of the service account's email address and store the service account's JSON private key file in a location accessible to your terminal/console.  Your application needs them to make authorized API calls. 
+
+**Rename your JSON file to google-creds.json to make the rest of the instructions easy.**
 
 #### Create a secret with the service account information
 
@@ -91,7 +91,7 @@ It is as easy as:
 
 [source,bash]
 ----
-oc create secret generic google-creds --from-file=/tmp/google-creds.json
+oc create secret generic google-creds --from-file=/{directory}/google-creds.json
 ----
 
 And then you can validate that the secrets have been created:
@@ -120,7 +120,7 @@ existing front-end will consume, we are going to deploy it inside the existing
 
 In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
 click the *"Add to Project"* button. You will see a number of runtimes and templates that you
-can choose from, but you will want to select, so let's filter using `gcp`.
+can choose from, but you will want to select the template that specifies all the pieces to use BigQuery, so let's filter using `publicweather`.
 
 image:/images/gcp_template_filter.png[Runtimes]
 
@@ -130,7 +130,7 @@ Also, you will need to provide some configuration for the application to connect
 The values required are:
 
 * *Month*: Month of the year for which you want to get weather information (with 2 digit format).
-* *GCP Project Id*: This is a reference to your Google's project id to use. Find this value in the Google Compute.
+* *GCP Project Id*: This is a reference to your Google's project id to use. Find this value in the Google Compute. It usually has the form of something like: *massive-vector-159812*
 +
 image:/images/gcp_project_id.png[Google Project Id]
 +

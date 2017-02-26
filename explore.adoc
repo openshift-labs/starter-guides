@@ -44,7 +44,7 @@ $ oc login {{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
 Once you issue the `oc login` command, you will be prompted for the username and
 password combination for your user account:
 
-[source]
+[source,role=copypaste]
 ----
 Username: {{USER_NAME}}
 Password: {{USER_PASSWORD}}
@@ -130,13 +130,11 @@ image::explore-webconsole2.png[Explore Project]
 
 {% if METRICS_ENABLED %}
 
-Lastly, we need to accept another self-signed certificate for OpenShift's metrics
+Lastly, the web console will show you an error: _An error occurred getting
+metrics._  We need to accept another self-signed certificate for OpenShift's metrics
 aggregation. If we don't, then the metrics will not display in the OpenShift UI.
-Visit the following URL in your browser, and be sure to accept the certificate:
 
-----
-https://metrics.{{ROUTER_ADDRESS}}
-----
+Click the link that says *Open metrics URL*, and accept the certificate.
 
 {% endif %}
 

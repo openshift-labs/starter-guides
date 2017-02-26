@@ -30,7 +30,7 @@ parksmap-2-tegp4   1/1       Running   0          2m
 
 Now you can establish a remote shell session into the pod by using the pod name:
 
-[source]
+[source,role=copypaste]
 ----
 oc rsh parksmap-2-tegp4
 ----
@@ -39,7 +39,6 @@ You would see the following output:
 
 [source]
 ----
-$ oc rsh parksmap-2-tegp4
 sh-4.2$
 ----
 
@@ -68,10 +67,15 @@ the executable path.
 
 In order to show just the JAR file, run the following:
 
-[source]
+[source,role=copypaste]
 ----
 $ oc exec parksmap-2-tegp4 -- ls -l /parksmap.jar
+----
 
+You would see something like the following:
+
+[source]
+----
 -rw-r--r--. 1 root root 21753918 Nov 23 15:54 /parksmap.jar
 ----
 
@@ -84,14 +88,20 @@ end and where the actual command to execute begins. Take a look at `oc exec
 
 You can also specify the shell commands to run directly with the *oc rsh* command:
 
-[source]
+[source,role=copypaste]
 ----
 $ oc rsh parksmap-2-tegp4 whoami
+----
+
+You would see something like:
+
+[source]
+----
 whoami: cannot find name for user ID 1000060000
 error: error executing remote command: error executing command in container: Error executing in Docker Container: 1
 ----
 
-[WARNING]
+[NOTE]
 ====
 It is important to understand that, for security reasons, OpenShift does not run
 Docker containers as the user specified in the Dockerfile by default. In fact,

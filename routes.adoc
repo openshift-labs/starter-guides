@@ -30,7 +30,7 @@ First we want to verify that we don't already have any existing routes:
 [source]
 ----
 oc get routes
-<no output>
+No resources found.
 ----
 
 Now we need to get the *Service* name to expose:
@@ -64,6 +64,7 @@ You can also verify the *Route* by looking at the project in the OpenShift web c
 
 image::parksmap-route.png[Route]
 
-Pretty nifty, huh?  This application is now available at the above URL:
+Pretty nifty, huh?  This application is now available at the URL shown in the
+web console. Click the link and you will see:
 
 image::parksmap-empty.png[Route]
