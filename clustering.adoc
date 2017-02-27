@@ -30,7 +30,7 @@ $ oc scale dc/mlbparks --replicas=2
 
 For pods based on Java images, the web console also exposes access to a
 hawt.io-based JVM console for viewing and managing any relevant Java components.
-A link is displayed in the pod's details on the *Browse* &rarr; *Pods* page,
+A link is displayed in the pod's details on the *Applications* &rarr; *Pods* page,
 provided the container has a port named jolokia. On the console, click on
 mlbparks pods, then on any of the two pods deployed. On the *Details* tab, click
 on *Open Java Console*.
