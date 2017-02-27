@@ -228,9 +228,15 @@ OpenShift will now:
 ** Using auto-generated user, password, and database name
 * Configure environment variables for the app to connect to the DB
 * Create the correct services
-* Label the app route with `type=parksmap-backend`
 
 All with one command!
+
+Lastly let's add the label `type=parksmap-backend` to our `mlbparks` route, so that our `parksmap` application can pick up the new mlbparks data.
+
+[source]
+----
+oc label route mlbparks type=parksmap-backend
+----
 
 When the build is complete, visit the parks map. Does it work? Think about how
 this could be used in your environment.  For example, a template could define a
