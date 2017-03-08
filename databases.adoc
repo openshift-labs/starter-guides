@@ -259,7 +259,7 @@ here:
 {% if PARKSMAP_PY %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/blob/{{NATIONALPARKS_VERSION}}/wsgi.py#L11-18
 {% else %}
-http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/blob/{{NATIONALPARKS_VERSION}}/src/main/java/org/openshift/parks/mongo/DBConnection.java#L44-l48
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/blob/{{NATIONALPARKS_VERSION}}/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48
 {% endif %}
 ----
 
