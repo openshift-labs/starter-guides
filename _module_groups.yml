@@ -1,0 +1,21 @@
+roadshow:
+  name: OpenShift roadshow
+  modules:
+    - environment
+    - install
+    - explore
+    - docker
+    - scaling
+    - routes
+    - logging
+    - permissions
+    - remote-ops
+    - java
+    - databases
+    - configmap
+    - application-health
+    - pipelines
+    - codechanges
+    - canaryrelease
+    - templates
+    - clustering
