@@ -21,10 +21,13 @@ The infrastructure node is providing several services:
 * This lab manual
 * The OpenShift Docker registry
 * The OpenShift router
+{% if ETHERPAD_ENABLED %}
 * Etherpad
+{% endif %}
 
-Additionally, {{ NUM_USERS }} user accounts have been provisioned. 
+Additionally, {{ NUM_USERS }} user accounts have been provisioned.
 
+{% if ETHERPAD_ENABLED %}
 Before continuing, please visit visit the Etherpad at the following URL:
 
 ----
@@ -41,6 +44,7 @@ userxx Luke Skywalker
 
 If you already see a name next to a user account, it means that someone else has
 already claimed it.
+{% endif %}
 
 You will see various code and command blocks throughout these exercises. Some of
 the command blocks can be copy/pasted directly. Others will require
