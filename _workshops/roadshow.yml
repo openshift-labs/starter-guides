@@ -2,6 +2,9 @@
 id: roadshow
 name: Roadshow
 
+content:
+  url: https://raw.githubusercontent.com/osevg/workshopper-content/master
+
 vars:
   ENVIRONMENT: "Amazon Web Services"
   USE_MAVEN: false
