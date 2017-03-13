@@ -1,0 +1,55 @@
+---
+id: roadshow
+name: Roadshow
+
+vars:
+  ENVIRONMENT: "Amazon Web Services"
+  USE_MAVEN: false
+  METRICS_ENABLED: true
+  LOGGING_ENABLED: true
+  NFS_ENABLED: true
+  MASTERS: "1"
+  INFRA: "1"
+  NODES: "24"
+  DOCS_URL: "docs.openshift.com/container-platform"
+  SUFFIX: "XX"
+  USER_SUFFIX: "-XX"
+  OPENSHIFT_NAME: "OpenShift Container Platform"
+  OPENSHIFT_SHORTNAME: "OCP"
+  OPENSHIFT_VERSION: "3.3"
+  GITLAB_USER: "userxx"
+  GITLAB_PASSWORD: "openshift3"
+  GITLAB_URL_PREFIX: "gitlab-ce-workshop-infra"
+  JAVA_BUILDER_PROPER: "JBoss EAP 7"
+  JAVA_BUILDER_STRING: "jboss-eap70-openshift:1.4"
+  USER_NAME: "userXX"
+  USER_PASSWORD: "openshift3"
+  PARKSMAP_IMAGENAME: "parksmap"
+  PARKSMAP_VERSION: "1.2.0"
+  PARKSMAP_PY: false
+  NATIONALPARKS_VERSION: "1.2.0"
+  MLBPARKS_VERSION: "1.0.0"
+  EXPLORE_PROJECT_NAME: "explore"
+  DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE: true
+  MW_NAME: "eap"
+
+modules:
+  activate:
+  - environment
+  - install
+  - explore
+  - docker
+  - scaling
+  - routes
+  - logging
+  - permissions
+  - remote-ops
+  - java
+  - databases
+  - configmap
+  - application-health
+  - pipelines
+  - codechanges
+  - canaryrelease
+  - templates
+  - clustering
