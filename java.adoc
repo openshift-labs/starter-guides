@@ -90,14 +90,14 @@ In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 click the *"Add to Project"* button. You will see a list of categories of
 runtimes, and other types of components that you can deploy and run on OpenShift.
 
-Type _"simple"_ into the search box, and then select the item titled
-`simple-java-s2i`.
+Type _"jdk"_ into the search box, and then select the item titled
+`redhat-openjdk18-openshift`.
 
 image::ocp-runtimes.png[Runtimes]
 
-After you click `simple-java-s2i`, on the next screen you will need to enter a
-name and a Git repository URL. For the name, enter `nationalparks`, and for
-the Git repository URL, enter:
+After you click `redhat-openjdk18-openshift`, on the next screen you will need
+to enter a name and a Git repository URL. For the name, enter `nationalparks`,
+and for the Git repository URL, enter:
 
 [source,role=copypaste]
 ----
