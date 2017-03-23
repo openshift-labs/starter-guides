@@ -159,7 +159,7 @@ Because OpenShift's *RCs* are constantly monitoring to see that the desired numb
 of *Pods* actually is running, you might also expect that OpenShift will "fix" the
 situation if it is ever not right. You would be correct!
 
-Since we have three *Pods* running right now, let's see what happens if we
+Since we have two *Pods* running right now, let's see what happens if we
 "accidentally" kill one. Run the `oc get pods` command again, and choose a *Pod*
 name. Then, do the following:
 
