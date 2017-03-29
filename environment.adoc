@@ -31,7 +31,7 @@ Additionally, {{ NUM_USERS }} user accounts have been provisioned.
 Before continuing, please visit visit the Etherpad at the following URL:
 
 ----
-{{ ETHERPAD_URL_PREFIX }}.{{ ROUTER_ADDRESS }}/p/roadshow
+http://{{ ETHERPAD_URL_PREFIX }}.{{ ROUTER_ADDRESS }}/p/roadshow
 ----
 
 Decide on a user account, between user01 and user{{ NUM_USERS }}. Type that user
