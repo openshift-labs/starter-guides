@@ -11,6 +11,7 @@ vars:
   METRICS_ENABLED: true
   LOGGING_ENABLED: true
   NFS_ENABLED: true
+  ETHERPAD_ENABLED: true
   MASTERS: "1"
   INFRA: "1"
   NODES: "24"
