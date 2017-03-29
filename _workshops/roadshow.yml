@@ -12,6 +12,7 @@ vars:
   LOGGING_ENABLED: true
   NFS_ENABLED: true
   ETHERPAD_ENABLED: true
+  ETHERPAD_URL_PREFIX: "etherpad-workshop-infra"
   MASTERS: "1"
   INFRA: "1"
   NODES: "24"
