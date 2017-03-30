@@ -16,6 +16,7 @@ vars:
   MASTERS: "1"
   INFRA: "1"
   NODES: "24"
+  NUM_USERS: "100"
   DOCS_URL: "docs.openshift.com/container-platform"
   SUFFIX: "XX"
   USER_SUFFIX: "-XX"
