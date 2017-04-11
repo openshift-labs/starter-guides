@@ -1,0 +1,30 @@
+---
+id: training
+name: Internal training
+
+content:
+  url: https://raw.githubusercontent.com/osevg/workshopper-content/master
+
+vars:
+  USER_NAME: "userXX"
+  USER_PASSWORD: "openshift3"
+  PARKSMAP_IMAGENAME: "parksmap"
+  PARKSMAP_VERSION: "1.2.0"
+  PARKSMAP_PY: true
+  NATIONALPARKS_VERSION: "1.2.1"
+  MLBPARKS_VERSION: "1.0.0"
+
+modules:
+  activate:
+  - install
+  - explore
+  - parksmap-architecture
+  - docker
+  - scaling
+  - routes
+  - permissions
+  - python
+  - databases-py
+  - application-health
+  - codechanges
+  - templates
