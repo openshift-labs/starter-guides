@@ -228,7 +228,7 @@ OpenShift will now:
 ** Using auto-generated user, password, and database name
 * Configure environment variables for the app to connect to the DB
 * Create the correct services
-* Label the app route with `type=parksmap-backend`
+* Label the app service with `type=parksmap-backend`
 
 All with one command!
 
