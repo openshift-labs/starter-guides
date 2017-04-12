@@ -221,7 +221,11 @@ NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 jenkins              1          1         1         config,image(jenkins:latest)
 mongodb              1          1         1         config,image(mongodb:3.2)
 mongodb-live         1          1         1         config,image(mongodb:3.2)
+{% if modules.pipelines %}
 nationalparks        9          1         1         config
+{% else %}
+nationalparks        9          1         1         config,image(nationalparks:latest)
+{% endif %}
 nationalparks-live   4          1         1         config,image(nationalparks:live)
 parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
 ----
