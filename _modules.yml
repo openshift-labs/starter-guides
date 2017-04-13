@@ -1,21 +1,128 @@
 config:
   vars:
-    CONSOLE_ADDRESS: 10.2.2.2:8443
-    ROUTER_ADDRESS: "apps.10.2.2.2.xip.io"
-    USER_NAME: "dev"
-    USER_PASSWORD: "dev"
+    - name: CONSOLE_ADDRESS
+      desc: Address to access the OpenShift console
+      value: 10.2.2.2:8443
+    - name: ROUTER_ADDRESS
+      desc: Router DNS suffix (https://appname-project.<suffix>)
+      value: "apps.10.2.2.2.xip.io"
+    - name: USER_NAME
+      desc: Username to login into console and oc
+      value: "dev"
+    - name: USER_PASSWORD
+      desc: Password to login
+      value: "dev"
+    - name: MASTERS
+      desc: Number of master nodes in the cluster
+      value: 1
+    - name: INFRA
+      desc:  Number of infra nodes in the cluster
+      value: 1
+    - name: NODES
+      desc: Number of container nodes in the cluster
+      value: 1
+    - name: NUM_USERS
+      desc: Number of users created for workshop
+      value: 0
+    - name: NFS_ENABLED
+      desc: Is NFS enabled?
+      value: false
+    - name: METRICS_ENABLED
+      desc: Are metrics enabled?
+      value: false
+    - name: LOGGING_ENABLED
+      desc: Is logging enabled?
+      value: false
+    - name: ETHERPAD_ENABLED
+      desc: Is etherpad enabled?
+      value: false
+    - name: ETHERPAD_URL_PREFIX
+      desc: Ethepad's URL prefix (<appname>-<project>)
+      value: etherpad-workshop-infra
+    - name: DOWNLOAD_CLIENT_WINDOWS
+      desc: URL to download oc client for Windows
+      value: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-windows.zip"
+    - name: DOWNLOAD_CLIENT_MAC
+      desc: URL to download oc client for macOS
+      value: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-mac.zip"
+    - name: DOWNLOAD_CLIENT_LIN32
+      desc: URL to download oc client for 32bit Linux
+      value: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-32bit.tar.gz"
+    - name: DOWNLOAD_CLIENT_LIN64
+      desc: URL to download oc client for 64bit Linux
+      value: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-64bit.tar.gz"
+    - name: OC_VERSION
+      desc: Expected oc version when `oc version` is executed
+      value: "oc v1.3.0\nkubernetes v1.3.0+52492b4"
+    - name: DOCS_URL
+      desc: URL prefix to access docs (https://docs.openshift.org/latest)
+      value: <url>
+    - name: EXPLORE_PROJECT_NAME
+      desc: Project the user is supposed to work with
+      value: project
+    - name: SUFFIX
+      desc: Username suffix
+      value: XY
+    - name: PARKSMAP_IMAGENAME
+      desc: Docker image name for the parksmap application
+      value: <image name>
+    - name: USER_SUFFIX
+      desc: The user suffix
+      value: -userXY
+    - name: GITLAB_URL_PREFIX
+      desc: URL of the Gitlab instance to use
+      value: <gitlab>
+    - name: GITLAB_USER
+      desc: User's Gitlab username
+      value: userXY
+    - name: GITLAB_PASSWORD
+      desc: User's Gitlab password
+      value: <password>
+    - name: NATIONALPARKS_VERSION
+      desc: Version of nationalparks to use
+      value: <version>
+    - name: PARKSMAP_VERSION
+      desc: Version of parksmap to use
+      value: <version>
+    - name: PARKSMAP_PY
+      desc: Are we deploying parksmap in Python?
+      value: false
+    - name: USE_MAVEN
+      desc: Should local Maven mirror be used?
+      value: false
+    - name: DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE
+      desc: Should pipeline be disabled for nationalparks app?
+      value: false
+    - name: MLBPARKS_VERSION
+      desc: Version of mlbparks to use
+      value: <version>
+    - name: MW_NAME
+      desc: Middlewarr system name
+      value: "wildfly"
+    - name: MW_TEXT
+      desc: Middleware human-readable name
+      value: "WildFly"
 
 modules:
   environment:
     name: Environment Overview
+    vars:
+      MASTERS:
+      INFRA:
+      NODES:
+      NFS_ENABLED:
+      LOGGING_ENABLED:
+      ETHERPAD_ENABLED:
+      NUM_USERS:
+      ETHERPAD_URL_PREFIX:
   install:
     name: Installing the *oc* client tool
     vars:
-      DOWNLOAD_CLIENT_WINDOWS: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-windows.zip"
-      DOWNLOAD_CLIENT_MAC: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-mac.zip"
-      DOWNLOAD_CLIENT_LIN32: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-32bit.tar.gz"
-      DOWNLOAD_CLIENT_LIN64: "https://github.com/openshift/origin/releases/download/v1.3.0/openshift-origin-client-tools-v1.3.0-3ab7af3d097b57f933eccef684a714f2368804e7-linux-64bit.tar.gz"
-      OC_VERSION: "oc v1.3.0\nkubernetes v1.3.0+52492b4"
+      DOWNLOAD_CLIENT_WINDOWS:
+      DOWNLOAD_CLIENT_MAC:
+      DOWNLOAD_CLIENT_LIN32:
+      DOWNLOAD_CLIENT_LIN64:
+      OC_VERSION:
     revisions:
       ocp:
         vars:
@@ -28,6 +135,8 @@ modules:
     name: Exploring the CLI and Web Console
   parksmap-architecture:
     name: Architecture Overview of the ParksMap Application
+    vars:
+      PARKSMAP_IMAGENAME:
   docker:
     name: Deploying our First Docker Image
   scaling:
@@ -38,12 +147,18 @@ modules:
     name: Exploring OpenShift's Logging Capabilities
   permissions:
     name: Role-Based Access Control
+    vars:
+      SUFFIX:
   remote-ops:
     name: Remote Operations
   java:
     name: Deploying Java Code
+    vars:
+      USE_MAVEN:
   python:
     name: Deploying Python Code
+    vars:
+      USE_MAVEN:
   databases:
     name: Adding a Database (MongoDB)
   #  requires:
@@ -59,6 +174,8 @@ modules:
     name: Application Health
   pipelines:
     name: Automating Deployment with CI/CD Pipeline
+    vars:
+      DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE:
     requires:
   #    - java
   #    - databases
@@ -74,8 +191,9 @@ modules:
   templates:
     name: Using Application Templates
     vars:
-      MW_NAME: "wildfly"
-      MW_TEXT: "WildFly"
+      MLBPARKS_VERSION:
+      MW_NAME:
+      MW_TEXT:
     revisions:
       roadshow:
         vars:
@@ -91,6 +209,7 @@ modules:
     name: Running a container as a non Root user
   gcp-bigquery:
     name: Integrating with Google Compute Service BigQuery
+
   demos_msa-coolstore-overview:
     name: CoolStore Demo Application Overview
   demos_msa-overview:
