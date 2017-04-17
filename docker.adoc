@@ -161,7 +161,7 @@ daemon will check to make sure it has the right "version" of the image to run.
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://{{DOCS_URL}}/latest/dev_guide/new_app.html#specifying-an-image[specifying an image]
+https://{{DOCS_URL}}/latest/dev_guide/application_lifecycle/new_app.html#specifying-an-image[specifying an image]
 as well as
 https://{{DOCS_URL}}/latest/dev_guide/managing_images.html#image-pull-policy[image pullpolicy].
 
