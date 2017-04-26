@@ -262,7 +262,7 @@ the automatic deployments run this:
 
 [source]
 ----
-oc deploy nationalparks-live --enable-triggers
+oc set triggers dc/nationalparks-live --auto
 ----
 ====
 
