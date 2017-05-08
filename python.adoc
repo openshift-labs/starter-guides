@@ -62,7 +62,11 @@ application code!
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
+{% if GIT_HOST == "github" %}
+https://github.com/openshift-roadshow/nationalparks-py[https://github.com/openshift-roadshow/nationalparks-py]
+{% else %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}]
+{% endif %}
 
 Your GitLab credentials are: *{{GITLAB_USER}}/{{GITLAB_PASSWORD}}*
 
@@ -91,7 +95,11 @@ the Git repository URL, enter:
 
 [source]
 ----
+{% if GIT_HOST == "github" %}
+https://github.com/openshift-roadshow/nationalparks-py.git
+{% else %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py.git
+{% endif %}
 ----
 
 NOTE: All of these runtimes shown are made available via *Templates* and
