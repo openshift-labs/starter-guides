@@ -1,6 +1,7 @@
 ## Lab: Making Code Changes and using webhooks
 
 ### Background: Web Hooks
+
 Most Git repository servers support the concept of web hooks -- calling to an
 external source via HTTP(S) when a change in the code repository happens.
 OpenShift provides an API endpoint that supports receiving hooks from
@@ -8,8 +9,41 @@ remote systems in order to trigger builds. By pointing the code repository's
 hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
-#### Exercise: Configuring GitLab Web Hooks
+{% if GIT_HOST == "github" %}
+#### Getting the webhook URL
 
+Go to **Builds** -> **Builds** -> **Confoguration** and there in the
+**Triggers** sectoin there is **Github webhook URL** copy the URL to be used
+for configuring the webhook at Github.
+
+
+#### Setting up the webhook
+
+Open the **Github** repository page and go to the **Settings** tab and then to
+**Webhooks** in the left menu. Click **Add webhook** and fill the form
+
+* **Payload URL** is the URL copied from OpenShift
+* **Content type** has to be *application/json*
+* **Secret** should be empty
+* **Disable SSL verification** as the cluster does not have valid SSL
+certificates
+
+And click the **Add webhook** button.
+
+#### Making a code change
+
+Go back to the **Code** tab in the same repository and open the **wsgi.py**
+file. Click the pen icon in the top right corner to edit the file.
+
+Go to the line `35` and change the **displayName**.
+
+Scroll down to the bottom of the page and click **Commit changes**.
+
+#### Validation on OpenShift
+
+{% else %}
+
+#### Exercise: Configuring GitLab Web Hooks
 
 {% if modules.pipelines %}
 In previous labs, you created a CI/CD Pipeline to automate build, test and deployment of
@@ -147,6 +181,8 @@ return new Backend("nationalparks","OpenShift National Parks", new Coordinates("
 Click on Commit changes at the bottom of the screen. Feel free to enter a commit
 message.
 
+{% endif %}
+
 {% if modules.pipelines %}
 
 Once you have committed your changes, the `nationalparks-pipeline` should almost
@@ -218,32 +254,30 @@ The output will be similar to the following:
 [source]
 ----
 NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
-jenkins              1          1         1         config,image(jenkins:latest)
 mongodb              1          1         1         config,image(mongodb:3.2)
-mongodb-live         1          1         1         config,image(mongodb:3.2)
-{% if modules.pipelines %}
-nationalparks        9          1         1         config
-{% else %}
-nationalparks        9          1         1         config,image(nationalparks:latest)
-{% endif %}
-nationalparks-live   4          1         1         config,image(nationalparks:live)
 parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+nationalparks        9          1         1         {% if modules.pipelines %}config{% else %}config,image(nationalparks:latest){% endif %}
+{% if modules.pipelines %}
+jenkins              1          1         1         config,image(jenkins:latest)
+mongodb-live         1          1         1         config,image(mongodb:3.2)
+nationalparks-live   4          1         1         config,image(nationalparks:live)
+{% endif %}
 ----
-
+{% if modules.pipelines %}-live{% endif %}
 Now run the following command to rollback the latest code change:
 
 [source]
 ----
-oc rollback nationalparks-live
+oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}
 ----
 
 You will see output like the following:
 
 [source]
 ----
-#5 rolled back to nationalparks-live-3
+#5 rolled back to nationalparks{% if modules.pipelines %}-live{% endif %}-3
 Warning: the following images triggers were disabled: nationalparks:live
-  You can re-enable them with: oc set triggers dc/nationalparks-live --auto
+  You can re-enable them with: oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
 ----
 
 Once the deploy is complete, verify that the page header is reverted to the
@@ -251,7 +285,7 @@ original header by viewing the application in your browser.
 
 [source,role=copypaste]
 ----
-http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks{% if modules.pipelines %}-live{% endif %}-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
 ----
 
 [NOTE]
@@ -262,7 +296,7 @@ the automatic deployments run this:
 
 [source]
 ----
-oc deploy nationalparks-live --enable-triggers
+oc deploy nationalparks{% if modules.pipelines %}-live{% endif %} --enable-triggers
 ----
 ====
 
@@ -275,26 +309,28 @@ the same command. You'll notice above that when you requested a roll*back*, it
 caused a new deployment (#3). In essence, we always move forwards in OpenShift,
 even if we are going "back".
 
+{% if modules.pipelines %}
 * We know that the first deployment (#1) was the initial definition.
 * We know that the second deployment (#2) was due to our configmap addition.
 * We know that the third deployment (#3) was our first run of the pipeline.
 * We know that the fourth deployment (#4) was our change to "OpenShift National
   Parks".
 * We know that the fifth deployment (#5) was our rollback to "National Parks".
+{% endif %}
 
 So, if we want to return to the "new code" version, that is deployment #4.
 
 [source]
 ----
-oc rollback nationalparks-live-4
+oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}-4
 ----
 
 And you will see the following:
 [source]
 ----
-#6 rolled back to nationalparks-live-4
+#6 rolled back to nationalparks{% if modules.pipelines %}-live{% endif %}-4
 Warning: the following images triggers were disabled: nationalparks:live
-  You can re-enable them with: oc set triggers dc/nationalparks-live --auto
+  You can re-enable them with: oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
 ----
 
 Cool! Once the roll"back" is complete, verify you again see "OpenShift

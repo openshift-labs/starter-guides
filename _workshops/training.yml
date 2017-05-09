@@ -18,7 +18,9 @@ vars:
   DOWNLOAD_CLIENT_LIN64: https://github.com/openshift/origin/releases/download/v1.5.0/openshift-origin-client-tools-v1.5.0-031cbe4-linux-64bit.tar.gz
   OC_VERSION: "oc v1.5.0+031cbe4\nkubernetes v1.5.2+43a9be4"
   CONSOLE_ADDRESS: console.westford.pixy.io:8443
+  ROUTER_ADDRESS: apps.westford.pixy.io
   GIT_HOST: github
+  NO_USER_PROJECT: true
 
 modules:
   activate:
