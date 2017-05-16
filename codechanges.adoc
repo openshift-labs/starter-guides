@@ -296,7 +296,7 @@ the automatic deployments run this:
 
 [source]
 ----
-oc deploy nationalparks{% if modules.pipelines %}-live{% endif %} --enable-triggers
+oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
 ----
 ====
 
