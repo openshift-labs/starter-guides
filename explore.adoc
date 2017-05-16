@@ -56,8 +56,9 @@ following confirmation message:
 [source]
 ----
 Login successful.
-
+{% if NO_USER_PROJECT != true %}
 Using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}".
+{% endif %}
 ----
 
 Congratulations, you are now authenticated to the OpenShift server. The
@@ -81,6 +82,22 @@ During this lab, we are going to use a few different commands to make sure that
 things in the environment are working as expected.  Don't worry if you don't
 understand all of the terminology as we will cover it in detail in later labs.
 
+{% if NO_USER_PROJECT == true %}
+The first thing we want to do is create the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}*
+project. You can do this with the following command:
+
+[source,role=copypaste]
+----
+oc new-project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
+----
+
+You will see the following confirmation message:
+
+[source]
+----
+Now using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" on server "https://{{CONSOLE_ADDRESS}}".
+----
+{% else %}
 The first thing we want to do is switch to the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project. You
 can do this with the following command:
 
@@ -95,6 +112,7 @@ You will see the following confirmation message:
 ----
 Now using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" on server "https://{{CONSOLE_ADDRESS}}".
 ----
+{% endif %}
 
 ### The Web Console
 

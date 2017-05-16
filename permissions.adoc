@@ -7,10 +7,10 @@ requires going through the master's API. All API interactions are both
 authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to
 do what you are asking?).
 
-In the log aggregation lab we saw that there was an error in reference to a
-*Service Account*. Just like a user has permissions (AuthZ), sometimes we may
-wish for non-users to be able to perform actions against the API. These
-"non-users" are referred to as service accounts.
+{% if modules.logging %}In the log aggregation lab we saw that there was an
+error in reference to a *Service Account*.{% endif %}Just like a user has
+permissions (AuthZ), sometimes we may wish for non-users to be able to perform
+actions against the API. These "non-users" are referred to as service accounts.
 
 OpenShift automatically creates a few special service accounts in every project.
 The **default** service account has its credentials automatically injected into
@@ -89,4 +89,4 @@ image::new-parksmap-deploy.png[Deploy Button]
 
 You'll see that a new deployment is immediately started. Return to the overview
 page and watch it happen. You might not be fast enough! If you look at the logs
-for the application now, you should see no errors.  That's great. 
+for the application now, you should see no errors.  That's great.

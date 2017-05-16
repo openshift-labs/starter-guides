@@ -1,0 +1,25 @@
+name: "Multi-product Demo: Modern App Architecture"
+vars:
+  PROJECT_SUFFIX: "USERNAME"
+  GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
+  GOGS_DEV_REPO_URL_PREFIX: "http://gogs-ci-USERNAME.cloudapps.test.openshift.opentlc.com/developer/coolstore-microservice"
+  JENKINS_URL: "http://jenkins-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
+  COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
+  HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
+  CLOUDFORMS_URL: "https://cloudforms-management-infra.cloudapps.na.openshift.opentlc.com"
+  CLOUDFORMS_USER: "admin"
+  CLOUDFORMS_PASSWORD: "smartvm"
+  GOGS_DEV_USER: "developer"
+  GOGS_DEV_PASSWORD: "developer"
+  GOGS_REVIEWER_USER: "team"
+  GOGS_REVIEWER_PASSWORD: "team"
+  OCP_VERSION: "3.3"
+modules:
+  activate:
+    - demos_msa-coolstore-overview
+    - demos_msa-overview
+    - demos_msa-agile-integration
+    - demos_msa-on-demand-env
+    - demos_msa-dev-productivity-jbds
+    - demos_msa-pr-code-review-with-jbds
+    - demos_msa-pr-code-review-without-jbds
