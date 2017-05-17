@@ -1,7 +1,7 @@
 name: "Modern Application Architecture (minimal)"
 vars:
   PROJECT_SUFFIX: "USERNAME"
-  COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
+  COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
   OCP_VERSION: "3.5"
 modules:
   activate:

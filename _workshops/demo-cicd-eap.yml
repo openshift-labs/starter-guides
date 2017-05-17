@@ -1,12 +1,12 @@
 name: "Modern Application Architecture and Continuous Delivery"
 vars:
   PROJECT_SUFFIX: "USERNAME"
-  GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
-  GOGS_DEV_REPO_URL_PREFIX: "http://gogs-ci-USERNAME.cloudapps.test.openshift.opentlc.com/developer/coolstore-microservice"
-  JENKINS_URL: "http://jenkins-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
-  COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
-  HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
-  CLOUDFORMS_URL: "https://cloudforms-management-infra.cloudapps.na.openshift.opentlc.com"
+  GOGS_URL: "http://gogs-ci-USERNAME.apps.rhpds.openshift.opentlc.com"
+  GOGS_DEV_REPO_URL_PREFIX: "http://gogs-ci-USERNAME.apps.rhpds.openshift.opentlc.com/developer/coolstore-microservice"
+  JENKINS_URL: "http://jenkins-ci-USERNAME.apps.rhpds.openshift.opentlc.com"
+  COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
+  HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
+  CLOUDFORMS_URL: "https://cloudforms-management-infra.apps.rhpds.openshift.opentlc.com"
   CLOUDFORMS_USER: "USERNAME-redhat.com"
   CLOUDFORMS_PASSWORD: "YOUR PASSWORD"
   GOGS_DEV_USER: "developer"
@@ -26,3 +26,4 @@ modules:
     - demos_msa-pr-code-review-without-jbds
     - demos_msa-cicd-eap
     - demos_msa-continuous-security
+http://gogs-ci-ssadeghi.apps.rhpds.openshift.opentlc.com
