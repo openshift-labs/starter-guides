@@ -26,4 +26,3 @@ modules:
     - demos_msa-pr-code-review-without-jbds
     - demos_msa-cicd-eap
     - demos_msa-continuous-security
-http://gogs-ci-ssadeghi.apps.rhpds.openshift.opentlc.com
