@@ -1,4 +1,4 @@
-name: "All Modules"
+name: "Modern Application Architecture and Continuous Delivery (minimal)"
 vars:
   PROJECT_SUFFIX: "USERNAME"
   GOGS_URL: "http://gogs-ci-USERNAME.cloudapps.na.openshift.opentlc.com"
@@ -7,18 +7,17 @@ vars:
   COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
   HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.cloudapps.na.openshift.opentlc.com"
   CLOUDFORMS_URL: "https://cloudforms-management-infra.cloudapps.na.openshift.opentlc.com"
-  CLOUDFORMS_USER: "admin"
-  CLOUDFORMS_PASSWORD: "smartvm"
+  CLOUDFORMS_USER: "USERNAME-redhat.com"
+  CLOUDFORMS_PASSWORD: "YOUR PASSWORD"
   GOGS_DEV_USER: "developer"
   GOGS_DEV_PASSWORD: "developer"
   GOGS_REVIEWER_USER: "team"
   GOGS_REVIEWER_PASSWORD: "team"
-  OCP_VERSION: "3.3"
+  OCP_VERSION: "3.5"
 modules:
   activate:
     - demos_msa-coolstore-overview
     - demos_msa-overview
-    - demos_msa-agile-integration
     - demos_msa-service-resilience
     - demos_msa-on-demand-env
     - demos_msa-dev-productivity-jbds
