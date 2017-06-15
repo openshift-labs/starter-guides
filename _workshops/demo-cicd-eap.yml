@@ -1,4 +1,5 @@
 name: "Modern Application Architecture and Continuous Delivery"
+id: "demo-cicd-eap"
 vars:
   PROJECT_SUFFIX: "USERNAME"
   GOGS_URL: "http://gogs-ci-USERNAME.apps.rhpds.openshift.opentlc.com"

@@ -1,4 +1,5 @@
 name: "Modern Application Architecture"
+id: "demo-msa"
 vars:
   PROJECT_SUFFIX: "USERNAME"
   COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
