@@ -105,7 +105,7 @@ location in the container filesystem. Using the following command to mount the
 
 [source]
 ----
-oc set volumes dc/nationalparks --add -m /opt/openshift/config --configmap-name=nationalparks
+oc set volumes dc/nationalparks --add -m /deployments/config --configmap-name=nationalparks
 ----
 
 The above command makes the content of the configmap `ConfigMap`, which you
