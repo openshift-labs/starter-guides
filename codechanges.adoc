@@ -263,7 +263,6 @@ mongodb-live         1          1         1         config,image(mongodb:3.2)
 nationalparks-live   4          1         1         config,image(nationalparks:live)
 {% endif %}
 ----
-{% if modules.pipelines %}-live{% endif %}
 Now run the following command to rollback the latest code change:
 
 [source]
