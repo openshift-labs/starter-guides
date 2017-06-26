@@ -29,7 +29,7 @@ First we want to verify that we don't already have any existing routes:
 
 [source]
 ----
-oc get routes
+$ oc get routes
 No resources found.
 ----
 
@@ -37,7 +37,7 @@ Now we need to get the *Service* name to expose:
 
 [source]
 ----
-oc get services
+$ oc get services
 
 NAME       CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 parksmap   172.30.169.213   <none>        8080/TCP   5h
@@ -47,7 +47,7 @@ Once we know the *Service* name, creating a *Route* is a simple one-command task
 
 [source]
 ----
-oc expose service parksmap
+$ oc expose service parksmap
 route "parksmap" exposed
 ----
 

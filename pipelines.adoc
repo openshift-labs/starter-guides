@@ -93,7 +93,7 @@ retrieve information and invoke action in OpenShift:
 
 [source]
 ----
-oc policy add-role-to-user edit -z jenkins
+$ oc policy add-role-to-user edit -z jenkins
 ----
 
 ### Exercise: Remove Dev from `parksmap`
@@ -103,7 +103,7 @@ taking away the *Route* label:
 
 [source]
 ----
-oc label route nationalparks type-
+$ oc label route nationalparks type-
 ----
 
 ### Exercise: Create Live Environment
@@ -147,7 +147,7 @@ Then, run the following command to create the live *ConfigMap*:
 
 [source]
 ----
-oc create configmap nationalparks-live --from-file=application.properties=./application-live.properties
+$ oc create configmap nationalparks-live --from-file=application.properties=./application-live.properties
 ----
 {% endif %}
 
@@ -171,7 +171,7 @@ This new tag will be what the *Live* deployment will look for changes to:
 
 [source]
 ----
-oc tag nationalparks:latest nationalparks:live
+$ oc tag nationalparks:latest nationalparks:live
 ----
 
 You should have seen a change on the *ImageStream* page in the UI.
@@ -241,7 +241,7 @@ do is use the `oc set volumes` command to put it in the right place:
 
 [source]
 ----
-oc set volumes dc/nationalparks-live --add -m /deployments/config --configmap-name=nationalparks-live
+$ oc set volumes dc/nationalparks-live --add -m /deployments/config --configmap-name=nationalparks-live
 ----
 
 {% endif %}
@@ -278,7 +278,7 @@ to the *Live* route:
 
 [source]
 ----
-oc label route nationalparks-live type=parksmap-backend
+$ oc label route nationalparks-live type=parksmap-backend
 ----
 
 {% if DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE %}
@@ -294,7 +294,7 @@ simple CLI statement:
 
 [source]
 ----
-oc set triggers dc/nationalparks --from-image=nationalparks:latest --remove
+$ oc set triggers dc/nationalparks --from-image=nationalparks:latest --remove
 ----
 
 {% endif %}

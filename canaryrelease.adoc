@@ -22,7 +22,7 @@ Make Router to do round robin
 
 [source]
 ----
-oc annotate route/nationalparks-live haproxy.router.openshift.io/balance=roundrobin
+$ oc annotate route/nationalparks-live haproxy.router.openshift.io/balance=roundrobin
 ----
 
 Test the route

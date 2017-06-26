@@ -38,7 +38,7 @@ http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks
 Create a `ConfigMap` using the following command in the `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project:
 [source]
 ----
-oc create configmap nationalparks --from-file=application.properties=./application-dev.properties
+$ oc create configmap nationalparks --from-file=application.properties=./application-dev.properties
 ----
 
 The `--from-file` option specifies a key-value pair with the key used as the
@@ -52,7 +52,7 @@ database credentials:
 
 [source]
 ----
-oc describe configmap nationalparks
+$ oc describe configmap nationalparks
 
 Name:		nationalparks
 Namespace:	demo
@@ -69,7 +69,7 @@ You can review the content of the `ConfigMap` using the `oc get` command:
 
 [source]
 ----
-oc get configmap nationalparks -o yaml
+$ oc get configmap nationalparks -o yaml
 
 apiVersion: v1
 data:
@@ -105,7 +105,7 @@ location in the container filesystem. Using the following command to mount the
 
 [source]
 ----
-oc set volumes dc/nationalparks --add -m /deployments/config --configmap-name=nationalparks
+$ oc set volumes dc/nationalparks --add -m /deployments/config --configmap-name=nationalparks
 ----
 
 The above command makes the content of the configmap `ConfigMap`, which you
@@ -119,7 +119,7 @@ the database environment variables set in the link:databases[previous labs]:
 
 [source]
 ----
-oc env dc/nationalparks MONGODB_USER- MONGODB_PASSWORD- MONGODB_DATABASE- MONGODB_SERVER_HOST-
+$ oc env dc/nationalparks MONGODB_USER- MONGODB_PASSWORD- MONGODB_DATABASE- MONGODB_SERVER_HOST-
 ----
 
 You have now externalized `nationalparks` configuration. Visit the `nationalparks` web

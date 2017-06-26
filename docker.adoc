@@ -90,7 +90,7 @@ You can also examine *Pods* from the command line:
 
 [source]
 ----
-oc get pod
+$ oc get pod
 ----
 
 You should see output that looks similar to:
@@ -111,7 +111,7 @@ NOTE: Make sure you use the correct *Pod* name from your output.
 
 [source,role=copypaste]
 ----
-oc get pod parksmap-1-hx0kv -o yaml
+$ oc get pod parksmap-1-hx0kv -o yaml
 ----
 
 You should see something like the following output (which has been truncated due
@@ -195,7 +195,7 @@ view the *Services* defined in your *Project*, enter in the following command:
 
 [source]
 ----
-oc get services
+$ oc get services
 ----
 
 You should see output similar to the following:
@@ -219,7 +219,7 @@ following command to display the data in YAML:
 
 [source]
 ----
-oc get service parksmap -o yaml
+$ oc get service parksmap -o yaml
 ----
 
 You should see output similar to the following:
@@ -262,7 +262,7 @@ name of your `parksmap` *Pod*:
 
 [source]
 ----
-oc get pods
+$ oc get pods
 ----
 
 You should see output similar to the following:
@@ -277,7 +277,7 @@ Now you can view the detailed data for your *Pod* with the following command:
 
 [source]
 ----
-oc get pod parksmap-1-hx0kv -o yaml
+$ oc get pod parksmap-1-hx0kv -o yaml
 ----
 
 Under the `metadata` section you should see the following:
@@ -302,7 +302,7 @@ action, issue the following command:
 
 [source]
 ----
-oc describe service parksmap
+$ oc describe service parksmap
 ----
 
 You should see something like the following output:
