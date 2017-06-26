@@ -312,7 +312,13 @@ You see that it only has one label: `app=nationalparks`. Now, use `oc label`:
 
 [source]
 ----
-oc label route nationalparks type=parksmap-backend
+$ oc label route nationalparks type=parksmap-backend
+----
+
+You will see something like:
+
+[source]
+----
 route "nationalparks" labeled
 ----
 
