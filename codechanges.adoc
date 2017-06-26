@@ -230,6 +230,8 @@ http://nationalparks{% if modules.pipelines %}-live{% endif %}-{{EXPLORE_PROJECT
 
 You should now see the new name you have set in the JSON string returned.
 
+NOTE: To see this in the map's legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
+
 
 #### Exercise: Rollback
 
