@@ -90,12 +90,12 @@ In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 click the *"Add to Project"* button. You will see a list of categories of
 runtimes, and other types of components that you can deploy and run on OpenShift.
 
-Type _"simple"_ into the search box, and then select the item titled
-`simple-java-s2i`.
+Type _"jdk"_ into the search box, and then select the item titled
+`redhat-openjdk18-openshift`.
 
 image::ocp-runtimes.png[Runtimes]
 
-After you click `simple-java-s2i`, on the next screen you will need
+After you click `redhat-openjdk18-openshift`, on the next screen you will need
 to enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
 
@@ -112,7 +112,7 @@ image::new-national-parks-1.png[Runtimes]
 These labs were written against specific points in time for these
 applications. With Git as our version control system (VCS), we are using the
 concept of *Branches/Tags*. Click on *Show advanced routing, build, and deployment
-options*. In the *Git Reference* field enter "{{NATIONALPARKS_VERSION}}". This will cause the S2I
+options*. In the *Git Reference* field enter "*{{NATIONALPARKS_VERSION}}*". This will cause the S2I
 process to grab that specific tag in the code repository.
 
 image::nationalparks-tag.png[Runtimes]

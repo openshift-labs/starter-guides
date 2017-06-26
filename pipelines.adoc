@@ -241,7 +241,7 @@ do is use the `oc set volumes` command to put it in the right place:
 
 [source]
 ----
-oc set volumes dc/nationalparks-live --add -m /opt/openshift/config --configmap-name=nationalparks-live
+oc set volumes dc/nationalparks-live --add -m /deployments/config --configmap-name=nationalparks-live
 ----
 
 {% endif %}
@@ -303,7 +303,7 @@ oc set triggers dc/nationalparks --from-image=nationalparks:latest --remove
 
 The Pipeline is in fact a type of build that allows developers to define a Jenkins
 pipeline for execution by the Jenkins pipeline plugin. The build can be started,
-monitored, and managed by OpenShift Container Platform in the same way as any other
+monitored, and managed by {{OPENSHIFT_NAME}} in the same way as any other
 build type. Pipeline workflows are defined in a Jenkinsfile, either embedded directly
 in the build configuration, or supplied in a Git repository and referenced by the
 build configuration.
