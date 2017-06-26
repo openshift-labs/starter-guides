@@ -137,5 +137,16 @@ You should see the following (or something similar):
 {{OC_VERSION}}
 ----
 
-If you get an error message, you have not updated your path correctly.  If you
-need help, raise your hand and the instructor will assist.
+If you get an error message, you have not updated your path correctly. Try the following steps to resolve the matter -
+[source]
+----
+$ which oc
+$ mv oc_client_package_name .
+$ oc version
+----
+If the oc path is still not in the present directory(~/OpenShift), try the command mentioned below -
+[source]
+----
+$ ./oc version
+----
+ If you still are getting an error, raise your hand and the instructor will assist.
