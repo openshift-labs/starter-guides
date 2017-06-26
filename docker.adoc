@@ -182,7 +182,7 @@ available to the "outside world", or anything that is outside the OpenShift
 environment. That's OK, as you will learn later.
 
 The way that a *Service* maps to a set of *Pods* is via a system of *Labels* and
-*Selectors*. *Services* are assigned an eternal IP address and many ports and
+*Selectors*. *Services* are assigned a fixed IP address and many ports and
 protocols can be mapped.
 
 There is a lot more information about
@@ -209,7 +209,7 @@ parksmap   172.30.169.213   <none>        8080/TCP   3h
 In the above output, we can see that we have a *Service* named `parksmap` with an
 IP/Port combination of 172.30.169.213/8080TCP. Your IP address may be different, as
 each *Service* receives a unique IP address upon creation. *Service* IPs are
-eternal and never change for the life of the *Service*.
+fixed and never change for the life of the *Service*.
 
 In the web console, service information is available by clicking "Applications"
 and then clicking "Services" in the "Networking" submenu.
