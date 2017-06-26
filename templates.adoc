@@ -50,9 +50,9 @@ the source code repository. Execute the following command:
 [source]
 ----
 {% if PARKSMAP_PY %}
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks-py/{{MLBPARKS_VERSION}}/ose3/application-template.json
+$ oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks-py/{{MLBPARKS_VERSION}}/ose3/application-template.json
 {% else %}
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/{{MLBPARKS_VERSION}}/ose3/application-template-{{MW_NAME}}.json
+$ oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/{{MLBPARKS_VERSION}}/ose3/application-template-{{MW_NAME}}.json
 {% endif %}
 ----
 
@@ -62,7 +62,7 @@ your *Project*. You can see this with the following command:
 
 [source]
 ----
-oc get template
+$ oc get template
 ----
 
 You will see output like the following:
@@ -245,8 +245,8 @@ resources for our *mlbparks* application.
 [source]
 ----
 {% if PARKSMAP_PY %}
-oc get template mlbparks-py -o yaml
+$ oc get template mlbparks-py -o yaml
 {% else %}
-oc get template mlbparks -o yaml
+$ oc get template mlbparks -o yaml
 {% endif %}
 ----

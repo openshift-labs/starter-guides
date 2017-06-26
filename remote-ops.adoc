@@ -17,7 +17,7 @@ get the list of available pods:
 
 [source]
 ----
-oc get pods
+$ oc get pods
 ----
 
 You should an output similar to the following:
@@ -32,7 +32,7 @@ Now you can establish a remote shell session into the pod by using the pod name:
 
 [source,role=copypaste]
 ----
-oc rsh parksmap-2-tegp4
+$ oc rsh parksmap-2-tegp4
 ----
 
 You would see the following output:

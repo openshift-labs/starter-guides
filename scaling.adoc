@@ -39,7 +39,7 @@ OpenShift to stand up the `parksmap` image:
 
 [source]
 ----
-oc get dc
+$ oc get dc
 
 NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
 parksmap   1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
@@ -52,7 +52,7 @@ you told OpenShift to stand up the `parksmap` image:
 
 [source]
 ----
-oc get rc
+$ oc get rc
 
 NAME         DESIRED   CURRENT   READY     AGE
 parksmap-1   1         1         0         4h
@@ -76,14 +76,14 @@ the *Pod* in the OpenShift web console on the overview page. It's your choice.
 
 [source]
 ----
-oc scale --replicas=2 dc/parksmap
+$ oc scale --replicas=2 dc/parksmap
 ----
 
 To verify that we changed the number of replicas, issue the following command:
 
 [source]
 ----
-oc get rc
+$ oc get rc
 
 NAME         DESIRED   CURRENT   READY     AGE
 parksmap-1   2         2         0         4h
@@ -94,7 +94,7 @@ the `oc get pods` command:
 
 [source]
 ----
-oc get pods
+$ oc get pods
 
 NAME               READY     STATUS    RESTARTS   AGE
 parksmap-1-8g6lb   1/1       Running   0          1m
@@ -106,7 +106,7 @@ previous lab accurately reflects two endpoints:
 
 [source]
 ----
-oc describe svc parksmap
+$ oc describe svc parksmap
 ----
 
 You will see something like the following output:
@@ -129,7 +129,7 @@ Another way to look at a *Service*'s endpoints is with the following:
 
 [source]
 ----
-oc get endpoints parksmap
+$ oc get endpoints parksmap
 ----
 
 And you will see something like the following:
@@ -165,14 +165,14 @@ name. Then, do the following:
 
 [source]
 ----
-oc delete pod parksmap-1-hx0kv
+$ oc delete pod parksmap-1-hx0kv
 ----
 
 Then, as fast as you can, do the following:
 
 [source]
 ----
-oc get pods
+$ oc get pods
 ----
 
 Did you notice anything different? The names of the *Pods* are slightly changed.

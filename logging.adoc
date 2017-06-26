@@ -41,16 +41,16 @@ your *Pod*:
 
 [source]
 ----
-oc get pods
+$ oc get pods
 NAME               READY     STATUS    RESTARTS   AGE
 parksmap-1-hx0kv   1/1       Running   0          5h
 ----
 
 And then use the `logs` command to view this *Pod*'s logs:
 
-[source,role=copypaste]
+[source]
 ----
-oc logs parksmap-1-hx0kv
+$ oc logs parksmap-1-hx0kv
 ----
 
 You will see all of the application logs scroll on your screen:

@@ -13,7 +13,7 @@ https://raw.githubusercontent.com/osevg/workshopper-content/master/
 or host locally as static content, e.g. on OpenShift using the PHP S2I builder
 
 ```
-oc new-app php~https://github.com/osevg/workshopper-content.git
+$ oc new-app php~https://github.com/osevg/workshopper-content.git
 ```
 
 and use that url to feed Workshopper with content.

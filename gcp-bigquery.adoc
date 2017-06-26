@@ -91,14 +91,14 @@ It is as easy as:
 
 [source,bash]
 ----
-oc create secret generic google-creds --from-file=/{directory}/google-creds.json
+$ oc create secret generic google-creds --from-file=/{directory}/google-creds.json
 ----
 
 And then you can validate that the secrets have been created:
 
 [source,bash]
 ----
-$oc describe secret/google-creds
+$ oc describe secret/google-creds
 Name:      google-creds
 Namespace:   roadshow
 Labels:      <none>

@@ -107,14 +107,14 @@ the name of the DC:
 
 [source]
 ----
-oc get dc
+$ oc get dc
 ----
 
 Then, use the `oc env` command to set environment variables directly on the DC:
 
 [source]
 ----
-oc env dc nationalparks -e DB_USERNAME=mongodb -e DB_PASSWORD=mongodb -e DB_NAME=mongodb -e DB_HOST=mongodb
+$ oc env dc nationalparks -e DB_USERNAME=mongodb -e DB_PASSWORD=mongodb -e DB_NAME=mongodb -e DB_HOST=mongodb
 ----
 
 NOTE: Note that environment variables in this application are named different than in the database.
@@ -124,7 +124,7 @@ environment variables have been added by viewing the YAML for it:
 
 [source]
 ----
-oc get dc nationalparks -o yaml
+$ oc get dc nationalparks -o yaml
 ----
 
 You should see the following section:
@@ -147,7 +147,7 @@ the DC:
 
 [source]
 ----
-oc env dc/nationalparks --list
+$ oc env dc/nationalparks --list
 # deploymentconfigs nationalparks, container nationalparks
 DB_USER=mongodb
 DB_PASSWORD=mongodb
@@ -290,7 +290,7 @@ labels. `describe` the `nationalparks` service:
 
 [source]
 ----
-oc describe route nationalparks
+$ oc describe route nationalparks
 
 Name:                   nationalparks
 Namespace:              {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}

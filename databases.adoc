@@ -120,14 +120,14 @@ the name of the DC:
 
 [source]
 ----
-oc get dc
+$ oc get dc
 ----
 
 Then, use the `oc env` command to set environment variables directly on the DC:
 
 [source]
 ----
-oc env dc nationalparks -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e MONGODB_DATABASE=mongodb -e MONGODB_SERVER_HOST=mongodb
+$ oc env dc nationalparks -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e MONGODB_DATABASE=mongodb -e MONGODB_SERVER_HOST=mongodb
 ----
 
 After you have modified the *DeploymentConfig* object, you can verify the
@@ -135,7 +135,7 @@ environment variables have been added by viewing the YAML for it:
 
 [source]
 ----
-oc get dc nationalparks -o yaml
+$ oc get dc nationalparks -o yaml
 ----
 
 You should see the following section:
@@ -158,7 +158,7 @@ the DC:
 
 [source]
 ----
-oc env dc/nationalparks --list
+$ oc env dc/nationalparks --list
 # deploymentconfigs nationalparks, container nationalparks
 MONGODB_USER=mongodb
 MONGODB_PASSWORD=mongodb
@@ -299,7 +299,7 @@ labels. `describe` the `nationalparks` service:
 
 [source]
 ----
-oc describe route nationalparks
+$ oc describe route nationalparks
 
 Name:                   nationalparks
 Namespace:              {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
@@ -321,7 +321,7 @@ You see that it only has one label: `app=nationalparks`. Now, use `oc label`:
 
 [source]
 ----
-oc label route nationalparks type=parksmap-backend
+$ oc label route nationalparks type=parksmap-backend
 ----
 
 You will see something like:

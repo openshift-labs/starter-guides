@@ -269,7 +269,7 @@ Now run the following command to rollback the latest code change:
 
 [source]
 ----
-oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}
+$ oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}
 ----
 
 You will see output like the following:
@@ -297,7 +297,7 @@ the automatic deployments run this:
 
 [source]
 ----
-oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
+$ oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
 ----
 ====
 
@@ -306,7 +306,7 @@ oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --aut
 // TODO: Fix deployment numbers
 
 Just like you performed a rollback, you can also perform a roll-forward using
-the same command. You'll notice above that when you requested a roll*back*, it
+the same command. You'll notice above that when you requested a *rollback*, it
 caused a new deployment (#3). In essence, we always move forwards in OpenShift,
 even if we are going "back".
 
@@ -323,7 +323,7 @@ So, if we want to return to the "new code" version, that is deployment #4.
 
 [source]
 ----
-oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}-4
+$ oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}-4
 ----
 
 And you will see the following:

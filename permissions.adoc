@@ -23,14 +23,14 @@ The parksmap application wants to talk to the OpenShift API to learn about other
 
 [source,role=copypaste]
 ----
-oc project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
+$ oc project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 ----
 
 Then:
 
 [source]
 ----
-oc policy add-role-to-user view -z default
+$ oc policy add-role-to-user view -z default
 ----
 
 The `oc policy` command above is giving a defined _role_ (`view`) to a user. But
@@ -62,7 +62,7 @@ access to your `explore` project using the following command:
 
 [source,role=copypaste]
 ----
-oc policy add-role-to-user view user{{SUFFIX}}
+$ oc policy add-role-to-user view user{{SUFFIX}}
 ----
 
 Have them go to the project view by clicking the *Projects* button and verify
