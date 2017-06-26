@@ -225,7 +225,7 @@ automatically deployed by viewing the application in your browser:
 
 [source,role=copypaste]
 ----
-http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks{% if modules.pipelines %}-live{% endif %}-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
 ----
 
 You should now see the new name you have set in the JSON string returned.
