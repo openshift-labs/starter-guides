@@ -267,6 +267,9 @@ Similar to the link:databases[previous labs], populate the database by pointing 
 http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/load/
 ----
 
+NOTE: If the application has not been deployed yet, you might get a __502 Bad Gateway error webpage__. This 
+means that the application backing up the route is not yet ready. Wait until the pod is up. 
+
 #### Label Service
 As discussed in link:databases[previous labs], the `parksmap` web app queries the OpenShift API and
 looks for routes that have the label `type=parksmap-backend` and interrogates the
@@ -341,6 +344,9 @@ verify the service works as expected.
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all/
 ----
+
+NOTE: If the application has not been deployed yet, you might get a __502 Bad Gateway error webpage__. This 
+means that the application backing up the route is not yet ready. Wait until the pod is up. 
 
 After the test stage, pipeline waits for manual approval in order to deploy to the
 *Live* container.
