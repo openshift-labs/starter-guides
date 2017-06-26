@@ -165,17 +165,19 @@ name. Then, do the following:
 
 [source]
 ----
-$ oc delete pod parksmap-1-hx0kv
+$ oc delete pod parksmap-1-hx0kv && oc get pods
+
+pod "parksmap-1-h45hj" deleted
+NAME               READY     STATUS              RESTARTS   AGE
+parksmap-1-h45hj   1/1       Terminating         0          4m
+parksmap-1-q4b4r   0/1       ContainerCreating   0          1s
+parksmap-1-vdkd9   1/1       Running             0          32s
 ----
 
-Then, as fast as you can, do the following:
+Did you notice anything? There is a container being terminated (the one we deleted),
+and there's a new container already being created.
 
-[source]
-----
-$ oc get pods
-----
-
-Did you notice anything different? The names of the *Pods* are slightly changed.
+Also, the names of the *Pods* are slightly changed.
 That's because OpenShift almost immediately detected that the current state (1
 *Pod*) didn't match the desired state (2 *Pods*), and it fixed it by scheduling
 another *Pod*.

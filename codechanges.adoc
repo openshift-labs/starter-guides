@@ -334,5 +334,5 @@ Warning: the following images triggers were disabled: nationalparks:live
   You can re-enable them with: oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
 ----
 
-Cool! Once the roll"back" is complete, verify you again see "OpenShift
+Cool! Once the *rollback* is complete, verify you again see "OpenShift
 National Parks".
