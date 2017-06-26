@@ -35,6 +35,9 @@ contains the database credentials:
 http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-dev.properties
 ----
 
+NOTE: Verify that the contents of the file are correct. If you have downladed the file with Internet Explorer it might contain
+incorrect chars or different charset. Try to use "Google Chrome", "Firefox" or "curl".
+
 Create a `ConfigMap` using the following command in the `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project:
 [source]
 ----
