@@ -1,4 +1,4 @@
-name: "Modern Application Architecture and Continuous Delivery"
+name: "Microservices with Zero Downtime in Production"
 id: "demo-cicd-eap"
 vars:
   PROJECT_SUFFIX: "USERNAME"
