@@ -32,7 +32,11 @@ orders without knowing about the inventory.
 * Explain OpenShift container health management using
 https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b95a791a8_0_24[the slides]
 * In the OpenShift web console, go to *CoolStore PROD* project
+{% if modules.demos_msa-cicd-eap %}
 * Scroll down to find the *Inventory Live* service group
+{% else %}
+* Scroll down to find the *Inventory* service group
+{% endif %}
 * Explain that the blue circle shows the number containers that back *inventory-green* service
 
 ====
