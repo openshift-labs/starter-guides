@@ -225,6 +225,9 @@ Items inserted in database: 2740
 If you then go back to `/ws/data/all` you will see tons of JSON data now.
 That's great. Our parks map should finally work!
 
+NOTE: There's some errors reported with browsers like firefox 54 that don't properly parse the resulting JSON. It's
+a browser problem, and the application is working properly.
+
 [NOTE]
 ====
 You are probably wondering how the database connection magically started
