@@ -18,6 +18,7 @@ vars:
   DOWNLOAD_CLIENT_LIN64: https://github.com/openshift/origin/releases/download/v1.5.1/openshift-origin-client-tools-v1.5.1-7b451fc-linux-64bit.tar.gz
   OC_VERSION: "oc v1.5.1+7b451fc\nkubernetes v1.5.2+43a9be4"
   GIT_HOST: github
+  DOCS_URL: docs.openshift.org
 
 modules:
   activate:
