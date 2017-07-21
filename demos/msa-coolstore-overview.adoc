@@ -6,7 +6,9 @@
 |*Difficulty*|Easy
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_6_67[Google Slide]
 |*Video*|NA
+{% if DISPLAY_SIMULATION_LINKS %}
 |*Simulation*|NA
+{% endif %}
 |===
 
 ### Explain the Demo Concepts

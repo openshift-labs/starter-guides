@@ -5,6 +5,7 @@ vars:
   COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
   HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
   OCP_VERSION: "3.5"
+  DISPLAY_SIMULATION_LINKS: false
 modules:
   activate:
     - demos_msa-coolstore-overview

@@ -15,6 +15,7 @@ vars:
   GOGS_REVIEWER_USER: "team"
   GOGS_REVIEWER_PASSWORD: "team"
   OCP_VERSION: "3.5"
+  DISPLAY_SIMULATION_LINKS: false
 modules:
   activate:
     - demos_msa-coolstore-overview

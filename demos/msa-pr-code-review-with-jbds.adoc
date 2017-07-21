@@ -6,9 +6,11 @@
 |*Difficulty*|Easy
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_0_0[Google Slide]
 |*Video*|https://www.youtube.com/watch?v=Vfa8rXQrf9U&list=PLk57upl23Db1fYboes5JowhAtEB3EWxEP&index=6[YouTube]
+{% if DISPLAY_SIMULATION_LINKS %}
 |*Simulation*  
 (https://drive.google.com/open?id=0B630TpgzAhO_eERmS2lJcDM2OVU[Tutorial]) |https://drive.google.com/open?id=0B630TpgzAhO_OEdOWWUtMWJlSGM[Mac]
 https://drive.google.com/open?id=0B630TpgzAhO_dlhCaXRoVUhHaU0[HTML]
+{% endif %}
 |===
 
 ### Explain the Demo Concepts

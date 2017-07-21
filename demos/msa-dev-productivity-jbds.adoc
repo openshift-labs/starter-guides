@@ -6,7 +6,9 @@
 |*Difficulty*|Hard
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1cdbadc42a_2_4[Google Slide]
 |*Video*|https://www.youtube.com/watch?v=D3ziFwiSMuk&list=PLk57upl23Db1fYboes5JowhAtEB3EWxEP&index=5[YouTube]
+{% if DISPLAY_SIMULATION_LINKS %}
 |*Simulation*|NA
+{% endif %}
 |===
 
 ====

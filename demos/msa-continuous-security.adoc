@@ -6,9 +6,11 @@
 |*Difficulty*|Medium
 |*Slides*|NA
 |*Video*|https://www.youtube.com/watch?v=SGh5wQivQcE&list=PLk57upl23Db1fYboes5JowhAtEB3EWxEP&index=9[YouTube]
+{% if DISPLAY_SIMULATION_LINKS %}
 |*Simulation*  
 (https://drive.google.com/open?id=0B630TpgzAhO_eERmS2lJcDM2OVU[Tutorial]) |https://drive.google.com/open?id=0B630TpgzAhO_RWlycTVpV3FraUE[Mac]
 https://drive.google.com/open?id=0B630TpgzAhO_bHROeW1lYUE2RHc[HTML]
+{% endif %}
 |===
 
 
