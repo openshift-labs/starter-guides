@@ -256,7 +256,7 @@ status:
 
 Take note of the `selector` stanza. Remember it.
 
-It is also of interest to view the JSON of the *Pod* to understand how OpenShift
+It is also of interest to view the YAML of the *Pod* to understand how OpenShift
 wires components together.  For example, run the following command to get the
 name of your `parksmap` *Pod*:
 
