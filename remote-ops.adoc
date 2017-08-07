@@ -65,6 +65,18 @@ already running container using the `oc exec` command. This does not require
 that a shell is installed, but only that the desired command is present and in
 the executable path.
 
+{% if PARKSMAP_PY %}
+
+In order to list all files in the main directory, run the following:
+
+[source,role=copypaste]
+----
+$ oc exec parksmap-2-tegp4 -- ls -l 
+----
+
+You would see a listing of all of the files in the current directory on the remote container.
+
+{% else %}
 In order to show just the JAR file, run the following:
 
 [source,role=copypaste]
@@ -78,6 +90,9 @@ You would see something like the following:
 ----
 -rw-r--r--. 1 root root 21753918 Nov 23 15:54 /parksmap.jar
 ----
+{% endif %}
+
+
 
 [NOTE]
 ====
