@@ -37,13 +37,9 @@ out to the Docker registry specified and interrogate the image. You then are
 presented with some options to add things like environment variables, labels,
 and etc. -- which we will learn about later.
 
-{% if PARKSMAP_PY %}
-
-For now, change the application name:
+Make sure to have the correct application name:
 
 image::parksmap-image-options.png[Explore Project]
-
-{% endif %}
 
 Hit the blue "Create" button at the bottom of the screen and then click the
 "Continue to overview" link. Take a moment to look at the various messages that
