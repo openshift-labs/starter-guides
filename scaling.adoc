@@ -13,15 +13,15 @@ how OpenShift "self heals".
 A *DeploymentConfiguration* (DC) defines how something in OpenShift should be
 deployed. From the https://{{DOCS_URL}}/latest/architecture/core_concepts/deployments.html#deployments-and-deployment-configurations[deployments documentation]:
 
-[source]
-----
+[quote]
+__
 Building on replication controllers, OpenShift adds expanded support for the
 software development and deployment lifecycle with the concept of deployments.
 In the simplest case, a deployment just creates a new replication controller and
 lets it start up pods. However, OpenShift deployments also provide the ability
 to transition from an existing deployment of an image to a new one and also
 define hooks to be run before or after creating the replication controller.
-----
+__
 
 In almost all cases, you will end up using the *Pod*, *Service*,
 *ReplicationController* and *DeploymentConfiguration* resources together. And, in
@@ -37,7 +37,7 @@ Now that we know the background of what a *ReplicatonController* and
 look at the *DeploymentConfig* (DC) that was created for you when you told
 OpenShift to stand up the `parksmap` image:
 
-[source]
+[source,bash]
 ----
 $ oc get dc
 
@@ -50,7 +50,7 @@ To get more details, we can look into the *ReplicationController* (*RC*).
 Take a look at the *ReplicationController* (RC) that was created for you when
 you told OpenShift to stand up the `parksmap` image:
 
-[source]
+[source,bash]
 ----
 $ oc get rc
 
@@ -74,14 +74,14 @@ Let's scale our parksmap "application" up to 2 instances. We can do this with
 the `scale` command. You could also do this by clicking the "up" arrow next to
 the *Pod* in the OpenShift web console on the overview page. It's your choice.
 
-[source]
+[source,bash]
 ----
 $ oc scale --replicas=2 dc/parksmap
 ----
 
 To verify that we changed the number of replicas, issue the following command:
 
-[source]
+[source,bash]
 ----
 $ oc get rc
 
@@ -92,7 +92,7 @@ parksmap-1   2         2         0         4h
 You can see that we now have 2 replicas. Let's verify the number of pods with
 the `oc get pods` command:
 
-[source]
+[source,bash]
 ----
 $ oc get pods
 
@@ -104,14 +104,14 @@ parksmap-1-hx0kv   1/1       Running   0          4h
 And lastly, let's verify that the *Service* that we learned about in the
 previous lab accurately reflects two endpoints:
 
-[source]
+[source,bash]
 ----
 $ oc describe svc parksmap
 ----
 
 You will see something like the following output:
 
-[source]
+[source,bash]
 ----
 Name:			parksmap
 Namespace:		{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
@@ -127,14 +127,14 @@ No events.
 
 Another way to look at a *Service*'s endpoints is with the following:
 
-[source]
+[source,bash]
 ----
 $ oc get endpoints parksmap
 ----
 
 And you will see something like the following:
 
-[source]
+[source,bash]
 ----
 NAME       ENDPOINTS                                   AGE
 parksmap   10.1.0.5:8080,10.1.1.5:8080                 4h
@@ -163,7 +163,7 @@ Since we have two *Pods* running right now, let's see what happens if we
 "accidentally" kill one. Run the `oc get pods` command again, and choose a *Pod*
 name. Then, do the following:
 
-[source]
+[source,bash]
 ----
 $ oc delete pod parksmap-1-hx0kv && oc get pods
 

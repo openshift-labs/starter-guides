@@ -16,8 +16,8 @@ Return to the web console:
 
 *link:https://{{CONSOLE_ADDRESS}}[]*
 
-Find your *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project and click it. Next, click "Add to
-project" at the top of the screen.
+Find your *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project and click it. Next,
+click on the `Deploy Image` in the *"Add to Project"* drop down.
 
 There are several options, but we are only concerned with "Deploy Image". Click
 it. We will learn more about image streams and image stream tags later. For now,
@@ -63,13 +63,13 @@ In OpenShift, the smallest deployable unit is a *Pod*. A *Pod* is a group of one
 more Docker containers deployed together and guaranteed to be on the same host.
 From the doc:
 
-[source]
-----
+[quote]
+__
 Each pod has its own IP address, therefore owning its entire port space, and
 containers within pods can share storage. Pods can be "tagged" with one or
 more labels, which are then used to select and manage groups of pods in a
 single operation.
-----
+__
 
 *Pods* can contain multiple Docker instances. The general idea is for a Pod to
 contain a "server" and any auxiliary services you want to run along with that
@@ -84,14 +84,14 @@ happens to be the parks map application - a simple Spring Boot/Java application.
 
 You can also examine *Pods* from the command line:
 
-[source]
+[source,bash]
 ----
 $ oc get pod
 ----
 
 You should see output that looks similar to:
 
-[source]
+[source,bash]
 ----
 NAME               READY     STATUS    RESTARTS   AGE
 parksmap-1-hx0kv   1/1       Running   0          2m
@@ -105,7 +105,7 @@ following syntax:
 
 NOTE: Make sure you use the correct *Pod* name from your output.
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 $ oc get pod parksmap-1-hx0kv -o yaml
 ----
@@ -113,7 +113,7 @@ $ oc get pod parksmap-1-hx0kv -o yaml
 You should see something like the following output (which has been truncated due
 to space considerations of this workshop manual):
 
-[source]
+[source,bash]
 ----
 apiVersion: v1
 kind: Pod
@@ -189,14 +189,14 @@ Now that we understand the basics of what a *Service* is, let's take a look at
 the *Service* that was created for the image that we just deployed.  In order to
 view the *Services* defined in your *Project*, enter in the following command:
 
-[source]
+[source,bash]
 ----
 $ oc get services
 ----
 
 You should see output similar to the following:
 
-[source]
+[source,bash]
 ----
 NAME       CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 parksmap   172.30.169.213   <none>        8080/TCP   3h
@@ -213,14 +213,14 @@ and then clicking "Services" in the "Networking" submenu.
 You can also get more detailed information about a *Service* by using the
 following command to display the data in YAML:
 
-[source]
+[source,bash]
 ----
 $ oc get service parksmap -o yaml
 ----
 
 You should see output similar to the following:
 
-[source]
+[source,bash]
 ----
 apiVersion: v1
 kind: Service
@@ -256,14 +256,14 @@ It is also of interest to view the YAML of the *Pod* to understand how OpenShift
 wires components together.  For example, run the following command to get the
 name of your `parksmap` *Pod*:
 
-[source]
+[source,bash]
 ----
 $ oc get pods
 ----
 
 You should see output similar to the following:
 
-[source]
+[source,bash]
 ----
 NAME               READY     STATUS    RESTARTS   AGE
 parksmap-1-hx0kv   1/1       Running   0          3h
@@ -271,14 +271,14 @@ parksmap-1-hx0kv   1/1       Running   0          3h
 
 Now you can view the detailed data for your *Pod* with the following command:
 
-[source]
+[source,bash]
 ----
 $ oc get pod parksmap-1-hx0kv -o yaml
 ----
 
 Under the `metadata` section you should see the following:
 
-[source]
+[source,bash]
 ----
 labels:
   app: parksmap
@@ -296,14 +296,14 @@ labels:
 matches the *Selector* will be associated with the *Service*. To see this in
 action, issue the following command:
 
-[source]
+[source,bash]
 ----
 $ oc describe service parksmap
 ----
 
 You should see something like the following output:
 
-[source]
+[source,bash]
 ----
 Name:                   parksmap
 Namespace:              {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}

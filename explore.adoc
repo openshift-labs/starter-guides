@@ -8,14 +8,14 @@ environment that has been provided for this Roadshow session.  In
 order to login, we will use the `oc` command and then specify the server that we
 want to authenticate to.  Issue the following command:
 
-[source]
+[source,bash]
 ----
 $ oc login {{CONSOLE_ADDRESS}}
 ----
 
 You may see the following output:
 
-[source]
+[source,bash]
 ----
 The server uses a certificate signed by an unknown authority.
 You can bypass the certificate check, but any data you send to the server could be intercepted by others.
@@ -35,7 +35,7 @@ On some versions of Microsoft Windows, you may get an error that the
 server has an invalid x.509 certificate.  If you receive this error, enter in
 the following command:
 
-[source]
+[source,bash]
 ----
 $ oc login {{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
 ----
@@ -44,7 +44,7 @@ $ oc login {{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
 Once you issue the `oc login` command, you will be prompted for the username and
 password combination for your user account:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 Username: {{USER_NAME}}
 Password: {{USER_PASSWORD}}
@@ -53,7 +53,7 @@ Password: {{USER_PASSWORD}}
 Once you have authenticated to the OpenShift server, you will see the
 following confirmation message:
 
-[source]
+[source,bash]
 ----
 Login successful.
 {% if NO_USER_PROJECT != true %}
@@ -86,14 +86,14 @@ understand all of the terminology as we will cover it in detail in later labs.
 The first thing we want to do is create the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}*
 project. You can do this with the following command:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 $ oc new-project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 ----
 
 You will see the following confirmation message:
 
-[source]
+[source,bash]
 ----
 Now using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" on server "https://{{CONSOLE_ADDRESS}}".
 ----
@@ -101,14 +101,14 @@ Now using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" on server "https://{
 The first thing we want to do is switch to the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project. You
 can do this with the following command:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 $ oc project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 ----
 
 You will see the following confirmation message:
 
-[source]
+[source,bash]
 ----
 Now using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" on server "https://{{CONSOLE_ADDRESS}}".
 ----
@@ -124,7 +124,7 @@ works, open your browser and go to the following URL:
 
 The first screen you will see is the authentication screen.  Enter in the following credentials:
 
-[source]
+[source,bash]
 ----
 Username: {{USER_NAME}}
 Password: {{USER_PASSWORD}}

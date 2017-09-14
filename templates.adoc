@@ -47,7 +47,7 @@ deploy the Mongo database. It also uses a *Hook* to call the `/ws/data/load`
 endpoint to cause the data to be loaded into the database from a JSON file in
 the source code repository. Execute the following command:
 
-[source]
+[source,bash]
 ----
 {% if PARKSMAP_PY %}
 $ oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks-py/{{MLBPARKS_VERSION}}/ose3/application-template.json
@@ -60,14 +60,14 @@ What just happened? What did you just `create`? The item that we passed to the `
 command is a *Template*. `create` simply makes the template available in
 your *Project*. You can see this with the following command:
 
-[source]
+[source,bash]
 ----
 $ oc get template
 ----
 
 You will see output like the following:
 
-[source]
+[source,bash]
 ----
 {% if PARKSMAP_PY %}
 NAME          DESCRIPTION                                                                      PARAMETERS     OBJECTS
@@ -80,13 +80,13 @@ mlbparks      Application template MLBParks backend running on {{MW_TEXT}} and u
 Are you ready for the magic command?  Here it is:
 
 {% if USE_MAVEN %}
-[source]
+[source,bash]
 ----
 oc new-app mlbparks --name=mlbparks -p GIT_REF={{MLBPARKS_VERSION}} -p MAVEN_MIRROR_URL=http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public
 ----
 
 {% else %}
-[source]
+[source,bash]
 ----
 {% if PARKSMAP_PY %}
 oc new-app mlbparks-py -p APPLICATION_NAME=mlbparks -p GIT_URI=https://github.com/openshift-roadshow/mlbparks-py -p GIT_REF={{MLBPARKS_VERSION}}
@@ -99,7 +99,7 @@ oc new-app mlbparks -p APPLICATION_NAME=mlbparks -p GIT_REF={{MLBPARKS_VERSION}}
 You will see the following output:
 
 {% if USE_MAVEN %}
-[source]
+[source,bash]
 ----
 --> Deploying template mlbparks
 
@@ -177,7 +177,7 @@ You will see the following output:
     Run 'oc status' to view your app.
 ----
 {% else %}
-[source]
+[source,bash]
 ----
 --> Deploying template mlbparks
 
@@ -242,7 +242,7 @@ microservices, fix bugs, and more.
 As a final exercise, look at the template that was used to create the
 resources for our *mlbparks* application.
 
-[source]
+[source,bash]
 ----
 {% if PARKSMAP_PY %}
 $ oc get template mlbparks-py -o yaml

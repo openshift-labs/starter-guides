@@ -71,7 +71,7 @@ image::ocp-webhook1.png[Webhook]
 Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on your local GitLab:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 {% if PARKSMAP_PY %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}
@@ -131,14 +131,14 @@ image::ocp-webhook5-py.png[Webhook]
 
 Change line number 35:
 
-[source]
+[source,python]
 ----
 'displayName': 'National Parks (PY)'
 ----
 
 To
 
-[source]
+[source,python]
 ----
 'displayName': 'World National Parks (PY)'
 ----
@@ -150,7 +150,7 @@ middle of the page. This is GitLab's repository view. Make sure that the
 drop-down menu at the upper right is set for the `{{NATIONALPARKS_VERSION}}` branch. Navigate to the
 following path:
 
-[source]
+[source,bash]
 ----
 src/main/java/com/openshift/evg/roadshow/parks/rest/
 ----
@@ -164,14 +164,14 @@ image::ocp-webhook5.png[Webhook]
 
 Change line number 20:
 
-[source]
+[source,java]
 ----
 return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);
 ----
 
 To
 
-[source]
+[source,java]
 ----
 return new Backend("nationalparks","OpenShift National Parks", new Coordinates("47.039304", "14.505178"), 4);
 ----
@@ -205,14 +205,14 @@ Once you have committed your changes, a *Build* should almost instantaneously be
 triggered in OpenShift. Look at the *Builds* page in the web console, or run the
 following command to verify:
 
-[source]
+[source,bash]
 ----
 $ oc get builds
 ----
 
 You should see that a new build is running:
 
-[source]
+[source,bash]
 ----
 NAME              TYPE      FROM          STATUS     STARTED          DURATION
 nationalparks-1   Source    Git@b052ae6   Complete   18 hours ago     36s
@@ -223,7 +223,7 @@ Once the build and deploy has finished, verify your new Docker image was
 automatically deployed by viewing the application in your browser:
 {% endif %}
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 http://nationalparks{% if modules.pipelines %}-live{% endif %}-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
 ----
@@ -244,16 +244,14 @@ various versions of applications.
 In order to perform a rollback, you need to know the name of the *Deployment Config*
 which has deployed the application:
 
-[source]
+[source,bash]
 ----
 $ oc get dc
 ----
 
-// TODO: Need non-pipeline version
-
 The output will be similar to the following:
 
-[source]
+[source,bash]
 ----
 NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb              1          1         1         config,image(mongodb:3.2)
@@ -267,14 +265,14 @@ nationalparks-live   4          1         1         config,image(nationalparks:l
 ----
 Now run the following command to rollback the latest code change:
 
-[source]
+[source,bash]
 ----
 $ oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}
 ----
 
 You will see output like the following:
 
-[source]
+[source,bash]
 ----
 #5 rolled back to nationalparks{% if modules.pipelines %}-live{% endif %}-3
 Warning: the following images triggers were disabled: nationalparks:live
@@ -284,7 +282,7 @@ Warning: the following images triggers were disabled: nationalparks:live
 Once the deploy is complete, verify that the page header is reverted to the
 original header by viewing the application in your browser.
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 http://nationalparks{% if modules.pipelines %}-live{% endif %}-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
 ----
@@ -295,15 +293,13 @@ Automatic deployment of new images is disabled as part of the rollback
 to prevent unwanted deployments soon after the rollback is complete. To re-enable
 the automatic deployments run this:
 
-[source]
+[source,bash]
 ----
 $ oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
 ----
 ====
 
 #### Exercise: Rollforward
-
-// TODO: Fix deployment numbers
 
 Just like you performed a rollback, you can also perform a roll-forward using
 the same command. You'll notice above that when you requested a *rollback*, it
@@ -321,13 +317,13 @@ even if we are going "back".
 
 So, if we want to return to the "new code" version, that is deployment #4.
 
-[source]
+[source,bash]
 ----
 $ oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}-4
 ----
 
 And you will see the following:
-[source]
+[source,bash]
 ----
 #6 rolled back to nationalparks{% if modules.pipelines %}-live{% endif %}-4
 Warning: the following images triggers were disabled: nationalparks:live
