@@ -32,21 +32,21 @@ directories:
 
 **Windows:**
 
-[source]
+[source,bash]
 ----
 C:\OpenShift
 ----
 
 **OS X:**
 
-[source]
+[source,bash]
 ----
 ~/OpenShift
 ----
 
 **Linux:**
 
-[source]
+[source,bash]
 ----
 ~/OpenShift
 ----
@@ -66,7 +66,7 @@ file using file explorer and select to extract the contents.
 Open up a terminal window and change to the directory where you downloaded the
 file.  Once you are in the directory, enter in the following command:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 $ tar zxvf oc-macosx.tar.gz
 ----
@@ -77,7 +77,7 @@ The tar.gz file name needs to be replaced by the entire name that was downloaded
 Open up a terminal window and change to the directory where you downloaded the
 file.  Once you are in the directory, enter in the following command:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 $ tar zxvf oc-linux.tar.gz
 ----
@@ -109,14 +109,14 @@ Windows 10 - Follow the directions above.
 
 **OS X:**
 
-[source]
+[source,bash]
 ----
 $ export PATH=$PATH:~/OpenShift
 ----
 
 **Linux:**
 
-[source]
+[source,bash]
 ----
 $ export PATH=$PATH:~/OpenShift
 ----
@@ -125,14 +125,14 @@ $ export PATH=$PATH:~/OpenShift
 At this point, we should have the oc tool available for use.  Let's test this
 out by printing the version of the oc command:
 
-[source]
+[source,bash]
 ----
 $ oc version
 ----
 
 You should see the following (or something similar):
 
-[source]
+[source,bash]
 ----
 {{OC_VERSION}}
 ----
