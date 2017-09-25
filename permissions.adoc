@@ -62,7 +62,7 @@ access to your `explore` project using the following command:
 
 [source,role=copypaste]
 ----
-$ oc policy add-role-to-user view user{{SUFFIX}}
+$ oc policy add-role-to-user view user{{USER_SUFFIX}}
 ----
 
 Have them go to the project view by clicking the *Projects* button and verify

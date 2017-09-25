@@ -60,9 +60,6 @@ config:
     - name: EXPLORE_PROJECT_NAME
       desc: Project the user is supposed to work with
       value: project
-    - name: SUFFIX
-      desc: Username suffix
-      value: XY
     - name: PARKSMAP_IMAGENAME
       desc: Docker image name for the parksmap application
       value: <image name>
