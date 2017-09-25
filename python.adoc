@@ -14,7 +14,7 @@ image::roadshow-app-architecture-nationalparks-1.png[Application architecture,80
 ### Background: Source-to-Image (S2I)
 
 In a previous lab, we learned how to deploy a pre-existing Docker-formatted
-image. Now we will expand on that a bit by learning how OpenShift builds a
+image. Now we will expand on that a bit by learning how OpenShift builds
 Docker images using source code from an existing repository.
 
 https://github.com/openshift/source-to-image[Source-to-Image (S2I)] is another

@@ -3,7 +3,7 @@
 ### Background: Source-to-Image (S2I)
 
 In lab three we learned how to deploy a pre-existing Docker image from a Docker
-registry. Now we will expand on that a bit by learning how OpenShift builds a
+registry. Now we will expand on that a bit by learning how OpenShift builds
 Docker images using source code from an existing repository.
 
 https://github.com/openshift/source-to-image[Source-to-Image (S2I)] is another
