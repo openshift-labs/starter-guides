@@ -44,10 +44,10 @@ persistent storage!). The image will ensure that:
 - The user can access the specified database with the specified password
 
 In the web console in your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, again click the *"Add to
-Project"* button, and then find the `mongodb-ephemeral` template, and click it.
+Project"* button, and then find the `mongodb-{{STORAGE_TYPE}}` template, and click it.
 You will notice that there are several MongoDB templates available, some of
 which come with application servers pre-configured. We just need a database,
-though, so `mongodb-ephemeral` is what you should choose.
+though, so `mongodb-{{STORAGE_TYPE}}` is what you should choose.
 
 image::ocp-mongodb-template.png[MongoDB]
 

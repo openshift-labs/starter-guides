@@ -54,9 +54,9 @@ Integration & Deployment*:
 
 image::pipeline-technologies.png[CI/CD Technologies]
 
-Find the `jenkins-ephemeral` template, and click on it:
+Find the `jenkins-{{STORAGE_TYPE}}` template, and click on it:
 
-image::pipeline-jenkins-catalog.png[Jenkins Ephemeral]
+image::pipeline-jenkins-catalog.png[Jenkins {{STORAGE_TYPE}}]
 
 You can customize the Jenkins properties such as service name, admin password, memory
 allocation, etc through the parameters in the web console. We can leave all of
@@ -116,7 +116,7 @@ changes in the *Dev* deployment without interfering with the live application.
 #### Live MongoDB
 First you need to create a new MongoDB deployment for the *Live* environment. In the
 web console in your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project,  click the *Add to
-Project* button, and then find the `mongodb-ephemeral` template, and click it.
+Project* button, and then find the `mongodb-{{STORAGE_TYPE}}` template, and click it.
 Use the following values in their respective fields:
 
 * Database Service Name : `mongodb-live`

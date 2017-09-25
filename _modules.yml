@@ -108,6 +108,9 @@ config:
     - name: OPENSHIFT_VERSION      
       desc: OpenShift version used in the workshop
       value: "3.5"
+    - name: STORAGE_TYPE
+      desc: Should they be using ephemeral or persistant storage?
+      value: ephemeral
 
 modules:
   environment:
