@@ -342,7 +342,7 @@ verify the service works as expected.
 
 [source]
 ----
-http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all/
+http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all
 ----
 
 NOTE: If the application has not been deployed yet, you might get a __502 Bad Gateway error webpage__. This 

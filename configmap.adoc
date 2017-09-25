@@ -130,7 +130,7 @@ service to very the database connection is working correctly.:
 
 [source]
 ----
-http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all/
+http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all
 ----
 
 If you check the new *Pod's* logs once it comes up, you should see no errors.
