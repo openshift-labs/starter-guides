@@ -6,6 +6,7 @@ vars:
   HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
   OCP_VERSION: "3.5"
   DISPLAY_SIMULATION_LINKS: false
+  SLIDES: "slideshare"
 modules:
   activate:
     - demos_msa-coolstore-overview
