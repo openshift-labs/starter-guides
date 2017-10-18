@@ -56,8 +56,8 @@ Once you have the tools downloaded, you will need to extract the contents:
 
 **Windows:**
 
-In order to extract a zip archive on windows, you will need a zip utility
-installed on your system.  With newer versions of windows (greater than XP),
+In order to extract a zip archive on Windows, you will need a zip utility
+installed on your system.  With newer versions of Windows (greater than XP),
 this is provided by the operating system.  Just right click on the downloaded
 file using file explorer and select to extract the contents.
 
@@ -88,7 +88,7 @@ The tar.gz file name needs to be replaced by the entire name that was downloaded
 
 **Windows:**
 
-Because changing your PATH on windows varies by version of the operating system,
+Because changing your PATH on Windows varies by version of the operating system,
 we will not list each operating system here.  However, the general workflow is
 right click on your computer name inside of the file explorer.  Select Advanced
 system settings. I guess changing your PATH is considered an advanced task? :)
