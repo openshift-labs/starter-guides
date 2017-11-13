@@ -322,7 +322,7 @@ image::pipeline-template.png[Pipeline Template]
 
 In order to start the pipeline that you created in a previous step, Go to
 *Builds* &rarr; *Pipelines* on the left side-bar. Click `nationalparks-pipeline`
-and click on *Start Build* to start the execution.  You can click on *View
+and click on *Start Pipeline* to start the execution.  You can click on *View
 Log* to take a look at the build logs as they progress through the pipeline or
 on *Build #N* to see the details of this specific pipeline execution as well as
 the pipeline definition using the
