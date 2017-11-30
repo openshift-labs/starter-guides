@@ -82,21 +82,16 @@ now, be sure to use the following values in their respective fields:
 * `MONGODB_DATABASE`: `mongodb`
 * `MONGODB_ADMIN_PASSWORD` : `mongodb`
 
+You need to add a label `app=nationalparks` to group both deployments as part of the 
+same application. Scroll to the bottom of the page and add this label.
+
+image::nationalparks-db-label.png[Label MongoDB]
+
 You can leave the rest of the values as their defaults, and then click
 *"Create"*. Then click *Continue to overview*. The MongoDB instance should
 quickly be deployed.
 
-
-image::mongo-group-db-1.png[Service Groups]
-
-You can group services in OpenShift Console in order to display related services
-together in one panel. Click on the chain icon on the right-top corner of the
-`nationalparks` service, choose `mongodb` from the drop-down list in the
-*Group Service to nationalparks* dialog and click on *OK*. The `nationalparks` and
- `mongodb` services are groups and displayed together.
-
-image::mongo-group-db-2.png[Service Groups]
-
+image::nationalparks-deployments.png[National parks deployments]
 
 #### Exercise: Wiring the Application and the Database
 
@@ -118,14 +113,14 @@ line.
 The command line takes a little less time, so let's use that option. First, find
 the name of the DC:
 
-[source]
+[source,bash]
 ----
 $ oc get dc
 ----
 
 Then, use the `oc env` command to set environment variables directly on the DC:
 
-[source]
+[source,bash]
 ----
 $ oc env dc nationalparks -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e MONGODB_DATABASE=mongodb -e MONGODB_SERVER_HOST=mongodb
 ----
@@ -133,14 +128,14 @@ $ oc env dc nationalparks -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e
 After you have modified the *DeploymentConfig* object, you can verify the
 environment variables have been added by viewing the YAML for it:
 
-[source]
+[source,bash]
 ----
 $ oc get dc nationalparks -o yaml
 ----
 
 You should see the following section:
 
-[source]
+[source,bash]
 ----
 - env:
   - name: MONGODB_USER
@@ -156,7 +151,7 @@ You should see the following section:
 You can also just ask OpenShift to tell you about the environment variables on
 the DC:
 
-[source]
+[source,bash]
 ----
 $ oc env dc/nationalparks --list
 # deploymentconfigs nationalparks, container nationalparks
@@ -172,7 +167,7 @@ magic happened. OpenShift decided that this was a significant enough change to
 warrant updating the internal version number of the *DeploymentConfiguration*. You
 can verify this by looking at the output of `oc get dc`:
 
-[source]
+[source,bash]
 ----
 NAME            REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb         1          1         1         config,image(mongodb:3.2)
@@ -184,7 +179,7 @@ Something that increments the version of a *DeploymentConfiguration*, by default
 causes a new deployment. You can verify this by looking at the output of `oc get
 rc`:
 
-[source]
+[source,bash]
 ----
 NAME              DESIRED   CURRENT   READY     AGE
 mongodb-1         1         1         0         24m
@@ -203,14 +198,14 @@ stood up a "new" instance.
 Now that we have a database deployed, we can again visit the `nationalparks` web
 service to query for data:
 
-[source]
+[source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all
 ----
 
 And the result?
 
-[source]
+[source,bash]
 ----
 []
 ----
@@ -221,14 +216,14 @@ application and then deployed the database. Nothing actually loaded anything
 
 The application provides an endpoint to do just that:
 
-[source]
+[source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/load
 ----
 
 And the result?
 
-[source]
+[source,bash]
 ----
 Items inserted in database: 2740
 ----
@@ -239,7 +234,7 @@ That's great. Our parks map should finally work!
 NOTE: There's some errors reported with browsers like firefox 54 that don't properly parse the resulting JSON. It's
 a browser problem, and the application is working properly. 
 
-[source]
+[source,bash]
 ----
 http://parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
 ----
@@ -257,7 +252,7 @@ for application portability across different environments.  The source file that
 performs the connection as well as creates the database schema can be viewed
 here:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 {% if PARKSMAP_PY %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/blob/{{NATIONALPARKS_VERSION}}/wsgi.py#L11-18
@@ -300,7 +295,7 @@ link:https://github.com/openshift-roadshow/parksmap-web/blob/{{PARKSMAP_VERSION}
 Fortunately, the command line provides a convenient way for us to manipulate
 labels. `describe` the `nationalparks` service:
 
-[source]
+[source,bash]
 ----
 $ oc describe route nationalparks
 
@@ -322,21 +317,21 @@ Endpoints:              10.1.9.8:8080
 
 You see that it only has one label: `app=nationalparks`. Now, use `oc label`:
 
-[source]
+[source,bash]
 ----
 $ oc label route nationalparks type=parksmap-backend
 ----
 
 You will see something like:
 
-[source]
+[source,bash]
 ----
 route "nationalparks" labeled
 ----
 
 If you check your browser now:
 
-[source]
+[source,bash]
 ----
 http://parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/
 ----

@@ -86,6 +86,15 @@ In the OpenShift web console on the *Pod*'s logs page, at the right you will see
 a "View Archive" link. Go ahead and click it. You will need to accept the SSL
 certificate.
 
+[NOTE]
+====
+If for any reason the link don't show up, you can access the kibana interface here:
+
+https://kibana.{{ ROUTER_ADDRESS }}
+
+Use the same credentials as with OpenShift
+====
+
 Clicking this link takes you to the Kibana web interface. This interface is
 secured with OpenShift's role-based access controls, so you can only see logs
 for projects that you have access to.

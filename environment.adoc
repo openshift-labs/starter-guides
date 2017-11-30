@@ -17,17 +17,17 @@ The infrastructure node is providing several services:
 {% if METRICS_ENABLED %}
 * Cluster metrics
 {% endif %}
-* GitLab
+* {{GIT_SERVER}} git server
 * This lab manual
 * The OpenShift Docker registry
 * The OpenShift router
-{% if ETHERPAD_ENABLED %}
+{% if ETHERPAD_ENABLED == 'true' %}
 * Etherpad
 {% endif %}
 
 Additionally, {{ NUM_USERS }} user accounts have been provisioned.
 
-{% if ETHERPAD_ENABLED %}
+{% if ETHERPAD_ENABLED == 'true' %}
 Before continuing, please visit visit the Etherpad at the following URL:
 
 ----
