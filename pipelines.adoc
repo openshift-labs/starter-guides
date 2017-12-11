@@ -284,23 +284,6 @@ to the *Live* route:
 $ oc label route nationalparks-live type=parksmap-backend
 ----
 
-{% if DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE %}
-### Exercise: Disable Automatic Deployment of nationalparks (dev)
-When we created the `nationalparks` build earlier in the workshop, OpenShift
-configured the deployment of the image to occur automatically whenever the
-`:latest` tag was updated.
-
-In our pipeline example, Jenkins is going to handle telling OpenShift to deploy
-the dev version of `nationalparks` if it builds successfully. In order to
-prevent two deployments, we will need to disable automatic deployments with a
-simple CLI statement:
-
-[source]
-----
-$ oc set triggers dc/nationalparks --from-image=nationalparks:latest --remove
-----
-
-{% endif %}
 
 ### Exercise: Create OpenShift Pipeline
 
