@@ -17,11 +17,11 @@ vars:
   MASTERS: "1"
   INFRA: "1"
   NODES: "24"
-  NUM_USERS: 100"
+  NUM_USERS: "100"
   DOCS_URL: "docs.openshift.com/container-platform"
   SUFFIX: "XX"
   USER_SUFFIX: "-XX"
-  GIT_SERVER: gitlab
+  GIT_SERVER: "gitlab"
   GITLAB_USER: "userXX"
   GITLAB_PASSWORD: "openshift3"
   GITLAB_URL_PREFIX: "gitlab-ce-workshop-infra"
