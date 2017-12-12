@@ -12,16 +12,16 @@ vars:
   METRICS_ENABLED: true
   LOGGING_ENABLED: true
   NFS_ENABLED: true
-  ETHERPAD_ENABLED: false
+  ETHERPAD_ENABLED: true
   ETHERPAD_URL_PREFIX: "etherpad-workshop-infra"
   MASTERS: "1"
   INFRA: "1"
-  NODES: "4"
-  NUM_USERS: "40"
+  NODES: "24"
+  NUM_USERS: 100"
   DOCS_URL: "docs.openshift.com/container-platform"
   SUFFIX: "XX"
   USER_SUFFIX: "-XX"
-  GIT_SERVER: gogs
+  GIT_SERVER: gitlab
   GITLAB_USER: "userXX"
   GITLAB_PASSWORD: "openshift3"
   GITLAB_URL_PREFIX: "gitlab-ce-workshop-infra"
