@@ -8,27 +8,30 @@ content:
 
 vars:
   ENVIRONMENT: "Amazon Web Services"
+  OPENSHIFT_VERSION: "3.6"
   USE_MAVEN: false
   METRICS_ENABLED: true
   LOGGING_ENABLED: true
   NFS_ENABLED: true
-  ETHERPAD_ENABLED: true
+  ETHERPAD_ENABLED: false
   ETHERPAD_URL_PREFIX: "etherpad-workshop-infra"
   MASTERS: "1"
   INFRA: "1"
-  NODES: "24"
-  NUM_USERS: "100"
-  DOCS_URL: "docs.openshift.com/container-platform"
-  SUFFIX: "XX"
-  USER_SUFFIX: "-XX"
-  GIT_SERVER: "gitlab"
-  GITLAB_USER: "userXX"
-  GITLAB_PASSWORD: "openshift3"
-  GITLAB_URL_PREFIX: "gitlab-ce-workshop-infra"
+  NODES: "4"
+  NUM_USERS: "50"
+  DOCS_URL: https://docs.openshift.com/container-platform/3.6
+  SUFFIX: "XY"
+  NO_USER_PROJECT: false
+  KIBANA_URL_PREFIX: "kibana"
+  GIT_SERVER: "gogs"
+  USER_SUFFIX: "-userXY"
+  GITLAB_USER: "userXY"
+  GITLAB_PASSWORD: "r3dh4t1"
+  GITLAB_URL_PREFIX: "gogs-roadshow"
   JAVA_BUILDER_PROPER: "JBoss EAP 7"
   JAVA_BUILDER_STRING: "jboss-eap70-openshift:1.4"
   USER_NAME: "userXX"
-  USER_PASSWORD: "openshift3"
+  USER_PASSWORD: "r3dh4t1!"
   PARKSMAP_IMAGENAME: "parksmap"
   PARKSMAP_VERSION: "1.2.0"
   PARKSMAP_PY: false
@@ -41,6 +44,8 @@ vars:
   DOWNLOAD_CLIENT_MAC: https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-v3.6.1-008f2d5-mac.zip
   DOWNLOAD_CLIENT_LIN64: https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-v3.6.1-008f2d5-linux-64bit.tar.gz
   OC_VERSION: "oc v3.6.1+008f2d5\nkubernetes v1.6.1+5115d708d7"
+  CONSOLE_ADDRESS: "master.ninja.openshiftworkshop.com:443"
+  ROUTER_ADDRESS: "apps.ninja.openshiftworkshop.com"
 
 modules:
   activate:
@@ -58,7 +63,7 @@ modules:
   - configmap
   - application-health
   - pipelines
-  - codechanges
+  - codechanges-gogs
   - templates
   - clustering
   - further-resources  
