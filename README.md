@@ -33,7 +33,7 @@ NOTE: You will need the following ENV values:
 
 * *WORKSHOPS_URLS*: Raw URL for a training. There's some trainings [here](https://github.com/osevg/workshopper-content/tree/master/_workshops)
 
-Depending on the workshop, you minght need additional ENV. These are defined per workshop. In the sample use, we define:
+Depending on the workshop, you might need additional ENV. These are defined per workshop. In the sample use, we define:
 * *CONSOLE_ADDRESS*: Address to the master server's console
 * *ROUTER_ADDRESS*: Wildcard DNS used for deployed apps
 * *DOCS_URL*: Link to the OpenShift documentation
