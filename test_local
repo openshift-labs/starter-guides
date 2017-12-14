@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+WORKSHOP=${1:-"training.yml"}
+
+if [[ $1 != -* ]]
+then
+  WORKSHOP=${1}
+  shift
+else
+  WORKSHOP="training.yml"
+fi
+
+docker run -ti --rm -v $(pwd):/content -p 8080:8080 \
+    -e CONTENT_URL_PREFIX='file:///content' \
+    -e WORKSHOPS_URLS="file:///content/_workshops/${WORKSHOP}" \
+    $@ \
+    docker.io/osevg/workshopper:latest
