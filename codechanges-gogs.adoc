@@ -16,7 +16,7 @@ In previous labs, you created a CI/CD Pipeline to automate build, test and deplo
 the `nationalparks` application. In this lab you can use the pipline webhook to
 trigger a pipeline execution every time there is a change in the `nationalparks` Gogs
 repository. In the OpenShift web console, navigate to your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` *Project*, and
-then mouse-over *Browse* and then *Pipelines*. Click the `nationalparks-pipeline` and
+then mouse-over *Builds* and then *Pipelines*. Click the `nationalparks-pipeline` and
 then *Configuration* tab.
 
 On this screen you will see the option to copy the *generic* webhook URL as shown

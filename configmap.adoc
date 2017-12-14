@@ -116,7 +116,7 @@ location in the container filesystem. Using the following command to mount the
 $ oc set volumes dc/nationalparks --add -m /deployments/config --configmap-name=nationalparks
 ----
 
-The above command makes the content of the configmap `ConfigMap`, which you
+The above command makes the content of the configmap `nationalparks`, which you
 created from a file, called `application.properties`, available in the
 `/deployments/config` directory. The `nationalparks` *DeploymentConfiguration*
 detects the configuration change, and automatically deploys the *Pod* with
@@ -135,7 +135,7 @@ service to very the database connection is working correctly.:
 
 [source,bash]
 ----
-http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all/
+http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all
 ----
 
 If you check the new *Pod's* logs once it comes up, you should see no errors.

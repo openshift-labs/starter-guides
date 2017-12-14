@@ -18,7 +18,7 @@ In some cases, applications may not have been designed to send all of their
 information to `STDOUT` and `STDERR`. In many cases, multiple local log files
 are used. While OpenShift cannot parse any information from these files, nothing
 prevents them from being created, either. In other cases, log information is
-sent to some external system using. Here, too, OpenShift does not prohibit these
+sent to some external system. Here, too, OpenShift does not prohibit these
 behaviors. If you have an application that does not log to `STDOUT`, either because it
 already sends log information to some "external" system or because it writes
 various log information to various files, fear not.
