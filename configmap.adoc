@@ -32,12 +32,7 @@ contains the database credentials:
 
 [source,bash,role=copypaste]
 ----
-{% if GIT_SERVER == 'gitlab' or GIT_SERVER == 'github' %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-dev.properties
-{% endif %}
-{% if GIT_SERVER == 'gogs' %}
-http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/src/{{NATIONALPARKS_VERSION}}/ose3/application-dev.properties
-{% endif %}
 ----
 
 NOTE: Verify that the contents of the file are correct. If you have downladed the file with Internet Explorer it might contain

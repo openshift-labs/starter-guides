@@ -135,12 +135,7 @@ and create a distinct *ConfigMap*. The file is located here:
 
 [source,bash,role=copypaste]
 ----
-{% if GIT_SERVER == 'gitlab' or GIT_SERVER == 'github' %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-live.properties
-{% endif %}
-{% if GIT_SERVER == 'gogs' %}
-http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/src/{{NATIONALPARKS_VERSION}}/ose3/application-live.properties
-{% endif %}
 ----
 
 Then, run the following command to create the live *ConfigMap*:
@@ -257,7 +252,7 @@ Similar to the link:databases[previous labs], populate the database by pointing 
 
 [source,bash]
 ----
-http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/load/
+http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/load
 ----
 
 NOTE: If the application has not been deployed yet, you might get a __502 Bad Gateway error webpage__. This 
