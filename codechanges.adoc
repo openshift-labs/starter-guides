@@ -9,7 +9,7 @@ remote systems in order to trigger builds. By pointing the code repository's
 hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
-{% if GIT_HOST == "github" %}
+{% if GIT_SERVER == "github" %}
 #### Getting the webhook URL
 
 Go to **Builds** -> **Builds** -> **Configuration** and there in the

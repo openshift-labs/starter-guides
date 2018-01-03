@@ -133,7 +133,7 @@ to use *ConfigMaps* in a previous lab. Similarly, we will use a *ConfigMap* for
 `nationalparks-live`. Download the live properties file to your local machine
 and create a distinct *ConfigMap*. The file is located here:
 
-{% if GIT_HOST == "github" %}
+{% if GIT_SERVER == "github" %}
 [source,role=copypaste]
 ----
 https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/ose3/application-live.properties

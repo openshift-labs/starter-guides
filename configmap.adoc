@@ -30,7 +30,7 @@ You can create a `ConfigMap` by pointing at a file containing the application
 configuration. Download this properties file to your local machine which
 contains the database credentials: 
 
-{% if GIT_HOST == "github" %}
+{% if GIT_SERVER == "github" %}
 [source,role=copypaste]
 ----
 https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/ose3/application-dev.properties
