@@ -57,17 +57,18 @@ Because the `nationalparks` application is a back-end to serve data that our
 existing front-end will consume, we are going to build it inside the existing
 `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project. And, we will do it from the web console.
 
-#### Using application code on embedded GitLab
+#### Using application code on embedded Git server
 
 OpenShift can work with any accessible Git repository. This could be GitHub,
 GitLab, or any other server that speaks Git. You can even register webhooks in
 your Git server to initiate OpenShift builds triggered by any update to the
 application code!
 
+{% if GIT_SERVER == 'gitlab' or GIT_SERVER == 'github' %}
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
 ----
@@ -76,6 +77,22 @@ http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tr
 ====
 Your GitLab credentials are: *{{GITLAB_USER}}/{{GITLAB_PASSWORD}}*
 ====
+{% endif %}
+
+{% if GIT_SERVER == 'gogs%}
+The repository that we are going to use is already cloned in the internal Gogs repository
+and located at the following URL:
+
+[source,role=copypaste]
+----
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/src/{{NATIONALPARKS_VERSION}}
+----
+
+[NOTE]
+====
+Your Gogs credentials are the same as your openshift credentials
+====
+{% endif %}
 
 Later in the lab, we want you to make a code change and then rebuild your
 application. This is a fairly simple Spring framework Java application.
@@ -91,11 +108,11 @@ click the *"Add to Project"* button. You will see a list of categories of
 runtimes, and other types of components that you can deploy and run on OpenShift.
 
 Type _"jdk"_ into the search box, and then select the item titled
-`redhat-openjdk18-openshift`.
+`Red Hat OpenJDK 8` that says `Builds source code`.
 
 image::ocp-runtimes.png[Runtimes]
 
-After you click `redhat-openjdk18-openshift`, on the next screen you will need
+After you click `Red Hat OpenJDK 8`, on the next screen you will need
 to enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
 
@@ -106,8 +123,6 @@ http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks.gi
 
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
-
-image::new-national-parks-1.png[Runtimes]
 
 These labs were written against specific points in time for these
 applications. With Git as our version control system (VCS), we are using the
@@ -131,7 +146,7 @@ image::new-national-parks-2.png[Runtimes]
 You can then hit the button labeled *"Create"*. Then click *Continue to
 overview*. You will see this in the web console:
 
-[source]
+[source,bash]
 ----
 Build nationalparks, #1 Running. A new deployment will be created automatically
 once the build completes.  a few seconds ago View Log
@@ -144,14 +159,14 @@ the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
-[source]
+[source,bash]
 ----
 $ oc get builds
 ----
 
 You'll see output like:
 
-[source]
+[source,bash]
 ----
 NAME              TYPE      FROM          STATUS     STARTED              DURATION
 nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
@@ -159,7 +174,7 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
 
 You can also view the build logs with the following command:
 
-[source]
+[source,bash]
 ----
 $ oc logs -f builds/nationalparks-1
 ----
@@ -175,7 +190,7 @@ After the build has completed and successfully:
 In the end, when issuing the `oc get pods` command, you will see that the build Pod
 has finished (exited) and that an application *Pod* is in a ready and running state:
 
-[source]
+[source,bash]
 ----
 NAME                    READY     STATUS      RESTARTS   AGE
 nationalparks-1-tkid3   1/1       Running     3          2m
@@ -187,14 +202,14 @@ If you look again at the web console, you will notice that, when you create the
 application this way, OpenShift also creates a *Route* for you. You can see the
 URL in the web console, or via the command line:
 
-[source]
+[source,bash]
 ----
 $ oc get routes
 ----
 
 Where you should see something like the following:
 
-[source]
+[source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
 nationalparks   nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}             nationalparks   8080-tcp
@@ -203,7 +218,7 @@ parksmap        parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRES
 
 In the above example, the URL is:
 
-[source]
+[source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
 ----
@@ -213,7 +228,7 @@ However, it can still be used with a browser. All back ends that work with the p
 front end are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
 ----
@@ -222,14 +237,14 @@ WARNING: The trailing slash is *required*.
 
 You will see a simple JSON string:
 
-[source]
+[source,json]
 ----
 {"id":"nationalparks","displayName":"National Parks","center":{"latitude":"47.039304","longitude":"14.505178"},"zoom":4}
 ----
 
 Earlier we said:
 
-[source]
+[source,bash]
 ----
 This is a Java Spring Boot application that performs 2D geo-spatial queries
 against a MongoDB database

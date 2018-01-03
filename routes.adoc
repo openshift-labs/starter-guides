@@ -27,7 +27,7 @@ the "Create Route" button associated with the service.
 
 First we want to verify that we don't already have any existing routes:
 
-[source]
+[source,bash]
 ----
 $ oc get routes
 No resources found.
@@ -35,7 +35,7 @@ No resources found.
 
 Now we need to get the *Service* name to expose:
 
-[source]
+[source,bash]
 ----
 $ oc get services
 
@@ -45,7 +45,7 @@ parksmap   172.30.169.213   <none>        8080/TCP   5h
 
 Once we know the *Service* name, creating a *Route* is a simple one-command task:
 
-[source]
+[source,bash]
 ----
 $ oc expose service parksmap
 route "parksmap" exposed
@@ -53,7 +53,7 @@ route "parksmap" exposed
 
 Verify the *Route* was created with the following command:
 
-[source]
+[source,bash]
 ----
 $ oc get route
 NAME       HOST/PORT                                              PATH      SERVICES   PORT       TERMINATION

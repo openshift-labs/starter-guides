@@ -30,16 +30,16 @@ You can create a `ConfigMap` by pointing at a file containing the application
 configuration. Download this properties file to your local machine which
 contains the database credentials: 
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
-http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-dev.properties
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-dev.properties
 ----
 
 NOTE: Verify that the contents of the file are correct. If you have downladed the file with Internet Explorer it might contain
 incorrect chars or different charset. Try to use "Google Chrome", "Firefox" or "curl".
 
 Create a `ConfigMap` using the following command in the `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project:
-[source]
+[source,bash]
 ----
 $ oc create configmap nationalparks --from-file=application.properties=./application-dev.properties
 ----
@@ -53,7 +53,7 @@ will be provided to the application container as a properties file called
 List and verify that the `ConfigMap` is created successfully containing the
 database credentials:
 
-[source]
+[source,bash]
 ----
 $ oc describe configmap nationalparks
 
@@ -70,7 +70,7 @@ application.properties:	123 bytes
 
 You can review the content of the `ConfigMap` using the `oc get` command:
 
-[source]
+[source,bash]
 ----
 $ oc get configmap nationalparks -o yaml
 
@@ -106,13 +106,13 @@ properties file called `application.properties` which should reside in a specifi
 location in the container filesystem. Using the following command to mount the
 `ConfigMap` inside the `nationalparks` pod:
 
-[source]
+[source,bash]
 ----
 $ oc set volumes dc/nationalparks --add -m /deployments/config --configmap-name=nationalparks
 ----
 
 The above command makes the content of the configmap `nationalparks`, which you
-created from a file called `application.properties`, available in the
+created from a file, called `application.properties`, available in the
 `/deployments/config` directory. The `nationalparks` *DeploymentConfiguration*
 detects the configuration change, and automatically deploys the *Pod* with
 the new configuration.
@@ -120,7 +120,7 @@ the new configuration.
 Also, as we have configured `nationalparks` through `ConfigMap`, you can remove
 the database environment variables set in the link:databases[previous labs]:
 
-[source]
+[source,bash]
 ----
 $ oc env dc/nationalparks MONGODB_USER- MONGODB_PASSWORD- MONGODB_DATABASE- MONGODB_SERVER_HOST-
 ----
@@ -128,7 +128,7 @@ $ oc env dc/nationalparks MONGODB_USER- MONGODB_PASSWORD- MONGODB_DATABASE- MONG
 You have now externalized `nationalparks` configuration. Visit the `nationalparks` web
 service to very the database connection is working correctly.:
 
-[source]
+[source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all
 ----
