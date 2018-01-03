@@ -4,7 +4,11 @@
 |===
 |*Length*|~3 min
 |*Difficulty*|Easy
+{% if SLIDES == "google" %}
 |*Slides*|https://docs.google.com/presentation/d/1bt4k9yB0wDOj0d5WzDCWqftPxIizQ7f5S15LysEGFyQ/edit#slide=id.g1b05a1839c_6_67[Google Slide]
+{% else %}
+|*Slides*|https://www.slideshare.net/secret/1e8Yow4e35IA8w/2[SlideShare]
+{% endif %}
 |*Video*|NA
 {% if DISPLAY_SIMULATION_LINKS %}
 |*Simulation*|NA
