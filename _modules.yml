@@ -60,9 +60,6 @@ config:
     - name: EXPLORE_PROJECT_NAME
       desc: Project the user is supposed to work with
       value: project
-    - name: SUFFIX
-      desc: Username suffix
-      value: XY
     - name: PARKSMAP_IMAGENAME
       desc: Docker image name for the parksmap application
       value: <image name>
@@ -114,6 +111,9 @@ config:
     - name: OPENSHIFT_VERSION      
       desc: OpenShift version used in the workshop
       value: "3.5"
+    - name: STORAGE_TYPE
+      desc: Should they be using ephemeral or persistant storage?
+      value: ephemeral
 
 modules:
   environment:

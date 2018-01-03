@@ -57,9 +57,9 @@ again click the *"Add to Project"* button. Click the *Data Stores* category.
 image::mongodb-datastores.png[Data Stores]
 
 Type `mongodb` in the search box, and then scroll down to find the *MongoDB
-(Ephemeral)* template, and click it.  You will notice that there are several
+({{STORAGE_TYPE}})* template, and click it.  You will notice that there are several
 MongoDB templates available, some of which come with application servers
-pre-configured.  We just need a database, though, so the ephemeral Mongo
+pre-configured.  We just need a database, though, so the {{STORAGE_TYPE}} Mongo
 template is what you should choose.
 
 image::ocp-mongodb-template.png[MongoDB]
