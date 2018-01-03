@@ -10,7 +10,7 @@ the popular https://jenkins.io/doc/book/pipeline/overview/[Jenkins pipelines] in
 the platform and enables defining truly complex workflows directly within OpenShift.
 
 In a previous lab, you deployed the `nationalparks` application using the
-https://{{DOCS_URL}}/latest/architecture/core_concepts/builds_and_image_streams.html#source-build[source,bash-to-Image (S2I)]
+https://{{DOCS_URL}}/latest/architecture/core_concepts/builds_and_image_streams.html#source-build[Source-to-Image (S2I)]
 mechanism. S2I already provides build automation by automatically running builds
 when source code changes, or an underlying image changes. Deployments are also automated
 by S2I and can be triggered when the image they are based on changes. In this lab,
