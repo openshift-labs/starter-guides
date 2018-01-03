@@ -41,8 +41,13 @@ instances to the service until they pass the readiness checks, and will ensure
 that unhealthy instances are restarted (if they fail the liveness checks).
 
 Click *Applications* &rarr; *Deployments* on the left-side bar. Click
-`nationalparks`. You will see the warning about health checks, with a link to
-click in order to add them. Click *Add health checks* now.
+`nationalparks`. Click on `Configuration`.
+You will see the warning about health checks, with a link to
+click in order to add them.
+
+image::healthchecks_warning.png[Healthchecks warning,500,align="center"]
+
+Click *Add health checks* now.
 
 You will want to click both *Add Readiness Probe* and *Add Liveness Probe* and
 then fill them out as follows:

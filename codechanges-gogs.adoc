@@ -9,46 +9,12 @@ remote systems in order to trigger builds. By pointing the code repository's
 hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
-{% if GIT_HOST == "github" %}
-#### Getting the webhook URL
-
-Go to **Builds** -> **Builds** -> **Configuration** and there in the
-**Triggers** section there is **Github webhook URL** copy the URL to be used
-for configuring the webhook at Github.
-
-
-#### Setting up the webhook
-
-Open the **Github** repository page and go to the **Settings** tab and then to
-**Webhooks** in the left menu. Click **Add webhook** and fill the form
-
-* **Payload URL** is the URL copied from OpenShift
-* **Content type** has to be *application/json*
-* **Secret** should be empty
-* **Disable SSL verification** as the cluster does not have valid SSL
-certificates
-
-And click the **Add webhook** button.
-
-#### Making a code change
-
-Go back to the **Code** tab in the same repository and open the **wsgi.py**
-file. Click the pen icon in the top right corner to edit the file.
-
-Go to the line `35` and change the **displayName**.
-
-Scroll down to the bottom of the page and click **Commit changes**.
-
-#### Validation on OpenShift
-
-{% else %}
-
-#### Exercise: Configuring GitLab Web Hooks
+#### Exercise: Configuring Gogs Web Hooks
 
 {% if modules.pipelines %}
 In previous labs, you created a CI/CD Pipeline to automate build, test and deployment of
 the `nationalparks` application. In this lab you can use the pipline webhook to
-trigger a pipeline execution every time there is a change in the `nationalparks` GitLab
+trigger a pipeline execution every time there is a change in the `nationalparks` Gogs
 repository. In the OpenShift web console, navigate to your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` *Project*, and
 then mouse-over *Builds* and then *Pipelines*. Click the `nationalparks-pipeline` and
 then *Configuration* tab.
@@ -69,7 +35,7 @@ image::ocp-webhook1.png[Webhook]
 
 
 Once you have the URL copied to your clipboard, navigate to the code repository
-that you have on your local GitLab:
+that you have on your local Gogs:
 
 [source,bash,role=copypaste]
 ----
@@ -82,45 +48,44 @@ http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks
 
 [NOTE]
 ====
-The credentials for this GitLab instance are:
+The credentials for this Gogs instance are:
 
 Username: {{GITLAB_USER}}
 
 Password: {{GITLAB_PASSWORD}}
 ====
 
-Click the Settings link on the top right of the screen, and then click "Integrations":
+Click the Settings link on the top right of the screen:
 
-image::ocp-webhook2.png[Webhook]
+image::gogs-ocp-webhook2.png[Webhook]
+
+Click on webhooks, and the on `Add Webhook` button.
+
+image::gogs-ocp-webhook3.png[Webhook]
 
 In the next screen, paste your link into the "URL" field. You can leave the
 secret token field blank -- the secret is already in the URL and does not need
-to be in the payload.
+to be in the payload, or copy it from the URL.
 
-image::ocp-webhook3.png[Webhook]
-
-Scroll to the bottom of the page. Make sure you *un-check* the SSL verification
-box. Remember that OpenShift's API is not presenting an SSL certificate signed
-by a known/trusted authority. Without *un-checking* the verification box, the
-webhook will fail.
+Change the `Content Type` to `application/x-www-form-urlencoded`.
 
 Finally, click on "Add webhook".
 
-image::ocp-webhook4.png[Webhook]
+image::gogs-ocp-webhook4.png[Webhook]
 
-Boom! From now on, every time you commit new source code to your GitLab
+Boom! From now on, every time you commit new source code to your Gogs
 repository, a new build and deploy will occur inside of OpenShift.  Let's try
 this out.
 
-#### Exercise: Using GitLab Web Hooks
+#### Exercise: Using Gogs Web Hooks
 
 {% if PARKSMAP_PY %}
 Be sure you return to the proper tag in the git repository:
 
 *link:http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[]*
 
-Click "Project" at the top of the GitLab page, and then "Files" towards the
-middle of the page. This is GitLab's repository view. Make sure that the
+Click "Project" at the top of the Gogs page, and then "Files" towards the
+middle of the page. This is Gogs's repository view. Make sure that the
 drop-down menu at the upper right is set for the `1.0.0` branch. Navigate to the
 root path and click on the `wsgi.py` file.
 
@@ -145,8 +110,8 @@ To
 
 {% else %}
 
-Click "Project" at the top of the GitLab page, and then "Files" towards the
-middle of the page. This is GitLab's repository view. Make sure that the
+Click "Project" at the top of the Gogs page, and then "Files" towards the
+middle of the page. This is Gogs's repository view. Make sure that the
 drop-down menu at the upper right is set for the `{{NATIONALPARKS_VERSION}}` branch. Navigate to the
 following path:
 
@@ -160,7 +125,7 @@ Then click on the `BackendController.java` file.
 Once you have the file on the screen, click the edit button in the top right
 hand corner as shown here:
 
-image::ocp-webhook5.png[Webhook]
+image::gogs-ocp-webhook5.png[Webhook]
 
 Change line number 20:
 
@@ -181,7 +146,6 @@ return new Backend("nationalparks","OpenShift National Parks", new Coordinates("
 Click on Commit changes at the bottom of the screen. Feel free to enter a commit
 message.
 
-{% endif %}
 
 {% if modules.pipelines %}
 

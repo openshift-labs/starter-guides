@@ -62,6 +62,9 @@ You can customize the Jenkins properties such as service name, admin password, m
 allocation, etc through the parameters in the web console. We can leave all of
 the default values, so just click on *Create* to deploy Jenkins.
 
+It will ask you for confirmation as Jenkins will grant permissions to the Jenkins service account.
+Click `Create Anyway`.
+
 OpenShift deploys a Jenkins pod and also creates a service and route for the
 deployed container.
 
@@ -84,24 +87,12 @@ Click *Allow selected permissions*.
 
 image::pipeline-jenkins-console.png[Jenkins Console]
 
-The OpenShift Jenkins plugin uses the OpenShift REST API in order to integrate
-into various OpenShift operations. Since we want Jenkins to be able to do more
-than just look at our project, we will need to grant additional permissions. A
-Jenkins service account was created automatically when deploying Jenkins via the
-template. Run the following CLI command to allow the Jenkins service account to
-retrieve information and invoke action in OpenShift:
-
-[source]
-----
-$ oc policy add-role-to-user edit -z jenkins
-----
-
 ### Exercise: Remove Dev from `parksmap`
 Since we are going to be replacing the current `nationalparks` application with
 a *Live* version, we should remove the *Dev* version from the `parksmap` by
 taking away the *Route* label:
 
-[source]
+[source,bash]
 ----
 $ oc label route nationalparks type-
 ----
@@ -123,7 +114,11 @@ Use the following values in their respective fields:
 * MongoDB Connection Username : `mongodb`
 * MongoDB Connection Password : `mongodb`
 * MongoDB Database Name: `mongodb`
-* MongoB Admin Password : `mongodb`
+* MongoDB Admin Password : `mongodb`
+
+Add the following label
+
+* app: nationalparks-live
 
 You can leave the rest of the values as their defaults, and then click
 *Create*. Then click *Continue to overview*. The MongoDB instance should
@@ -138,14 +133,14 @@ to use *ConfigMaps* in a previous lab. Similarly, we will use a *ConfigMap* for
 `nationalparks-live`. Download the live properties file to your local machine
 and create a distinct *ConfigMap*. The file is located here:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
-http://gitlab-ce-workshop-infra.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-live.properties
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-live.properties
 ----
 
 Then, run the following command to create the live *ConfigMap*:
 
-[source]
+[source,bash]
 ----
 $ oc create configmap nationalparks-live --from-file=application.properties=./application-live.properties
 ----
@@ -169,7 +164,7 @@ changing and deploying *Dev* without affecting the *Live* environment. In
 order to achieve that, you will create a new Docker image tag using the CLI.
 This new tag will be what the *Live* deployment will look for changes to:
 
-[source]
+[source,bash]
 ----
 $ oc tag nationalparks:latest nationalparks:live
 ----
@@ -239,19 +234,12 @@ Deploying the `nationalparks-live` image through the UI did not utilize the
 properties file. Since you have already created the *ConfigMap*, all you have to
 do is use the `oc set volumes` command to put it in the right place:
 
-[source]
+[source,bash]
 ----
 $ oc set volumes dc/nationalparks-live --add -m /deployments/config --configmap-name=nationalparks-live
 ----
 
 {% endif %}
-
-#### Group Services
-Group the *Live* services
-by clicking on the *Group Service* on the right side of *NATIONALPARKS LIVE*
-container and choosing `mongodb-live` from the drop-down list.
-
-image::pipeline-live.png[National Parks Live]
 
 #### Add Route
 If you look at the web console, you will notice that, when you create the
@@ -262,9 +250,9 @@ then *Create* to create a route with the default values.
 Similar to the link:databases[previous labs], populate the database by pointing your browser to the
 `nationalparks-live` route url:
 
-[source]
+[source,bash]
 ----
-http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/load/
+http://nationalparks-live-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/load
 ----
 
 NOTE: If the application has not been deployed yet, you might get a __502 Bad Gateway error webpage__. This 
@@ -279,7 +267,7 @@ deployments to the *Dev* container does not disrupt the `parksmap` application.
 You can do that by removing the `type` label from the *Dev* route and adding it
 to the *Live* route:
 
-[source]
+[source,bash]
 ----
 $ oc label route nationalparks-live type=parksmap-backend
 ----
@@ -295,7 +283,7 @@ the dev version of `nationalparks` if it builds successfully. In order to
 prevent two deployments, we will need to disable automatic deployments with a
 simple CLI statement:
 
-[source]
+[source,bash]
 ----
 $ oc set triggers dc/nationalparks --from-image=nationalparks:latest --remove
 ----
@@ -315,10 +303,14 @@ In order to create the pipeline, click on the *Add to project* button,
 find the `dev-live-pipeline` template, and click on it. Specify the project name
 and click on *Create*
 
-NOTE: Specify the name of the project (e.g. `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}`) where
-`nationalparks` *Dev* and *Live* containers are deployed.
-
 image::pipeline-template.png[Pipeline Template]
+
+You will need to specify:
+
+* the name of the project (e.g. `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}`) where
+`nationalparks` *Dev* and *Live* containers are deployed.
+* Label 
+** app: nationalparks-live 
 
 In order to start the pipeline that you created in a previous step, Go to
 *Builds* &rarr; *Pipelines* on the left side-bar. Click `nationalparks-pipeline`
@@ -340,7 +332,7 @@ Pipeline execution will pause after running automated tests against the *Dev*
 container. Visit the `nationalparks` *Dev* web service to query for data and
 verify the service works as expected.
 
-[source]
+[source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all
 ----

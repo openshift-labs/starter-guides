@@ -1,7 +1,7 @@
 ---
 id: roadshow
 name: Roadshow
-revision: ocp_3_5
+revision: ocp_3_6
 
 content:
   url: https://raw.githubusercontent.com/osevg/workshopper-content/master
@@ -21,6 +21,7 @@ vars:
   DOCS_URL: "docs.openshift.com/container-platform"
   SUFFIX: "XX"
   USER_SUFFIX: "-XX"
+  GIT_SERVER: "gitlab"
   GITLAB_USER: "userXX"
   GITLAB_PASSWORD: "openshift3"
   GITLAB_URL_PREFIX: "gitlab-ce-workshop-infra"
@@ -36,6 +37,10 @@ vars:
   EXPLORE_PROJECT_NAME: "explore"
   DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE: true
   MW_NAME: "eap"
+  DOWNLOAD_CLIENT_WINDOWS: https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-v3.6.1-008f2d5-windows.zip
+  DOWNLOAD_CLIENT_MAC: https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-v3.6.1-008f2d5-mac.zip
+  DOWNLOAD_CLIENT_LIN64: https://github.com/openshift/origin/releases/download/v3.6.1/openshift-origin-client-tools-v3.6.1-008f2d5-linux-64bit.tar.gz
+  OC_VERSION: "oc v3.6.1+008f2d5\nkubernetes v1.6.1+5115d708d7"
 
 modules:
   activate:

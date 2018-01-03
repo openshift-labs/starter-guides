@@ -21,14 +21,14 @@ account, we can do interesting things.
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll learn why soon!
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 $ oc project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 ----
 
 Then:
 
-[source]
+[source,bash]
 ----
 $ oc policy add-role-to-user view -z default
 ----
@@ -36,7 +36,7 @@ $ oc policy add-role-to-user view -z default
 The `oc policy` command above is giving a defined _role_ (`view`) to a user. But
 we are using a special flag, `-z`. What does this flag do? From the `-h` output:
 
-[source]
+[source,bash]
 ----
 -z, --serviceaccount=[]: service account in the current namespace to use as a user
 ----
@@ -47,20 +47,20 @@ entire string, which, in this case, is
 
 [NOTE]
 ====
-The `-z` flag will only work for service accounts in the *current* namespace.
-Beware of this if you attempt to use it in the future.
+The `-z` flag will only work for service accounts in the *current* project.
+If you're referring to a service account in a different project, use the `-n <project>`switch.
 ====
 
 Now that the default *Service Account* has **view** access, it can query the API
 to see what resources are within the *Project*. This also has the added benefit
-of supressing the error message! Although, in reality, we fixed the application.
+of suppressing the error message! Although, in reality, we fixed the application.
 
 ### Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
 access to your `explore` project using the following command:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
 $ oc policy add-role-to-user view user{{SUFFIX}}
 ----
