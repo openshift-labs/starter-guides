@@ -4,6 +4,6 @@ services:
   - docker
 
 script:
-  - docker run --name content -d -p 8080:8080 -e WORKSHOPS_URLS="https://raw.githubusercontent.com/osevg/workshopper-content/master/_workshops/training.yml" osevg/workshopper
+  - docker run --name content -d -p 8080:8080 -e WORKSHOPS_URLS="https://raw.githubusercontent.com/osevg/workshopper-content/$TRAVIS_BRANCH/_workshops/training.yml" osevg/workshopper
   - sleep 30
   - curl -vL http://127.0.0.1:8080/api/workshops
