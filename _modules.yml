@@ -70,7 +70,7 @@ config:
       desc: The user suffix
       value: -userXY
     - name: GIT_SERVER
-      desc: Git server to use (Possible values: github,gitlab,gogs)
+      desc: "Git server to use (Possible values: github,gitlab,gogs)"
       value: gitlab
     - name: GITLAB_URL_PREFIX
       desc: URL of the Gitlab instance to use
