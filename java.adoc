@@ -79,7 +79,7 @@ Your GitLab credentials are: *{{GITLAB_USER}}/{{GITLAB_PASSWORD}}*
 ====
 {% endif %}
 
-{% if GIT_SERVER == 'gogs%}
+{% if GIT_SERVER == 'gogs' %}
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 

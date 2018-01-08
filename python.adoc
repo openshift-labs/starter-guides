@@ -65,7 +65,7 @@ GitLab, or any other server that speaks Git. You can even register webhooks in
 your Git server to initiate OpenShift builds triggered by any update to the
 application code!
 
-{% if GIT_HOST == "github" %}
+{% if GIT_SERVER == "github" %}
 The repository that we are going to use is available at Github.com
 
 https://github.com/openshift-roadshow/nationalparks-py[https://github.com/openshift-roadshow/nationalparks-py]
@@ -92,7 +92,7 @@ from a GitHub/GitLab repository into a Docker image, we can also use the web
 console to do the same thing. Similar to how we used "Add to project" before
 with a Docker-formatted image, we can do the same for specifying a source code
 repository.
-{% if GIT_HOST == "github" %} You have already forked the Github repository so
+{% if GIT_SERVER == "github" %} You have already forked the Github repository so
 let's use it with a simple Python S2I image.
 {% else %} Since for this lab you have your own GitLab repository let's use it
 with a simple Python S2I image.
@@ -113,7 +113,7 @@ the Git repository URL, enter:
 
 [source,bash]
 ----
-{% if GIT_HOST == "github" %}
+{% if GIT_SERVER == "github" %}
 https://github.com/(your Github username)/nationalparks-py.git
 {% else %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py.git

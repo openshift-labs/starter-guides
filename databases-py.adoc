@@ -230,7 +230,7 @@ here:
 [source,bash,role=copypaste]
 ----
 {% if PARKSMAP_PY %}
-{% if GIT_HOST == "github" %}
+{% if GIT_SERVER == "github" %}
 https://github.com/openshift-roadshow/nationalparks-py/blob/master/wsgi.py#L11-L18
 {% else %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/blob/{{NATIONALPARKS_VERSION}}/wsgi.py#L11-18
