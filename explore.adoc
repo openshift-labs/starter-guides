@@ -42,7 +42,7 @@ $ oc login {{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
 ====
 
 Once you issue the `oc login` command, you will be prompted for the username and
-password combination for your user account:
+password combination for your user account.  Use the username and password combination provided to you by the instructor of this workshop:
 
 [source,bash,role=copypaste]
 ----
@@ -75,8 +75,6 @@ their content in isolation from other communities. Each project has its own
 resources, policies (who can or cannot perform actions), and constraints (quotas
 and limits on resources, etc). Projects act as a "wrapper" around all the
 application services and endpoints you (or your teams) are using for your work.
-For this first lab, we are going to use a project named *smoke* that has been
-created and populated with an application for you.
 
 During this lab, we are going to use a few different commands to make sure that
 things in the environment are working as expected.  Don't worry if you don't
@@ -133,12 +131,12 @@ Password: {{USER_PASSWORD}}
 image::ocp-login.png[OpenShift Login Screen]
 
 After you have authenticated to the web console, you will be presented with a
-list of projects that your user has permission to work with. You will see
+list of items that you can add to your project.  This is called the service catalog. You will see
 something that looks like the following image:
 
-image::explore-webconsole1.png[Web Console]
+image::explore-webconsole1sc.png[Web Console]
 
-Click on the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project. When you click on the
+Click on the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project on the right hand side of the screen. When you click on the
 *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project, you will be taken to the project overview page
 which will list all of the routes, services, deployments, and pods that you have
 running as part of your project. There's nothing there now, but that's about to
