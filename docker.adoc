@@ -17,7 +17,7 @@ Return to the web console:
 *link:https://{{CONSOLE_ADDRESS}}[]*
 
 Find your *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project and click it. Next,
-click on the `Deploy Image` in the *"Add to Project"* drop down.
+click on the `Deploy Image` in the *"Add to Project"* drop down.  This will open a dialog that will allow you to specify the information for the image you want to deploy.
 
 There are several options, but we are only concerned with "Deploy Image". Click
 it. We will learn more about image streams and image stream tags later. For now,
@@ -30,7 +30,7 @@ docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 
 Your screen will end up looking something like this:
 
-image::parksmap-image.png[Explore Project]
+image::parksmap-image37.png[Explore Project]
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
 out to the Docker registry specified and interrogate the image. You then are
@@ -39,13 +39,13 @@ and etc. -- which we will learn about later.
 
 Make sure to have the correct application name:
 
-image::parksmap-image-options.png[Explore Project]
+image::parksmap-image-options-37.png[Explore Project]
 
-Hit the blue "Create" button at the bottom of the screen and then click the
-"Continue to overview" link. Take a moment to look at the various messages that
+Hit the blue "Deploy" button at the bottom of the dialog and then click the
+"Continue to overview" link or the "Close" button. Take a moment to look at the various messages that
 you now see on the overview page.
 
-WINNING! These few steps are the only ones you need to run to get a "vanilla"
+WINNING! These few steps are the only ones you need to run to get a
 Docker-formatted image deployed on OpenShift. This should work with any
 Docker-formatted image that follows best practices, such as defining an EXPOSE
 port, not needing to run specifically as the *root user* or other user name, and
@@ -54,14 +54,11 @@ a single non-exiting CMD to execute on start.
 ### Background: Containers and Pods
 
 Before we start digging in we need to understand how containers and *Pods* are
-related. Given the morning sessions where we discussed the OpenShift platform
-and how it uses containers and *Pods*, we will not be covering the background on
-these technologies in this lab.  Instead, we will dive right in and start using
-them.
+related. We will not be covering the background on these technologies in this lab but if you have questions please inform the instructor.  Instead, we will dive right in and start using them.
 
 In OpenShift, the smallest deployable unit is a *Pod*. A *Pod* is a group of one or
 more Docker containers deployed together and guaranteed to be on the same host.
-From the doc:
+From the official OpenShift documentation:
 
 [quote]
 __
@@ -140,7 +137,7 @@ urceVersion":"36222"}}
 ----
 
 The web interface also shows a lot of the same information on the *Pod* details
-page. If you click in the *Pod* circle, and then click the *Pod* name, you will
+page. If you click in the *Pod* circle, you will
 find the details page. You can also get there by clicking "Applications", then
 "Pods", at the left, and then clicking the *Pod* name.
 
