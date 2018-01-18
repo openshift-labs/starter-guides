@@ -83,8 +83,10 @@ Fortunately, OpenShift provides an optional system for log aggregation that uses
 Fluentd, Elasticsearch, and Kibana (EFK).
 
 In the OpenShift web console on the *Pod*'s logs page, at the right you will see
-a "View Archive" link. Go ahead and click it. You will need to accept the SSL
+a "View Archive" link. Go ahead and click it. If you do not see the "archive" link, ensure that you have at least two pods running.  If you don't, use the information you learned in a previous lab to scale up to two instances of the application.  You will need to accept the SSL
 certificate.
+
+image::overview-view-log-archive.png[View Logs]
 
 [NOTE]
 ====
@@ -111,7 +113,7 @@ kubernetes.pod_name:"parksmap-1-hx0kv" AND kubernetes.namespace_name:"{{EXPLORE_
 ----
 
 If you want to see all the historical logs for this *Project*, simply remove the
-pod name reference and click the magnifying glass.
+pod name reference and click the magnifying glass or press the enter key.
 
 [source,bash,role=copypaste]
 ----
@@ -125,7 +127,7 @@ log system is keeping a historical record.
 
 image::kibana-parksmap-headers.png[Kibana Interface]
 
-Try the following search string:
+Try the following search string ensuring that you use the correct name for your project:
 
 [source,bash,role=copypaste]
 ----
@@ -133,4 +135,4 @@ kubernetes.namespace_name:"{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" AND message:
 ----
 {% endif %}
 
-Service account? What's that?
+You may have noticed an error that mentions a service account. What's that?  Never fear, we will cover that shortly.
