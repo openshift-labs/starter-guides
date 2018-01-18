@@ -23,7 +23,9 @@ create a *Route*.
 
 Fortunately, creating a *Route* is a pretty straight-forward process.  You simply
 `expose` the *Service* via the command line. Or, via the web console, just click
-the "Create Route" button associated with the service.
+the "Create Route" button associated with the service and choose the defaults as highlighted in the following image:
+
+image::create-route-37.png[Create Route,800,align="center"]
 
 First we want to verify that we don't already have any existing routes:
 
@@ -62,7 +64,7 @@ parksmap   parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}  
 
 You can also verify the *Route* by looking at the project in the OpenShift web console:
 
-image::parksmap-route.png[Route]
+image::parksmap-route-37.png[Route]
 
 Pretty nifty, huh?  This application is now available at the URL shown in the
 web console. Click the link and you will see:
