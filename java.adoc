@@ -126,22 +126,51 @@ Ensure that you are using the correct repository that you forked in to your own 
 {% endif %}
 
 In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
-click the *"Add to Project"* button. You will see a list of categories of
-runtimes, and other types of components that you can deploy and run on OpenShift.
+click the *"Add to Project"* button and then the browse catalog link as highlighted in the following image:
 
-Type _"jdk"_ into the search box, and then select the item titled
-`Red Hat OpenJDK 8` that says `Builds source code`.
+image::java-add-to-project.png[Add to Project]
 
-image::ocp-runtimes.png[Runtimes]
+ This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
 
-After you click `Red Hat OpenJDK 8`, on the next screen you will need
-to enter a name and a Git repository URL. For the name, enter `nationalparks`,
+ Select "Languages" at the top of the service catalog, then "Java", and finally "Red Hat OpenJDK" as shown in the following image:
+
+image::service-catalog-languages.png[Service Catalog Languages]
+
+====
+You could have also typed _"jdk"_ into the search box, and then selected the item titled
+`Red Hat OpenJDK 8`.
+====
+
+After you click `Red Hat OpenJDK 8`, a dialog is presented as shown in the following image:
+
+image::service-catalog-add-java.png[Add Java]
+
+Click on the "Next" button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
+
+
+{% if GIT_SERVER == 'gitlab'%}
 
 [source,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks.git
 ----
+
+{% endif %}
+
+{% if GIT_SERVER == 'github'%}
+The git URL for the repository that you forked earlier in this lab.  This should look like the following, ensuring to relace the **USERNAME** with your github username.
+
+[source]
+----
+https://github.com/USERNAME/nationalparks.git
+----
+
+This should like the following:
+
+image::service-catalog-java-s2i.png[Java S2I]
+
+{% endif %}
 
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
