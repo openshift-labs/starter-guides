@@ -166,7 +166,9 @@ The git URL for the repository that you forked earlier in this lab.  This should
 https://github.com/USERNAME/nationalparks.git
 ----
 
-This should like the following:
+This should look like the following image:
+
+**Note: Do not click create yet.** 
 
 image::service-catalog-java-s2i.png[Java S2I]
 
@@ -177,11 +179,12 @@ NOTE: All of these runtimes shown are made available via *Templates* and
 
 These labs were written against specific points in time for these
 applications. With Git as our version control system (VCS), we are using the
-concept of *Branches/Tags*. Click on *Show advanced routing, build, and deployment
-options*. In the *Git Reference* field enter "*{{NATIONALPARKS_VERSION}}*". This will cause the S2I
+concept of *Branches/Tags*. Click on *Advanced Options*. In the *Git Reference* field enter "*{{NATIONALPARKS_VERSION}}*". This will cause the S2I
 process to grab that specific tag in the code repository.
 
-image::nationalparks-tag.png[Runtimes]
+image::service-catalog-java-advanced.png[Runtimes]
+
+Once you have entered in the above information, scroll to the bottom of the screen and click on "Create".
 
 {% if USE_MAVEN %}
 
