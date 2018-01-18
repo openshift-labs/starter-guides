@@ -19,7 +19,7 @@ account, we can do interesting things.
 
 ### Exercise: Grant Service Account View Permissions
 The parksmap application wants to talk to the OpenShift API to learn about other
-*Pods*, *Services*, and resources within the *Project*. You'll learn why soon!
+*Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
 [source,bash,role=copypaste]
 ----
@@ -58,7 +58,7 @@ of suppressing the error message! Although, in reality, we fixed the application
 ### Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
-access to your `explore` project using the following command:
+access to your project using the following command:
 
 [source,bash,role=copypaste]
 ----
@@ -71,7 +71,7 @@ but not edit) might be ideal for a developer getting visibility into a
 production application's project.
 
 ### Exercise: Redeploy Application
-One more step is required. We need to re-deploy the application because it's
+One more step is required. We need to re-deploy the parks map application because it's
 given up trying to query the API.
 
 This time we'll use the web console. Find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project,
