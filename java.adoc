@@ -114,7 +114,16 @@ application. This is a fairly simple Spring framework Java application.
 
 Similar to how we used "Add to project" before with a Docker-formatted image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own GitLab repository, let's use it with a simple Java S2I image.
+have your own git repository, let's use it with a simple Java S2I image.
+
+{% if GIT_SERVER == 'github'%}
+
+[NOTE]
+====
+Ensure that you are using the correct repository that you forked in to your own github account!
+====
+
+{% endif %}
 
 In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
 click the *"Add to Project"* button. You will see a list of categories of
