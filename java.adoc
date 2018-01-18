@@ -184,8 +184,6 @@ process to grab that specific tag in the code repository.
 
 image::service-catalog-java-advanced.png[Runtimes]
 
-Once you have entered in the above information, scroll to the bottom of the screen and click on "Create".
-
 {% if USE_MAVEN %}
 
 To speed build process, a Sonatype Nexus server is running in the environment
