@@ -190,19 +190,14 @@ for application portability across different environments.  The source file that
 performs the connection as well as creates the database schema can be viewed
 here:
 
-
-(% if GIT_SERVER="gilab" }
 [source,bash,role=copypaste]
 ----
 {% if PARKSMAP_PY %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/blob/{{NATIONALPARKS_VERSION}}/wsgi.py#L11-18
 {% else %}
-http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/blob/{{NATIONALPARKS_VERSION}}/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48
-{% endif %}
-----
-{% else %}
 http://www.github.com/openshift-roadshow/nationalparks/blob/{{NATIONALPARKS_VERSION}}/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48
 {% endif %}
+----
 
 In short summary: By referring to bindings to connect to services
 (like databases), it can be trivial to promote applications throughout different
