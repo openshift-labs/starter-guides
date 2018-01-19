@@ -19,7 +19,7 @@ image::roadshow-app-architecture-nationalparks-2.png[Application architecture,80
 Most useful applications are "stateful" or "dynamic" in some way, and this is
 usually achieved with a database or other data storage. In this lab we are
 going to add MongoDB to our `nationalparks` application and then rewire it to
-talk to the database using environment variables.
+talk to the database using environment variables via a secret.
 
 We are going to use the MongoDB image that is included with OpenShift.
 
@@ -29,19 +29,12 @@ OpenShift's persistent storage mechanism to attach real-world storage (NFS,
 Gluster, EBS, etc) to the *Pods* to give them a persistent place to store their
 data.
 
-### Background: Environment Variables
+### Exercise: Deploy MongoDB
 
 As you've seen so far, the web console makes it very easy to deploy things onto
-OpenShift. When we deploy the database, we pass in some environment variables.
-These environment variables are used to set the username, password, and name of
-the database.  You can change the
-values of these environment variables to anything you would like.  The variables
-we are going to be setting are as follows:
-
-- MONGODB_USER
-- MONGODB_PASSWORD
-- MONGODB_DATABASE
-- MONGODB_ADMIN_PASSWORD
+OpenShift. When we deploy the database, we pass in some values for configuration.
+These values are used to set the username, password, and name of
+the database.  
 
 The database image is built in a way that it will automatically configure itself
 using the supplied information (assuming there is no data already present in the
@@ -56,9 +49,9 @@ click the *"Add to Project"* button and then *"Browse Catalog"*. Select the *"Da
 
 image::mongodb-datastores-37.png[Data Stores]
 
-Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB  scroll down to find the *MongoDB
+Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, scroll down to find the *MongoDB
 (Ephemeral)* template, and select it.  You will notice that there are several
-MongoDB templates available.  We just need a database, though, so the ephemeral Mongo
+MongoDB templates available.  We just need a database with persistent storage, so the ephemeral Mongo
 template is what you should choose.  Go ahead and select the ephemeral template and click the next button.
 
 image::ocp-mongodb-template-37.png[MongoDB]
@@ -67,10 +60,10 @@ When we performed the application build, there was no template. Rather, we selec
 builder image directly and OpenShift presented only the standard build workflow.
 Now we are using a template - a preconfigured set of resources that includes
 parameters that can be customized. In our case, the parameters we are concerned
-with are the environment variables discussed -- user, password, database, and
+with are -- user, password, database, and
 admin password.
 
-image::ocp-mongo-template-deploy-37.png[MongoDB]
+image::ocp-mongodb-template-deploy-37.png[MongoDB]
 
 You can see that some of the fields say *"generated if empty"*. This is a
 feature of *Templates* in OpenShift that will be covered in the next lab. For
