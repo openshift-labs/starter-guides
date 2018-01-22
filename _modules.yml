@@ -58,7 +58,7 @@ config:
       desc: Expected oc version when `oc version` is executed
       value: "oc v3.7.1+ab0f056\nkubernetes v1.7.6+a08f5eeb62"
     - name: DOCS_URL
-      desc: URL prefix to access docs (https://docs.openshift.org/latest)
+      desc: URL prefix to access docs (docs.openshift.org/latest) without the protocol prefix. (https:// will be used.)
       value: <url>
     - name: EXPLORE_PROJECT_NAME
       desc: Project the user is supposed to work with

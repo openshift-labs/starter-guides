@@ -146,11 +146,18 @@ image::explore-webconsole2.png[Explore Project]
 
 {% if METRICS_ENABLED %}
 
-Lastly, the web console will show you an error: _An error occurred getting
-metrics._  We need to accept another self-signed certificate for OpenShift's metrics
-aggregation. If we don't, then the metrics will not display in the OpenShift UI.
+In case the web console shows you an error: 
+
+image::explore-webconsole2-error.png[Web Console]
 
 Click the link that says *Open metrics URL*, and accept the certificate.
+
+image::explore-acceptcertificate.png[Acept Certificates]
+
+We need to accept another self-signed certificate for OpenShift's metrics
+aggregation. If we don't, then the metrics will not display in the OpenShift UI.
+
+image::explore-hawkular.png[Hawkular web]
 
 {% endif %}
 
