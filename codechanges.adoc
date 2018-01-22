@@ -57,7 +57,7 @@ file located in the **src/main/java/com/openshift/evg/roadshow/parks/rest** dire
 
 image::codechanges-java.png[Code Change]
 
-Go to the line `20` and change the **Nation Parks** to something else.
+Go to line `20` and change the **Nation Parks** to something else.
 
 [source]
 ----
