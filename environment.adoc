@@ -1,5 +1,7 @@
 ## Environment Overview
 
+image::ocp-architecture.png[OCP Architecture]
+
 You will be interacting with an OpenShift environment that is running on {{ ENVIRONMENT }}. The environment consists of the following systems:
 
 * {{ MASTERS }} master nodes

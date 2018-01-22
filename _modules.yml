@@ -1,5 +1,35 @@
 config:
   vars:
+    - name: MASTERS
+      desc: Number of master nodes in the cluster
+      value: 1
+    - name: INFRA
+      desc:  Number of infra nodes in the cluster
+      value: 1
+    - name: NODES
+      desc: Number of container nodes in the cluster
+      value: 1
+    - name: NFS_ENABLED
+      desc: Is NFS enabled?
+      value: false
+    - name: METRICS_ENABLED
+      desc: Are metrics enabled?
+      value: false
+    - name: LOGGING_ENABLED
+      desc: Is logging enabled?
+      value: false
+    - name: GIT_SERVER
+      desc: "Git server to use (Possible values: github,gitlab,gogs)"
+      value: gitlab
+    - name: ETHERPAD_ENABLED
+      desc: Is etherpad enabled?
+      value: false
+    - name: NUM_USERS
+      desc: Number of users created for workshop
+      value: 0
+    - name: ETHERPAD_URL_PREFIX
+      desc: Ethepad's URL prefix (<appname>-<project>)
+      value: etherpad-workshop-infra
     - name: CONSOLE_ADDRESS
       desc: Address to access the OpenShift console
       value: 10.2.2.2:8443
@@ -12,33 +42,6 @@ config:
     - name: USER_PASSWORD
       desc: Password to login
       value: "dev"
-    - name: MASTERS
-      desc: Number of master nodes in the cluster
-      value: 1
-    - name: INFRA
-      desc:  Number of infra nodes in the cluster
-      value: 1
-    - name: NODES
-      desc: Number of container nodes in the cluster
-      value: 1
-    - name: NUM_USERS
-      desc: Number of users created for workshop
-      value: 0
-    - name: NFS_ENABLED
-      desc: Is NFS enabled?
-      value: false
-    - name: METRICS_ENABLED
-      desc: Are metrics enabled?
-      value: false
-    - name: LOGGING_ENABLED
-      desc: Is logging enabled?
-      value: false
-    - name: ETHERPAD_ENABLED
-      desc: Is etherpad enabled?
-      value: false
-    - name: ETHERPAD_URL_PREFIX
-      desc: Ethepad's URL prefix (<appname>-<project>)
-      value: etherpad-workshop-infra
     - name: DOWNLOAD_CLIENT_WINDOWS
       desc: URL to download oc client for Windows
       value: "https://github.com/openshift/origin/releases/download/v1.3.3/openshift-origin-client-tools-v1.3.3-bc17c1527938fa03b719e1a117d584442e3727b8-windows.zip"
@@ -69,9 +72,6 @@ config:
     - name: USER_SUFFIX
       desc: The user suffix
       value: -userXY
-    - name: GIT_SERVER
-      desc: "Git server to use (Possible values: github,gitlab,gogs)"
-      value: gitlab
     - name: GITLAB_URL_PREFIX
       desc: URL of the Gitlab instance to use
       value: <gitlab>
