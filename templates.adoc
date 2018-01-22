@@ -4,7 +4,7 @@
 In this lab, we're going to deploy a complete backend application, consisting of
 an REST API backend and a mongo database. The complete application will already
 be wired together and described as a backend for the map visualization tool, so
-that once the application is build and deployed, you will be able to see the new
+that once the application is built and deployed, you will be able to see the new
 map.
 
 image::roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
@@ -25,9 +25,7 @@ The great thing about *Templates* is that they can speed up the deployment
 workflow for application development by providing a "recipe" of sorts that can
 be deployed with a single command.  Not only that, they can be loaded into
 OpenShift from an external URL, which will allow you to keep your templates in a
-version control system. And, even further, they can be stored in a version
-control system (even in the same repository as the application source code) --
-they're just serialized text data!
+version control system. 
 
 Let's combine all of the exercises we have performed in the last several labs by
 using a *Template* that we can instantiate with a single command.  While we
