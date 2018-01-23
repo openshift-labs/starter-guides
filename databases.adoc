@@ -80,6 +80,23 @@ Once you have entered in the above information, click on "Next" to go to the nex
 image::mongo-create-binding.png[Bind Mongo]
 
 This creates a *"secret"* in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
+
+While the database deploys, we will fix the labels assigned to the deployment. Currenly we can not set
+a label when using templates from the Service Catalog, so in this case we will fix this manually.
+
+Like before, we will add 3 labels:
+
+- *__app__=workshop*  (the name we will be giving to the app)
+- *__component__=nationalparks*  (the name of this deployment)
+- *__role__=backend* (the role this component plays in the overall application)
+
+Execute the following command:
+
+[source,bash,role=copypaste]
+----
+$ oc label dc/mongodb svc/mongodb app=workshop component=nationalparks role=database --overwrite
+----
+
 Now that the connection and authentication information is bound to our project, we need to add it to the national parks backend.  Go to the project overview screen and click on the national parks deployment:
 
 image::nationalparks-deployment.png[National Parks Deployment]
@@ -230,7 +247,9 @@ $ oc describe route nationalparks
 Name:                   nationalparks
 Namespace:              {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 Created:                2 hours ago
-Labels:                 app=nationalparks
+Labels:                 app=workshop
+                        component=nationalparks
+                        role=backend
 Requested Host:         nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
                         exposed on router router 2 hours ago
 Path:                   <none>
@@ -243,7 +262,7 @@ Weight:                 100 (100%)
 Endpoints:              10.1.9.8:8080
 ----
 
-You see that it only has one label: `app=nationalparks`. Now, use `oc label`:
+You see that it already has some labels. Now, use `oc label`:
 
 [source,bash]
 ----
