@@ -195,17 +195,21 @@ scroll down to *Build Configuration* and add an environment variable named
 image::new-national-parks-2.png[Runtimes]
 {% endif %}
 
+We will again set 3 labels to the deployment.
+
+- *__app__=workshop*  (the name we will be giving to the app)
+- *__component__=nationalparks*  (the name of this deployment)
+- *__role__=backend* (the role this component plays in the overall application)
+
+image::new-national-parks-labels.png[Adding labels]
+
 You can then hit the button labeled *"Create"*. Then click *Continue to
-overview*. You will see this in the web console:
+overview*. You will see the build log output directly there.
 
-[source,bash]
-----
-Build nationalparks, #1 Running. A new deployment will be created automatically
-once the build completes.  a few seconds ago View Log
-----
+image::new-national-parks-overview-build.png[Nationalparks build]
 
-Go ahead and click *"View Log"*. This is a Java-based application that uses
-Maven as the build and dependency system.  For this reason, the initial build
+
+This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build
 will take a few minutes as Maven downloads all of the dependencies needed for
 the application. You can see all of this happening in real time!
 
