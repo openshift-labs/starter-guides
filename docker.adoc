@@ -41,6 +41,18 @@ Make sure to have the correct application name:
 
 image::parksmap-image-options-37.png[Explore Project]
 
+Let's scroll to the bottom of this page and add some labels to better identify 
+this deployment later. Labels will help us identify and filter components in the
+web UI and in the command line.
+
+We will add 3 labels:
+
+- *__app__=workshop*  (the name we will be giving to the app)
+- *__component__=parksmap*  (the name of this deployment)
+- *__role__=frontend* (the role this component plays in the overall application)
+
+image::parksmap-image-options-37-labels.png[Explore Project]
+
 Hit the blue "Deploy" button at the bottom of the dialog and then click the
 "Continue to overview" link or the "Close" button. Take a moment to look at the various messages that
 you now see on the overview page.
@@ -49,7 +61,9 @@ WINNING! These few steps are the only ones you need to run to get a
 Docker-formatted image deployed on OpenShift. This should work with any
 Docker-formatted image that follows best practices, such as defining an EXPOSE
 port, not needing to run specifically as the *root user* or other user name, and
-a single non-exiting CMD to execute on start.
+a single non-exiting CMD to execute on start. 
+
+NOTE: Adding the labels is desired when deploying complex applications for organization purposes.
 
 ### Background: Containers and Pods
 
@@ -76,7 +90,16 @@ server, a log analyzer, and a file service to help manage uploaded files.
 ### Exercise: Examining the Pod
 
 In the web console's overview page you will see that there is a single *Pod* that
-was created by your actions. This *Pod* contains a single container, which
+was created by your actions. 
+
+image::parksmap-overview.png[Pod overview]
+
+You can also get a list of all the pods created within your project, by navigating to 
+"Applications -> Pods"
+
+image::parksmap-podlist.png[Pod list]
+
+This *Pod* contains a single container, which
 happens to be the parks map application - a simple Spring Boot/Java application.
 
 You can also examine *Pods* from the command line:
@@ -140,6 +163,8 @@ The web interface also shows a lot of the same information on the *Pod* details
 page. If you click in the *Pod* circle, you will
 find the details page. You can also get there by clicking "Applications", then
 "Pods", at the left, and then clicking the *Pod* name.
+
+image::parksmap-pod.png[Pod list]
 
 Getting the parks map image running may take a little while to complete. Each
 OpenShift node that is asked to run the image has to pull (download) it if the
@@ -205,7 +230,9 @@ each *Service* receives a unique IP address upon creation. *Service* IPs are
 fixed and never change for the life of the *Service*.
 
 In the web console, service information is available by clicking "Applications"
-and then clicking "Services" in the "Networking" submenu.
+and then clicking "Services".
+
+image::parksmap-serviceslist.png[Services list]
 
 You can also get more detailed information about a *Service* by using the
 following command to display the data in YAML:
@@ -249,6 +276,10 @@ status:
 
 Take note of the `selector` stanza. Remember it.
 
+Alternatively, you can use the web console to view information about the *Service*.
+
+image::parksmap-service.png[Service]
+
 It is also of interest to view the YAML of the *Pod* to understand how OpenShift
 wires components together.  For example, run the following command to get the
 name of your `parksmap` *Pod*:
@@ -277,16 +308,20 @@ Under the `metadata` section you should see the following:
 
 [source,bash]
 ----
-labels:
-  app: parksmap
-  deployment: parksmap-1
-  deploymentconfig: parksmap
+  labels:
+    app: workshop
+    component: parksmap
+    deployment: parksmap-1
+    deploymentconfig: parksmap
+    role: frontend
 ----
 
 * The *Service* has `selector` stanza that refers to `deploymentconfig=parksmap`.
 * The *Pod* has multiple *Labels*:
+** `app=workshop`
+** `component=parksmap`
+** `role=frontend`
 ** `deploymentconfig=parksmap`
-** `app=parksmap`
 ** `deployment=parksmap-1`
 
 *Labels* are just key/value pairs. Any *Pod* in this *Project* that has a *Label* that
@@ -304,7 +339,9 @@ You should see something like the following output:
 ----
 Name:                   parksmap
 Namespace:              {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
-Labels:                 app=parksmap
+Labels:                 app=workshop
+                        component=parksmap
+                        role=frontend
 Selector:               deploymentconfig=parksmap
 Type:                   ClusterIP
 IP:                     172.30.169.213
