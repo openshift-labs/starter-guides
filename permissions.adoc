@@ -17,6 +17,10 @@ The **default** service account has its credentials automatically injected into
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
+You can view current permissions in the web UI, by navigating to "Resources -> Membership" page.
+
+image::membership.png[Membership]
+
 ### Exercise: Grant Service Account View Permissions
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
@@ -55,6 +59,20 @@ Now that the default *Service Account* has **view** access, it can query the API
 to see what resources are within the *Project*. This also has the added benefit
 of suppressing the error message! Although, in reality, we fixed the application.
 
+Another way you could have done the same is by using the OpenShift console. Once you're on the 
+*"Applications --> Membership"* page, click on Service Accounts, and then on *"Edit Membership"* button.
+
+image::membership_serviceaccount-list.png[Service account list]
+
+Add the admin role to the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}/default* Service Account, and then
+click the *"Add"* button.
+
+image::membership_serviceaccount-edit.png[Service account edit]
+
+Once you're finished editing permissions, click on the *"Done Editing"* button.
+
+image::membership_serviceaccount-done.png[Service account changed]
+
 ### Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
@@ -88,5 +106,9 @@ Click it.
 image::new-parksmap-deploy.png[Deploy Button]
 
 You'll see that a new deployment is immediately started. Return to the overview
-page and watch it happen. You might not be fast enough! If you look at the logs
-for the application now, you should see no errors.  That's great.
+page and watch it happen. You might not be fast enough! But it will be in the list of
+deployments.
+
+image::new-parksmap-deployed.png[Application deployed]
+
+If you look at the logs for the application now, you should see no errors.  That's great.
