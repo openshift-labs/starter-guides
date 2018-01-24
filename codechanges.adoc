@@ -282,14 +282,14 @@ The output will be similar to the following:
 
 [source,bash]
 ----
-NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb              1          1         1         config,image(mongodb:3.2)
-parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
-nationalparks        9          1         1         {% if modules.pipelines %}config{% else %}config,image(nationalparks:latest){% endif %}
+NAME                               REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb-nationalparks              1          1         1         config,image(mongodb:3.2)
+parksmap                           2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+nationalparks                      9          1         1         {% if modules.pipelines %}config{% else %}config,image(nationalparks:latest){% endif %}
 {% if modules.pipelines %}
-jenkins              1          1         1         config,image(jenkins:latest)
-mongodb-live         1          1         1         config,image(mongodb:3.2)
-nationalparks-live   4          1         1         config,image(nationalparks:live)
+jenkins                            1          1         1         config,image(jenkins:latest)
+mongodb-live                       1          1         1         config,image(mongodb:3.2)
+nationalparks-live                 4          1         1         config,image(nationalparks:live)
 {% endif %}
 ----
 Now run the following command to rollback the latest code change:
