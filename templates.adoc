@@ -75,7 +75,20 @@ mlbparks      Application template MLBParks backend running on {{MW_TEXT}} and u
 {% endif %}
 ----
 
-Are you ready for the magic command?  Here it is:
+In the web UI, you can see the templates you have in your project, by clicking on the 
+*"Add to project --> Select from project"* dropdown menu.
+
+image::template-from-project-menu.png[Select from project menu]
+
+You'll be presented with a list of templates local to your own project. You will see the template we just loaded.
+
+image::template-from-project.png[Local templates]
+
+Are you ready for the magic command?  
+
+Here it is!
+
+If you want to use command line:
 
 {% if USE_MAVEN %}
 [source,bash]
@@ -215,6 +228,17 @@ You will see the following output:
 {% endif %}
 {% endif %}
 
+Or if you prefer using the web UI, just click on the template we just saw:
+
+image::template-from-project-info.png[Template info]
+
+Then, you'll see a guided wizard showing you some information and allowing you to provide
+the desired configuration to instantiate the template
+
+image::template-from-project-config.png[Template config]
+
+Go ahead and click *"Create"*
+
 OpenShift will now:
 
 * Configure and start a build
@@ -237,6 +261,8 @@ several app servers, databases, and more.  You could deploy the entire set of
 resources with one command, and then hack on them to develop new features,
 microservices, fix bugs, and more.
 
+image::complete-overview.png[Complete overview]
+
 As a final exercise, look at the template that was used to create the
 resources for our *mlbparks* application.
 
@@ -248,3 +274,12 @@ $ oc get template mlbparks-py -o yaml
 $ oc get template mlbparks -o yaml
 {% endif %}
 ----
+
+But as always, you can use the OpenShift console to do the same. Under *"Resources menu"*, click on *"Other resources"*,
+then select *"Templates*" from teh dropdown, and select the *"Edit YAML"* action, on the *"Actions"* dropdown. 
+
+image::template-yaml-menu.png[Complete overview]
+
+You'll be able to see/edit the YAML as well from here.
+
+image::template-yaml-edit.png[Template YAML edit]
