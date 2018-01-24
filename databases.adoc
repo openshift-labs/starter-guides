@@ -65,8 +65,10 @@ admin password.
 
 image::mongo-template-deploy-37.png[MongoDB Deploy]
 
+NOTE: Make sure you name your database service name *mongodb-nationalparks*
+
 You can see that some of the fields say *"generated if empty"*. This is a
-feature of *Templates* in OpenShift that will be covered in the next lab. For
+feature of *Templates* in OpenShift. For
 now, be sure to use the following values in their respective fields:
 
 * `MONGODB_USER` : `mongodb`
@@ -94,7 +96,7 @@ Execute the following command:
 
 [source,bash,role=copypaste]
 ----
-$ oc label dc/mongodb svc/mongodb app=workshop component=nationalparks role=database --overwrite
+$ oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
 ----
 
 Now that the connection and authentication information is bound to our project, we need to add it to the national parks backend.  Go to the project overview screen and click on the national parks deployment:
@@ -117,10 +119,10 @@ can verify this by looking at the output of `oc get dc`:
 
 [source,bash]
 ----
-NAME            REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb         1          1         1         config,image(mongodb:3.2)
-nationalparks   2          1         1         config,image(nationalparks:{{NATIONALPARKS_VERSION}})
-parksmap        1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb-nationalparks   1          1         1         config,image(mongodb:3.2)
+nationalparks           2          1         1         config,image(nationalparks:{{NATIONALPARKS_VERSION}})
+parksmap                2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}}))
 ----
 
 Something that increments the version of a *DeploymentConfiguration*, by default,
@@ -129,11 +131,12 @@ rc`:
 
 [source,bash]
 ----
-NAME              DESIRED   CURRENT   READY     AGE
-mongodb-1         1         1         0         24m
-nationalparks-1   0         0         0         3h
-nationalparks-2   1         1         0         8m
-parksmap-1        1         1         0         6h
+NAME                      DESIRED   CURRENT   READY     AGE
+mongodb-nationalparks-1   1         1         1         24m
+nationalparks-1           0         0         0         3h
+nationalparks-2           1         1         1         8m
+parksmap-1                0         0         0         6h
+parksmap-2                1         1         1         5h
 ----
 
 We see that the desired and current number of instances for the "-1" deployment
