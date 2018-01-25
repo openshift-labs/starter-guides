@@ -185,7 +185,7 @@ need help, raise your hand and the instructor will assist.
 
 #### Tab Completion 
 
-The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using using, never fear, we will discuss some ways to get tab completion working on that operating system as well.
+The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.
 
 If you are on the Mac operating sytem, you will need to ensure that you have the *bash-completion* project installed.  This can be accomplished using the popular brew system:
 
