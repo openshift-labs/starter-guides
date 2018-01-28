@@ -130,9 +130,9 @@ click the *"Add to Project"* button and then the browse catalog link as highligh
 
 image::java-add-to-project.png[Add to Project]
 
- This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
+This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
 
- Select "Languages" at the top of the service catalog, then "Java", and finally "Red Hat OpenJDK" as shown in the following image:
+Select "Languages" at the top of the service catalog, then "Java", and finally "Red Hat OpenJDK" as shown in the following image:
 
 image::service-catalog-languages.png[Service Catalog Languages]
 
