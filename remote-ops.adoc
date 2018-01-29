@@ -141,8 +141,8 @@ when OpenShift launches a container its user is actually randomized.
 If you want or need to allow OpenShift users to deploy Docker images that do
 expect to run as root (or any specific user), a small configuration change is
 needed. You can learn more about the
-https://{{DOCS_URL}}/latest/creating_images/guidelines.html[Docker guidelines]
+https://{{DOCS_URL}}/creating_images/guidelines.html[Docker guidelines]
 for OpenShift, or you can look at the section on
-https://{{DOCS_URL}}/latest/admin_guide/manage_scc.html#enable-images-to-run-with-user-in-the-dockerfile[enabling
+https://{{DOCS_URL}}/admin_guide/manage_scc.html#enable-images-to-run-with-user-in-the-dockerfile[enabling
 images to run with a USER in the dockerfile].
 ====

@@ -8,7 +8,7 @@ health checks in OpenShift. These come in two flavors:
 * Liveness probe
 
 From the
-https://{{DOCS_URL}}/latest/dev_guide/application_health.html[Application
+https://{{DOCS_URL}}/dev_guide/application_health.html[Application
 Health] section of the documentation, we see the definitions:
 
 [glossary]
