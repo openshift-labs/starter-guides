@@ -11,7 +11,7 @@ somehow die/exit are not automatically restarted. *ReplicationControllers* are
 how OpenShift "self heals".
 
 A *DeploymentConfiguration* (DC) defines how something in OpenShift should be
-deployed. From the https://{{DOCS_URL}}/latest/architecture/core_concepts/deployments.html#deployments-and-deployment-configurations[deployments documentation]:
+deployed. From the https://{{DOCS_URL}}/architecture/core_concepts/deployments.html#deployments-and-deployment-configurations[deployments documentation]:
 
 [quote]
 __
@@ -66,7 +66,7 @@ OpenShift's *HorizontalPodAutoscaler* effectively monitors the CPU usage of a
 set of instances and then manipulates the RCs accordingly.
 
 You can learn more about the CPU-based
-https://{{DOCS_URL}}/latest/dev_guide/pod_autoscaling.html[Horizontal Pod Autoscaler here]
+https://{{DOCS_URL}}/dev_guide/pod_autoscaling.html[Horizontal Pod Autoscaler here]
 
 ### Exercise: Scaling the Application
 
@@ -197,7 +197,7 @@ application instance wasn't alive, it would kill the instance and then restart
 it, always ensuring that the desired number of replicas was in place.
 
 More information on probing applications is available in the
-https://{{DOCS_URL}}/latest/dev_guide/application_health.html[Application
+https://{{DOCS_URL}}/dev_guide/application_health.html[Application
 Health] section of the documentation.
 
 ### Exercise: Scale Down

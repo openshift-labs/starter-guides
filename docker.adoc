@@ -179,9 +179,9 @@ daemon will check to make sure it has the right "version" of the image to run.
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://{{DOCS_URL}}/latest/dev_guide/application_lifecycle/new_app.html#specifying-an-image[specifying an image]
+https://{{DOCS_URL}}/dev_guide/application_lifecycle/new_app.html#specifying-an-image[specifying an image]
 as well as
-https://{{DOCS_URL}}/latest/dev_guide/managing_images.html#image-pull-policy[image pullpolicy].
+https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy[image pullpolicy].
 
 #### Background: Services
 
@@ -204,7 +204,7 @@ The way that a *Service* maps to a set of *Pods* is via a system of *Labels* and
 protocols can be mapped.
 
 There is a lot more information about
-https://{{DOCS_URL}}/latest/architecture/core_concepts/pods_and_services.html#services[Services],
+https://{{DOCS_URL}}/architecture/core_concepts/pods_and_services.html#services[Services],
 including the YAML format to make one by hand, in the official documentation.
 
 Now that we understand the basics of what a *Service* is, let's take a look at

@@ -245,7 +245,7 @@ In short summary: By referring to environment variables to connect to services
 lifecycle environments on OpenShift without having to modify application code.
 
 You can learn more about environment variables in the
-https://docs.openshift.org/latest/dev_guide/environment_variables.html[environment
+https://docs.openshift.org/dev_guide/environment_variables.html[environment
 variables] section of the Developer Guide.
 ====
 

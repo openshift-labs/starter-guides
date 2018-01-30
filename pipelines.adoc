@@ -10,7 +10,7 @@ the popular https://jenkins.io/doc/book/pipeline/overview/[Jenkins pipelines] in
 the platform and enables defining truly complex workflows directly within OpenShift.
 
 In a previous lab, you deployed the `nationalparks` application using the
-https://{{DOCS_URL}}/latest/architecture/core_concepts/builds_and_image_streams.html#source-build[Source-to-Image (S2I)]
+https://{{DOCS_URL}}/architecture/core_concepts/builds_and_image_streams.html#source-build[Source-to-Image (S2I)]
 mechanism. S2I already provides build automation by automatically running builds
 when the source code changes, or an underlying image changes. Deployments are also automated
 by S2I and can be triggered when the image they are based on changes. In this lab,
@@ -147,7 +147,7 @@ Docker image created in link:java[previous labs]. Click on *Builds* &rarr;
 image::pipeline-live-image.png[National Parks Image Stream]
 
 The default behavior for OpenShift has every
-https://{{DOCS_URL}}/latest/architecture/core_concepts/builds_and_image_streams.html[S2I
+https://{{DOCS_URL}}/architecture/core_concepts/builds_and_image_streams.html[S2I
 build] creating a new Docker image that is pushed into the internal registry,
 identified with the `latest` tag. Since we do not want to immediately run or
 deploy the *Live* version of `nationalparks` when the image changes, we want the

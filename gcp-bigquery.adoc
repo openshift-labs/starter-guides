@@ -85,7 +85,7 @@ Take note of the service account's email address and store the service account's
 
 #### Create a secret with the service account information
 
-Once you have your Google credentials created, you need to provide them to the application. For this purpose we will use *link:https://docs.openshift.org/latest/dev_guide/secrets.html[OpenShift's secrets]*.
+Once you have your Google credentials created, you need to provide them to the application. For this purpose we will use *link:https://docs.openshift.org/dev_guide/secrets.html[OpenShift's secrets]*.
 
 It is as easy as:
 
