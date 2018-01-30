@@ -1,18 +1,18 @@
 ## Lab: Automating Deployment with CI/CD Pipeline
 
 ### Background: CI/CD Pipeline
-Continuous Integration and Continuous Deployment refer to a set of practises with
-the intention of automating various aspects of delivery software. One of these
-practises is Pipeline which is an automated process to define the steps a change
-in code or configuration has to go through in order to reach upper environments
+Continuous Integration and Continuous Deployment refer to a set of practices with
+the intention of automating various aspects of software delivery. One of these
+practices is called a Pipeline.  A Pipeline is an automated process to define the steps a change
+in code or configuration has to go through in order to reach promoted environments
 such as staging and production. OpenShift supports CI/CD Pipelines by integrating
 the popular https://jenkins.io/doc/book/pipeline/overview/[Jenkins pipelines] into
 the platform and enables defining truly complex workflows directly within OpenShift.
 
 In a previous lab, you deployed the `nationalparks` application using the
-https://{{DOCS_URL}}/latest/architecture/core_concepts/builds_and_image_streams.html#source-build[Source-to-Image (S2I)]
+https://{{DOCS_URL}}/architecture/core_concepts/builds_and_image_streams.html#source-build[Source-to-Image (S2I)]
 mechanism. S2I already provides build automation by automatically running builds
-when source code changes, or an underlying image changes. Deployments are also automated
+when the source code changes, or an underlying image changes. Deployments are also automated
 by S2I and can be triggered when the image they are based on changes. In this lab,
 you will create a more complex workflow by creating a pipeline that extends the S2I
 functionality by adding more steps to the build and deploy process. The following
@@ -20,8 +20,8 @@ diagram shows the pipeline you will create in this lab.
 
 image::pipeline-diagram.png[CI/CD Pipeline Diagram,800,align="center"]
 
-There are two environments for the `nationalparks` application in this pipeline.
-*Dev* container is the for development and test purposes where all code and
+There are two environments for the `nationalparks` application in this pipeline. Dev and Production (Live).
+*Dev* is for development and test purposes where all code and
 configuration changes are deployed so that you can run automated tests against it.
 Furthermore, the test teams can run their manual tests on this container and
 report any bugs discovered through their test cases. If the tests are all successful
@@ -49,28 +49,21 @@ Let's move on to deploy `Jenkins` and create this pipeline on OpenShift.
 
 OpenShift provides a supported Jenkins image which includes a rich set of
 plugins that enable the full pipeline flow. Click on the *Add to project*
-button. Then, scroll down to the *Technologies* section and click on *Continuous
-Integration & Deployment*:
+button on the top right of your project overview page and then select *Browse Catalog*. Then, *CI/CD*:
 
-image::pipeline-technologies.png[CI/CD Technologies]
+image::pipeline-technologies-37.png[CI/CD Technologies]
 
-Find the `jenkins-ephemeral` template, and click on it:
-
-image::pipeline-jenkins-catalog.png[Jenkins Ephemeral]
-
-You can customize the Jenkins properties such as service name, admin password, memory
+Find the `jenkins-ephemeral` template, and click on it.  This will display a dialog 
+where uou can customize the Jenkins properties such as service name, admin password, memory
 allocation, etc through the parameters in the web console. We can leave all of
-the default values, so just click on *Create* to deploy Jenkins.
-
-It will ask you for confirmation as Jenkins will grant permissions to the Jenkins service account.
-Click `Create Anyway`.
+the default values, so click on *Next* until you get to the last screen of the dialog and then click on *Create* to deploy Jenkins.
 
 OpenShift deploys a Jenkins pod and also creates a service and route for the
 deployed container.
 
-image::pipeline-jenkins-pods.png[Jenkins Pods]
+image::pipeline-jenkins-pods-37.png[Jenkins Pods]
 
-Click on the Jenkins route in order to open the Jenkins Console. You will again
+After the readiness probe has passed and the Jenkins pod is blue, click on the Jenkins route in order to open the Jenkins Console. You will again
 need to accept the certificate. The Jenkins image that is provided by Red Hat
 uses an OAuth integration with OpenShift. Your OpenShift user credentials also
 become the admin credentials for Jenkins:
@@ -81,7 +74,7 @@ Click *Login with OpenShift* and you will be taken to an OpenShift-branded login
 screen. Use your username (_{{USER_NAME}}_) and password (_{{USER_PASSWORD}}_) to
 access Jenkins. You will then be prompted to grant access:
 
-image::pipeline-jenkins-permissions.png[Grant Jenkins Permissions]
+image::pipeline-jenkins-permissions-37.png[Grant Jenkins Permissions]
 
 Click *Allow selected permissions*.
 
@@ -154,7 +147,7 @@ Docker image created in link:java[previous labs]. Click on *Builds* &rarr;
 image::pipeline-live-image.png[National Parks Image Stream]
 
 The default behavior for OpenShift has every
-https://{{DOCS_URL}}/latest/architecture/core_concepts/builds_and_image_streams.html[S2I
+https://{{DOCS_URL}}/architecture/core_concepts/builds_and_image_streams.html[S2I
 build] creating a new Docker image that is pushed into the internal registry,
 identified with the `latest` tag. Since we do not want to immediately run or
 deploy the *Live* version of `nationalparks` when the image changes, we want the

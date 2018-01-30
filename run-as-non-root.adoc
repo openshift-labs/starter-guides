@@ -188,7 +188,7 @@ pull new images on deployment.
 By default the DeploymentConfig has its _imagePullPolicy_ set to _Always_ if we use the tag latest (which
 we are doing in this case). This means everytime we do a deploy we do a pull request to Dockerhub (or whatever
 registry we are using) but we may not pull any bits if there are no changes.
-Here is some https://docs.openshift.org/latest/dev_guide/managing_images.html#image-pull-policy[documentation].
+Here is some https://docs.openshift.org/dev_guide/managing_images.html#image-pull-policy[documentation].
 
 === Next steps
 

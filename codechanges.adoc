@@ -9,17 +9,26 @@ remote systems in order to trigger builds. By pointing the code repository's
 hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
-{% if GIT_HOST == "github" %}
+In this lab, we are going to configure a webhook for our git repository that will trigger a new build after a change to the source code is made.
+
+{% if GIT_SERVER == "github" %}
 #### Getting the webhook URL
 
-Go to **Builds** -> **Builds** -> **Configuration** and there in the
-**Triggers** section there is **Github webhook URL** copy the URL to be used
-for configuring the webhook at Github.
+The first thing we need to do to set up integration between GitHub and OpenShift is to find the webhook endpoint on OpenShift.  
+To accomplish this, from the project overview screen, click on **Builds** using the left hand navigation and then select **Builds**.  This will list all of the build configs you have for your project as shown in the following image:
+
+image::builds-nationalparks.png[Builds]
+
+Click on the **nationalparks** build as highlighted in the above image and then select **Configuration**.  
+
+image::builds-github-webhook.png[GitHub Webhook]
+
+Notice the **Triggers** section on the right hand side and the **Github webhook URL**.  Copy the URL as shown in the above image.
 
 
 #### Setting up the webhook
 
-Open the **Github** repository page and go to the **Settings** tab and then to
+Open the **Github** repository page for your fork of the national parks application and go to the **Settings** tab.  Click on
 **Webhooks** in the left menu. Click **Add webhook** and fill the form
 
 * **Payload URL** is the URL copied from OpenShift
@@ -30,12 +39,32 @@ certificates
 
 And click the **Add webhook** button.
 
+image::builds-github-webhook-add.png[Add Webhook]
+
 #### Making a code change
 
+
+{% if PARKSMAP_PY %}
 Go back to the **Code** tab in the same repository and open the **wsgi.py**
 file. Click the pen icon in the top right corner to edit the file.
 
 Go to the line `35` and change the **displayName**.
+
+{% else %}
+
+Go back to the **Code** tab in the same repository and open the **BackendController.java**
+file located in the **src/main/java/com/openshift/evg/roadshow/parks/rest** directoy. Click the pen icon in the top right corner to edit the file as highlighed in the following image:
+
+image::codechanges-java.png[Code Change]
+
+Go to line `20` and change the **Nation Parks** to something else.
+
+[source]
+----
+  return new Backend("nationalparks","World Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+{% endif %}
 
 Scroll down to the bottom of the page and click **Commit changes**.
 
@@ -253,14 +282,14 @@ The output will be similar to the following:
 
 [source,bash]
 ----
-NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb              1          1         1         config,image(mongodb:3.2)
-parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
-nationalparks        9          1         1         {% if modules.pipelines %}config{% else %}config,image(nationalparks:latest){% endif %}
+NAME                               REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb-nationalparks              1          1         1         config,image(mongodb:3.2)
+parksmap                           2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+nationalparks                      9          1         1         {% if modules.pipelines %}config{% else %}config,image(nationalparks:latest){% endif %}
 {% if modules.pipelines %}
-jenkins              1          1         1         config,image(jenkins:latest)
-mongodb-live         1          1         1         config,image(mongodb:3.2)
-nationalparks-live   4          1         1         config,image(nationalparks:live)
+jenkins                            1          1         1         config,image(jenkins:latest)
+mongodb-live                       1          1         1         config,image(mongodb:3.2)
+nationalparks-live                 4          1         1         config,image(nationalparks:live)
 {% endif %}
 ----
 Now run the following command to rollback the latest code change:

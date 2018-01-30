@@ -14,11 +14,11 @@ image::roadshow-app-architecture-nationalparks-1.png[Application architecture,80
 ### Background: Source-to-Image (S2I)
 
 In a previous lab, we learned how to deploy a pre-existing Docker-formatted
-image. Now we will expand on that a bit by learning how OpenShift builds
-Docker images using source code from an existing repository.
+image. Now we will expand on that by learning how OpenShift builds
+Docker images using source code from an existing repository.  This is accomplished using the Source-to-Image project.
 
-https://github.com/openshift/source-to-image[Source-to-Image (S2I)] is another
-open source project sponsored by Red Hat. Its goal:
+https://github.com/openshift/source-to-image[Source-to-Image (S2I)] is a
+open source project sponsored by Red Hat that has the following goal:
 
 [source]
 ----
@@ -39,8 +39,8 @@ other aspects of OpenShift.
 
 A full discussion of S2I is beyond the scope of this class, but you can find
 more information about it either in the
-https://{{DOCS_URL}}/latest/creating_images/s2i.html[OpenShift S2I documentation]
-or on GitHub (following the link above). The only key concept you need to
+https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
+or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
 ### Exercise: Creating a Java application
@@ -53,9 +53,9 @@ saying that we are going to deploy a webservice that returns a JSON list of
 places.
 
 #### Add to Project
-Because the `nationalparks` application is a back-end to serve data that our
-existing front-end will consume, we are going to build it inside the existing
-`{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project. And, we will do it from the web console.
+Because the `nationalparks` component is a back-end to serve data that our
+existing front-end (parksmap) will consume, we are going to build it inside the existing
+project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the Web Console, we will deploy the nationalparks component using the web console.
 
 #### Using application code on embedded Git server
 
@@ -64,7 +64,7 @@ GitLab, or any other server that speaks Git. You can even register webhooks in
 your Git server to initiate OpenShift builds triggered by any update to the
 application code!
 
-{% if GIT_SERVER == 'gitlab' or GIT_SERVER == 'github' %}
+{% if GIT_SERVER == 'gitlab'%}
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
@@ -77,6 +77,19 @@ http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tr
 ====
 Your GitLab credentials are: *{{GITLAB_USER}}/{{GITLAB_PASSWORD}}*
 ====
+{% endif %}
+
+{% if GIT_SERVER == 'github'%}
+The repository that we are going to use is hosted on GitHub and is located at the following URL:
+
+[source,bash,role=copypaste]
+----
+http://{{GITHUB_URL_PREFIX}}/{{GITHUB_ORG}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
+----
+
+NOTE: You should fork the repository into your own Github account.  If you do not have your own github account or do not know how to fork a project, please inform your instructor.
+
+
 {% endif %}
 
 {% if GIT_SERVER == 'gogs%}
@@ -101,36 +114,75 @@ application. This is a fairly simple Spring framework Java application.
 
 Similar to how we used "Add to project" before with a Docker-formatted image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own GitLab repository, let's use it with a simple Java S2I image.
+have your own git repository, let's use it with a simple Java S2I image.
+
+{% if GIT_SERVER == 'github'%}
+
+[NOTE]
+====
+Ensure that you are using the correct repository that you forked in to your own github account!
+====
+
+{% endif %}
 
 In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
-click the *"Add to Project"* button. You will see a list of categories of
-runtimes, and other types of components that you can deploy and run on OpenShift.
+click the *"Add to Project"* button and then the browse catalog link as highlighted in the following image:
 
-Type _"jdk"_ into the search box, and then select the item titled
-`Red Hat OpenJDK 8` that says `Builds source code`.
+image::java-add-to-project.png[Add to Project]
 
-image::ocp-runtimes.png[Runtimes]
+This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
 
-After you click `Red Hat OpenJDK 8`, on the next screen you will need
-to enter a name and a Git repository URL. For the name, enter `nationalparks`,
+Select "Languages" at the top of the service catalog, then "Java", and finally "Red Hat OpenJDK" as shown in the following image:
+
+image::service-catalog-languages.png[Service Catalog Languages]
+
+====
+You could have also typed _"jdk"_ into the search box, and then selected the item titled
+`Red Hat OpenJDK 8`.
+====
+
+After you click `Red Hat OpenJDK 8`, a dialog is presented as shown in the following image:
+
+image::service-catalog-add-java.png[Add Java]
+
+Click on the "Next" button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
+
+
+{% if GIT_SERVER == 'gitlab'%}
 
 [source,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks.git
 ----
 
+{% endif %}
+
+{% if GIT_SERVER == 'github'%}
+The git URL for the repository that you forked earlier in this lab.  This should look like the following, ensuring to relace the **USERNAME** with your github username.
+
+[source]
+----
+https://github.com/USERNAME/nationalparks.git
+----
+
+This should look like the following image:
+
+**Note: Do not click create yet.** 
+
+image::service-catalog-java-s2i.png[Java S2I]
+
+{% endif %}
+
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
 These labs were written against specific points in time for these
 applications. With Git as our version control system (VCS), we are using the
-concept of *Branches/Tags*. Click on *Show advanced routing, build, and deployment
-options*. In the *Git Reference* field enter "*{{NATIONALPARKS_VERSION}}*". This will cause the S2I
+concept of *Branches/Tags*. Click on *Advanced Options*. In the *Git Reference* field enter "*{{NATIONALPARKS_VERSION}}*". This will cause the S2I
 process to grab that specific tag in the code repository.
 
-image::nationalparks-tag.png[Runtimes]
+image::service-catalog-java-advanced.png[Runtimes]
 
 {% if USE_MAVEN %}
 
@@ -143,17 +195,21 @@ scroll down to *Build Configuration* and add an environment variable named
 image::new-national-parks-2.png[Runtimes]
 {% endif %}
 
+We will again set 3 labels to the deployment.
+
+- *__app__=workshop*  (the name we will be giving to the app)
+- *__component__=nationalparks*  (the name of this deployment)
+- *__role__=backend* (the role this component plays in the overall application)
+
+image::new-national-parks-labels.png[Adding labels]
+
 You can then hit the button labeled *"Create"*. Then click *Continue to
-overview*. You will see this in the web console:
+overview*. You will see the build log output directly there.
 
-[source,bash]
-----
-Build nationalparks, #1 Running. A new deployment will be created automatically
-once the build completes.  a few seconds ago View Log
-----
+image::new-national-parks-overview-build.png[Nationalparks build]
 
-Go ahead and click *"View Log"*. This is a Java-based application that uses
-Maven as the build and dependency system.  For this reason, the initial build
+
+This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build
 will take a few minutes as Maven downloads all of the dependencies needed for
 the application. You can see all of this happening in real time!
 

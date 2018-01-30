@@ -8,7 +8,7 @@ health checks in OpenShift. These come in two flavors:
 * Liveness probe
 
 From the
-https://{{DOCS_URL}}/latest/dev_guide/application_health.html[Application
+https://{{DOCS_URL}}/dev_guide/application_health.html[Application
 Health] section of the documentation, we see the definitions:
 
 [glossary]
@@ -58,17 +58,18 @@ _Readiness Probe_
 * Initial Delay: `20`
 * Timeout: `1`
 
-image::pipeline-readiness.png[Readiness Probe]
-
 _Liveness Probe_
 
 * Path: `/ws/healthz/`
 * Initial Delay: `120`
 * Timeout: `1`
 
-image::pipeline-liveness.png[Liveness Probe]
+This is shown in the following image:
 
-Click *Save* and then click the *Overview* button in the left navigation. You
+image::pipeline-readiness-37.png[Readiness and Liveness Probe]
+
+
+Once you have entered in the values show above, click *Save* and then click the *Overview* button in the left navigation. You
 will notice that these changes caused a new deployment -- they counted as a
 configuration change.
 

@@ -17,9 +17,9 @@ image::roadshow-app-architecture-nationalparks-2.png[Application architecture,80
 ### Background: Storage
 
 Most useful applications are "stateful" or "dynamic" in some way, and this is
-usually achieved with a database or other data storage. In this next lab we are
+usually achieved with a database or other data storage. In this lab we are
 going to add MongoDB to our `nationalparks` application and then rewire it to
-talk to the database using environment variables.
+talk to the database using environment variables via a secret.
 
 We are going to use the MongoDB image that is included with OpenShift.
 
@@ -29,19 +29,12 @@ OpenShift's persistent storage mechanism to attach real-world storage (NFS,
 Gluster, EBS, etc) to the *Pods* to give them a persistent place to store their
 data.
 
-### Background: Environment Variables
+### Exercise: Deploy MongoDB
 
 As you've seen so far, the web console makes it very easy to deploy things onto
-OpenShift. When we deploy the database, we pass in some environment variables.
-These environment variables are used to set the username, password, and name of
-the database.  You can change the
-values of these environment variables to anything you would like.  The variables
-we are going to be setting are as follows:
-
-- MONGODB_USER
-- MONGODB_PASSWORD
-- MONGODB_DATABASE
-- MONGODB_ADMIN_PASSWORD
+OpenShift. When we deploy the database, we pass in some values for configuration.
+These values are used to set the username, password, and name of
+the database.  
 
 The database image is built in a way that it will automatically configure itself
 using the supplied information (assuming there is no data already present in the
@@ -52,29 +45,30 @@ persistent storage!). The image will ensure that:
 - The user can access the specified database with the specified password
 
 In the web console in your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project,
-again click the *"Add to Project"* button. Click the *Data Stores* category.
+click the *"Add to Project"* button and then *"Browse Catalog"*. Select the *"Databases"* category and then *"Mongo"*.
 
-image::mongodb-datastores.png[Data Stores]
+image::mongodb-datastores-37.png[Data Stores]
 
-Type `mongodb` in the search box, and then scroll down to find the *MongoDB
-(Ephemeral)* template, and click it.  You will notice that there are several
-MongoDB templates available, some of which come with application servers
-pre-configured.  We just need a database, though, so the ephemeral Mongo
-template is what you should choose.
+Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, scroll down to find the *MongoDB
+(Ephemeral)* template, and select it.  You will notice that there are several
+MongoDB templates available.  We just need a database with persistent storage, so the ephemeral Mongo
+template is what you should choose.  Go ahead and select the ephemeral template and click the next button.
 
-image::ocp-mongodb-template.png[MongoDB]
+image::ocp-mongodb-template-37.png[MongoDB]
 
 When we performed the application build, there was no template. Rather, we selected the
 builder image directly and OpenShift presented only the standard build workflow.
 Now we are using a template - a preconfigured set of resources that includes
 parameters that can be customized. In our case, the parameters we are concerned
-with are the environment variables discussed -- user, password, database, and
+with are -- user, password, database, and
 admin password.
 
-image::ocp-mongo-template-deploy.png[MongoDB]
+image::mongo-template-deploy-37.png[MongoDB Deploy]
+
+NOTE: Make sure you name your database service name *mongodb-nationalparks*
 
 You can see that some of the fields say *"generated if empty"*. This is a
-feature of *Templates* in OpenShift that will be covered in the next lab. For
+feature of *Templates* in OpenShift. For
 now, be sure to use the following values in their respective fields:
 
 * `MONGODB_USER` : `mongodb`
@@ -82,97 +76,53 @@ now, be sure to use the following values in their respective fields:
 * `MONGODB_DATABASE`: `mongodb`
 * `MONGODB_ADMIN_PASSWORD` : `mongodb`
 
-You need to add a label `app=nationalparks` to group both deployments as part of the 
-same application. Scroll to the bottom of the page and add this label.
 
-image::nationalparks-db-label.png[Label MongoDB]
+Once you have entered in the above information, click on "Next" to go to the next step which will allow us to add a binding.
 
-You can leave the rest of the values as their defaults, and then click
-*"Create"*. Then click *Continue to overview*. The MongoDB instance should
-quickly be deployed.
+image::mongo-create-binding.png[Bind Mongo]
 
-image::nationalparks-deployments.png[National parks deployments]
+This creates a *"secret"* in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
 
-#### Exercise: Wiring the Application and the Database
+While the database deploys, we will fix the labels assigned to the deployment. Currenly we can not set
+a label when using templates from the Service Catalog, so in this case we will fix this manually.
 
-When we initially created the `nationalparks` application, we provided no environment
-variables. The application is looking for a database, but can't find one, and it
-fails gracefully (you don't see an error).
+Like before, we will add 3 labels:
 
-We need to configure the `nationalparks` *Pod*(s) to have the right values in
-the right environment variables so that the application knows how and where to
-find MongoDB.
+- *__app__=workshop*  (the name we will be giving to the app)
+- *__component__=nationalparks*  (the name of this deployment)
+- *__role__=backend* (the role this component plays in the overall application)
 
-If you think way back to the beginning of the labs, you will recall that a
-*DeploymentConfiguration* tells OpenShift how to deploy something. This includes
-things like what environment variables to configure. So, to set up the right
-environment variables, we simply need to modify the *DeploymentConfiguration*
-(DC).  This can easily be done from either the web interface or via the command
-line.
+Execute the following command:
 
-The command line takes a little less time, so let's use that option. First, find
-the name of the DC:
-
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get dc
+$ oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
 ----
 
-Then, use the `oc env` command to set environment variables directly on the DC:
+Now that the connection and authentication information is bound to our project, we need to add it to the national parks backend.  Go to the project overview screen and click on the national parks deployment:
 
-[source,bash]
-----
-$ oc env dc nationalparks -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e MONGODB_DATABASE=mongodb -e MONGODB_SERVER_HOST=mongodb
-----
+image::nationalparks-deployment.png[National Parks Deployment]
 
-After you have modified the *DeploymentConfig* object, you can verify the
-environment variables have been added by viewing the YAML for it:
+This will bring up the configuration for the deployment of the national parks backend.  If you think way back to the beginning of the labs, you will recall that a
+*DeploymentConfiguration* tells OpenShift how to deploy something.
 
-[source,bash]
-----
-$ oc get dc nationalparks -o yaml
-----
+In order to make the authentication information available to the java code, we need to add the secret as part of the deployment by modifying the environment information.  To do this, click on *"Environment"* and then select the monogo-ephemeral-podid-credentials and click on *"Add ALL Values from ConfigMap or Secret"*.  Finally click the *"Save"* Button.
 
-You should see the following section:
+image::ocp-mongo-nationalparks-bind.png[Edit Configuration]
 
-[source,bash]
-----
-- env:
-  - name: MONGODB_USER
-    value: mongodb
-  - name: MONGODB_PASSWORD
-    value: mongodb
-  - name: MONGODB_DATABASE
-    value: mongodb
-  - name: MONGODB_SERVER_HOST
-    value: mongodb
-----
-
-You can also just ask OpenShift to tell you about the environment variables on
-the DC:
-
-[source,bash]
-----
-$ oc env dc/nationalparks --list
-# deploymentconfigs nationalparks, container nationalparks
-MONGODB_USER=mongodb
-MONGODB_PASSWORD=mongodb
-MONGODB_DATABASE=mongodb
-MONGODB_SERVER_HOST=mongodb
-----
 
 #### Exercise: Exploring OpenShift Magic
-As soon as we set the environment variables on the *DeploymentConfiguration*, some
+As soon as we changed the *DeploymentConfiguration*, some
 magic happened. OpenShift decided that this was a significant enough change to
 warrant updating the internal version number of the *DeploymentConfiguration*. You
 can verify this by looking at the output of `oc get dc`:
 
 [source,bash]
 ----
-NAME            REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb         1          1         1         config,image(mongodb:3.2)
-nationalparks   2          1         1         config,image(nationalparks:{{NATIONALPARKS_VERSION}})
-parksmap        1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb-nationalparks   1          1         1         config,image(mongodb:3.2)
+nationalparks           2          1         1         config,image(nationalparks:{{NATIONALPARKS_VERSION}})
+parksmap                2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}}))
 ----
 
 Something that increments the version of a *DeploymentConfiguration*, by default,
@@ -181,11 +131,12 @@ rc`:
 
 [source,bash]
 ----
-NAME              DESIRED   CURRENT   READY     AGE
-mongodb-1         1         1         0         24m
-nationalparks-1   0         0         0         3h
-nationalparks-2   1         1         0         8m
-parksmap-1        1         1         0         6h
+NAME                      DESIRED   CURRENT   READY     AGE
+mongodb-nationalparks-1   1         1         1         24m
+nationalparks-1           0         0         0         3h
+nationalparks-2           1         1         1         8m
+parksmap-1                0         0         0         6h
+parksmap-2                1         1         1         5h
 ----
 
 We see that the desired and current number of instances for the "-1" deployment
@@ -247,7 +198,7 @@ the right *Label*.
 ====
 You are probably wondering how the database connection magically started
 working? When deploying applications to OpenShift, it is always best to use
-environment variables to define connections to dependent systems.  This allows
+environment variables, secrets, or configMaps to define connections to dependent systems.  This allows
 for application portability across different environments.  The source file that
 performs the connection as well as creates the database schema can be viewed
 here:
@@ -257,17 +208,14 @@ here:
 {% if PARKSMAP_PY %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/blob/{{NATIONALPARKS_VERSION}}/wsgi.py#L11-18
 {% else %}
-http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/blob/{{NATIONALPARKS_VERSION}}/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48
+http://www.github.com/openshift-roadshow/nationalparks/blob/{{NATIONALPARKS_VERSION}}/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48
 {% endif %}
 ----
 
-In short summary: By referring to environment variables to connect to services
+In short summary: By referring to bindings to connect to services
 (like databases), it can be trivial to promote applications throughout different
 lifecycle environments on OpenShift without having to modify application code.
 
-You can learn more about environment variables in the
-https://{{DOCS_URL}}/latest/dev_guide/environment_variables.html[environment
-variables] section of the Developer Guide.
 ====
 
 #### Exercise: Working With Labels
@@ -302,7 +250,9 @@ $ oc describe route nationalparks
 Name:                   nationalparks
 Namespace:              {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
 Created:                2 hours ago
-Labels:                 app=nationalparks
+Labels:                 app=workshop
+                        component=nationalparks
+                        role=backend
 Requested Host:         nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
                         exposed on router router 2 hours ago
 Path:                   <none>
@@ -315,7 +265,7 @@ Weight:                 100 (100%)
 Endpoints:              10.1.9.8:8080
 ----
 
-You see that it only has one label: `app=nationalparks`. Now, use `oc label`:
+You see that it already has some labels. Now, use `oc label`:
 
 [source,bash]
 ----

@@ -68,9 +68,10 @@ file.  Once you are in the directory, enter in the following command:
 
 [source,bash,role=copypaste]
 ----
-$ tar zxvf oc-macosx.tar.gz
+$ unzip oc-macosx.tar.gz
 ----
-The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
+
+NOTE: The zip file name needs to be replaced by the entire name that was downloaded in the previous step.
 
 **Linux:**
 
@@ -81,7 +82,8 @@ file.  Once you are in the directory, enter in the following command:
 ----
 $ tar zxvf oc-linux.tar.gz
 ----
-The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
+
+NOTE: The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
 
 
 #### Adding `oc` to your PATH
@@ -180,3 +182,41 @@ You should see the following (or something similar):
 
 If you get an error message, you have not updated your path correctly.  If you
 need help, raise your hand and the instructor will assist.
+
+#### Tab Completion 
+
+The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.
+
+If you are on the Mac operating sytem, you will need to ensure that you have the *bash-completion* project installed.  This can be accomplished using the popular brew system:
+
+[source, bash]
+----
+$ brew install bash-completion
+----
+
+
+To enable tab completion in your shell, you can simply enter in the following command from your terminal
+
+[source, bash]
+----
+$ oc completion bash >> oc_completion.sh
+$ source oc_completion.sh
+----
+
+Alternatively, you can add this to your .bashrc file.
+
+If you are using zsh, you can run the following command:
+[source, bash]
+----
+$ source <(oc completion zsh)
+----
+
+Alternatively, you can add this to your .zshrc file.
+
+
+For Windows users, things become a bit more tricky.  You could of course use the Linux Subsystem for Windows but you may want to consider using a combination of babun and cmder.  For a full list of instructions, you can check out the following blog post:
+
+-  https://blog.openshift.com/openshift-3-tab-completion-for-windows/[https://blog.openshift.com/openshift-3-tab-completion-for-windows/]
+
+
+
