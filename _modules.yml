@@ -256,37 +256,3 @@ modules:
     name: Integrating with Google Compute Service BigQuery
   further-resources:
     name: Further resources
-  demos_msa-coolstore-overview:
-    name: CoolStore Demo Application Overview
-  demos_msa-overview:
-    name: Containerized Microservices
-    requires:
-      - demos_msa-coolstore-overview
-  demos_msa-agile-integration:
-    name: Agile Integration for Microservices
-    requires:
-      - demos_msa-coolstore-overview
-  demos_msa-service-resilience:
-    name: Service Resilience and Fault Tolerance
-    requires:
-      - demos_msa-coolstore-overview
-  demos_msa-on-demand-env:
-    name: Creating On-Demand Environment
-  demos_msa-dev-productivity-jbds:
-    name: Increase Developer Productivity with Containers (with JBoss Developer Studio)
-  demos_msa-pr-code-review-with-jbds:
-    name: Building Quality into Development Process (with JBoss Developer Studio)
-    requires:
-      - demos_msa-dev-productivity-jbds
-      - demos_msa-on-demand-env
-  demos_msa-pr-code-review-without-jbds:
-    name: Building Quality into Development Process (without JBoss Developer Studio)
-    requires:
-      - demos_msa-on-demand-env
-  demos_msa-cicd-eap:
-    name: Increasing Delivery Speed with CI/CD
-    requires:
-      - demos_msa-coolstore-overview
-      - demos_msa-pr-code-review-without-jbds
-  demos_msa-continuous-security:
-    name: Continuous Security Compliance for Containers
