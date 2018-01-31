@@ -14,7 +14,7 @@ vars:
   GOGS_DEV_PASSWORD: "developer"
   GOGS_REVIEWER_USER: "team"
   GOGS_REVIEWER_PASSWORD: "team"
-  OCP_VERSION: "3.5"
+  OCP_VERSION: "3.7"
   DISPLAY_SIMULATION_LINKS: false
   SLIDES: "slideshare"
 modules:

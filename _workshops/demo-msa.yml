@@ -4,7 +4,7 @@ vars:
   PROJECT_SUFFIX: "USERNAME"
   COOLSTORE_WEB_PROD_URL: "http://web-ui-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
   HYSTRIX_PROD_URL: "http://hystrix-dashboard-coolstore-prod-USERNAME.apps.rhpds.openshift.opentlc.com"
-  OCP_VERSION: "3.5"
+  OCP_VERSION: "3.7"
   DISPLAY_SIMULATION_LINKS: false
   SLIDES: "slideshare"
 modules:
