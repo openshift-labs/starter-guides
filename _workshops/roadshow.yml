@@ -4,7 +4,7 @@ name: Roadshow
 revision: ocp_3_6
 
 content:
-  url: https://raw.githubusercontent.com/osevg/workshopper-content/master
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/master
 
 vars:
   ENVIRONMENT: "Amazon Web Services"

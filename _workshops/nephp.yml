@@ -3,7 +3,7 @@ id: nephp
 name: Northeast PHP
 
 content:
-  url: https://raw.githubusercontent.com/osevg/workshopper-content/master
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/master
 
 vars:
   USER_NAME: "userXX"

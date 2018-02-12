@@ -3,7 +3,7 @@ id: training
 name: Internal training
 
 content:
-  url: https://raw.githubusercontent.com/osevg/workshopper-content/master
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/master
 
 vars:
   EXPLORE_PROJECT_NAME: ""
