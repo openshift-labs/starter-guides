@@ -1,4 +1,4 @@
-# OpenShift workshops content
+# OpenShift Starter Workshop Guides [![Build Status](https://travis-ci.org/openshift-labs/starter-guides.svg?branch=master)](https://travis-ci.org/openshift-labs/starter-guides)
 
 Workshop content designed to be used by the [Workshopper tool](https://github.com/osevg/workshopper).
 
