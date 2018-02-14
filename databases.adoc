@@ -51,7 +51,7 @@ image::mongodb-datastores-37.png[Data Stores]
 
 Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, scroll down to find the *MongoDB
 (Ephemeral)* template, and select it.  You will notice that there are several
-MongoDB templates available.  We just need a database with persistent storage, so the ephemeral Mongo
+MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
 template is what you should choose.  Go ahead and select the ephemeral template and click the next button.
 
 image::ocp-mongodb-template-37.png[MongoDB]
