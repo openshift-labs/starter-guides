@@ -1,0 +1,74 @@
+## Lab: Setting up Debugging
+
+### Background: Port Forwarding and Debugging
+Just as we did before with remote shelling into our pods, we can also set up a port-forward between our local machine
+and our pod. The is useful for operations like connecting to a database running in a pod, viewing an administrative web
+interface we don't want to expose to the public, or, in our case, attach a debugger to the JVM running our application
+server.
+
+You can read more about port-forwarding from the
+https://{{DOCS_URL}}/dev_guide/port_forwarding.html[developer documentation].
+
+By port forwarding the debugging port for the application server, we can attach the debugger from our IDE and actually
+step through the code in the pod as it is running in real time. By default EAP is not in debug mode, therefore we first
+need to turn on the debug ports
+
+
+### Exercise: Enabling Debugging in EAP on OpenShift
+
+It is very simple to turn on debugging. The EAP S2I container we are using is looking for an environment variable to
+control whether or not to enable the debug port. All we need to do is set an environment variable for the deployment.
+
+[source,bash]
+----
+oc set env dc/mlbparks DEBUG=true
+----
+
+This will force a redeploy of our MLB park pod, this time with the JDWT transport enabled and serving on port 8787.
+
+### Exercise: Port-Forwarding from the pod to our local machine
+
+It is quite simple to do port-forwarding.
+
+First get the pods:
+[source,bash]
+----
+oc get pods
+NAME                       READY     STATUS      RESTARTS   AGE
+mlbparks-1-build           0/1       Completed   0          9m
+mlbparks-2-7c6zb           1/1       Running     0          4m
+mongodb-mlbparks-1-887pq   1/1       Running     0          8m
+parksmap-2-wms5l           1/1       Running     0          13m
+----
+
+Now we are all set to set up the port-forward:
+
+[source,bash]
+----
+oc port-forward mlbparks-2-7c6zb 8787:8787
+Forwarding from 127.0.0.1:8787 -> 8787
+Forwarding from [::1]:8787 -> 8787
+----
+
+We said to port-forward from port 8787 on the pod to 8787 on the local machine. Now we can attach a remote debugger.
+
+NOTE: To stop port-forwarding just hit ctrl-c in the terminal window where you did the port forward command
+
+### Setting up Remote Debug in Intellij
+
+Setting up remote debugging is quite easy in Intellij. First edit the run/debug configurations.
+Under the Run menu (alt-u), choose edit configurations. This will bring up the new configuration dialog.
+
+Click the plus in the top left corner, scroll down, and choose remote.
+
+image::debug-new.png[Intellij New Configuration]
+
+On the resulting dialog page, change the name at the top to "on OpenShift" or whatever is informative to you. Then
+towards the bottom right, change the port number to 8787. When you have done that click "OK".
+
+image::debug-info.png[Intellij New Configuration]
+
+Now when you click the Debug icon in Intellij, it will open the debugger and attach to JVM in the pod on OpenShift. Go
+ahead and set a break point in any class you want and it will do normal debugging - just like you know and love!
+
+
