@@ -41,6 +41,7 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 
 If you have Maven all set up on your machine, then you can just do a
 
+
 [source,bash,role=copypaste]
 ----
 mvn package
@@ -75,6 +76,7 @@ mapped it to ctrl-shift-f10).
 ##### Code Change
 Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
 that gives basic info on the service and can be reached at
+
 
 [source,bash]
 ----
