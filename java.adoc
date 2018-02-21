@@ -64,7 +64,7 @@ GitLab, or any other server that speaks Git. You can even register webhooks in
 your Git server to initiate OpenShift builds triggered by any update to the
 application code!
 
-{% if GIT_SERVER == 'gitlab'%}
+{% if GIT_SERVER == 'gitlab' %}
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
@@ -92,7 +92,7 @@ NOTE: You should fork the repository into your own Github account.  If you do no
 
 {% endif %}
 
-{% if GIT_SERVER == 'gogs%}
+{% if GIT_SERVER == 'gogs' %}
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
