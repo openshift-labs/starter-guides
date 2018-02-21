@@ -27,10 +27,10 @@ https://{{DOCS_URL}}/dev_guide/dev_tutorials/binary_builds.html[official documen
 ##### Clone source
 The first step is to clone the MLB source code from GitHub to your local machine:
 
-[source, bash,role=copypaste]
----
+[source,bash,role=copypaste]
+----
 git clone https://github.com/openshift-roadshow/mlbparks.git
----
+----
 
 NOTE: We are using Intellij here in the guide for screenshots but this should work regardless of your tool chain. JBoss
 Developer Studio and JBoss Developer Tools have built in functionality that makes this close to seamless right from the IDE.
@@ -41,11 +41,10 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 
 If you have Maven all set up on your machine, then you can just do a
 
-[source, bash,role=copypaste]
+
+[source,bash,role=copypaste]
 ----
-
 mvn package
-
 ----
 
 Pay attention to the output location for the ROOT.war, we will need that directory later.
@@ -55,6 +54,7 @@ Pay attention to the output location for the ROOT.war, we will need that directo
 In Intellij, once the project is imported, we need to create a configuration to build an artifact
 
 Go to Project Structure
+
 image::binary-build-properties.png[Intellij Properties]
 
 Then got to Modules, where you will see a notice that web facet resources is not included in the artifact. Click the "create
@@ -77,7 +77,11 @@ mapped it to ctrl-shift-f10).
 Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
 that gives basic info on the service and can be reached at
 
+
+[source,bash]
+----
 http://mlbparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
+----
 
 Please change line 23 to add a _AMAZING_ in front of "MLB Parks" look like this:
 
@@ -108,8 +112,18 @@ oc start-build bc/mlbparks --from-file=location/you/put/in/output/ROOT.war --fol
 
 NOTE: Change the file path above to the location you set in Intellij
 
-When the build is finished and the container is deployed you should see the new content at:
+Using labels and a recreate deployment strategy, as soon as we get the new deployment finishes the map name
+will be updated. Under a recreate deployment strategy we first tear down the pod before doing our new deployment.
+When the pod is torn down, the parksmap service removes the MLB Parks map from the layers. When it comes back up, the layer
+automatically get's added back with our beautiful new title.  This would not have happened with a rolling deployment because
+rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.
+
+When the deployment is finished and the container is deployed you will see the new content at:
+
+[source,bash]
+----
 http://mlbparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
+----
 
 
 So now you have seen how we can speed up the build and deploy process.

@@ -21,7 +21,7 @@ control whether or not to enable the debug port. All we need to do is set an env
 
 [source,bash]
 ----
-oc set env dc/mlbparks DEBUG=true
+$ oc set env dc/mlbparks DEBUG=true
 ----
 
 This will force a redeploy of our MLB park pod, this time with the JDWT transport enabled and serving on port 8787.
@@ -45,9 +45,7 @@ Now we are all set to set up the port-forward:
 
 [source,bash]
 ----
-oc port-forward mlbparks-2-7c6zb 8787:8787
-Forwarding from 127.0.0.1:8787 -> 8787
-Forwarding from [::1]:8787 -> 8787
+$ oc port-forward mlbparks-2-7c6zb 8787:8787
 ----
 
 We said to port-forward from port 8787 on the pod to 8787 on the local machine. Now we can attach a remote debugger.
