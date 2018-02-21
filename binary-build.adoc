@@ -1,4 +1,4 @@
-## Lab: Day to Day Development
+## Lab: Binary Builds for Day to Day Development
 
 ### Moving on From S2I
 As you saw before S2I is a great way to get from source code to a container, but the process is a bit too slow for daily fast iteration
@@ -79,13 +79,11 @@ that gives basic info on the service and can be reached at
 
 http://mlbparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
 
-Please change line 23 to add a _THE_ in front of "MLB Parks" look like this:
+Please change line 23 to add a _AMAZING_ in front of "MLB Parks" look like this:
 
 [source,java]
 ----
-
-        return new Backend("mlbparks", "THE MLB Parks", new Coordinates("39.82", "-98.57"), 5);
-
+return new Backend("mlbparks", "AMAZING MLB Parks", new Coordinates("39.82", "-98.57"), 5);
 ----
 
 Don't forget to save the file.

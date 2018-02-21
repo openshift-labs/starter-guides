@@ -256,3 +256,7 @@ modules:
     name: Integrating with Google Compute Service BigQuery
   further-resources:
     name: Further resources
+  binary-build:
+    name: Binary Builds for Day to Day Development
+  debugging:
+    name: Using Port-Forwarding and Remote Debugging
