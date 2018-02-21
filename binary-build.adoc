@@ -112,7 +112,13 @@ oc start-build bc/mlbparks --from-file=location/you/put/in/output/ROOT.war --fol
 
 NOTE: Change the file path above to the location you set in Intellij
 
-When the build is finished and the container is deployed you should see the new content at:
+Using labels and a recreate deployment strategy, as soon as we get the new deployment finishes the map name
+will be updated. Under a recreate deployment strategy we first tear down the pod before doing our new deployment.
+When the pod is torn down, the parksmap service removes the MLB Parks map from the layers. When it comes back up, the layer
+automatically get's added back with our beautiful new title.  This would not have happened with a rolling deployment because
+rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.
+
+When the deployment is finished and the container is deployed you will see the new content at:
 
 [source,bash]
 ----
