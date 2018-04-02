@@ -254,7 +254,14 @@ OpenShift will now:
 
 All with one command!
 
-When the build is complete, visit the parks map. Does it work? Think about how
+When the build is complete, visit the parks map in your browser: 
+
+[source,role=copypaste]
+----
+http://mlbparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
+----
+
+Does it work? Think about how
 this could be used in your environment.  For example, a template could define a
 large set of resources that make up a "reference application", complete with
 several app servers, databases, and more.  You could deploy the entire set of
