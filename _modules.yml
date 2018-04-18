@@ -196,6 +196,8 @@ modules:
     name: Deploying Java Code
     vars:
       USE_MAVEN:
+  javascript:
+    name: Deploying Javascript
   python:
     name: Deploying Python Code
     vars:
@@ -205,6 +207,8 @@ modules:
   #  requires:
   #    - java
   databases-py:
+    name: Adding a Database (MongoDB)
+  databases-js:
     name: Adding a Database (MongoDB)
   configmap:
     name: Externalizing Application Configurations
