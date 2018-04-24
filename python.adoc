@@ -103,11 +103,11 @@ In the OpenShift web console, find your
 click on `Browse Catalog` in the *"Add to Project"* drop down.
 You will see a number of technologies and runtimes that you
 can choose from.
-Search for `python 3.5` and select it.
+Search for `python` and select it.
 
 image::ocp-runtimes-python.png[Runtimes]
 
-After you select `python` version `3.5`, on the next screen you will need to enter a
+After you select `python`, click `Next` and on the next screen choose version `3.6`, you will need to enter a
 name and a Git repository URL. For the name, enter `nationalparks`, and for
 the Git repository URL, enter:
 
