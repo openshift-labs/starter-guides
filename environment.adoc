@@ -23,17 +23,17 @@ The infrastructure node is providing several services:
 * This lab manual
 * The OpenShift Docker registry
 * The OpenShift router
-{% if ETHERPAD_ENABLED == 'true' %}
+{% if ETHERPAD_ENABLED %}
 * Etherpad
 {% endif %}
 
 Additionally, {{ NUM_USERS }} user accounts have been provisioned.
 
 {% if ETHERPAD_ENABLED == 'true' %}
-Before continuing, please visit visit the Firepad at the following URL:
+Before continuing, please visit visit the Etherpad at the following URL:
 
 ----
-http://{{ ETHERPAD_URL_PREFIX }}.{{ ROUTER_ADDRESS }}/#roadshow
+http://{{ ETHERPAD_URL_PREFIX }}.{{ ROUTER_ADDRESS }}/p/workshop
 ----
 
 Decide on a user account, between user01 and user{{ NUM_USERS }}. Type that user
