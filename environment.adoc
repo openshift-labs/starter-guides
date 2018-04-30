@@ -29,7 +29,7 @@ The infrastructure node is providing several services:
 
 Additionally, {{ NUM_USERS }} user accounts have been provisioned.
 
-{% if ETHERPAD_ENABLED == 'true' %}
+{% if ETHERPAD_ENABLED %}
 Before continuing, please visit visit the Etherpad at the following URL:
 
 ----
