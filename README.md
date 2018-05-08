@@ -37,3 +37,15 @@ Depending on the workshop, you might need additional ENV. These are defined per 
 * *CONSOLE_ADDRESS*: Address to the master server's console
 * *ROUTER_ADDRESS*: Wildcard DNS used for deployed apps
 * *DOCS_URL*: Link to the OpenShift documentation
+
+
+# Run Guides Locally
+```
+$ git clone https://github.com/openshift-labs/starter-labs.git
+$ cd starter-labs
+
+$ docker run -it --rm -p 8080:8080 -v $(pwd):/app-data \
+              -e CONTENT_URL_PREFIX="file:///app-data" \
+              -e WORKSHOPS_URLS="file:///app-data/_workshops/roadshow.yml" \
+              osevg/workshopper:latest 
+```

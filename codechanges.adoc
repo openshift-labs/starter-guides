@@ -100,6 +100,8 @@ image::ocp-webhook1.png[Webhook]
 Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on your local GitLab:
 
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
 [source,bash,role=copypaste]
 ----
 {% if PARKSMAP_PY %}
@@ -145,6 +147,8 @@ this out.
 
 {% if PARKSMAP_PY %}
 Be sure you return to the proper tag in the git repository:
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
 
 *link:http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[]*
 
@@ -252,6 +256,8 @@ Once the build and deploy has finished, verify your new Docker image was
 automatically deployed by viewing the application in your browser:
 {% endif %}
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash,role=copypaste]
 ----
 http://nationalparks{% if modules.pipelines %}-live{% endif %}-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/info/
@@ -310,6 +316,8 @@ Warning: the following images triggers were disabled: nationalparks:live
 
 Once the deploy is complete, verify that the page header is reverted to the
 original header by viewing the application in your browser.
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----

@@ -68,6 +68,8 @@ application code!
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
 [source,bash,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
@@ -95,6 +97,8 @@ NOTE: You should fork the repository into your own Github account.  If you do no
 {% if GIT_SERVER == 'gogs' %}
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
 
 [source,role=copypaste]
 ----
@@ -125,6 +129,8 @@ Ensure that you are using the correct repository that you forked in to your own 
 
 {% endif %}
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
 click the *"Add to Project"* button and then the browse catalog link as highlighted in the following image:
 
@@ -145,6 +151,8 @@ and for the Git repository URL, enter:
 
 
 {% if GIT_SERVER == 'gitlab'%}
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
 
 [source,role=copypaste]
 ----
@@ -269,6 +277,8 @@ parksmap        parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRES
 
 In the above example, the URL is:
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
@@ -278,6 +288,8 @@ Since this is a back-end application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All back ends that work with the parks map
 front end are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----

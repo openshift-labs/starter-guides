@@ -149,6 +149,8 @@ stood up a "new" instance.
 Now that we have a database deployed, we can again visit the `nationalparks` web
 service to query for data:
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}/ws/data/all
@@ -166,6 +168,8 @@ application and then deployed the database. Nothing actually loaded anything
 *INTO* the database, though.
 
 The application provides an endpoint to do just that:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash]
 ----
@@ -185,6 +189,8 @@ That's great. Our parks map should finally work!
 NOTE: There's some errors reported with browsers like firefox 54 that don't properly parse the resulting JSON. It's
 a browser problem, and the application is working properly.
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash]
 ----
 http://parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
@@ -202,6 +208,10 @@ environment variables, secrets, or configMaps to define connections to dependent
 for application portability across different environments.  The source file that
 performs the connection as well as creates the database schema can be viewed
 here:
+
+{% if PARKSMAP_PY %}
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+{% endif %}
 
 [source,bash,role=copypaste]
 ----
@@ -280,6 +290,8 @@ route "nationalparks" labeled
 ----
 
 If you check your browser now:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash]
 ----

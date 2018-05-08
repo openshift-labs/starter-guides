@@ -88,6 +88,8 @@ understand all of the terminology as we will cover it in detail in later labs.
 The first thing we want to do is create the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}*
 project. You can do this with the following command:
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash,role=copypaste]
 ----
 $ oc new-project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
@@ -102,6 +104,8 @@ Now using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}" on server "https://{
 {% else %}
 The first thing we want to do is switch to the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project. You
 can do this with the following command:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----

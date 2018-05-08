@@ -25,6 +25,8 @@ image::membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash,role=copypaste]
 ----
 $ oc project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
