@@ -84,7 +84,7 @@ The repository that we are going to use is hosted on GitHub and is located at th
 
 [source,bash,role=copypaste]
 ----
-http://{{GITHUB_URL_PREFIX}}/{{GITHUB_ORG}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
+https://github.com/{{GITHUB_ORG}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
 ----
 
 NOTE: You should fork the repository into your own Github account.  If you do not have your own github account or do not know how to fork a project, please inform your instructor.
@@ -132,14 +132,9 @@ image::java-add-to-project.png[Add to Project]
 
 This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
 
-Select "Languages" at the top of the service catalog, then "Java", and finally "Red Hat OpenJDK" as shown in the following image:
+Search for `openjdk`, and finally "Red Hat OpenJDK" as shown in the following image:
 
 image::service-catalog-languages.png[Service Catalog Languages]
-
-====
-You could have also typed _"jdk"_ into the search box, and then selected the item titled
-`Red Hat OpenJDK 8`.
-====
 
 After you click `Red Hat OpenJDK 8`, a dialog is presented as shown in the following image:
 
@@ -168,7 +163,7 @@ https://github.com/USERNAME/nationalparks.git
 
 This should look like the following image:
 
-**Note: Do not click create yet.** 
+**Note: Do not click create yet.**
 
 image::service-catalog-java-s2i.png[Java S2I]
 

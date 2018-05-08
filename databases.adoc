@@ -34,7 +34,7 @@ data.
 As you've seen so far, the web console makes it very easy to deploy things onto
 OpenShift. When we deploy the database, we pass in some values for configuration.
 These values are used to set the username, password, and name of
-the database.  
+the database.
 
 The database image is built in a way that it will automatically configure itself
 using the supplied information (assuming there is no data already present in the
@@ -47,14 +47,14 @@ persistent storage!). The image will ensure that:
 In the web console in your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project,
 click the *"Add to Project"* button and then *"Browse Catalog"*. Select the *"Databases"* category and then *"Mongo"*.
 
-image::mongodb-datastores-37.png[Data Stores]
+image::mongodb-datastores-39.png[Data Stores]
 
 Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, scroll down to find the *MongoDB
 (Ephemeral)* template, and select it.  You will notice that there are several
 MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
 template is what you should choose.  Go ahead and select the ephemeral template and click the next button.
 
-image::ocp-mongodb-template-37.png[MongoDB]
+image::ocp-mongodb-template-39.png[MongoDB]
 
 When we performed the application build, there was no template. Rather, we selected the
 builder image directly and OpenShift presented only the standard build workflow.
@@ -106,7 +106,7 @@ image::nationalparks-deployment.png[National Parks Deployment]
 This will bring up the configuration for the deployment of the national parks backend.  If you think way back to the beginning of the labs, you will recall that a
 *DeploymentConfiguration* tells OpenShift how to deploy something.
 
-In order to make the authentication information available to the java code, we need to add the secret as part of the deployment by modifying the environment information.  To do this, click on *"Environment"* and then select the monogo-ephemeral-podid-credentials and click on *"Add ALL Values from ConfigMap or Secret"*.  Finally click the *"Save"* Button.
+In order to make the authentication information available to the java code, we need to add the secret as part of the deployment by modifying the environment information.  To do this, click on *"Environment"* and then select the monogo-ephemeral-podid-credentials and click on the *"Save"* Button.
 
 image::ocp-mongo-nationalparks-bind.png[Edit Configuration]
 
@@ -183,7 +183,7 @@ If you then go back to `/ws/data/all` you will see tons of JSON data now.
 That's great. Our parks map should finally work!
 
 NOTE: There's some errors reported with browsers like firefox 54 that don't properly parse the resulting JSON. It's
-a browser problem, and the application is working properly. 
+a browser problem, and the application is working properly.
 
 [source,bash]
 ----

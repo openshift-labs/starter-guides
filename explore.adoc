@@ -4,13 +4,13 @@
 
 The first thing we want to do to ensure that our `oc` command line tools was
 installed and successfully added to our path is to log in to the OpenShift
-environment that has been provided for this Roadshow session.  In
+environment that has been provided for this Workshop session.  In
 order to log in, we will use the `oc` command and then specify the server that we
 want to authenticate to.  Issue the following command:
 
 [source,bash]
 ----
-$ oc login {{CONSOLE_ADDRESS}}
+$ oc login https://{{CONSOLE_ADDRESS}}
 ----
 
 You may see the following output:
@@ -37,7 +37,7 @@ the following command:
 
 [source,bash]
 ----
-$ oc login {{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
+$ oc login https://{{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
 ----
 ====
 
@@ -53,10 +53,14 @@ Password: {{USER_PASSWORD}}
 Once you have authenticated to the OpenShift server, you will see the
 following confirmation message:
 
-[source,bash]
+[source]
 ----
 Login successful.
-{% if NO_USER_PROJECT != true %}
+{% if NO_USER_PROJECT == "true" %}
+You don't have any projects. You can try to create a new project, by running
+
+    oc new-project <projectname>
+{% else %}
 Using project "{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}".
 {% endif %}
 ----
@@ -80,7 +84,7 @@ During this lab, we are going to use a few different commands to make sure that
 things in the environment are working as expected.  Don't worry if you don't
 understand all of the terminology as we will cover it in detail in later labs.
 
-{% if NO_USER_PROJECT == true %}
+{% if NO_USER_PROJECT == "true" %}
 The first thing we want to do is create the *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}*
 project. You can do this with the following command:
 
@@ -146,7 +150,7 @@ image::explore-webconsole2.png[Explore Project]
 
 {% if METRICS_ENABLED %}
 
-In case the web console shows you an error: 
+In case the web console shows you an error:
 
 image::explore-webconsole2-error.png[Web Console]
 
