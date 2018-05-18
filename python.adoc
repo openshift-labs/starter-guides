@@ -77,6 +77,8 @@ repository into your own Github account.
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}]
 
 Your GitLab credentials are: *{{GITLAB_USER}}/{{GITLAB_PASSWORD}}*
@@ -98,18 +100,25 @@ let's use it with a simple Python S2I image.
 with a simple Python S2I image.
 {% endif %}
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 In the OpenShift web console, find your
 `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
 click on `Browse Catalog` in the *"Add to Project"* drop down.
 You will see a number of technologies and runtimes that you
 can choose from.
-Search for `python 3.5` and select it.
+Search for `python` and select it.
 
 image::ocp-runtimes-python.png[Runtimes]
 
-After you select `python` version `3.5`, on the next screen you will need to enter a
+After you select `python`, click `Next` and on the next screen choose version `3.6`, you will need to enter a
 name and a Git repository URL. For the name, enter `nationalparks`, and for
 the Git repository URL, enter:
+
+{% if GIT_HOST != "github" %}
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+{% endif %}
+
 
 [source,bash]
 ----
@@ -203,6 +212,8 @@ parksmap        parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRES
 
 In the above example, the URL is:
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
@@ -212,6 +223,8 @@ Since this is a back-end application, it doesn't actually have a web interface.
 However, it can give us some data. All back ends that work with the parks map
 front end are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash]
 ----

@@ -75,8 +75,9 @@ mapped it to ctrl-shift-f10).
 
 ##### Code Change
 Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
-that gives basic info on the service and can be reached at
+that gives basic info on the service and can be reached at:
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the guid provided to you.
 
 [source,bash]
 ----
@@ -119,6 +120,8 @@ automatically get's added back with our beautiful new title.  This would not hav
 rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.
 
 When the deployment is finished and the container is deployed you will see the new content at:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash]
 ----

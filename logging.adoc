@@ -107,6 +107,8 @@ The "View Archive" link that you clicked takes you to a default view with a spec
 pre-populated. Kibana will only show you logs where the pod name is
 `parksmap-1-hx0kv` and in the *Project* (namespace) {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you, and the pod_name to match your pod.
+
 [source,bash]
 ----
 kubernetes.pod_name:"parksmap-1-hx0kv" AND kubernetes.namespace_name:"{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}"
@@ -114,6 +116,8 @@ kubernetes.pod_name:"parksmap-1-hx0kv" AND kubernetes.namespace_name:"{{EXPLORE_
 
 If you want to see all the historical logs for this *Project*, simply remove the
 pod name reference and click the magnifying glass or press the enter key.
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
@@ -128,6 +132,8 @@ log system is keeping a historical record.
 image::kibana-parksmap-headers.png[Kibana Interface]
 
 Try the following search string ensuring that you use the correct name for your project:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----

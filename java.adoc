@@ -68,6 +68,8 @@ application code!
 The repository that we are going to use is already cloned in the internal GitLab repository
 and located at the following URL:
 
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
 [source,bash,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
@@ -84,7 +86,7 @@ The repository that we are going to use is hosted on GitHub and is located at th
 
 [source,bash,role=copypaste]
 ----
-http://{{GITHUB_URL_PREFIX}}/{{GITHUB_ORG}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
+https://github.com/{{GITHUB_ORG}}/nationalparks/tree/{{NATIONALPARKS_VERSION}}
 ----
 
 NOTE: You should fork the repository into your own Github account.  If you do not have your own github account or do not know how to fork a project, please inform your instructor.
@@ -95,6 +97,8 @@ NOTE: You should fork the repository into your own Github account.  If you do no
 {% if GIT_SERVER == 'gogs' %}
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
 
 [source,role=copypaste]
 ----
@@ -125,6 +129,8 @@ Ensure that you are using the correct repository that you forked in to your own 
 
 {% endif %}
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 In the OpenShift web console, find your `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project, and then
 click the *"Add to Project"* button and then the browse catalog link as highlighted in the following image:
 
@@ -132,14 +138,9 @@ image::java-add-to-project.png[Add to Project]
 
 This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
 
-Select "Languages" at the top of the service catalog, then "Java", and finally "Red Hat OpenJDK" as shown in the following image:
+Search for `openjdk`, and finally "Red Hat OpenJDK" as shown in the following image:
 
 image::service-catalog-languages.png[Service Catalog Languages]
-
-====
-You could have also typed _"jdk"_ into the search box, and then selected the item titled
-`Red Hat OpenJDK 8`.
-====
 
 After you click `Red Hat OpenJDK 8`, a dialog is presented as shown in the following image:
 
@@ -150,6 +151,8 @@ and for the Git repository URL, enter:
 
 
 {% if GIT_SERVER == 'gitlab'%}
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
 
 [source,role=copypaste]
 ----
@@ -168,7 +171,7 @@ https://github.com/USERNAME/nationalparks.git
 
 This should look like the following image:
 
-**Note: Do not click create yet.** 
+**Note: Do not click create yet.**
 
 image::service-catalog-java-s2i.png[Java S2I]
 
@@ -274,6 +277,8 @@ parksmap        parksmap-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRES
 
 In the above example, the URL is:
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash]
 ----
 http://nationalparks-{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}.{{ROUTER_ADDRESS}}
@@ -283,6 +288,8 @@ Since this is a back-end application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All back ends that work with the parks map
 front end are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
