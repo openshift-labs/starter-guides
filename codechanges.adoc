@@ -44,7 +44,19 @@ image::builds-github-webhook-add.png[Add Webhook]
 #### Making a code change
 
 
-{% if PARKSMAP_PY %}
+{% if NATIONALPARKS == "JS" %}
+Go back to the **Code** tab in the same repository and open **bin/config.js**
+file. Click the pen icon in the top right corner to edit the file.
+
+Go to the line `16` and change the **displayName**.
+
+{% elsif NATIONALPARKS == "PY" %}
+Go back to the **Code** tab in the same repository and open the **wsgi.py**
+file. Click the pen icon in the top right corner to edit the file.
+
+Go to the line `35` and change the **displayName**.
+
+{% elsif PARKSMAP_PY %}
 Go back to the **Code** tab in the same repository and open the **wsgi.py**
 file. Click the pen icon in the top right corner to edit the file.
 
@@ -104,7 +116,11 @@ CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git usernam
 
 [source,bash,role=copypaste]
 ----
-{% if PARKSMAP_PY %}
+{% if NATIONALPARKS == 'JS' %}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-js/tree/{{NATIONALPARKS_VERSION}}
+{% elsif NATIONALPARKS == 'PY' %}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}
+{% elsif PARKSMAP_PY %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}
 {% else %}
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks
@@ -145,7 +161,64 @@ this out.
 
 #### Exercise: Using GitLab Web Hooks
 
-{% if PARKSMAP_PY %}
+{% if NATIONALPARKS == "JS" %}
+Be sure you return to the proper tag in the git repository:
+
+*link:http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-js/tree/{{NATIONALPARKS_VERSION}}[]*
+
+Click "Project" at the top of the GitLab page, and then "Files" towards the
+middle of the page. This is GitLab's repository view. Make sure that the
+drop-down menu at the upper right is set for the `{{NATIONALPARKS_VERSION}}` branch. Navigate to the `bin` folder, then click on the `config.js` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::ocp-webhook5-js.png[Webhook]
+
+Change line number 16:
+
+[source,javascript]
+----
+'displayName': 'National Parks (JS)'
+----
+
+To
+
+[source,javascript]
+----
+'displayName': 'World National Parks (JS)'
+----
+
+{% elsif NATIONALPARKS == "PY" %}
+Be sure you return to the proper tag in the git repository:
+
+*link:http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[]*
+
+Click "Project" at the top of the GitLab page, and then "Files" towards the
+middle of the page. This is GitLab's repository view. Make sure that the
+drop-down menu at the upper right is set for the `1.0.0` branch. Navigate to the
+root path and click on the `wsgi.py` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::ocp-webhook5-py.png[Webhook]
+
+Change line number 35:
+
+[source,python]
+----
+'displayName': 'National Parks (PY)'
+----
+
+To
+
+[source,python]
+----
+'displayName': 'World National Parks (PY)'
+----
+
+{% elsif PARKSMAP_PY %}
 Be sure you return to the proper tag in the git repository:
 
 CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
