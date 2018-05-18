@@ -23,30 +23,32 @@ The infrastructure node is providing several services:
 * This lab manual
 * The OpenShift Docker registry
 * The OpenShift router
-{% if ETHERPAD_ENABLED == 'true' %}
+{% if ETHERPAD_ENABLED %}
 * Etherpad
 {% endif %}
 
 Additionally, {{ NUM_USERS }} user accounts have been provisioned.
 
-{% if ETHERPAD_ENABLED == 'true' %}
+{% if ETHERPAD_ENABLED %}
 Before continuing, please visit visit the Etherpad at the following URL:
 
 ----
-http://{{ ETHERPAD_URL_PREFIX }}.{{ ROUTER_ADDRESS }}/p/roadshow
+http://{{ ETHERPAD_URL_PREFIX }}.{{ ROUTER_ADDRESS }}/p/workshop
 ----
 
-Decide on a user account, between user01 and user{{ NUM_USERS }}. Type that user
+Decide on a user account, between user01 and user{{ NUM_USERS }}, or use the one that
+has been assigned to you by the instructor. Type that user
 account and your name next to it. This will be your user account for the
 duration of these exercises. For example:
 
 ----
-userxx Luke Skywalker
+userxx=Luke Skywalker
 ----
 
 If you already see a name next to a user account, it means that someone else has
 already claimed it.
 {% endif %}
+
 
 You will see various code and command blocks throughout these exercises. Some of
 the command blocks can be copy/pasted directly. Others will require

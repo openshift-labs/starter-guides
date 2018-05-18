@@ -16,6 +16,8 @@ Return to the web console:
 
 *link:https://{{CONSOLE_ADDRESS}}[]*
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 Find your *{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}* project and click it. Next,
 click on the `Deploy Image` in the *"Add to Project"* drop down.  This will open a dialog that will allow you to specify the information for the image you want to deploy.
 

@@ -126,6 +126,8 @@ to use *ConfigMaps* in a previous lab. Similarly, we will use a *ConfigMap* for
 `nationalparks-live`. Download the live properties file to your local machine
 and create a distinct *ConfigMap*. The file is located here:
 
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
 [source,bash,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-live.properties
@@ -179,6 +181,8 @@ on the `nationalparks:live` image tag. In the web console in your
 `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` project,  click the *Add to Project* button, and then
 *Deploy Image* tab. Choose the *Image Stream Tag* radio button and use following
 values in each respective field:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 * Namespace: `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}`
 * ImageStream: `nationalparks`
@@ -242,6 +246,8 @@ then *Create* to create a route with the default values.
 
 Similar to the link:databases[previous labs], populate the database by pointing your browser to the
 `nationalparks-live` route url:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash]
 ----
@@ -324,6 +330,8 @@ image::pipeline-deploy-dev.png[Pipeline - Deploy to Dev]
 Pipeline execution will pause after running automated tests against the *Dev*
 container. Visit the `nationalparks` *Dev* web service to query for data and
 verify the service works as expected.
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash]
 ----

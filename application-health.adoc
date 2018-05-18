@@ -45,7 +45,7 @@ Click *Applications* &rarr; *Deployments* on the left-side bar. Click
 You will see the warning about health checks, with a link to
 click in order to add them.
 
-image::healthchecks_warning.png[Healthchecks warning,500,align="center"]
+image::healthchecks_warning.png[Healthchecks warning,align="center"]
 
 Click *Add health checks* now.
 

@@ -30,6 +30,8 @@ You can create a `ConfigMap` by pointing at a file containing the application
 configuration. Download this properties file to your local machine which
 contains the database credentials: 
 
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
 [source,bash,role=copypaste]
 ----
 http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/raw/{{NATIONALPARKS_VERSION}}/ose3/application-dev.properties
@@ -127,6 +129,8 @@ $ oc env dc/nationalparks MONGODB_USER- MONGODB_PASSWORD- MONGODB_DATABASE- MONG
 
 You have now externalized `nationalparks` configuration. Visit the `nationalparks` web
 service to very the database connection is working correctly.:
+
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
 
 [source,bash]
 ----

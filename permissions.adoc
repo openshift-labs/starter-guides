@@ -25,6 +25,8 @@ image::membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
+CAUTION: In the following url(s), replace `{{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}` with the project provided to you.
+
 [source,bash,role=copypaste]
 ----
 $ oc project {{EXPLORE_PROJECT_NAME}}{{USER_SUFFIX}}
@@ -60,7 +62,7 @@ to see what resources are within the *Project*. This also has the added benefit
 of suppressing the error message! Although, in reality, we fixed the application.
 
 Another way you could have done the same is by using the OpenShift console. Once you're on the 
-*"Applications --> Membership"* page, click on Service Accounts, and then on *"Edit Membership"* button.
+*"Resources --> Membership"* page, click on Service Accounts, and then on *"Edit Membership"* button.
 
 image::membership_serviceaccount-list.png[Service account list]
 
