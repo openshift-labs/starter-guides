@@ -30,7 +30,10 @@ vars:
 
 modules:
   activate:
+  - environment
   - parksmap-architecture
+  - install
+  - explore
   - docker
   - scaling
   - routes
@@ -40,6 +43,9 @@ modules:
   - java
   - databases
   - application-health
-  - codechanges
+  - codechanges-gogs
   - templates
+  - binary-build
+  - debugging
   - clustering
+  - further-resources
