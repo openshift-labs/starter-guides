@@ -115,8 +115,10 @@ To
 {% else %}
 
 Click "Project" at the top of the Gogs page, and then "Files" towards the
-middle of the page. This is Gogs's repository view. Make sure that the
-drop-down menu at the upper right is set for the `{{NATIONALPARKS_VERSION}}` branch. Navigate to the
+middle of the page. This is Gogs's repository view. 
+
+CAUTION: Make sure that the drop-down menu at the upper right is set for 
+the *`{{NATIONALPARKS_VERSION}}`* branch. Navigate to the
 following path:
 
 [source,bash]

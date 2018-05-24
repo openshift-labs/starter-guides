@@ -180,10 +180,13 @@ image::service-catalog-java-s2i.png[Java S2I]
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
-These labs were written against specific points in time for these
-applications. With Git as our version control system (VCS), we are using the
-concept of *Branches/Tags*. Click on *Advanced Options*. In the *Git Reference* field enter "*{{NATIONALPARKS_VERSION}}*". This will cause the S2I
+In the *Git Repository* field enter the base of the Git repository for
+your Nationaparks application. This will cause the S2I
 process to grab that specific tag in the code repository.
+
+If you were to specify a specific branch or directory in the repository for your code, you would be able to do it in the *Advanced Options*. 
+
+Don't click *Create*, but click on *Advanced Options*, as there's more things we are going to configure.
 
 image::service-catalog-java-advanced.png[Runtimes]
 
@@ -193,7 +196,7 @@ To speed build process, a Sonatype Nexus server is running in the environment
 that will cache your dependencies as you pull them down. To use it, you need to
 scroll down to *Build Configuration* and add an environment variable named
 *MAVEN_MIRROR_URL* with value
-`http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public`
+`http://nexus.ocp-workshop.svc.cluster.local:8081/content/groups/public`
 
 image::new-national-parks-2.png[Runtimes]
 {% endif %}

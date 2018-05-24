@@ -93,7 +93,7 @@ If you want to use command line:
 {% if USE_MAVEN %}
 [source,bash]
 ----
-oc new-app mlbparks --name=mlbparks -p GIT_REF={{MLBPARKS_VERSION}} -p MAVEN_MIRROR_URL=http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public
+oc new-app mlbparks --name=mlbparks -p GIT_REF={{MLBPARKS_VERSION}} -p MAVEN_MIRROR_URL=http://nexus.ocp-workshop.svc.cluster.local:8081/content/groups/public
 ----
 
 {% else %}
@@ -124,7 +124,7 @@ You will see the following output:
         * Mongodb App=mongodb-mlbparks
         * Git source repository=https://github.com/openshift-roadshow/mlbparks
         * Git branch/tag reference={{MLBPARKS_VERSION}}
-        * Maven mirror url=http://nexus.workshop-infra.svc.cluster.local:8081/content/groups/public
+        * Maven mirror url=http://nexus.ocp-workshop.svc.cluster.local:8081/content/groups/public
         * Database name=mongodb
         * MONGODB_NOPREALLOC=
         * MONGODB_SMALLFILES=
