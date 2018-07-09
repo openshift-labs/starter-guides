@@ -1,0 +1,251 @@
+## Lab: Deploying Python Code
+
+### Application Description
+In this lab, we're going to deploy a backend service, developed in Python
+programming language that will expose 2 main REST endpoints to the visualizer
+application (`parksmap` web component that was deployed in the previous labs).
+The application will query for national parks information (including it's
+coordinates) that is stored in a Mongo database.
+This application will also provide an external access point, so that the API
+provided can be directly used by the end user.
+
+image::roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
+
+### Background: Source-to-Image (S2I)
+
+In a previous lab, we learned how to deploy a pre-existing Docker-formatted
+image. Now we will expand on that a bit by learning how OpenShift builds
+Docker images using source code from an existing repository.
+
+https://github.com/openshift/source-to-image[Source-to-Image (S2I)] is another
+open source project sponsored by Red Hat. Its goal:
+
+[quote]
+__
+Source-to-image (S2I) is a tool for building reproducible Docker images. S2I
+produces ready-to-run images by injecting source code into a Docker image and
+assembling a new Docker image which incorporates the builder image and built
+source. The result is then ready to use with docker run. S2I supports
+incremental builds which re-use previously downloaded dependencies, previously
+built artifacts, etc.
+__
+
+OpenShift is S2I-enabled and can use S2I as one of its build mechanisms (in
+addition to building Docker images from Dockerfiles, and "custom" builds).
+
+OpenShift runs the S2I process inside a special *Pod*, called a Build
+Pod, and thus builds are subject to quotas, limits, resource scheduling, and
+other aspects of OpenShift.
+
+A full discussion of S2I is beyond the scope of this class, but you can find
+more information about it either in the
+https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
+or on GitHub (following the link above). The only key concept you need to
+remember about S2I is that it's magic.
+
+### Exercise: Creating a Python application
+
+The backend service that we will be deploying as part of this exercise is
+called `nationalparks`.  This is a Python application that performs 2D
+geo-spatial queries against a MongoDB database to locate and return map
+coordinates of all National Parks in the world. That was just a fancy way of
+saying that we are going to deploy a webservice that returns a JSON list of
+places.
+
+#### Add to Project
+Because the `nationalparks` application is a back-end to serve data that our
+existing front-end will consume, we are going to build it inside the existing
+`userXY` project. And, we will do it from the
+web console.
+
+#### Using application code
+
+OpenShift can work with any accessible Git repository. This could be GitHub,
+GitLab, or any other server that speaks Git. You can even register webhooks in
+your Git server to initiate OpenShift builds triggered by any update to the
+application code!
+
+{% if GIT_HOST == "github" %}
+The repository that we are going to use is available at Github.com
+
+https://github.com/openshift-roadshow/nationalparks-py[https://github.com/openshift-roadshow/nationalparks-py]
+
+NOTE: To be able to do code changes later in the workshop, you should fork the
+repository into your own Github account.
+
+{% else %}
+The repository that we are going to use is already cloned in the internal GitLab repository
+and located at the following URL:
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}]
+
+Your GitLab credentials are: *{{GITLAB_USER}}/{{GITLAB_PASSWORD}}*
+
+Later in the lab, we want you to make a code change and then rebuild your
+application. This is a fairly simple Python application.
+{% endif %}
+
+#### Build the Code on OpenShift
+
+While the `new-app` command makes it very easy to get OpenShift to build code
+from a GitHub/GitLab repository into a Docker image, we can also use the web
+console to do the same thing. Similar to how we used "Add to project" before
+with a Docker-formatted image, we can do the same for specifying a source code
+repository.
+{% if GIT_HOST == "github" %} You have already forked the Github repository so
+let's use it with a simple Python S2I image.
+{% else %} Since for this lab you have your own GitLab repository let's use it
+with a simple Python S2I image.
+{% endif %}
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+In the OpenShift web console, find your
+`userXY` project, and then
+click on `Browse Catalog` in the *"Add to Project"* drop down.
+You will see a number of technologies and runtimes that you
+can choose from.
+Search for `python` and select it.
+
+image::ocp-runtimes-python.png[Runtimes]
+
+After you select `python`, click `Next` and on the next screen choose version `3.6`, you will need to enter a
+name and a Git repository URL. For the name, enter `nationalparks`, and for
+the Git repository URL, enter:
+
+{% if GIT_HOST != "github" %}
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+{% endif %}
+
+
+[source,bash]
+----
+{% if GIT_HOST == "github" %}
+https://github.com/(your Github username)/nationalparks-py.git
+{% else %}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py.git
+{% endif %}
+----
+
+NOTE: All of these runtimes shown are made available via *Templates* and
+*ImageStreams*, which will be discussed in a later lab.
+
+image::new-national-parks-1-py.png[Runtimes]
+
+{% if modules.pipelines %}
+
+These labs were written against specific points in time for these
+applications. With Git as our version control system (VCS), we are using the
+concept of *Branches/Tags*. Click on *Show advanced routing, build, and deployment
+options*. In the *Git Reference* field enter "1.0.0". This will cause the S2I
+process to grab that specific tag in the code repository.
+
+image::nationalparks-tag-py.png[Runtimes]
+
+{% endif %}
+
+You can then hit the button labeled *"Create"*. Then click *Continue to
+overview*. You will see the build logs right there:
+
+image::overview-build-log.png[Build log]
+
+From the command line, you can also see the *Builds*:
+
+[source,bash]
+----
+$ oc get builds
+----
+
+You'll see output like:
+
+[source,bash]
+----
+NAME              TYPE      FROM          STATUS     STARTED              DURATION
+nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
+----
+
+You can also view the build logs with the following command:
+
+[source,bash]
+----
+$ oc logs -f builds/nationalparks-1
+----
+
+After the build has completed and successfully:
+
+* The S2I process will push the resulting Docker-formatted image to the internal OpenShift registry
+* The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
+  will cause a new deployment to happen.
+* A *ReplicationController* (RC) will be spawned for this new deployment.
+* The RC will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
+
+In the end, when issuing the `oc get pods` command, you will see that the build Pod
+has finished (exited) and that an application *Pod* is in a ready and running state:
+
+[source,bash]
+----
+NAME                    READY     STATUS      RESTARTS   AGE
+nationalparks-1-tkid3   1/1       Running     3          2m
+nationalparks-1-build   0/1       Completed   0          3m
+parksmap-1-4hbtk        1/1       Running     0          2h
+----
+
+If you look again at the web console, you will notice that, when you create the
+application this way, OpenShift also creates a *Route* for you. You can see the
+URL in the web console, or via the command line:
+
+[source,bash]
+----
+$ oc get routes
+----
+
+Where you should see something like the following:
+
+[source,bash]
+----
+NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
+nationalparks   nationalparks-userXY.{{ROUTER_ADDRESS}}             nationalparks   8080-tcp
+parksmap        parksmap-userXY.{{ROUTER_ADDRESS}}                  parksmap        8080-tcp
+----
+
+In the above example, the URL is:
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash]
+----
+http://nationalparks-userXY.{{ROUTER_ADDRESS}}
+----
+
+Since this is a back-end application, it doesn't actually have a web interface.
+However, it can give us some data. All back ends that work with the parks map
+front end are required to implement a `/ws/info/` endpoint. To test, the
+complete URL to enter in your browser is:
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash]
+----
+http://nationalparks-userXY.{{ROUTER_ADDRESS}}/ws/info/
+----
+
+WARNING: The trailing slash is *required*.
+
+You will see a simple JSON string:
+
+[source,json]
+----
+{"id":"nationalparks","displayName":"National Parks","center":{"latitude":"47.039304","longitude":"14.505178"},"zoom":4}
+----
+
+Earlier we said:
+
+[quote]
+__
+This is a Python application that performs 2D geo-spatial queries
+against a MongoDB database
+__
+
+But we don't have a database. Yet.

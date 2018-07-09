@@ -1,0 +1,198 @@
+## Lab: Deploying Java Code on JBoss
+
+### Background: Source-to-Image (S2I)
+
+In lab three we learned how to deploy a pre-existing Docker image from a Docker
+registry. Now we will expand on that a bit by learning how OpenShift builds
+Docker images using source code from an existing repository.
+
+https://github.com/openshift/source-to-image[Source-to-Image (S2I)] is another
+open source project sponsored by Red Hat. Its goal:
+
+    Source-to-image (S2I) is a tool for building reproducible Docker images. S2I
+    produces ready-to-run images by injecting source code into a Docker image and
+    assembling a new Docker image which incorporates the builder image and built
+    source. The result is then ready to use with docker run. S2I supports
+    incremental builds which re-use previously downloaded dependencies, previously
+    built artifacts, etc.
+
+OpenShift is S2I-enabled and can use S2I as one of its build mechanisms (in
+addition to building Docker images from Dockerfiles, and "custom" builds).
+
+OpenShift runs the S2I process inside a special *Pod*, called a Build
+Pod, and thus builds are subject to quotas, limits, resource scheduling, and
+other aspects of OpenShift.
+
+A full discussion of S2I is beyond the scope of this class, but you can find
+more information about it either in the
+https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
+or on GitHub (following the link above). The only key concept you need to
+remember about S2I is that it's magic.
+
+#### Exercise: Creating a WildFly application
+
+The backend service we will be deploying as part of this exercise is
+called `nationalparks`.  This application is a Java EE-based application that
+performs 2D geo-spatial queries against a MongoDB database to locate and map all
+National Parks in the world. That was just a fancy way
+of saying that we are going to deploy a map of National Parks.
+
+##### Create Project
+
+The first thing you need to do is create a new project called `nationalparks`:
+
+[source]
+----
+$ oc new-project nationalparks{{USER_SUFFIX}}
+Now using project "nationalparks{{USER_SUFFIX}}" on server "https://{{ROUTER_ADDRESS}}".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    $ oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-hello-world.git
+
+to build a new hello-world application in Ruby.
+----
+
+##### Using application code on embedded GitLab
+
+OpenShift can work with any accessible Git repository. This could be GitHub,
+GitLab, or any other server that speaks Git. You can even register webhooks in
+your Git server to initiate OpenShift builds triggered by any update to the
+application code!
+
+The repository that we are going to use is already cloned in the internal GitLab repository
+and located at the following URL:
+
+<< NEEDSFIX >>
+
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/user{{USER_SUFFIX}}/nationalparks.git[http://gitlab.{{ROUTER_ADDRESS}}/dev/openshift3nationalparks.git]
+
+Your GitLab credentials are: {{GITLAB_USER}}/{{GITLAB_PASSWORD}}
+
+Later in the lab, we want you to make a code change and then rebuild your application.
+If you are familiar with Java EE applications, you will notice that there is
+nothing special about our application - it is a standard, plain-old JEE
+application.
+
+
+#### Combine the code with the Docker image on OpenShift
+
+While the `new-app` command makes it very easy to get OpenShift to build code
+from a GitHub/GitLab repository into a Docker image, we can also use the web console to
+do the same thing. Similar to how we used "Add to project" before with a
+Docker-formatted image, we can do the same for specifying a source code
+repository. Since for this lab you have your own GitLab repository let's use it with
+OpenShift's {{JAVA_BUILDER}} S2I image.
+
+In the OpenShift web console, find your `nationalparks{{USER_SUFFIX}}` project, and then
+click the *"Add to Project"* button. You will see a number of runtimes that you
+can choose from, but you will want to select the one titled
+`{{JAVA_BUILDER_STRING}}`. As you might guess, this is going to use an S2I
+builder image that contains {{JAVA_BUILDER_PROPER}}.
+
+<< NEEDS IMAGE >>
+
+image::runtimes.png[Runtimes]
+
+After you click *"Add to Project"*, on the next screen you will need to enter a
+name and a Git repository URL. For the name, enter `openshift3nationalparks`, and for
+the Git repository URL, enter:
+
+    http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/dev/nationalparks.git
+
+NOTE: All of these runtimes shown are made available via *Templates*, which
+will be discussed in a later lab.
+
+image::new_mlbparks_1.png[Runtimes]
+
+**NOTE:** To speed build process, a Sonatype Nexus server is running in the
+environment that will cache your dependencies as you pull them down. To use it,
+you need to click on *Show advanced routing, build, and deployment options*,
+scroll down to *Build Configuration*, add an environment variable named
+*MAVEN_MIRROR_URL* with value *http://nexus.ci:8081/content/groups/public*
+
+image::new_mlbparks_2.png[Runtimes]
+
+You can then hit the button labeled *"Create"*. Then click *Continue to
+overview*. You will see this in the web console:
+
+    Build openshift3nationalparks #1 is running. A new deployment will be created
+    automatically once the build completes. View Log
+
+Go ahead and click *"View Log"*. This is a new Java-based project that uses
+Maven as the build and dependency system.  For this reason, the initial build
+will take a few minutes as Maven downloads all of the dependencies needed for
+the application. You can see all of this happening in real time!
+
+From the command line, you can also see the *Builds*:
+
+[source]
+----
+$ oc get builds
+----
+
+You'll see output like:
+
+[source]
+----
+NAME                        TYPE      FROM        STATUS     STARTED              DURATION
+openshift3nationalparks-1   Source    Git@master  Running    3 minutes ago        1m2s
+----
+
+You can also view the build logs with the following command:
+
+[source]
+----
+$ oc logs -f builds/openshift3nationalparks-1
+----
+
+After the build has completed and successfully:
+
+* The S2I process will push the resulting Docker image to the internal OpenShift registry
+* The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
+  will cause a new deployment to happen.
+* A *ReplicationController* (RC) will be spawned for this new deployment.
+* The RC will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
+
+In the end, when issuing the `oc get pods` command, you will see that the build Pod
+has finished (exited) and that an application *Pod* is in a ready and running state:
+
+[source]
+----
+NAME                              READY     STATUS      RESTARTS   AGE
+openshift3nationalparks-1-build   0/1       Completed   0          4m
+openshift3nationalparks-1-7e3ij   1/1       Running     0          2m
+----
+
+If you look again at the web console, you will notice that, when you create the
+application this way, OpenShift also creates a *Route* for you. You can see the
+URL in the web console, or via the command line:
+
+[source]
+----
+$ oc get routes
+----
+
+Where you should see something like the following:
+
+[source]
+----
+NAME                      HOST/PORT                                                     PATH  SERVICE                   LABELS ...
+openshift3nationalparks   openshift3nationalparks-nationalparks.{{ROUTER_ADDRESS}}          openshift3nationalparks   app=openshift3nationalparks
+----
+
+In the above example, the URL is:
+
+[source]
+----
+http://openshift3nationalparks-nationalparks.{{ROUTER_ADDRESS}}
+----
+
+Verify your application is working by viewing the URL in a web browser.  You should see the following:
+
+image::mlbparks1.png[MLBParks]
+
+Wait a second!  Why are the national parks not showing up?  Well, that is
+because we haven't actually added a database to the application yet.  We will do
+that in the next lab. Congratulations on deploying your first application
+using S2I on the OpenShift Platform!

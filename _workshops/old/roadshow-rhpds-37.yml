@@ -1,0 +1,73 @@
+---
+id: rhpds-workshop-37
+name: OpenShift Workshop
+revision: ocp_3_7
+
+content:
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/37
+
+vars:
+  ENVIRONMENT: "Amazon Web Services"
+  OPENSHIFT_VERSION: "3.7"
+  USE_MAVEN: false
+  METRICS_ENABLED: true
+  LOGGING_ENABLED: true
+  NFS_ENABLED: true
+  ETHERPAD_ENABLED: true
+  ETHERPAD_URL_PREFIX: "pad-ocp-workshop"
+  MASTERS: "1"
+  INFRA: "1"
+  NODES: "15"
+  NUM_USERS: "100"
+  DOCS_URL: docs.openshift.com/container-platform/3.7
+  SUFFIX: "XY"
+  NO_USER_PROJECT: false
+  KIBANA_URL_PREFIX: "kibana"
+  USER_SUFFIX: "userXY"
+  JAVA_BUILDER_PROPER: "JBoss EAP 7"
+  JAVA_BUILDER_STRING: "jboss-eap70-openshift:1.6"
+  USER_NAME: "userXY"
+  USER_PASSWORD: "openshift"
+  GIT_SERVER: "gogs"
+  GITLAB_URL_PREFIX: "gogs-ocp-workshop"
+  GITLAB_USER: "userXY"
+  GITLAB_PASSWORD: "openshift"
+  GITHUB_URL_PREFIX: "www.github.com"
+  GITHUB_ORG: "openshift-roadshow"
+  PARKSMAP_IMAGENAME: "parksmap"
+  PARKSMAP_VERSION: "1.2.0"
+  PARKSMAP_PY: false
+  NATIONALPARKS_VERSION: "1.3.0"
+  MLBPARKS_VERSION: "1.3.0"
+  EXPLORE_PROJECT_NAME: ""
+  DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE: true
+  MW_NAME: "eap"
+  DOWNLOAD_CLIENT_WINDOWS: "https://github.com/openshift/origin/releases/download/v3.7.2/openshift-origin-client-tools-v3.7.2-282e43f-windows.zip"
+  DOWNLOAD_CLIENT_MAC: "https://github.com/openshift/origin/releases/download/v3.7.2/openshift-origin-client-tools-v3.7.2-282e43f-mac.zip"
+  DOWNLOAD_CLIENT_LIN64: "https://github.com/openshift/origin/releases/download/v3.7.2/openshift-origin-client-tools-v3.7.2-282e43f-linux-64bit.tar.gz"
+  OC_VERSION: "oc v3.7.2+282e43f \nkubernetes v1.7.6+a08f5eeb62"
+
+modules:
+  activate:
+  - environment
+  - parksmap-architecture
+  - install
+  - explore
+  - docker
+  - scaling
+  - routes
+  - logging
+  - permissions
+  - remote-ops
+  - java
+  - databases
+#  - configmap
+  - application-health
+#  - pipelines
+  - codechanges-gogs
+  - templates
+  - binary-build
+  - debugging
+  - clustering
+  - further-resources
+

@@ -1,0 +1,155 @@
+## Lab: Integrating with Google Compute Service BigQuery
+
+### Application description
+In this lab, we're going to deploy a complete backend application, consisting of an REST API backend that will query information though using Google's Cloud BigQuery service. The complete application will already be wired together and described as a backend for the map visualization tool, so that once the application is build and deployed, you will be able to see the new map.
+
+The information displayed by this map is the average temperature registered by every public weather sensor in the link:https://cloud.google.com/bigquery/public-data/noaa-gsod[NOAA Global Surface Summary of the Day Weather Data].
+
+image::roadshow-app-architecture-publicweatherdata.png[Application architecture,800,align="center"]
+
+NOTE: As the information provided by this backend is really extensive, query and visualization has been limited to certain level of zooms, so in order to see information, you will probably need to `zoom in`.
+
+#### Exercise: Integrating with Google Compute BigQuery
+
+The backend service we will be deploying as part of this exercise is
+called `publicweatherdata`.  This is a Java Spring Boot application that performs
+data queries against a Google Compute BigQuery to locate and return map
+coordinates of public weather sensors, with average temperature information for a given month.
+That was just a fancy way of saying that we are going to deploy, yet again, a webservice that returns a JSON list of places.
+
+#### Before you begin
+Before you start, make sure you have already done the following steps:
+
+1. link:https://console.cloud.google.com/project?_ga=1.132090187.550669370.1466440172[Select or create a Cloud Platform project].
+2. link:https://support.google.com/cloud/answer/6293499#enable-billing[Enable billing for your project], if you already have a Google API or Google Cloud Platform account you may not need to do this.
+3. link:https://console.cloud.google.com/flows/enableapi?apiid=bigquery&_ga=1.103140804.550669370.1466440172[BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to Enable the BigQuery API]
+
+The BigQuery web UI provides an interface to query tables, including public tables offered by BigQuery, and link:https://bigquery.cloud.google.com/table/top-amplifier-139909:gsod.temp_20xx[the one used in this lab].
+
+To take a peek into the data you will be using, you can:
+
+1.  link:https://bigquery.cloud.google.com/table/top-amplifier-139909:gsod.temp_20xx[Log in to our BigQuery dataset]
+
+2. Click the QUERY TABLE button.
+Copy and paste the following query into the New Query text area:
++
+[source]
+----
+SELECT * FROM [top-amplifier-139909:gsod.temp_20xx];
+----
+
+3. Click the circular icon to activate the query validator.
++
+A green or red section displays above the buttons depending on whether the query is valid or invalid. If valid, the validator also describes the amount of data that will be processed once you run the query. This is helpful for determining how much a query will cost to run.
++
+image:/images/bigquery-query-validate.png[Big Query Validate]
+
+4. Click the RUN QUERY button. The query results display below the buttons.
++
+image:/images/bigquery-query.png[Big Query]
+
+#### Create web application credentials
+
+You need to allow the server side code to connect to your Google API. For this
+you will need a Google *service account*, which is an account that is used by your application to query Google APIs. The application calls Google APIs on behalf of the service account, so users aren't directly involved.
+
+To support server-to-server interactions, first create a service account for your project in the API Console
+
+Then, your application prepares to make authorized API calls by using the service account's credentials to request an access token from the OAuth 2.0 auth server.
+
+Finally, your application can use the access token to call Google APIs.
+
+#### Creating a Google Compute service account
+
+A service account's credentials include a generated email address that is unique and at least one public/private key pair.
+
+If your application doesn't run on Google App Engine or Google Compute Engine, you must obtain these credentials in the Google API Console. To generate service-account credentials, or to view the public credentials that you've already generated, do the following:
+
+* Open the link:https://console.developers.google.com/permissions/serviceaccounts[Service accounts page]. If prompted, select a project.
+* Click *Create service account*.
+* In the *Create service account* window, type a name for the service account, and select *Furnish a new private key.* Then click *Create*.
++
+image:/images/create_gcp_service_account.png[]
++
+image:/images/gcp_service_account_created.png[]
+
+Your new public/private key pair is generated and downloaded to your machine; it serves as the only copy of this key. You are responsible for storing it securely.
+
+You can return to the link:https://console.developers.google.com/[API Console] at any time to view the email address, public key fingerprints, and other information, or to generate additional public/private key pairs.
++
+image:/images/gcp_service_accounts.png[]
+
+Take note of the service account's email address and store the service account's JSON private key file in a location accessible to your terminal/console.  Your application needs them to make authorized API calls. 
+
+**Rename your JSON file to google-creds.json to make the rest of the instructions easy.**
+
+#### Create a secret with the service account information
+
+Once you have your Google credentials created, you need to provide them to the application. For this purpose we will use *link:https://docs.openshift.org/dev_guide/secrets.html[OpenShift's secrets]*.
+
+It is as easy as:
+
+[source,bash]
+----
+$ oc create secret generic google-creds --from-file=/{directory}/google-creds.json
+----
+
+And then you can validate that the secrets have been created:
+
+[source,bash]
+----
+$ oc describe secret/google-creds
+Name:      google-creds
+Namespace:   roadshow
+Labels:      <none>
+Annotations:   <none>
+
+Type:   Opaque
+
+Data
+====
+google-creds.json:   2338 bytes
+----
+
+#### Deploy a template to connect to BigTable
+Because the `publicweatherdata` application is a back-end to serve data that our
+existing front-end will consume, we are going to deploy it inside the existing
+`userXY` project. And, we will do it from the web console.
+
+#### Deploy the Application on OpenShift
+
+In the OpenShift web console, find your `userXY` project, and then
+click the *"Add to Project"* button. You will see a number of runtimes and templates that you
+can choose from, but you will want to select the template that specifies all the pieces to use BigQuery, so let's filter using `publicweather`.
+
+image:/images/gcp_template_filter.png[Runtimes]
+
+After you click `publicweatherdata`, on the next screen you will need to enter some configuration for the template.
+Also, you will need to provide some configuration for the application to connect to the Google BigQuery service.
+
+The values required are:
+
+* *Month*: Month of the year for which you want to get weather information (with 2 digit format).
+* *GCP Project Id*: This is a reference to your Google's project id to use. Find this value in the Google Compute. It usually has the form of something like: *massive-vector-159812*
++
+image:/images/gcp_project_id.png[Google Project Id]
++
+* *GCP Credentials dir*: This is where the application will find the google credentials json file that we have mounted as a secret. Use the value provided.
+* *GCP Credentials filename*: This is the name of the google's credentials file that has been stored in the secret. Use the default value.
+
+image:/images/gcp_template_use.png[]
+
+You can then hit the button labeled *"Create"*. Then click *Continue to
+overview*. Once the application has been succesfully built and deployed, you will see this in the web console:
+
+image:/images/gcp_publicweatherdata.png[]
+
+#### Viewing the Application on OpenShift
+
+Once the application is deployed, you'll see in the map a new service added. As this service provides too much information, it's only enabled when zoomed in to the map, otherwise you will see a message in the bottom left corner indicating that data retrieval is disabled.
+
+Zoom in, into an area of your choice an you'll see the data displayed. You can click on any dot to get the actual values.
+
+image:/images/gcp_weather_map.png[]
+
+This information is directly coming from querying a Google Compute Big Table.

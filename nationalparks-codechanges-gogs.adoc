@@ -1,0 +1,212 @@
+## Lab: Making Code Changes and using webhooks
+
+### Background: Web Hooks
+
+Most Git repository servers support the concept of web hooks -- calling to an
+external source via HTTP(S) when a change in the code repository happens.
+OpenShift provides an API endpoint that supports receiving hooks from
+remote systems in order to trigger builds. By pointing the code repository's
+hook at the OpenShift API, automated code/build/deploy pipelines can be
+achieved.
+
+#### Exercise: Configuring Gogs Web Hooks
+In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `userXY` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
+
+On this screen you will see the option to copy the generic webhook URL as shown in the following image:
+
+image::nationalparks-codechanges-webhook-config.png[Webhook]
+
+Once you have the URL copied to your clipboard, navigate to the code repository
+that you have on your local Gogs:
+
+CAUTION: In the following url(s), replace `userXY` with the Git username provided to you.
+
+[source,bash,role=copypaste]
+----
+http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/userXY/nationalparks
+----
+
+[NOTE]
+====
+The credentials for this Gogs instance are the same as for our OpenShift instance
+====
+
+Click the Settings link on the top right of the screen:
+
+image::nationalparks-codechanges-gogs-settings.png[Webhook]
+
+Click on webhooks, and the on `Add Webhook` button.
+
+image::nationalparks-codechanges-gogs-add-webhook.png[Webhook]
+
+In the next screen, paste your link into the "URL" field. You can leave the
+secret token field blank -- the secret is already in the URL and does not need
+to be in the payload, or copy it from the URL.
+
+Change the `Content Type` to `application/x-www-form-urlencoded`.
+
+Finally, click on "Add webhook".
+
+image::nationalparks-codechanges-gogs-config-webhook.png[Webhook]
+
+Boom! From now on, every time you commit new source code to your Gogs
+repository, a new build and deploy will occur inside of OpenShift.  Let's try
+this out.
+
+#### Exercise: Using Gogs Web Hooks
+Click "Project" at the top of the Gogs page, and then "Files" towards the
+middle of the page. This is Gogs's repository view. 
+
+CAUTION: Make sure that the drop-down menu at the upper right is set for 
+the *`master`* branch. Navigate to the
+following path:
+
+[source,bash]
+----
+src/main/java/com/openshift/evg/roadshow/parks/rest/
+----
+
+Then click on the `BackendController.java` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::nationalparks-codechanges-gogs-change-code.png[Webhook]
+
+Change line number 20:
+
+[source,java]
+----
+return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+To
+
+[source,java]
+----
+return new Backend("nationalparks","OpenShift National Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+Click on Commit changes at the bottom of the screen. Feel free to enter a commit
+message.
+
+Once you have committed your changes, a *Build* should almost instantaneously be
+triggered in OpenShift. Look at the *Builds* page in the web console, or run the
+following command to verify:
+
+[source,bash]
+----
+$ oc get builds
+----
+
+You should see that a new build is running:
+
+[source,bash]
+----
+NAME              TYPE      FROM          STATUS     STARTED          DURATION
+nationalparks-1   Source    Git@b052ae6   Complete   18 hours ago     36s
+nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago
+----
+
+Once the build and deploy has finished, verify your new Docker image was
+automatically deployed by viewing the application in your browser:
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash,role=copypaste]
+----
+http://nationalparks-userXY.{{ROUTER_ADDRESS}}/ws/info/
+----
+
+You should now see the new name you have set in the JSON string returned.
+
+NOTE: To see this in the map's legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
+
+
+#### Exercise: Rollback
+
+OpenShift allows you to move between different versions of an application
+without the need to rebuild each time. Every version (past builds) of the
+application exists as a Docker-formatted image in the OpenShift registry. Using
+the `oc rollback` and `oc deploy` commands you can move back- or forward between
+various versions of applications.
+
+In order to perform a rollback, you need to know the name of the *Deployment Config*
+which has deployed the application:
+
+[source,bash]
+----
+$ oc get dc
+----
+
+The output will be similar to the following:
+
+[source,bash]
+----
+NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb              1          1         1         config,image(mongodb:3.2)
+parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+nationalparks        9          1         1         config,image(nationalparks:master)
+----
+Now run the following command to rollback the latest code change:
+
+[source,bash]
+----
+$ oc rollback nationalparks
+----
+
+You will see output like the following:
+
+[source,bash]
+----
+#5 rolled back to nationalparks-3
+Warning: the following images triggers were disabled: nationalparks:live
+  You can re-enable them with: oc set triggers dc/nationalparks --auto
+----
+
+Once the deploy is complete, verify that the page header is reverted to the
+original header by viewing the application in your browser.
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash,role=copypaste]
+----
+http://nationalparks-userXY.{{ROUTER_ADDRESS}}/ws/info/
+----
+
+[NOTE]
+====
+Automatic deployment of new images is disabled as part of the rollback
+to prevent unwanted deployments soon after the rollback is complete. To re-enable
+the automatic deployments run this:
+
+[source,bash]
+----
+$ oc set triggers dc/nationalparks --auto
+----
+====
+
+#### Exercise: Rollforward
+
+Just like you performed a rollback, you can also perform a roll-forward using
+the same command. You'll notice above that when you requested a *rollback*, it
+caused a new deployment (#3). In essence, we always move forwards in OpenShift,
+even if we are going "back".
+
+So, if we want to return to the "new code" version, that is deployment #4.
+
+[source,bash]
+----
+$ oc rollback nationalparks-4
+----
+
+And you will see the following:
+[source,bash]
+----
+#6 rolled back to nationalparks-4
+Warning: the following images triggers were disabled: nationalparks
+  You can re-enable them with: oc set triggers dc/nationalparks --auto
+----
+
+Cool! Once the *rollback* is complete, verify you again see "OpenShift
+National Parks".

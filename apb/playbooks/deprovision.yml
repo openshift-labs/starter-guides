@@ -1,0 +1,18 @@
+- name: java-starter-guides playbook to deprovision the application
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  roles:
+  - role: ansible.kubernetes-modules
+    install_python_requirements: no
+  - role: ansibleplaybookbundle.asb-modules
+  - role: common-definitions
+  # Input:
+  #     openshift_user
+  #     openshift_password
+  #     openshift_token
+  # Output:
+  #     apps_hostname_suffix
+  - role: deprovision-java-starter-guides
+    playbook_debug: false

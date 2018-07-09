@@ -1,0 +1,175 @@
+config:
+  vars:
+    ##
+    # Common variables (environment dependant)
+    # 
+    - name: CONSOLE_ADDRESS
+      desc: Address to access the OpenShift console
+      value: https://master.osevg.openshiftworkshop.com
+    - name: ROUTER_ADDRESS
+      desc: Router DNS suffix (https://appname-project.<suffix>)
+      value: "apps.osevg.openshiftworkshop.com"
+    - name: INFRA_PROJECT
+      desc: Infrastructure project name
+      value: ocp-workshop
+    - name: USER_PASSWORD
+      desc: Password to login
+      value: "openshift"
+    ##
+    # Common fixed variables
+    # 
+    - name: DOCS_URL
+      desc: URL prefix to access docs (docs.openshift.org/latest) without the protocol prefix. (https:// will be used.)
+      value: docs.openshift.com/container-platform/latest
+    ##
+    # Module environment
+    # 
+    - name: ENV_MASTERS
+      desc: Number of master nodes in the cluster
+      value: 1
+    - name: ENV_INFRA
+      desc:  Number of ENV_INFRA nodes in the cluster
+      value: 1
+    - name: ENV_NODES
+      desc: Number of container nodes in the cluster
+      value: 20
+    ##
+    # Module installing CLI
+    # 
+    - name: DOWNLOAD_CLIENT_WINDOWS
+      desc: URL to download oc client for Windows
+      value: "https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-windows.zip"
+    - name: DOWNLOAD_CLIENT_MAC
+      desc: URL to download oc client for macOS
+      value: "https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-mac.zip"
+    - name: DOWNLOAD_CLIENT_LIN32
+      desc: URL to download oc client for 32bit Linux
+      value: ""
+    - name: DOWNLOAD_CLIENT_LIN64
+      desc: URL to download oc client for 64bit Linux
+      value: "https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz"
+    - name: OC_VERSION
+      desc: Expected oc version when `oc version` is executed
+      value: "oc v3.9.0+191fece\nkubernetes v1.9.1+a0ce1bc657"
+    ##
+    # Module docker
+    # 
+    - name: PARKSMAP_IMAGENAME
+      desc: Docker image name for the parksmap application
+      value: "parksmap"
+    - name: PARKSMAP_VERSION
+      desc: Version of parksmap to use
+      value: "1.2.0"
+
+modules:
+  common-environment:
+    name: Environment Overview
+    vars:
+      ENV_MASTERS:
+      ENV_INFRA:
+      ENV_NODES:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:
+  common-parksmap-architecture:
+    name: Architecture Overview of the ParksMap Application
+  common-cli:
+    name: Installing the *oc* client tool
+    vars:
+      DOWNLOAD_CLIENT_WINDOWS:
+      DOWNLOAD_CLIENT_MAC:
+      DOWNLOAD_CLIENT_LIN32:
+      DOWNLOAD_CLIENT_LIN64:
+      OC_VERSION:
+  common-explore:
+    name: Exploring the CLI and Web Console
+    vars:
+      CONSOLE_ADDRESS:
+      USER_PASSWORD:
+      DOCS_URL:
+  parksmap-docker:
+    name: Deploying our First Docker Image
+    vars:
+      CONSOLE_ADDRESS:
+      DOCS_URL:
+      PARKSMAP_IMAGENAME:
+      PARKSMAP_VERSION:
+  parksmap-scaling:
+    name: Scaling
+    vars:
+      DOCS_URL:
+      PARKSMAP_VERSION:
+  parksmap-routes:
+    name: Creating Routes
+    vars:
+      PARKSMAP_VERSION:
+  parksmap-logging:
+    name: Exploring OpenShift's Logging Capabilities
+    vars:
+      ROUTER_ADDRESS:
+  parksmap-permissions:
+    name: Role-Based Access Control
+  parksmap-rsh:
+    name: Remote access
+  nationalparks-java:
+    name: Deploying Java Code
+    vars:
+      DOCS_URL:
+      ROUTER_ADDRESS:
+      INFRA_PROJECT:
+  nationalparks-databases:
+    name: Adding a Database (MongoDB)
+    vars:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+#  configmap:
+#    name: Externalizing Application Configurations
+#    requires:
+#  #    - java
+#  #    - databases
+  nationalparks-application-health:
+    name: Application Health
+    vars:
+      DOCS_URL:
+#  pipelines:
+#    name: Automating Deployment with CI/CD Pipeline
+#    vars:
+#      DISABLE_NATIONALPARKS_DEPLOYMENT_PIPELINE:
+#    requires:
+#  #    - java
+#  #    - databases
+#      - application-health
+#  codechanges:
+#    name: Using Source 2 Image for Code Changes
+  nationalparks-codechanges-gogs:
+    name: Using Source 2 Image for Code Changes
+    vars:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+#  canaryrelease:
+#    name: Canary Release to Production
+#    requires:
+#      - pipelines
+  mlbparks-templates:
+    name: Using Application Templates
+    vars:
+      INFRA_PROJECT:
+  mlbparks-clustering:
+    name: Clustering Stateful Java EE Applications
+  mlbparks-binary-build:
+    name: Binary Builds for Day to Day Development
+    vars:
+      DOCS_URL:
+      ROUTER_ADDRESS:
+  mlbparks-debugging:
+    name: Using Port-Forwarding and Remote Debugging
+    vars:
+      DOCS_URL:
+  common-further-resources:
+    name: Further resources
+#  quotas:
+#    name: Limiting application resource usage
+#  run-as-non-root:
+#    name: Running a container as a non Root user
+#  gcp-bigquery:
+#    name: Integrating with Google Compute Service BigQuery

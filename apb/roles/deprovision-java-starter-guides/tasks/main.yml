@@ -1,0 +1,24 @@
+---
+#
+# Delete:
+#  - gogs
+#  - etherpad
+#  - nexus
+#  - guides
+#  - User projects
+#
+- name: Delete infrastructyre services from {{ namespace }}
+  command: "oc delete all,cm,secret,pvc,sa -l app={{ item }} -n {{ namespace }}"
+  with_items:
+    - etherpad
+    - gogs
+    - nexus
+    - starter-guides
+    - che
+    - ocp-ops-view
+
+# Remove users projects
+- name: Delete user projects
+  command: "oc delete project {{ item }}"
+  ignore_errors: true
+  with_sequence: start=1 end={{ user_count }} format={{ user_format }}

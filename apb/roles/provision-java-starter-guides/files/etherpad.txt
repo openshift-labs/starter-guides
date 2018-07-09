@@ -1,0 +1,3 @@
+Welcome to the \"Getting started for Developers\" on OpenShift Workshop.
+
+Assign yourself a user:

@@ -1,0 +1,39 @@
+## Lab: Canary Release to Production
+
+### Background: Canary Release
+
+
+#### Exercise: TBD
+
+Got to GitLab and change "National Parks" name to "National Parks Geo" in `src/main/java/com/openshift/evg/roadshow/parks/rest/BackendController.java`.
+Commit the change to trigger the pipeline and wait at "Input Required" in pipeline
+
+Go to *Applications* -> *Routes* and click on `nationalparks-live`. Edit the route
+
+image::canary-edit-route.png[Edit Route]
+
+image::canary-split-link.png[Split Traffic Link]
+
+image::canary-alt-service.png[Choose Alternative Service]
+
+image::canary-split-traffic.png[Split Traffic]
+
+Make Router to do round robin
+
+[source]
+----
+$ oc annotate route/nationalparks-live haproxy.router.openshift.io/balance=roundrobin
+----
+
+Test the route
+
+[source]
+----
+for i in {1..10}; do curl http://nationalparks-live-demo.10.2.2.15.xip.io/ws/info/ ; echo "" ; done
+----
+
+
+Open parksmap in Chrome > Incognito or Firefox > New Private Window in order to disable caching. Refresh
+the page a few times and you should see every few requests the name of nationalparks in the right top menu changes.
+
+When happy with the change, go to pipeline and click on promote to deploy the change in the live environment.

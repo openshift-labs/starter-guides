@@ -1,0 +1,51 @@
+---
+id: training
+name: OpenShift training
+
+content:
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/master
+
+vars:
+  USER_NAME: "(username)"
+  USER_PASSWORD: "(passowrd)"
+  NO_USER_PROJECT: "true"
+  EXPLORE_PROJECT_NAME: ""
+  USER_SUFFIX: userXY
+  GIT_SERVER: github
+  GITHUB_ORG: openshift-roadshow
+  PARKSMAP_PY: false
+
+  PARKSMAP_IMAGENAME: "parksmap"
+  PARKSMAP_VERSION: "1.2.0"
+  PARKSMAP_PY: true
+  NATIONALPARKS_VERSION: "master"
+  MLBPARKS_VERSION: "1.3.0"
+
+  DOWNLOAD_CLIENT_WINDOWS: https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-windows.zip
+  DOWNLOAD_CLIENT_MAC: https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-mac.zip
+  DOWNLOAD_CLIENT_LIN64: https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
+  OC_VERSION: "oc v3.9.0+191fece\nkubernetes v1.9.1+a0ce1bc657"
+  GIT_HOST: github
+  DOCS_URL: docs.openshift.org
+
+modules:
+  activate:
+  - environment
+  - parksmap-architecture
+  - install
+  - explore
+  - docker
+  - scaling
+  - routes
+  - logging
+  - permissions
+  - remote-ops
+  - java
+  - databases
+  - application-health
+  - codechanges-gogs
+  - templates
+  - binary-build
+  - debugging
+  - clustering
+  - further-resources

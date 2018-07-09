@@ -1,0 +1,201 @@
+== Lab: Running Your Images as a Non-Root User
+
+If you look at most of the images on Dockerhub they run as the root user - so if yours
+does as well you have a lot of company. Unfortunately this is a bad security practice.
+You don't run your desktop as a "root" user and especially not on your servers, so there
+is no reason you should do it on your containers. All those same reasons that warn against
+running as an account with admin priveliges still apply in Docker land.
+
+Running in OpenShift Container Platform, OpenShift Online, and OpenShift dedicated requires
+that your container be able to run as a random non-admin userid. For our class we are going
+to use a simple example.
+
+=== Making a CentOS Apache HTTPD Image
+
+We are going to start with a CentOS image and Apache HTTPD to the image. Since you have
+already built Docker images before I will just give you the GitHub repo. with my simple
+image:
+
+https://github.com/thesteve0/myDockerImages/tree/master/simple
+
+Here is the Dockerfile with the comments removed:
+
+[source, Dockerfile]
+-----
+FROM centos:centos7
+
+MAINTAINER Steve Pousty <thesteve0@redhat.com>
+
+RUN yum install -y --setopt=tsflags=nodocs httpd.x86_64 && yum clean all -y
+
+EXPOSE 80
+
+CMD /usr/sbin/apachectl -DFOREGROUND
+
+#docker run -p 80:80 6e3c25bdca9b
+-----
+
+You should be able to run this no problem on your machine. If we push this to Dockerhub we
+can actually run this in the A1VM since the OpenShift cluster does not enforce most
+of the security policies.
+
+First we need to push the image to DockerHub
+
+[source, terminal]
+----
+$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: thesteve0
+Password:
+Login Succeeded
+$ docker push thesteve0/centoshttpd
+
+----
+
+Now with our command line we run this in OpenShift with the OC command line tools:
+
+[source, bash]
+----
+$ oc login  #your username and password can be anything you want
+$ oc new-project mydockerimages
+$ oc new-app thesteve0/centoshttpd
+--> Found Docker image 6e3c25b (4 days old) from Docker Hub for "thesteve0/centoshttpd"
+
+    * An image stream will be created as "centoshttpd:latest" that will track this image
+    * This image will be deployed in deployment config "centoshttpd"
+    * Port 80/tcp will be load balanced by service "centoshttpd"
+      * Other containers can access this service through the hostname "centoshttpd"
+    * WARNING: Image "thesteve0/centoshttpd" runs as the 'root' user which may not be permitted by your cluster administrator
+
+--> Creating resources with label app=centoshttpd ...
+    imagestream "centoshttpd" created
+    deploymentconfig "centoshttpd" created
+    service "centoshttpd" created
+--> Success
+    Run 'oc status' to view your app.
+----
+
+Let's go ahead and discuss what we just did. Oc new-app realizes we have passed it a Docker image
+and does "the right thing" to get this image running in OpenShift. It creates:
+
+1. An Image Stream
+2. A Deployment Configuration
+3. A Service
+
+The Deployment Configuration uses the Image Stream to determin the Docker image to pull, pulls it,
+and then spins up the pod with our image running in it as a container.
+
+You can also log into the web console to look at what we created:
+
+https://{{CONSOLE_ADDRESS}}/console
+
+Just use the same username and password as you used in the command line.
+
+TIP: If your first deploy fails it may be because the Docker image does now download in time to the node. Please
+just trigger another deploy.
+
+==== What is the User For Our Pod
+
+In the web console - go to the running pod and then click on the terminal tab.
+
+image::terminal.png[]
+
+This is a terminal into your pod. Go ahead and click on the terminal and then type in `$ whoami`.
+You will see that you are running your container as root.
+
+
+=== Switching the User
+
+Our first task in getting this ready is making the image run as non-root. Actually to run in OpenShift
+you need the image to be ok with running as a randomly assigned user. We are going modify our Docker
+image to be a random users. There are several things we need
+to do to get there
+. Since we can't bind to port 80 as a non-root user we need to change the port for Apache HTTPD. We will
+also need to change the user we run as. Finally then we will need to see what this breaks.
+
+Here is the Github repo with my new docker image:
+
+https://github.com/thesteve0/myDockerImages/tree/master/simpleNoRoot
+
+Let's go through the following items together
+
+1. Modify httpd.conf to serve over port 8080. While we do this we will also modify logging to pipe to stdout
+2. Expose 8080 rather than 80
+3. Run as user 1001
+4. This turns out to cause a problem with file permissions for creating the httpd.pid. Which then exposes
+a bug in Docker
+
+At the end of this we now have a docker image that does not need root to run.
+
+After we build, We can test this by running our docker image like so:
+
+[source, bash]
+----
+
+docker run -p 8080:8080 -u 1234 mydockerimage
+
+----
+
+If it runs no problem then we are all set to run on OpenShift.
+
+We can build and push this to Dockerhub and then run it in OpenShift like last time.
+
+[source, bash]
+----
+
+$ oc new-app thesteve0/noroot
+--> Found Docker image 439b966 (4 days old) from Docker Hub for "thesteve0/noroot"
+
+    * An image stream will be created as "noroot:latest" that will track this image
+    * This image will be deployed in deployment config "noroot"
+    * Port 8080/tcp will be load balanced by service "noroot"
+      * Other containers can access this service through the hostname "noroot"
+
+--> Creating resources with label app=noroot ...
+    imagestream "noroot" created
+    deploymentconfig "noroot" created
+    service "noroot" created
+--> Success
+    Run 'oc status' to view your app.
+----
+
+Voila, the root warning is gone. From my teams experience the biggest place we find problems
+with being non-root, or a random userid, is actually with file permissions
+
+=== What if I need a user to be in the /etc/passwd table
+
+Sometimes an application will look up the user in the password table which won't
+work given the way I have just shown you. For example you need a username and not just an id.
+To handle you can use NSS Wrappers to do the work in your image.
+
+I am not going to talk through it much here but we will look at some example Docker images
+that take advantage of NSS wrappers.
+
+Jenkins Image does this with NSS wrapper example
+https://github.com/openshift/jenkins/blob/master/1/Dockerfile.rhel7
+OpenShift assigns a random UID when we start up jenkins and it runs this script (along with others)
+https://github.com/openshift/jenkins/blob/master/1/contrib/s2i/run#L29-L31
+
+And this adds the random UID to the NSS passwords file so the app can find it there
+https://github.com/openshift/jenkins/blob/master/1/contrib/jenkins/jenkins-common.sh#L12-L29
+
+=== Pulling New Images from Dockerhub Into OpenShift
+
+As you iteratively work on your image you will probably push to Dockerhub often. To get
+OpenShift to pick up the new images you need to modify your DeploymentConfig to always
+pull new images on deployment.
+
+By default the DeploymentConfig has its _imagePullPolicy_ set to _Always_ if we use the tag latest (which
+we are doing in this case). This means everytime we do a deploy we do a pull request to Dockerhub (or whatever
+registry we are using) but we may not pull any bits if there are no changes.
+Here is some https://docs.openshift.org/dev_guide/managing_images.html#image-pull-policy[documentation].
+
+=== Next steps
+
+And with that we have:
+
+1. Gotten our image to run as a random UUID
+2. Made our image log to stdout
+
+The final things we absolutely need to make it do is use volumes for changing content.
+So let's go to the next section and get going!

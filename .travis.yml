@@ -1,0 +1,28 @@
+dist: trusty
+sudo: required
+language: python
+python: "2.7"
+
+services:
+  - docker
+
+env:
+- ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:$PWD/apb/roles
+
+before_install:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+install:
+  - pip install ansible
+  - ansible-galaxy install -r apb/requirements-travis.yml
+  - ansible-playbook apb/playbooks/provision.yml --syntax-check
+
+script:
+  - cd apb && docker build -t openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT .
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then export TAG="latest"; else export TAG=$TRAVIS_BRANCH ; fi
+  - echo "Branch=$TRAVIS_BRANCH Tag=$TAG"
+  - docker tag openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT openshiftapb/starter-workshop-apb:$TAG
+  - echo "Pushing image to Docker hub: openshiftapb/starter-workshop-apb:$TAG"
+  - docker push openshiftapb/starter-workshop-apb:$TAG

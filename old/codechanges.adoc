@@ -1,0 +1,371 @@
+## Lab: Making Code Changes and using webhooks
+
+### Background: Web Hooks
+
+Most Git repository servers support the concept of web hooks -- calling to an
+external source via HTTP(S) when a change in the code repository happens.
+OpenShift provides an API endpoint that supports receiving hooks from
+remote systems in order to trigger builds. By pointing the code repository's
+hook at the OpenShift API, automated code/build/deploy pipelines can be
+achieved.
+
+In this lab, we are going to configure a webhook for our git repository that will trigger a new build after a change to the source code is made.
+
+{% if GIT_SERVER == "github" %}
+#### Getting the webhook URL
+
+The first thing we need to do to set up integration between GitHub and OpenShift is to find the webhook endpoint on OpenShift.  
+To accomplish this, from the project overview screen, click on **Builds** using the left hand navigation and then select **Builds**.  This will list all of the build configs you have for your project as shown in the following image:
+
+image::builds-nationalparks.png[Builds]
+
+Click on the **nationalparks** build as highlighted in the above image and then select **Configuration**.  
+
+image::builds-github-webhook.png[GitHub Webhook]
+
+Notice the **Triggers** section on the right hand side and the **Github webhook URL**.  Copy the URL as shown in the above image.
+
+
+#### Setting up the webhook
+
+Open the **Github** repository page for your fork of the national parks application and go to the **Settings** tab.  Click on
+**Webhooks** in the left menu. Click **Add webhook** and fill the form
+
+* **Payload URL** is the URL copied from OpenShift
+* **Content type** has to be *application/json*
+* **Secret** should be empty
+* **Disable SSL verification** as the cluster does not have valid SSL
+certificates
+
+And click the **Add webhook** button.
+
+image::builds-github-webhook-add.png[Add Webhook]
+
+#### Making a code change
+
+
+{% if PARKSMAP_PY %}
+Go back to the **Code** tab in the same repository and open the **wsgi.py**
+file. Click the pen icon in the top right corner to edit the file.
+
+Go to the line `35` and change the **displayName**.
+
+{% else %}
+
+Go back to the **Code** tab in the same repository and open the **BackendController.java**
+file located in the **src/main/java/com/openshift/evg/roadshow/parks/rest** directoy. Click the pen icon in the top right corner to edit the file as highlighed in the following image:
+
+image::codechanges-java.png[Code Change]
+
+Go to line `20` and change the **Nation Parks** to something else.
+
+[source]
+----
+  return new Backend("nationalparks","World Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+{% endif %}
+
+Scroll down to the bottom of the page and click **Commit changes**.
+
+#### Validation on OpenShift
+
+{% else %}
+
+#### Exercise: Configuring GitLab Web Hooks
+
+{% if modules.pipelines %}
+In previous labs, you created a CI/CD Pipeline to automate build, test and deployment of
+the `nationalparks` application. In this lab you can use the pipline webhook to
+trigger a pipeline execution every time there is a change in the `nationalparks` GitLab
+repository. In the OpenShift web console, navigate to your `userXY` *Project*, and
+then mouse-over *Builds* and then *Pipelines*. Click the `nationalparks-pipeline` and
+then *Configuration* tab.
+
+On this screen you will see the option to copy the *generic* webhook URL as shown
+in the following image:
+
+image::ocp-webhook1-pipeline.png[Webhook]
+{% else %}
+In the OpenShift web console, navigate to your `userXY` *Project*, and
+then mouse-over *Browse* and then *Builds*. Click the `nationalparks` build.
+
+On this screen you will see the option to copy the *generic* webhook URL as shown
+in the following image:
+
+image::ocp-webhook1.png[Webhook]
+{% endif %}
+
+
+Once you have the URL copied to your clipboard, navigate to the code repository
+that you have on your local GitLab:
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
+[source,bash,role=copypaste]
+----
+{% if PARKSMAP_PY %}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}
+{% else %}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks
+{% endif %}
+----
+
+[NOTE]
+====
+The credentials for this GitLab instance are:
+
+Username: {{GITLAB_USER}}
+
+Password: {{GITLAB_PASSWORD}}
+====
+
+Click the Settings link on the top right of the screen, and then click "Integrations":
+
+image::ocp-webhook2.png[Webhook]
+
+In the next screen, paste your link into the "URL" field. You can leave the
+secret token field blank -- the secret is already in the URL and does not need
+to be in the payload.
+
+image::ocp-webhook3.png[Webhook]
+
+Scroll to the bottom of the page. Make sure you *un-check* the SSL verification
+box. Remember that OpenShift's API is not presenting an SSL certificate signed
+by a known/trusted authority. Without *un-checking* the verification box, the
+webhook will fail.
+
+Finally, click on "Add webhook".
+
+image::ocp-webhook4.png[Webhook]
+
+Boom! From now on, every time you commit new source code to your GitLab
+repository, a new build and deploy will occur inside of OpenShift.  Let's try
+this out.
+
+#### Exercise: Using GitLab Web Hooks
+
+{% if PARKSMAP_PY %}
+Be sure you return to the proper tag in the git repository:
+
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+
+*link:http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/tree/{{NATIONALPARKS_VERSION}}[]*
+
+Click "Project" at the top of the GitLab page, and then "Files" towards the
+middle of the page. This is GitLab's repository view. Make sure that the
+drop-down menu at the upper right is set for the `1.0.0` branch. Navigate to the
+root path and click on the `wsgi.py` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::ocp-webhook5-py.png[Webhook]
+
+Change line number 35:
+
+[source,python]
+----
+'displayName': 'National Parks (PY)'
+----
+
+To
+
+[source,python]
+----
+'displayName': 'World National Parks (PY)'
+----
+
+{% else %}
+
+Click "Project" at the top of the GitLab page, and then "Files" towards the
+middle of the page. This is GitLab's repository view. Make sure that the
+drop-down menu at the upper right is set for the `{{NATIONALPARKS_VERSION}}` branch. Navigate to the
+following path:
+
+[source,bash]
+----
+src/main/java/com/openshift/evg/roadshow/parks/rest/
+----
+
+Then click on the `BackendController.java` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::ocp-webhook5.png[Webhook]
+
+Change line number 20:
+
+[source,java]
+----
+return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+To
+
+[source,java]
+----
+return new Backend("nationalparks","OpenShift National Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+{% endif %}
+
+Click on Commit changes at the bottom of the screen. Feel free to enter a commit
+message.
+
+{% endif %}
+
+{% if modules.pipelines %}
+
+Once you have committed your changes, the `nationalparks-pipeline` should almost
+instantaneously be triggered in OpenShift. Look at the *Builds* &rarr; *Pipelines*
+page in OpenShift Console to verify the pipeline is running:
+
+image::ocp-webhook6-pipeline.png[Pipeline Running]
+
+After the test stage, pipeline waits for manual approval in order to deploy to the
+*Live* container. Click on *Input Required* link which takes you to the Jenkins Console
+for approving the deployment and then *Proceed* button.
+
+image::pipeline-jenkins-input.png[Pipline Manual Approval,1000,align=center]
+
+Once the pipeline execution is finished, verify your new Docker image was
+automatically deployed by viewing the application in your browser:
+
+{% else %}
+Once you have committed your changes, a *Build* should almost instantaneously be
+triggered in OpenShift. Look at the *Builds* page in the web console, or run the
+following command to verify:
+
+[source,bash]
+----
+$ oc get builds
+----
+
+You should see that a new build is running:
+
+[source,bash]
+----
+NAME              TYPE      FROM          STATUS     STARTED          DURATION
+nationalparks-1   Source    Git@b052ae6   Complete   18 hours ago     36s
+nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago
+----
+
+Once the build and deploy has finished, verify your new Docker image was
+automatically deployed by viewing the application in your browser:
+{% endif %}
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash,role=copypaste]
+----
+http://nationalparks{% if modules.pipelines %}-live{% endif %}-userXY.{{ROUTER_ADDRESS}}/ws/info/
+----
+
+You should now see the new name you have set in the JSON string returned.
+
+NOTE: To see this in the map's legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
+
+
+#### Exercise: Rollback
+
+OpenShift allows you to move between different versions of an application
+without the need to rebuild each time. Every version (past builds) of the
+application exists as a Docker-formatted image in the OpenShift registry. Using
+the `oc rollback` and `oc deploy` commands you can move back- or forward between
+various versions of applications.
+
+In order to perform a rollback, you need to know the name of the *Deployment Config*
+which has deployed the application:
+
+[source,bash]
+----
+$ oc get dc
+----
+
+The output will be similar to the following:
+
+[source,bash]
+----
+NAME                               REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb-nationalparks              1          1         1         config,image(mongodb:3.2)
+parksmap                           2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+nationalparks                      9          1         1         {% if modules.pipelines %}config{% else %}config,image(nationalparks:latest){% endif %}
+{% if modules.pipelines %}
+jenkins                            1          1         1         config,image(jenkins:latest)
+mongodb-live                       1          1         1         config,image(mongodb:3.2)
+nationalparks-live                 4          1         1         config,image(nationalparks:live)
+{% endif %}
+----
+Now run the following command to rollback the latest code change:
+
+[source,bash]
+----
+$ oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}
+----
+
+You will see output like the following:
+
+[source,bash]
+----
+#5 rolled back to nationalparks{% if modules.pipelines %}-live{% endif %}-3
+Warning: the following images triggers were disabled: nationalparks:live
+  You can re-enable them with: oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
+----
+
+Once the deploy is complete, verify that the page header is reverted to the
+original header by viewing the application in your browser.
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash,role=copypaste]
+----
+http://nationalparks{% if modules.pipelines %}-live{% endif %}-userXY.{{ROUTER_ADDRESS}}/ws/info/
+----
+
+[NOTE]
+====
+Automatic deployment of new images is disabled as part of the rollback
+to prevent unwanted deployments soon after the rollback is complete. To re-enable
+the automatic deployments run this:
+
+[source,bash]
+----
+$ oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
+----
+====
+
+#### Exercise: Rollforward
+
+Just like you performed a rollback, you can also perform a roll-forward using
+the same command. You'll notice above that when you requested a *rollback*, it
+caused a new deployment (#3). In essence, we always move forwards in OpenShift,
+even if we are going "back".
+
+{% if modules.pipelines %}
+* We know that the first deployment (#1) was the initial definition.
+* We know that the second deployment (#2) was due to our configmap addition.
+* We know that the third deployment (#3) was our first run of the pipeline.
+* We know that the fourth deployment (#4) was our change to "OpenShift National
+  Parks".
+* We know that the fifth deployment (#5) was our rollback to "National Parks".
+{% endif %}
+
+So, if we want to return to the "new code" version, that is deployment #4.
+
+[source,bash]
+----
+$ oc rollback nationalparks{% if modules.pipelines %}-live{% endif %}-4
+----
+
+And you will see the following:
+[source,bash]
+----
+#6 rolled back to nationalparks{% if modules.pipelines %}-live{% endif %}-4
+Warning: the following images triggers were disabled: nationalparks:live
+  You can re-enable them with: oc set triggers dc/nationalparks{% if modules.pipelines %}-live{% endif %} --auto
+----
+
+Cool! Once the *rollback* is complete, verify you again see "OpenShift
+National Parks".

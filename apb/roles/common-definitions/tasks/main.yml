@@ -1,0 +1,49 @@
+---
+- name: login as super user with token
+  command: "oc login {{ master_url }} --token={{ openshift_token }} --insecure-skip-tls-verify=true"
+  when:
+    - openshift_token is defined
+    - openshift_token is not none
+    - openshift_token|trim() != ""
+
+- name: login as super user with pwd
+  command: "oc login {{ master_url }} -u {{ openshift_user }} -p {{ openshift_password }} --insecure-skip-tls-verify=true"
+  when: >
+    openshift_token is not defined or
+    openshift_token is none or
+    openshift_token|trim() == ""
+
+- name: Verify there is a node with env=infra label
+  command: "oc get nodes -o jsonpath='{.items[?(@.metadata.labels.env==\"infra\")].metadata.name}'"
+  register: infranodes
+
+- name: Modify nodeselector for {{ namespace }} so that it goes to an infra node if there is an infra node
+  command: "oc annotate namespace/{{ namespace }} openshift.io/node-selector=\"env=infra\" --overwrite"
+  when: infranodes.stdout != ""
+
+- name: Verify user can create projects
+  command: "oc auth can-i create project"
+  register: canicreateprojects
+  failed_when: canicreateprojects.stdout != 'yes'
+
+- name: Verify user can delete projects
+  command: "oc auth can-i delete project"
+  register: canideleteprojects
+  failed_when: canideleteprojects.stdout != 'yes'
+
+- name: Get apps route suffix
+  block:
+    - openshift_v1_route:
+        name: dummy
+        namespace: "{{ namespace }}"
+        state: present
+        spec_to_kind: Service
+        spec_to_name: dummy
+        spec_port_target_port: 8080
+      register: dummy_route
+    - set_fact:
+        apps_hostname_suffix: "{{ dummy_route.route.spec.host|regex_replace('^dummy-' + namespace + '\\.(.*)$', '\\1') }}"
+    - openshift_v1_route:
+        name: dummy
+        namespace: "{{ namespace }}"
+        state: absent

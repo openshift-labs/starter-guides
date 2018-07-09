@@ -1,0 +1,339 @@
+## Lab: Adding a Database
+
+### Application Description
+In this lab, we're going to deploy a Mongo database that will be used to store the data for the `nationalparks` application. We will also connect the `nationalparks` service with the newly deployed Mongo database, so that the `nationalparks` service can load and query the database for the corresponding information.
+
+Finally, we will mark the `nationalparks` application as a backend for the map visualization tool, so that it can be dynamically discovered by the `parksmap` component using the OpenShift discovery mechanism and the map will be displayed automatically.
+
+image::roadshow-app-architecture-nationalparks-2.png[Application architecture,800,align="center"]
+
+### Background: Storage
+Most useful applications are "stateful" or "dynamic" in some way, and this is
+usually achieved with a database or other data storage. In this next lab we are
+going to add MongoDB to our `nationalparks` application and then rewire it to
+talk to the database using environment variables.
+
+We are going to use the MongoDB image that is included with OpenShift.
+
+By default, this will use *EmptyDir* for data storage, which means if the *Pod*
+disappears the data does as well. In a real application you would use
+OpenShift's persistent storage mechanism to attach real-world storage (NFS,
+Gluster, EBS, etc) to the *Pods* to give them a persistent place to store their
+data.
+
+### Background: Environment Variables
+
+As you've seen so far, the web console makes it very easy to deploy things onto
+OpenShift. When we deploy the database, we pass in some environment variables.
+These environment variables are used to set the username, password, and name of
+the database.  You can change the
+values of these environment variables to anything you would like.  The variables
+we are going to be setting are as follows:
+
+- MONGODB_USER
+- MONGODB_PASSWORD
+- MONGODB_DATABASE
+- MONGODB_ADMIN_PASSWORD
+
+The database image is built in a way that it will automatically configure itself
+using the supplied information (assuming there is no data already present in the
+persistent storage!). The image will ensure that:
+
+- A database exists with the specified name
+- A user exists with the specified name
+- The user can access the specified database with the specified password
+
+In the web console in your `userXY` project, again click the *"Add to
+Project"* button, and then find the `mongodb-ephemeral` template, and click it.
+You will notice that there are several MongoDB templates available, some of
+which come with application servers pre-configured. We just need a database,
+though, so `mongodb-ephemeral` is what you should choose.
+
+image::ocp-mongodb-template.png[MongoDB]
+
+When we performed the application build we selected the
+builder image to use and OpenShift presented us the standard build workflow.
+Now we are using a template, a preconfigured set of resources that includes
+parameters that can be customized. In our case, the parameters we are concerned
+with are the environment variables discussed before (user, password, database, and
+admin password).
+
+image::ocp-mongo-template-deploy.png[MongoDB]
+
+You can see that some of the fields say *"generated if empty"*. This is a
+feature of *Templates* in OpenShift that will be covered in the next lab. For
+now, be sure to use the following values in their respective fields:
+
+* `MongoDB Connection Username` : *`mongodb`*
+* `MongoDB Connection Password` : *`mongodb`*
+* `MongoDB Database Name`: *`mongodb`* (*NOTE:* Default value of `simpledb` needs to be changed)
+* `MongoDB Admin Password` : *`mongodb`*
+
+You can leave the rest of the values as their defaults, and then click
+*"Create"*. Then click *Continue to overview*. The MongoDB instance should
+quickly be deployed.
+
+image::mongo-group-db.png[MongoDB deployed]
+
+#### Exercise: Wiring the Application and the Database
+
+When we initially created the `nationalparks` application, we provided no environment
+variables. The application is looking for a database, but can't find one, and it
+fails gracefully (you don't see an error).
+
+We need to configure the `nationalparks` *Pod*(s) to have the right values in
+the right environment variables so that the application knows how and where to
+find MongoDB.
+
+If you think way back to the beginning of the labs, you will recall that a
+*DeploymentConfiguration* tells OpenShift how to deploy something. This includes
+things like what environment variables to configure. So, to set up the right
+environment variables, we simply need to modify the *DeploymentConfiguration*
+(DC). This can easily be done from either the web interface or via the command
+line.
+
+The command line takes a little less time, so let's use that option. First, find
+the name of the DC:
+
+[source,bash]
+----
+$ oc get dc
+----
+
+Then, use the `oc env` command to set environment variables directly on the DC:
+
+[source,bash]
+----
+$ oc env dc nationalparks -e DB_USERNAME=mongodb -e DB_PASSWORD=mongodb -e DB_NAME=mongodb -e DB_HOST=mongodb
+----
+
+NOTE: Note that environment variables in this application are named different than in the database.
+
+After you have modified the *DeploymentConfig* object, you can verify the
+environment variables have been added by viewing the YAML for it:
+
+[source,bash]
+----
+$ oc get dc nationalparks -o yaml
+----
+
+You should see the following section:
+
+[source,yaml]
+----
+- env:
+  - name: DB_USERNAME
+    value: mongodb
+  - name: DB_PASSWORD
+    value: mongodb
+  - name: DB_NAME
+    value: mongodb
+  - name: DB_HOST
+    value: mongodb
+----
+
+You can also just ask OpenShift to tell you about the environment variables on
+the DC:
+
+[source,bash]
+----
+$ oc env dc/nationalparks --list
+# deploymentconfigs nationalparks, container nationalparks
+DB_USER=mongodb
+DB_PASSWORD=mongodb
+DB_NAME=mongodb
+DB_HOST=mongodb
+----
+
+#### Exercise: Exploring OpenShift Magic
+As soon as we set the environment variables on the *DeploymentConfiguration*, some
+magic happened. OpenShift decided that this was a significant enough change to
+warrant updating the internal version number of the *DeploymentConfiguration*. You
+can verify this by looking at the output of `oc get dc`:
+
+[source,bash]
+----
+NAME            REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb         1          1         1         config,image(mongodb:3.2)
+nationalparks   2          1         1         config,image(nationalparks:{{NATIONALPARKS_VERSION}})
+parksmap        1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+----
+
+Something that increments the version of a *DeploymentConfiguration*, by default,
+causes a new deployment. You can verify this by looking at the output of `oc get
+rc`:
+
+[source,bash]
+----
+NAME              DESIRED   CURRENT   READY     AGE
+mongodb-1         1         1         0         24m
+nationalparks-1   0         0         0         3h
+nationalparks-2   1         1         0         8m
+parksmap-1        1         1         0         6h
+----
+
+We see that the desired and current number of instances for the "-1" deployment
+is 0. The desired and current number of instances for the "-2" deployment is 1.
+This means that OpenShift has gracefully torn down our "old" application and
+stood up a "new" instance.
+
+#### Exercise: Data, Data, Everywhere
+
+Now that we have a database deployed, we can again visit the `nationalparks` web
+service to query for data:
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash]
+----
+http://nationalparks-userXY.{{ROUTER_ADDRESS}}/ws/data/all
+----
+
+And the result?
+
+[source,bash]
+----
+[]
+----
+
+Where's the data? Think about the process you went through. You deployed the
+application and then deployed the database. Nothing actually loaded anything
+*INTO* the database, though.
+
+The application provides an endpoint to do just that:
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash]
+----
+http://nationalparks-userXY.{{ROUTER_ADDRESS}}/ws/data/load
+----
+
+And the result?
+
+[source,bash]
+----
+Items inserted in database: 2740
+----
+
+If you then go back to `/ws/data/all` you will see tons of JSON data now.
+That's great. Our parks map should finally work!
+
+NOTE: There's some errors reported with browsers like firefox 54 that don't properly parse the resulting JSON. It's
+a browser problem, and the application is working properly.
+
+[NOTE]
+====
+You are probably wondering how the database connection magically started
+working? When deploying applications to OpenShift, it is always best to use
+environment variables to define connections to dependent systems.  This allows
+for application portability across different environments.  The source file that
+performs the connection as well as creates the database schema can be viewed
+here:
+
+{% if GIT_HOST != "github" %}
+CAUTION: In the following url(s), replace `{{GITLAB_USER}}` with the Git username provided to you.
+{% endif %}
+
+[source,bash,role=copypaste]
+----
+{% if PARKSMAP_PY %}
+{% if GIT_HOST == "github" %}
+https://github.com/openshift-roadshow/nationalparks-py/blob/master/wsgi.py#L11-L18
+{% else %}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks-py/blob/{{NATIONALPARKS_VERSION}}/wsgi.py#L11-18
+{% endif %}
+{% else %}
+http://{{GITLAB_URL_PREFIX}}.{{ROUTER_ADDRESS}}/{{GITLAB_USER}}/nationalparks/blob/{{NATIONALPARKS_VERSION}}/src/main/java/org/openshift/parks/mongo/DBConnection.java#L44-l48
+{% endif %}
+----
+
+In short summary: By referring to environment variables to connect to services
+(like databases), it can be trivial to promote applications throughout different
+lifecycle environments on OpenShift without having to modify application code.
+
+You can learn more about environment variables in the
+https://docs.openshift.org/dev_guide/environment_variables.html[environment
+variables] section of the Developer Guide.
+====
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash]
+----
+http://parksmap-userXY.{{ROUTER_ADDRESS}}
+----
+
+Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
+That's because the front end parks map only tries to talk to services that have
+the right *Label*.
+
+#### Exercise: Working With Labels
+
+We explored how a *Label* is just a key=value pair earlier when looking at
+*Services* and *Routes* and *Selectors*. In general, a *Label* is simply an
+arbitrary key=value pair. It could be anything.
+
+* `pizza=pepperoni`
+* `wicked=googly`
+* `openshift=awesome`
+
+In the case of the parks map, the application is actually querying the OpenShift
+API and asking about the *Routes* in the project. If any of them have a
+*Label* that is `type=parksmap-backend`, the application knows to interrogate
+that service's endpoints to look for map data.
+{% if PARKSMAP_PY %}
+You can see the code that does this link:https://github.com/openshift-roadshow/parksmap-web-py/blob/1.0.0/app.py#L85[here].
+{% else %}
+You can see the code that does this link:https://github.com/openshift-roadshow/parksmap-web/blob/1.0.0/src/main/java/com/openshift/evg/roadshow/rest/ServiceWatcher.java#L20[here].
+{% endif %}
+
+Fortunately, the command line provides a convenient way for us to manipulate
+labels. `describe` the `nationalparks` service:
+
+[source,bash]
+----
+$ oc describe route nationalparks
+
+Name:                   nationalparks
+Namespace:              userXY
+Created:                2 hours ago
+Labels:                 app=nationalparks
+Requested Host:         nationalparks-userXY.{{ROUTER_ADDRESS}}
+                        exposed on router router 2 hours ago
+Path:                   <none>
+TLS Termination:        <none>
+Insecure Policy:        <none>
+Endpoint Port:          8080-tcp
+
+Service:                nationalparks
+Weight:                 100 (100%)
+Endpoints:              10.1.9.8:8080
+----
+
+You see that it only has one label: `app=nationalparks`. Now, use `oc label`:
+
+[source,bash]
+----
+$ oc label route nationalparks type=parksmap-backend
+----
+
+You will see something like:
+
+[source,bash]
+----
+route "nationalparks" labeled
+----
+
+If you check your browser now:
+
+CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+
+[source,bash]
+----
+http://parksmap-userXY.{{ROUTER_ADDRESS}}/
+----
+
+image::parksmap-new-parks.png[MongoDB]
+
+You'll notice that the parks suddenly are showing up. That's really cool!
