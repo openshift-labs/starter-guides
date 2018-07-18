@@ -19,7 +19,7 @@ config:
       desc: Password to login
       value: "openshift"
     - name: USER_PROJECT
-      desc: User to login
+      desc: Project the user has to login
       value: "userXY"
     ##
     # Common fixed variables
