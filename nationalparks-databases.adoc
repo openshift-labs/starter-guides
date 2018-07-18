@@ -44,7 +44,7 @@ persistent storage!). The image will ensure that:
 - A user exists with the specified name
 - The user can access the specified database with the specified password
 
-In the web console in your `userXY` project,
+In the web console in your `{{ USER_PROJECT }}` project,
 click the *"Add to Project"* button and then *"Browse Catalog"*. Select the *"Databases"* category and then *"Mongo"*.
 
 image::nationalparks-databases-catalog-databases.png[Data Stores]
@@ -152,11 +152,11 @@ stood up a "new" instance.
 Now that we have a database deployed, we can again visit the `nationalparks` web
 service to query for data:
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash]
 ----
-http://nationalparks-userXY.{{ROUTER_ADDRESS}}/ws/data/all
+http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/data/all
 ----
 
 And the result?
@@ -172,11 +172,11 @@ application and then deployed the database. Nothing actually loaded anything
 
 The application provides an endpoint to do just that:
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash]
 ----
-http://nationalparks-userXY.{{ROUTER_ADDRESS}}/ws/data/load
+http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/data/load
 ----
 
 And the result?
@@ -192,11 +192,11 @@ That's great. Our parks map should finally work!
 NOTE: There's some errors reported with browsers like firefox 54 that don't properly parse the resulting JSON. It's
 a browser problem, and the application is working properly.
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash]
 ----
-http://parksmap-userXY.{{ROUTER_ADDRESS}}
+http://parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
@@ -250,12 +250,12 @@ labels. `describe` the `nationalparks` service:
 $ oc describe route nationalparks
 
 Name:                   nationalparks
-Namespace:              userXY
+Namespace:              {{ USER_PROJECT }}
 Created:                2 hours ago
 Labels:                 app=workshop
                         component=nationalparks
                         role=backend
-Requested Host:         nationalparks-userXY.{{ROUTER_ADDRESS}}
+Requested Host:         nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}
                         exposed on router router 2 hours ago
 Path:                   <none>
 TLS Termination:        <none>
@@ -283,11 +283,11 @@ route "nationalparks" labeled
 
 If you check your browser now:
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash]
 ----
-http://parksmap-userXY.{{ROUTER_ADDRESS}}/
+http://parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/
 ----
 
 image::nationalparks-databases-new-parks.png[MongoDB]

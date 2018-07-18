@@ -15,9 +15,9 @@ Return to the web console:
 
 *link:{{CONSOLE_ADDRESS}}[]*
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
-Find your *userXY* project and click it. Next,
+Find your *{{ USER_PROJECT }}* project and click it. Next,
 click on the `Deploy Image` in the *"Add to Project"* drop down.  This will open a dialog that will allow you to specify the information for the image you want to deploy.
 
 #TODO: Show image of this drop down.
@@ -255,9 +255,9 @@ metadata:
   labels:
     app: parksmap
   name: parksmap
-  namespace: userXY
+  namespace: {{ USER_PROJECT }}
   resourceVersion: "6893"
-  selfLink: /api/v1/namespaces/userXY/services/parksmap
+  selfLink: /api/v1/namespaces/{{ USER_PROJECT }}/services/parksmap
   uid: b51260a9-897e-11e6-bdaa-2cc2602f8794
 spec:
   clusterIP: 172.30.169.213
@@ -338,7 +338,7 @@ You should see something like the following output:
 [source,bash]
 ----
 Name:                   parksmap
-Namespace:              userXY
+Namespace:              {{ USER_PROJECT }}
 Labels:                 app=workshop
                         component=parksmap
                         role=frontend

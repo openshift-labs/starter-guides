@@ -3,10 +3,8 @@ id: workshop
 name: Developing Java Applications on OpenShift - Starter Lab
 
 content:
-  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/master
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.9
 
-vars:
-  NUM_USERS: "100"
 
 modules:
   activate:

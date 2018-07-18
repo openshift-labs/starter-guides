@@ -23,11 +23,11 @@ image::parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-$ oc project userXY
+$ oc project {{ USER_PROJECT }}
 ----
 
 Then:
@@ -47,7 +47,7 @@ we are using a special flag, `-z`. What does this flag do? From the `-h` output:
 
 The `-z` syntax is a special one that saves us from having to type out the
 entire string, which, in this case, is
-`system:serviceaccount:userXY:default`. It's a nifty shortcut.
+`system:serviceaccount:{{ USER_PROJECT }}:default`. It's a nifty shortcut.
 
 [NOTE]
 ====
@@ -62,7 +62,7 @@ Another way you could have done the same is by using the OpenShift console. Once
 
 image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 
-Add the admin role to the *userXY/default* Service Account, and then
+Add the admin role to the *{{ USER_PROJECT }}/default* Service Account, and then
 click the *"Add"* button.
 
 image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
@@ -75,7 +75,7 @@ image::parksmap-permissions-membership-serviceaccount-done.png[Service account c
 One more step is required. We need to re-deploy the parks map application because it's
 given up trying to query the API.
 
-This time we'll use the web console. Find your `userXY` project,
+This time we'll use the web console. Find your `{{ USER_PROJECT }}` project,
 and then click "Applications" and then "Deployments". You'll see your only
 application, `parksmap`, listed. Click that.
 
@@ -100,11 +100,11 @@ If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
 access to your project using the following command:
 
-CAUTION: In the following url(s), replace `userXY` with the user provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the user provided to you.
 
 [source,bash,role=copypaste]
 ----
-$ oc policy add-role-to-user view userXY
+$ oc policy add-role-to-user view {{ USER_PROJECT }}
 ----
 
 Have them go to the project view by clicking the *Projects* button and verify
