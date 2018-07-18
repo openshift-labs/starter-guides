@@ -118,7 +118,7 @@ You will see something like the following output:
 [source,bash]
 ----
 Name:			parksmap
-Namespace:		userXY
+Namespace:		{{ USER_PROJECT }}
 Labels:			app=parksmap
 Selector:		deploymentconfig=parksmap
 Type:			ClusterIP

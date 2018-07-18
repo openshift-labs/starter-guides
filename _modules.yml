@@ -12,9 +12,15 @@ config:
     - name: INFRA_PROJECT
       desc: Infrastructure project name
       value: ocp-workshop
+    - name: USER_NAME
+      desc: User to login
+      value: "userXY"
     - name: USER_PASSWORD
       desc: Password to login
       value: "openshift"
+    - name: USER_PROJECT
+      desc: Project the user has to login
+      value: "userXY"
     ##
     # Common fixed variables
     # 

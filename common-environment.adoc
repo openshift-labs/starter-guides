@@ -32,7 +32,7 @@ account and your name next to it. This will be your user account for the
 duration of these exercises. For example:
 
 ----
-userXY=Luke Skywalker
+{{ USER_NAME }}=Luke Skywalker
 ----
 
 If you already see a name next to a user account, it means that someone 
@@ -46,5 +46,5 @@ this is a substitution of your username or user number:
 
 [source,role=copypaste]
 ----
-some command for userXY
+some command for {{ USER_NAME }}
 ----

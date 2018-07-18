@@ -46,7 +46,7 @@ password combination for your user account. Use the username and password combin
 
 [source,bash,role=copypaste]
 ----
-Username: userXY
+Username: {{ USER_NAME }}
 Password: {{USER_PASSWORD}}
 ----
 
@@ -56,7 +56,7 @@ following confirmation message:
 [source]
 ----
 Login successful.
-Using project "userXY".
+Using project "{{ USER_PROJECT }}".
 ----
 
 [TIP]
@@ -89,38 +89,38 @@ things in the environment are working as expected.  Don't worry if you don't
 understand all of the terminology as we will cover it in detail in later labs.
 
 If you didn't have a project already created for you, the first thing we want 
-to do is create the *userXY* project. You can do this with the following command:
+to do is create the *{{ USER_PROJECT }}* project. You can do this with the following command:
 
-CAUTION: In the following url(s), replace `userXY` with the username provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-oc new-project userXY
+oc new-project {{ USER_PROJECT }}
 ----
 
 You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "userXY" on server "{{CONSOLE_ADDRESS}}".
+Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
 ----
 
 If you had multiple projects, the first thing you would want to do is to switch 
-to the *userXY* project to make sure you're on the correct project from now on. 
+to the *{{ USER_PROJECT }}* project to make sure you're on the correct project from now on. 
 You can do this with the following command:
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-oc project userXY
+oc project {{ USER_PROJECT }}
 ----
 
 You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "userXY" on server "{{CONSOLE_ADDRESS}}".
+Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
 ----
 
 ### The Web Console
@@ -135,7 +135,7 @@ The first screen you will see is the authentication screen. You will be prompted
 
 [source,bash]
 ----
-Username: userXY
+Username: {{ USER_NAME }}
 Password: {{USER_PASSWORD}}
 ----
 
@@ -147,8 +147,8 @@ something that looks like the following image:
 
 image::explore-webconsole1sc.png[Web Console]
 
-Click on the *userXY* project on the right hand side of the screen. When you click on the
-*userXY* project, you will be taken to the project overview page
+Click on the *{{ USER_PROJECT }}* project on the right hand side of the screen. When you click on the
+*{{ USER_PROJECT }}* project, you will be taken to the project overview page
 which will list all of the routes, services, deployments, and pods that you have
 running as part of your project. There's nothing there now, but that's about to
 change.

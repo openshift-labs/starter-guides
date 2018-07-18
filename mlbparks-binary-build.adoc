@@ -52,11 +52,11 @@ If you're using IntelliJ or eclipse/JBoss Developer Studio package the maven art
 Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
 that gives basic info on the service and can be reached at:
 
-CAUTION: In the following url(s), replace `userXY` with the guid provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the guid provided to you.
 
 [source,bash]
 ----
-http://mlbparks-userXY.{{ROUTER_ADDRESS}}/ws/info/
+http://mlbparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/info/
 ----
 
 Please change line 23 to add a _AMAZING_ in front of "MLB Parks" look like this:
@@ -89,11 +89,11 @@ rolling spins up the new version of the pod before it takes down the old one. Ro
 
 When the deployment is finished and the container is deployed you will see the new content at:
 
-CAUTION: In the following url(s), replace `userXY` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash]
 ----
-http://mlbparks-userXY.{{ROUTER_ADDRESS}}/ws/info/
+http://mlbparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/info/
 ----
 
 So now you have seen how we can speed up the build and deploy process.
