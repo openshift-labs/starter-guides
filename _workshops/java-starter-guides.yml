@@ -1,0 +1,29 @@
+---
+id: workshop
+name: Developing Java Applications on OpenShift - Starter Lab
+
+content:
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.9
+
+
+modules:
+  activate:
+  - common-environment
+  - common-parksmap-architecture
+  - common-cli
+  - common-explore
+  - parksmap-docker
+  - parksmap-scaling
+  - parksmap-routes
+  - parksmap-logging
+  - parksmap-permissions
+  - parksmap-rsh
+  - nationalparks-java
+  - nationalparks-databases
+  - nationalparks-application-health
+  - nationalparks-codechanges-gogs
+  - mlbparks-templates
+  - mlbparks-clustering
+  - mlbparks-binary-build
+  - mlbparks-debugging
+  - common-further-resources
