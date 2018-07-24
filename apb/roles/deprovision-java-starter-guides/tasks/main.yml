@@ -7,7 +7,7 @@
 #  - guides
 #  - User projects
 #
-- name: Delete infrastructyre services from {{ namespace }}
+- name: Delete infrastructure services from {{ namespace }}
   command: "oc delete all,cm,secret,pvc,sa -l app={{ item }} -n {{ namespace }}"
   with_items:
     - etherpad
@@ -22,3 +22,4 @@
   command: "oc delete project {{ item }}"
   ignore_errors: true
   with_sequence: start=1 end={{ user_count }} format={{ user_format }}
+  when: create_projects

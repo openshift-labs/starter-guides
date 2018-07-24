@@ -1,0 +1,14 @@
+---
+#####
+# Nexus
+#####
+- import_role:
+    name: openshift_sonatype_nexus
+  vars:
+    project_name: "{{ namespace }}"
+    nexus_image_version: "{{ nexus_release_version }}"
+    nexus_volume_capacity: 6Gi
+    nexus_admin_user: "{{ infrasvcs_adm_user }}"
+    nexus_admin_password: "{{ infrasvcs_adm_password }}"
+  when:
+    - workshop_type == "java"

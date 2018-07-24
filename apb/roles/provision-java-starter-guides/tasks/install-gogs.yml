@@ -1,0 +1,44 @@
+---
+#####
+# Gogs
+#####
+- set_fact:
+    gogs_hostname: "gogs-{{ namespace }}.{{ apps_hostname_suffix }}"
+
+- import_role:
+    name: openshift_gogs
+  vars:
+    project_name: "{{ namespace }}"
+    gogs_route: "{{ gogs_hostname }}"
+    gogs_image_version: "{{ gogs_release_version }}"
+    gogs_admin_user: "{{ infrasvcs_adm_user }}"
+    gogs_admin_password: "{{ infrasvcs_adm_password }}"
+    gogs_user: "developer"
+    gogs_password: "{{ openshift_user_password }}"
+    gogs_generate_user_count: "{{ user_count }}"
+    gogs_generate_user_format: "{{ user_format }}"
+    clean_deploy: false
+
+- name: "Create local repository to push to git (Java version)"
+  command: git clone https://github.com/openshift-roadshow/{{ reponame }}.git
+  args:
+    chdir: "{{ tmp_dir.path }}"
+  when: workshop_type == "java"
+- name: "Create local repository to push to git (Python version)"
+  command: git clone https://github.com/openshift-roadshow/{{ reponame }}-py.git {{ reponame }}
+  args:
+    chdir: "{{ tmp_dir.path }}"
+  when: workshop_type == "python"
+- name: "Create local repository to push to git (node.js version)"
+  command: git clone https://github.com/openshift-roadshow/{{ reponame }}-js.git {{ reponame }}
+  args:
+    chdir: "{{ tmp_dir.path }}"
+  when: workshop_type == "nodejs"
+- name: "Create local repository to push to git (PHP version)"
+  command: git clone https://github.com/openshift-roadshow/{{ reponame }}-php.git {{ reponame }}
+  args:
+    chdir: "{{ tmp_dir.path }}"
+  when: workshop_type == "php"
+
+- include_tasks: gogs-create-user-repo.yml
+  with_sequence: start=1 end={{ user_count }} format={{ user_format }}
