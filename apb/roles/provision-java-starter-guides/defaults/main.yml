@@ -4,3 +4,5 @@ reponame: "nationalparks"
 che_release_version: 6.7.1
 nexus_release_version: 3.12.1
 gogs_release_version: 0.11.34
+
+install_custom_stacks_json: []
