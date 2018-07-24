@@ -1,0 +1,15 @@
+---
+#####
+# Eclipse che
+#####
+# deploy eclipse che
+- import_role:
+    name: openshift_eclipse_che
+  vars:
+    project_name: "{{ namespace }}"
+    che_version: "{{ che_release_version }}"
+    multi_user: true
+    route_suffix: "{{ apps_hostname_suffix }}"
+    keycloak_admin_user: "{{ infrasvcs_adm_user }}"
+    keycloak_admin_pwd: "{{ infrasvcs_adm_password }}"
+    install_java_oc_stack: true

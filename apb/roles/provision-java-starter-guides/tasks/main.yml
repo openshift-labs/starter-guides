@@ -1,17 +1,41 @@
 ---
-# Creates:
-#  - gogs
-#  - etherpad
-#  - nexus
-#  - guides
-
 - debug:
     msg: "Installing infrastructure for workshop in {{ namespace }}"
 - debug:
     msg: "Provisioning {{ user_count }} users"
 - debug:
     msg: "Provisioning a {{ workshop_type }} workshop"
+- debug:
+    msg: "Installing {{ features_to_install }}"
 
+- name: Create project {{ namespace }} if it doesn't exist
+  command: "oc new-project {{ namespace }}"
+  ignore_errors: true
+
+- name: Verify there is a node with env=infra label
+  command: "oc get nodes -o jsonpath='{.items[?(@.metadata.labels.env==\"infra\")].metadata.name}'"
+  register: infranodes
+
+- name: Modify nodeselector for {{ namespace }} so that it goes to an infra node if there is an infra node
+  command: "oc annotate namespace/{{ namespace }} openshift.io/node-selector=\"env=infra\" --overwrite"
+  when: infranodes.stdout != ""
+
+- name: Get apps route suffix
+  block:
+    - openshift_v1_route:
+        name: dummy
+        namespace: "{{ namespace }}"
+        state: present
+        spec_to_kind: Service
+        spec_to_name: dummy
+        spec_port_target_port: 8080
+      register: dummy_route
+    - set_fact:
+        apps_hostname_suffix: "{{ dummy_route.route.spec.host|regex_replace('^dummy-' + namespace + '\\.(.*)$', '\\1') }}"
+    - openshift_v1_route:
+        name: dummy
+        namespace: "{{ namespace }}"
+        state: absent
 ###
 - name: "Create temporary directory"
   tempfile:
@@ -19,175 +43,23 @@
     path: "/tmp/"
   register: tmp_dir
 
-#####
-# Etherpad
-#####
-- name: "Copy etherpad base text file"
-  copy:
-    src: etherpad.txt
-    dest: "{{ tmp_dir.path }}/etherpad.txt"
+- include_tasks: install-etherpad.yml
+  when: '"etherpad" in features_to_install'
 
-- name: Add {{ user_count }} to etherpad.txt file
-  lineinfile:
-    path: "{{ tmp_dir.path }}/etherpad.txt"
-    line: "{{ item }}"
-  with_sequence: start=1 end={{ user_count }} format="{{ user_format }}="
+- include_tasks: install-guides.yml
+  when: '"guides" in features_to_install'
 
+- include_tasks: install-gogs.yml
+  when: '"gogs" in features_to_install'
 
-- set_fact:
-    etherpad_text: "{{ lookup('file', '{{ tmp_dir.path }}/etherpad.txt') | replace('\n', '\\n')}}"
+- include_tasks: install-nexus.yml
+  when: '"nexus" in features_to_install'
 
-- name: "Process etherpad template"
-  template:
-    src: etherpad.yml
-    dest: "{{ tmp_dir.path }}/etherpad.yml"
+- include_tasks: install-ocp-ops-view.yml
+  when: '"ocp-ops-view" in features_to_install'
 
-- name: Add etherpad template to {{ namespace }}
-  command: "oc apply -f {{ tmp_dir.path }}/etherpad.yml -n {{ namespace }}"
-
-- name: Create install etherpad resources
-  shell: >
-        oc new-app etherpad --name=etherpad -n {{ namespace }}
-        --dry-run -o yaml > etherpad.yml
-  args:
-    chdir: "{{ tmp_dir.path }}"
-
-- name: Apply etherpad objects
-  command: "oc apply -f etherpad.yml -n {{ namespace }}"
-  args:
-    chdir: "{{ tmp_dir.path }}"
-
-#####
-# Guides (Workshopper)
-#####
-- name: "Process guides template (for java workshop)"
-  template:
-    src: guides-java.yml
-    dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "java"
-- name: "Process guides template (for python workshop)"
-  template:
-    src: guides-python.yml
-    dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "python"
-- name: "Process guides template (for node.js workshop)"
-  template:
-    src: guides-nodejs.yml
-    dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "node.js"
-- name: "Process guides template (for php workshop)"
-  template:
-    src: guides-php.yml
-    dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "php"
-
-- name: Add guides template to {{ namespace }}
-  command: "oc apply -f {{ tmp_dir.path }}/guides.yml -n {{ namespace }}"
-
-- name: Create install guide resources
-  shell: >
-        oc new-app starter-guides
-        -p CONSOLE_ADDRESS={{ openshift_master_url }}
-        -p ROUTER_ADDRESS={{ apps_hostname_suffix }}
-        -n {{ namespace }}
-        --dry-run -o yaml > guide.yml
-  args:
-    chdir: "{{ tmp_dir.path }}"
-
-- name: Apply guide objects
-  command: "oc apply -f guide.yml -n {{ namespace }}"
-  args:
-    chdir: "{{ tmp_dir.path }}"
-
-#####
-# Gogs
-#####
-- set_fact:
-    gogs_hostname: "gogs-{{ namespace }}.{{ apps_hostname_suffix }}"
-
-- import_role:
-    name: openshift_gogs
-  vars:
-    project_name: "{{ namespace }}"
-    gogs_route: "{{ gogs_hostname }}"
-    gogs_image_version: "{{ gogs_release_version }}"
-    gogs_admin_user: "{{ infrasvcs_adm_user }}"
-    gogs_admin_password: "{{ infrasvcs_adm_password }}"
-    gogs_user: "developer"
-    gogs_password: "{{ openshift_user_password }}"
-    gogs_generate_user_count: "{{ user_count }}"
-    gogs_generate_user_format: "{{ user_format }}"
-    clean_deploy: false
-
-#####
-# Nexus
-#####
-- import_role:
-    name: openshift_sonatype_nexus
-  vars:
-    project_name: "{{ namespace }}"
-    nexus_image_version: "{{ nexus_release_version }}"
-    nexus_volume_capacity: 6Gi
-    nexus_admin_user: "{{ infrasvcs_adm_user }}"
-    nexus_admin_password: "{{ infrasvcs_adm_password }}"
-  when:
-    - workshop_type == "java"
-
-#####
-# ocp-ops-view
-#####
-- name: "Copy ocp-ops-view resource list"
-  copy:
-    src: ocp-ops-view.yml
-    dest: "{{ tmp_dir.path }}/ocp-ops-view.yml"
-
-- name: Add anyuid to SA ocp-ops-view in {{ namespace }}
-  command: "oc adm policy add-scc-to-user anyuid -z ocp-ops-view -n {{ namespace }}"
-
-- name: Add cluster-admin role to SA ocp-ops-view in {{ namespace }}
-  command: "oc adm policy add-cluster-role-to-user cluster-admin -z ocp-ops-view -n {{ namespace }}"
-
-- name: Configure SA ocp-ops-view in {{ namespace }}
-  command: "oc apply -f ocp-ops-view.yml -n {{ namespace }}"
-  args:
-    chdir: "{{ tmp_dir.path }}"  
-
-
-#####
-# Eclipse che
-#####
-# deploy eclipse che
-- import_role:
-    name: openshift_eclipse_che
-  vars:
-    project_name: "{{ namespace }}"
-    che_version: "{{ che_release_version }}"
-    multi_user: true
-    route_suffix: "{{ apps_hostname_suffix }}"
-    keycloak_admin_user: "{{ infrasvcs_adm_user }}"
-    keycloak_admin_pwd: "{{ infrasvcs_adm_password }}"
-    install_java_oc_stack: true
-
-- name: "Create local repository to push to git (Java version)"
-  command: git clone https://github.com/openshift-roadshow/{{ reponame }}.git
-  args:
-    chdir: "{{ tmp_dir.path }}"
-  when: workshop_type == "java"
-- name: "Create local repository to push to git (Python version)"
-  command: git clone https://github.com/openshift-roadshow/{{ reponame }}-py.git {{ reponame }}
-  args:
-    chdir: "{{ tmp_dir.path }}"
-  when: workshop_type == "python"
-- name: "Create local repository to push to git (node.js version)"
-  command: git clone https://github.com/openshift-roadshow/{{ reponame }}-js.git {{ reponame }}
-  args:
-    chdir: "{{ tmp_dir.path }}"
-  when: workshop_type == "nodejs"
-- name: "Create local repository to push to git (PHP version)"
-  command: git clone https://github.com/openshift-roadshow/{{ reponame }}-php.git {{ reponame }}
-  args:
-    chdir: "{{ tmp_dir.path }}"
-  when: workshop_type == "php"
+- include_tasks: install-che.yml
+  when: '"che" in features_to_install'
 
 - include_tasks: per_user.yml
   with_sequence: start=1 end={{ user_count }} format={{ user_format }}

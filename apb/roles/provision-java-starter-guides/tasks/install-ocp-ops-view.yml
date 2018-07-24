@@ -1,0 +1,19 @@
+---
+#####
+# ocp-ops-view
+#####
+- name: "Copy ocp-ops-view resource list"
+  copy:
+    src: ocp-ops-view.yml
+    dest: "{{ tmp_dir.path }}/ocp-ops-view.yml"
+
+- name: Add anyuid to SA ocp-ops-view in {{ namespace }}
+  command: "oc adm policy add-scc-to-user anyuid -z ocp-ops-view -n {{ namespace }}"
+
+- name: Add cluster-admin role to SA ocp-ops-view in {{ namespace }}
+  command: "oc adm policy add-cluster-role-to-user cluster-admin -z ocp-ops-view -n {{ namespace }}"
+
+- name: Configure SA ocp-ops-view in {{ namespace }}
+  command: "oc apply -f ocp-ops-view.yml -n {{ namespace }}"
+  args:
+    chdir: "{{ tmp_dir.path }}"

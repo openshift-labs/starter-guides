@@ -1,0 +1,42 @@
+---
+#####
+# Guides (Workshopper)
+#####
+- name: "Process guides template (for java workshop)"
+  template:
+    src: guides-java.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
+  when: workshop_type == "java"
+- name: "Process guides template (for python workshop)"
+  template:
+    src: guides-python.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
+  when: workshop_type == "python"
+- name: "Process guides template (for node.js workshop)"
+  template:
+    src: guides-nodejs.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
+  when: workshop_type == "node.js"
+- name: "Process guides template (for php workshop)"
+  template:
+    src: guides-php.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
+  when: workshop_type == "php"
+
+- name: Add guides template to {{ namespace }}
+  command: "oc apply -f {{ tmp_dir.path }}/guides.yml -n {{ namespace }}"
+
+- name: Create install guide resources
+  shell: >
+        oc new-app starter-guides
+        -p CONSOLE_ADDRESS={{ openshift_master_url }}
+        -p ROUTER_ADDRESS={{ apps_hostname_suffix }}
+        -n {{ namespace }}
+        --dry-run -o yaml > guide.yml
+  args:
+    chdir: "{{ tmp_dir.path }}"
+
+- name: Apply guide objects
+  command: "oc apply -f guide.yml -n {{ namespace }}"
+  args:
+    chdir: "{{ tmp_dir.path }}"

@@ -1,8 +1,20 @@
 ---
-reponame: "nationalparks"
+features_to_install: [etherpad, nexus, gogs, guides, nexus, ocp-ops-view, che]
 
+# DEFAULTS
+# namespace: ocp-workshop # This is defined in common-definitions
+apps_hostname_suffix: apps.osevg.openshiftworkshop.com
+openshift_master_url: https://master.osevg.openshiftworkshop.com
+workshop_type: java
+infrasvcs_adm_user: adminuser
+infrasvcs_adm_password: admin123
+openshift_user_password: openshift
+# user_count: 0 # This is defined in common-definitions
+# user_format: user%d # Theis is defined in common-definitions
 che_release_version: 6.7.1
 nexus_release_version: 3.12.1
 gogs_release_version: 0.11.34
 
+
+reponame: "nationalparks"
 install_custom_stacks_json: []
