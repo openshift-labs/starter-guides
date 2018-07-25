@@ -12,4 +12,7 @@
     route_suffix: "{{ apps_hostname_suffix }}"
     keycloak_admin_user: "{{ infrasvcs_adm_user }}"
     keycloak_admin_pwd: "{{ infrasvcs_adm_password }}"
+    che_generate_user_count: "{{ user_count }}"
+    che_generate_user_format: "{{ user_format }}"
+    che_generate_user_password: "{{ openshift_user_password }}"
     install_java_oc_stack: true
