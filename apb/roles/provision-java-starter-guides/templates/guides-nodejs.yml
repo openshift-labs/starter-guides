@@ -67,10 +67,10 @@ objects:
         - parksmap-logging
         - parksmap-permissions
         - parksmap-rsh
-        - nationalparks-java
-        - nationalparks-databases
+        - nationalparks-javascript
+        - nationalparks-javascript-databases
         - nationalparks-application-health
-        - nationalparks-codechanges-gogs
+        - nationalparks-javascript-codechanges-gogs
         - mlbparks-templates
         - mlbparks-clustering
         - mlbparks-binary-build

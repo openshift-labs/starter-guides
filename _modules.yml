@@ -122,7 +122,40 @@ modules:
       DOCS_URL:
       ROUTER_ADDRESS:
       INFRA_PROJECT:
-  nationalparks-databases:
+  nationalparks-javascript:
+    name: Deploying Javascript Code
+    vars:
+      DOCS_URL:
+      ROUTER_ADDRESS:
+      INFRA_PROJECT:
+  nationalparks-php:
+    name: Deploying PHP Code
+    vars:
+      DOCS_URL:
+      ROUTER_ADDRESS:
+      INFRA_PROJECT:
+  nationalparks-python:
+    name: Deploying Python Code
+    vars:
+      DOCS_URL:
+      ROUTER_ADDRESS:
+      INFRA_PROJECT:
+  nationalparks-java-databases:
+    name: Adding a Database (MongoDB)
+    vars:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+  nationalparks-javascript-databases:
+    name: Adding a Database (MongoDB)
+    vars:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+  nationalparks-python-databases:
+    name: Adding a Database (MongoDB)
+    vars:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+  nationalparks-php-databases:
     name: Adding a Database (MongoDB)
     vars:
       ROUTER_ADDRESS:
@@ -146,7 +179,25 @@ modules:
 #      - application-health
 #  codechanges:
 #    name: Using Source 2 Image for Code Changes
-  nationalparks-codechanges-gogs:
+  nationalparks-java-codechanges-gogs:
+    name: Using Source 2 Image for Code Changes
+    vars:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+  nationalparks-javascript-codechanges-gogs:
+    name: Using Source 2 Image for Code Changes
+    vars:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+  nationalparks-php-codechanges-gogs:
+    name: Using Source 2 Image for Code Changes
+    vars:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:
+      PARKSMAP_VERSION:
+  nationalparks-python-codechanges-gogs:
     name: Using Source 2 Image for Code Changes
     vars:
       INFRA_PROJECT:

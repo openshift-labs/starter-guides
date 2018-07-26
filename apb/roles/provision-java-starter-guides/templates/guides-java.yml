@@ -68,9 +68,9 @@ objects:
         - parksmap-permissions
         - parksmap-rsh
         - nationalparks-java
-        - nationalparks-databases
+        - nationalparks-java-databases
         - nationalparks-application-health
-        - nationalparks-codechanges-gogs
+        - nationalparks-java-codechanges-gogs
         - mlbparks-templates
         - mlbparks-clustering
         - mlbparks-binary-build

@@ -63,28 +63,28 @@ following path:
 
 [source,bash]
 ----
-src/main/java/com/openshift/evg/roadshow/parks/rest/
+bin/
 ----
 
-Then click on the `BackendController.java` file.
+Then click on the `config.js` file.
 
 Once you have the file on the screen, click the edit button in the top right
 hand corner as shown here:
 
-image::nationalparks-codechanges-gogs-change-code.png[Webhook]
+image::nationalparks-codechanges-gogs-javascript-change-code.png[Webhook]
 
-Change line number 20:
+Change line number 17:
 
-[source,java]
+[source,javascript]
 ----
-return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);
+ displayName: "National Parks (JS)",
 ----
 
 To
 
-[source,java]
+[source,javascript]
 ----
-return new Backend("nationalparks","OpenShift National Parks", new Coordinates("47.039304", "14.505178"), 4);
+ displayName: "Amazing National Parks (JS)",
 ----
 
 Click on Commit changes at the bottom of the screen. Feel free to enter a commit

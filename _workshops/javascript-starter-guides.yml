@@ -1,6 +1,6 @@
 ---
-id: java-starter-workshop
-name: Developing Java Applications on OpenShift - Starter Lab
+id: javascript-starter-workshop
+name: Developing Javascript Applications on OpenShift - Starter Lab
 
 content:
   url: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.9
@@ -18,10 +18,10 @@ modules:
   - parksmap-logging
   - parksmap-permissions
   - parksmap-rsh
-  - nationalparks-java
-  - nationalparks-java-databases
+  - nationalparks-javascript
+  - nationalparks-javascript-databases
   - nationalparks-application-health
-  - nationalparks-java-codechanges-gogs
+  - nationalparks-javascript-codechanges-gogs
   - mlbparks-templates
   - mlbparks-clustering
   - mlbparks-binary-build

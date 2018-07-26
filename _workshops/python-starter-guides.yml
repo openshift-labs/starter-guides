@@ -1,6 +1,6 @@
 ---
-id: java-starter-workshop
-name: Developing Java Applications on OpenShift - Starter Lab
+id: python-starter-workshop
+name: Developing Python Applications on OpenShift - Starter Lab
 
 content:
   url: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.9
@@ -18,10 +18,10 @@ modules:
   - parksmap-logging
   - parksmap-permissions
   - parksmap-rsh
-  - nationalparks-java
-  - nationalparks-java-databases
+  - nationalparks-python
+  - nationalparks-python-databases
   - nationalparks-application-health
-  - nationalparks-java-codechanges-gogs
+  - nationalparks-python-codechanges-gogs
   - mlbparks-templates
   - mlbparks-clustering
   - mlbparks-binary-build

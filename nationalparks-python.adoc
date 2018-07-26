@@ -1,7 +1,7 @@
-## Lab: Deploying Java Code
+## Lab: Deploying Python Code
 
 ### Application Description
-In this lab, we're going to deploy a backend service, developed in Java
+In this lab, we're going to deploy a backend service, developed in Python
 programming language that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
 The application will query for national parks information (including it's
@@ -43,10 +43,10 @@ https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
-### Exercise: Creating a Java application
+### Exercise: Creating a Python application
 
 The backend service that we will be deploying as part of this exercise is
-called `nationalparks`.  This is a Java Spring Boot application that performs 2D
+called `nationalparks`.  This is a python application that performs 2D
 geo-spatial queries against a MongoDB database to locate and return map
 coordinates of all National Parks in the world. That was just a fancy way of
 saying that we are going to deploy a webservice that returns a JSON list of
@@ -75,13 +75,13 @@ http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks.g
 ----
 
 Later in the lab, we want you to make a code change and then rebuild your
-application. This is a fairly simple Spring framework Java application.
+application. This is a fairly simple Python application.
 
 #### Build the Code on OpenShift
 
 Similar to how we used "Add to project" before with a Docker-formatted image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let's use it with a simple Java S2I image.
+have your own git repository, let's use it with a simple Python S2I image.
 
 CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
@@ -90,15 +90,15 @@ click the *"Add to Project"* button and then the browse catalog link as highligh
 
 image::nationalparks-show-catalog.png[Add to Project]
 
-This is the service catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
+This is the service catalog which allows a user to select components they want to add to their application.
 
-Search for `openjdk`, and finally "Red Hat OpenJDK" as shown in the following image:
+Search for `python`, and finally "Python" as shown in the following image:
 
-image::nationalparks-java-sarch-jdk.png[Service Catalog Languages]
+image::nationalparks-python-sarch-python.png[Service Catalog Languages]
 
-After you click `Red Hat OpenJDK 8`, a dialog is presented as shown in the following image:
+After you click `Python`, a dialog is presented as shown in the following image:
 
-image::nationalparks-java-new-java-service.png[Create application]
+image::nationalparks-python-new-python-service.png[Add application]
 
 Click on the "Next" button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
@@ -121,18 +121,7 @@ If you were to specify a specific branch or directory in the repository for your
 
 Don't click *Create*, but click on *Advanced Options*, as there's more things we are going to configure.
 
-image::nationalparks-java-configure-java-service.png[Runtimes]
-
-[TIP]
-====
-To speed build process, a Sonatype Nexus server is running in the environment
-that will cache your dependencies as you pull them down. To use it, you need to
-scroll down to *Build Configuration* and add an environment variable named
-*MAVEN_MIRROR_URL* with value
-`http://nexus.{{INFRA_PROJECT}}.svc.cluster.local:8081/repository/maven-public
-
-image::nationalparks-java-configure-java-service-maven2.png[Runtimes]
-====
+image::nationalparks-python-configure-python-service.png[Runtimes]
 
 We will again set 3 labels to the deployment.
 
@@ -145,11 +134,9 @@ image::nationalparks-configure-service-labels.png[Adding labels]
 You can then hit the button labeled *"Create"*. Then click *Continue to
 overview*. You will see the build log output directly there.
 
-image::nationalparks-java-new-java-build.png[Nationalparks build]
+image::nationalparks-python-new-python-build.png[Nationalparks build]
 
-
-This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build
-will take a few minutes as Maven downloads all of the dependencies needed for
+The initial build will take a few minutes to downloads all of the dependencies needed for
 the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
@@ -245,7 +232,7 @@ Earlier we said:
 
 [source,bash]
 ----
-This is a Java Spring Boot application that performs 2D geo-spatial queries
+This is a Python application that performs 2D geo-spatial queries
 against a MongoDB database
 ----
 
