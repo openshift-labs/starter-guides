@@ -94,7 +94,7 @@ repository:
 
 [source,bash]
 ----
-oc new-app mlbparks --name=mlbparks -p MAVEN_MIRROR_URL=http://nexus.{{INFRA_PROJECT}}.svc.cluster.local:8081/repository/maven-public
+oc new-app mlbparks --name=mlbparks -p MAVEN_MIRROR_URL=http://nexus.{{INFRA_PROJECT}}.svc.cluster.local:8081/repository/maven-all-public
 ----
 ====
 
