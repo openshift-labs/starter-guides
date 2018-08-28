@@ -21,12 +21,12 @@ parameters:
   displayName: Workshop Url
   required: true
 - name: CONSOLE_ADDRESS
-  description: Console url (e.g. https://master.mycluster.openshiftworkshop.com or https://console.mycluster.gce.pixy.io:8443)
+  description: Console url (e.g. https://master.mycluster.openshiftworkshop.com)
   value:
   displayName: Console url
   required: true
 - name: ROUTER_ADDRESS
-  description: Application subdomain (e.g. apps.mycluster.openshiftworkshop.com or apps.mycluster.gce.pixy.io)
+  description: Application subdomain (e.g. apps.mycluster.openshiftworkshop.com)
   value:
   displayName: Application subdomain
   required: true
@@ -39,6 +39,7 @@ objects:
       app: ${APPNAME}
       role: config
   data:
+    LOG_TO_STDOUT: "true"
     WORKSHOPS_URLS: ${WORKSHOPS_URLS}
     workshop.yml: |+
       ---
@@ -66,9 +67,9 @@ objects:
         - parksmap-permissions
         - parksmap-rsh
         - nationalparks-java
-        - nationalparks-databases
+        - nationalparks-java-databases
         - nationalparks-application-health
-        - nationalparks-codechanges-gogs
+        - nationalparks-java-codechanges-gogs
         - mlbparks-templates
         - mlbparks-clustering
         - mlbparks-binary-build
@@ -87,7 +88,14 @@ objects:
     - name: latest
       from:
         kind: DockerImage
-        name: osevg/workshopper:latest
+        name: quay.io/osevg/workshopper:latest
+      importPolicy: {}
+      referencePolicy:
+        type: Source
+    - name: previous
+      from:
+        kind: DockerImage
+        name: docker.io/osevg/workshopper:latest
       importPolicy: {}
       referencePolicy:
         type: Source
