@@ -179,30 +179,53 @@ modules:
 #      - application-health
 #  codechanges:
 #    name: Using Source 2 Image for Code Changes
+  nationalparks-java-pipeline-codechanges-gogs:
+    name: Automating builds on Code Changes
+    vars:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:
+      USER_NAME:
+      USER_PROJECT:
+      PARKSMAP_VERSION:
   nationalparks-java-codechanges-gogs:
     name: Using Source 2 Image for Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
+      USER_NAME:
+      USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-javascript-codechanges-gogs:
     name: Using Source 2 Image for Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
+      USER_NAME:
+      USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-php-codechanges-gogs:
     name: Using Source 2 Image for Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
+      USER_NAME:
+      USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-python-codechanges-gogs:
     name: Using Source 2 Image for Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
+      USER_NAME:
+      USER_PROJECT:
       PARKSMAP_VERSION:
+  nationalparks-java-pipeline:
+    name: Creating a Jenkins pipeline for your application
+    vars:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:
+      USER_NAME:
+      USER_PROJECT:
 #  canaryrelease:
 #    name: Canary Release to Production
 #    requires:
