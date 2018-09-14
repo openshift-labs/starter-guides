@@ -90,7 +90,7 @@ objects:
     - name: latest
       from:
         kind: DockerImage
-        name: osevg/workshopper:latest
+        name: quay.io/osevg/workshopper:latest
       importPolicy: {}
       referencePolicy:
         type: Source
