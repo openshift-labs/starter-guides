@@ -96,7 +96,7 @@ Search for `php`, and finally "PHP" as shown in the following image:
 
 image::nationalparks-php-search-php.png[Service Catalog Languages]
 
-After you click `Node.js`, a dialog is presented as shown in the following image:
+After you click `php`, a dialog is presented as shown in the following image:
 
 image::nationalparks-php-new-php-service.png[Add Java]
 

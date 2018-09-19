@@ -40,3 +40,16 @@
   command: "oc apply -f guide.yml -n {{ namespace }}"
   args:
     chdir: "{{ tmp_dir.path }}"
+#
+# PHP specific 
+#
+
+- name: "Copy updated PHP+mongodb IS to temp"
+  block:
+    - copy:
+        src: php-is.yml
+        dest: "{{ tmp_dir.path }}/php-is.yml"
+    - command: "oc replace -f php-is.yml -n openshift"
+      args:
+        chdir: "{{ tmp_dir.path }}"
+  when: workshop_type == "php"
