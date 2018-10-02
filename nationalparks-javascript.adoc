@@ -1,6 +1,3 @@
-## Lab: Deploying Javascript Code
-
-### Application Description
 In this lab, we're going to deploy a backend service, developed in Javascript
 programming language that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
@@ -11,7 +8,7 @@ by the end user.
 
 image::roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
 
-### Background: Source-to-Image (S2I)
+== Background: Source-to-Image (S2I)
 
 In a previous lab, we learned how to deploy a pre-existing Docker-formatted
 image. Now we will expand on that by learning how OpenShift builds
@@ -43,7 +40,7 @@ https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
-### Exercise: Creating a Javascript application
+== Exercise: Creating a Javascript application
 
 The backend service that we will be deploying as part of this exercise is
 called `nationalparks`.  This is a Javascript application that performs 2D
@@ -52,12 +49,12 @@ coordinates of all National Parks in the world. That was just a fancy way of
 saying that we are going to deploy a webservice that returns a JSON list of
 places.
 
-#### Add to Project
+=== Add to Project
 Because the `nationalparks` component is a back-end to serve data that our
 existing front-end (parksmap) will consume, we are going to build it inside the existing
 project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the Web Console, we will deploy the nationalparks component using the web console.
 
-#### Using application code on embedded Git server
+=== Using application code on embedded Git server
 
 OpenShift can work with any accessible Git repository. This could be GitHub,
 GitLab, or any other server that speaks Git. You can even register webhooks in
@@ -77,7 +74,7 @@ http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks.g
 Later in the lab, we want you to make a code change and then rebuild your
 application. This is a fairly simple Javascript application.
 
-#### Build the Code on OpenShift
+=== Build the Code on OpenShift
 
 Similar to how we used "Add to project" before with a Docker-formatted image, we
 can do the same for specifying a source code repository. Since for this lab you

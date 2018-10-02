@@ -1,6 +1,4 @@
-## Lab: Setting up Debugging
-
-### Background: Port Forwarding and Debugging
+== Background: Port Forwarding and Debugging
 Just as we did before with remote shelling into our pods, we can also set up a port-forward between our local machine
 and our pod. The is useful for operations like connecting to a database running in a pod, viewing an administrative web
 interface we don't want to expose to the public, or, in our case, attach a debugger to the JVM running our application
@@ -14,7 +12,7 @@ step through the code in the pod as it is running in real time. By default EAP i
 need to turn on the debug ports
 
 
-### Exercise: Enabling Debugging in EAP on OpenShift
+== Exercise: Enabling Debugging in EAP on OpenShift
 
 It is very simple to turn on debugging. The EAP S2I container we are using is looking for an environment variable to
 control whether or not to enable the debug port. All we need to do is set an environment variable for the deployment.
@@ -26,7 +24,7 @@ $ oc set env dc/mlbparks DEBUG=true
 
 This will force a redeploy of our MLBparks pod, this time with the JDWT transport enabled and serving on port 8787.
 
-### Exercise: Port-Forwarding from the pod to our local machine
+== Exercise: Port-Forwarding from the pod to our local machine
 
 It is quite simple to do port-forwarding.
 
@@ -52,7 +50,7 @@ We said to port-forward from port 8787 on the pod to 8787 on the local machine. 
 
 NOTE: To stop port-forwarding just hit ctrl-c in the terminal window where you did the port forward command
 
-### Setting up Remote Debug in IntelliJ
+=== Setting up Remote Debug in IntelliJ
 
 Setting up remote debugging is quite easy in IntelliJ. First edit the run/debug configurations.
 Under the Run menu (alt-u), choose edit configurations. This will bring up the new configuration dialog.
@@ -68,5 +66,3 @@ image::mlbparks-debugging-intellij-debug-info.png[IntelliJ New Configuration]
 
 Now when you click the Debug icon in IntelliJ, it will open the debugger and attach to JVM in the pod on OpenShift. Go
 ahead and set a break point in any class you want and it will do normal debugging - just like you know and love!
-
-

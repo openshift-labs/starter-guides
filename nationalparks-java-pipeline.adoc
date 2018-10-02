@@ -1,9 +1,7 @@
-## Automate Build and Deployment with Pipelines
-
 In this lab you will learn about pipelines and how to configure a pipeline in OpenShift so
 that it will take care of the application lifecycle.
 
-### Background
+== Background: Continuous Integration and Pipelines
 
 A continuous delivery (CD) pipeline is an automated expression of your process for getting software
 from version control right through to your users and customers.
@@ -24,7 +22,7 @@ and reviewed like any other code.
 
 image::devops-pipeline-flow.png[Pipelines]
 
-### Set Up Your Pipeline
+== Set Up Your Pipeline
 
 A deployment configuration in OpenShift can contain 
 https://{{DOCS_URL}}/dev_guide/deployments/basic_deployment_operations.html#triggers[triggers], which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.
@@ -32,7 +30,7 @@ https://{{DOCS_URL}}/dev_guide/deployments/basic_deployment_operations.html#trig
 As we want the Jenkins pipeline to control when builds and deployments happen, we need to disable the ability
 on the current Deployment to automatically trigger when there is a new image or a configuration change.
 
-### Configure Manual Deployments on Dev Application
+== Configure Manual Deployments on Dev Application
 
 In the *CoolStore DEV* project, click on *Applications -> Deployments* on the left sidebar menu
 and then on *catalog* deployment. Click on *Actions -> Edit* button:
@@ -43,7 +41,7 @@ Unselect the checkboxes for the Image Change trigger and for the Config change t
 
 image::devops-pipeline-deployment-triggers.png[Remove triggers]
 
-### Create Your Pipeline
+== Create Your Pipeline
 
 As pipelines provides the ability to promote applications between different stages of the delivery cycle, Jenkins, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
@@ -88,7 +86,7 @@ WARNING: If you have successfully deployed Jenkins, do NOT execute this command.
 oc new-app jenkins-persistent -n userXY
 ----
 
-### Store Your Pipeline Definition in Git
+== Store Your Pipeline Definition in Git
 
 For this example, we're going to store our pipeline in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principle, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
@@ -182,7 +180,7 @@ This pipeline has 4 stages defined:
 - *Build Image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created.
 - *Deploy*: it will deploy the created image on OpenShift using the DeploymentConfig named `nationalparks` we created in the previous lab.
 
-### Create Your Pipeline Definition on OpenShift
+== Create Your Pipeline Definition on OpenShift
 
 Create the OpenShift pipeline definition to use the Jenkins file. This is a regular OpenShift BuildConfig with a *JenkinsPipeline* strategy.
 

@@ -1,6 +1,4 @@
-## Lab: Scaling and Self Healing
-
-### Background: Deployment Configurations and Replication Controllers
+== Background: Deployment Configurations and Replication Controllers
 
 While *Services* provide routing and load balancing for *Pods*, which may go in and
 out of existence, *ReplicationControllers* (RC) are used to specify and then
@@ -30,7 +28,7 @@ almost all of those cases, OpenShift will create all of them for you.
 There are some edge cases where you might want some *Pods* and an *RC* without a *DC*
 or a *Service*, and others, so feel free to ask us about them after the labs.
 
-### Exercise: Exploring Deployment-related Objects
+== Exercise: Exploring Deployment-related Objects
 
 Now that we know the background of what a *ReplicatonController* and
 *DeploymentConfig* are, we can explore how they work and are related. Take a
@@ -68,7 +66,7 @@ set of instances and then manipulates the RCs accordingly.
 You can learn more about the CPU-based
 https://{{DOCS_URL}}/dev_guide/pod_autoscaling.html[Horizontal Pod Autoscaler here]
 
-### Exercise: Scaling the Application
+== Exercise: Scaling the Application
 
 Let's scale our parksmap "application" up to 2 instances. We can do this with
 the `scale` command. You could also do this by clicking the "up" arrow next to
@@ -157,7 +155,7 @@ Overall, that's how simple it is to scale an application (*Pods* in a
 is just launching new instances of an existing image, especially if that image
 is already cached on the node.
 
-### Application "Self Healing"
+== Application "Self Healing"
 
 Because OpenShift's *RCs* are constantly monitoring to see that the desired number
 of *Pods* actually is running, you might also expect that OpenShift will "fix" the
@@ -200,7 +198,7 @@ More information on probing applications is available in the
 https://{{DOCS_URL}}/dev_guide/application_health.html[Application
 Health] section of the documentation and later in this guide.
 
-### Exercise: Scale Down
+== Exercise: Scale Down
 
 Before we continue, go ahead and scale your application down to a single
 instance. Feel free to do this using whatever method you like.

@@ -1,0 +1,107 @@
+{
+  "v": "4.0",
+  "name": "starter-guides",
+  "workspace": {
+    "environments": {
+      "default": {
+        "machines": {
+          "dev-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2147483648"
+            },
+            "servers": {
+              "8080/tcp": {
+                "attributes": {},
+                "port": "8080",
+                "protocol": "http"
+              },
+              "8000/tcp": {
+                "attributes": {},
+                "port": "8000",
+                "protocol": "http"
+              }
+            },
+            "volumes": {},
+            "installers": [
+              "org.eclipse.che.exec",
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent"
+            ],
+            "env": {
+              "CHE_MACHINE_NAME": "dev-machine"
+            }
+          }
+        },
+        "recipe": {
+          "type": "dockerimage",
+          "content": "siamaksade/che-centos-jdk8"
+        }
+      }
+    },
+    "defaultEnv": "default",
+    "projects": [
+      {
+        "links": [],
+        "name": "nationalparks",
+        "attributes": {},
+        "type": "blank",
+        "source": {
+          "location": "http://gogs-{{ project_name }}.{{ route_suffix }}/{{username}}/nationalparks",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/nationalparks",
+        "description": "",
+        "problems": [],
+        "mixins": []
+      },
+      {
+        "links": [],
+        "name": "mlbparks",
+        "attributes": {},
+        "type": "blank",
+        "source": {
+          "location": "https://github.com/openshift-roadshow/mlbparks",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/mlbparks",
+        "description": "",
+        "problems": [],
+        "mixins": []
+      }
+
+    ],
+    "name": "starter-guides",
+    "commands": [
+      {
+        "commandLine": "mvn package -f ${current.project.path}",
+        "name": "build",
+        "attributes": {
+          "goal": "Build",
+          "previewUrl": ""
+        },
+        "type": "mvn"
+      },
+      {
+        "commandLine": "mvn test -f ${current.project.path}",
+        "name": "test",
+        "attributes": {
+          "goal": "Test",
+          "previewUrl": ""
+        },
+        "type": "mvn"
+      },
+      {
+        "commandLine": "mvn clean package -f ${current.project.path}",
+        "name": "clean build",
+        "attributes": {
+          "goal": "Build",
+          "previewUrl": ""
+        },
+        "type": "mvn"
+      }
+    ],
+    "links": []
+  }
+}

@@ -1,0 +1,44 @@
+You find all urls, hostnames, usernames and passwords that are needed during the workshop in this page. Note that the urls are also embedded inside the labs so that you don't have to go back and forth between this page and the labs.
+
+== OpenShift cluster URL
+
+Address: {{CONSOLE_ADDRESS}} +
+
+Username: `{{ USER_NAME }}` + 
+Password: `{{ USER_PASSWORD }}` +
+
+
+
+== Workshop Guides
+
+Web: http://starter-guides-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}
+
+== Etherpad
+
+Web: http://etherpad-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}/p/workshop
+
+== Web terminal
+
+Web: http://terminal-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}
+
+== Git Server
+
+Web: http://gogs-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}
+
+Username: `{{ USER_NAME }}` + 
+Password: `{{ USER_PASSWORD }}` + 
+
+== Nexus Maven repository
+
+Web: http://nexus-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}
+
+== Eclipse CHE
+
+Web: http://che-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}
+
+Username: `{{ USER_NAME }}` + 
+Password: `{{ USER_PASSWORD }}` + 
+
+== OpenShift Ops View
+
+Web: http://ocp-ops-view-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}

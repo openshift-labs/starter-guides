@@ -1,6 +1,4 @@
-## Lab: Making Code Changes and using webhooks
-
-### Background: Web Hooks
+== Background: Web Hooks
 
 Most Git repository servers support the concept of web hooks -- calling to an
 external source via HTTP(S) when a change in the code repository happens.
@@ -9,7 +7,7 @@ remote systems in order to trigger builds. By pointing the code repository's
 hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
-#### Exercise: Configuring Gogs Web Hooks
+== Exercise: Configuring Gogs Web Hooks
 In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ USER_PROJECT }}` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
 
 On this screen you will see the option to copy the generic webhook URL as shown in the following image:
@@ -53,7 +51,7 @@ Boom! From now on, every time you commit new source code to your Gogs
 repository, a new build and deploy will occur inside of OpenShift.  Let's try
 this out.
 
-#### Exercise: Using Gogs Web Hooks
+== Exercise: Using Gogs Web Hooks
 Click "Project" at the top of the Gogs page, and then "Files" towards the
 middle of the page. This is Gogs's repository view. 
 
@@ -123,7 +121,7 @@ You should now see the new name you have set in the JSON string returned.
 NOTE: To see this in the map's legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
 
 
-#### Exercise: Rollback
+== Exercise: Rollback
 
 OpenShift allows you to move between different versions of an application
 without the need to rebuild each time. Every version (past builds) of the
@@ -186,7 +184,7 @@ $ oc set triggers dc/nationalparks --auto
 ----
 ====
 
-#### Exercise: Rollforward
+== Exercise: Rollforward
 
 Just like you performed a rollback, you can also perform a roll-forward using
 the same command. You'll notice above that when you requested a *rollback*, it

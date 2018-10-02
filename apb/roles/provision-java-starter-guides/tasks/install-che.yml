@@ -16,3 +16,4 @@
     che_generate_user_format: "{{ user_format }}"
     che_generate_user_password: "{{ openshift_user_password }}"
     install_java_oc_stack: true
+    install_factory_template_filename: "che-factory.json.j2"

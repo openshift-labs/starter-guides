@@ -20,4 +20,4 @@ docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serv
                  -e openshift_user_password=openshift \
                  -e openshift_master_url=${_cluster} \
                  -e infrasvcs_adm_user=adminuser \
-                 -e infrasvcs_adm_password=adminpassword 
+                 -e infrasvcs_adm_password=adminpassword -vvv

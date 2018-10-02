@@ -1,7 +1,3 @@
-## Lab: OpenShift Role-Based Access Control
-
-### Background
-
 Almost every interaction with an OpenShift environment that you can think of
 requires going through the OpenShift's control plane API. All API interactions are both authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to do what you are asking?).
 
@@ -19,7 +15,7 @@ You can view current permissions in the web UI, by navigating to "Resources -> M
 
 image::parksmap-permissions-membership.png[Membership]
 
-### Exercise: Grant Service Account View Permissions
+== Exercise: Grant Service Account View Permissions
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
@@ -71,7 +67,7 @@ Once you're finished editing permissions, click on the *"Done Editing"* button.
 
 image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 
-### Exercise: Redeploy Application
+== Exercise: Redeploy Application
 One more step is required. We need to re-deploy the parks map application because it's
 given up trying to query the API.
 
@@ -95,7 +91,7 @@ image::parksmap-permissions-redeployed.png[Application deployed]
 
 If you look at the logs for the application now, you should see no errors.  That's great.
 
-### Exercise: Grant User View Permissions
+== Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
 access to your project using the following command:

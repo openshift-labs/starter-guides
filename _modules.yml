@@ -100,12 +100,12 @@ modules:
       PARKSMAP_IMAGENAME:
       PARKSMAP_VERSION:
   parksmap-scaling:
-    name: Scaling
+    name: Scaling and Self Healing
     vars:
       DOCS_URL:
       PARKSMAP_VERSION:
   parksmap-routes:
-    name: Creating Routes
+    name: Exposing your application to the outside world
     vars:
       PARKSMAP_VERSION:
   parksmap-logging:
@@ -115,7 +115,7 @@ modules:
   parksmap-permissions:
     name: Role-Based Access Control
   parksmap-rsh:
-    name: Remote access
+    name: Remote access to your application
   nationalparks-java:
     name: Deploying Java Code
     vars:
@@ -180,7 +180,7 @@ modules:
 #  codechanges:
 #    name: Using Source 2 Image for Code Changes
   nationalparks-java-pipeline-codechanges-gogs:
-    name: Automating builds on Code Changes
+    name: Automation for your application on Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -188,7 +188,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-java-codechanges-gogs:
-    name: Using Source 2 Image for Code Changes
+    name: Trigger automatic rebuilds on code changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -196,7 +196,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-javascript-codechanges-gogs:
-    name: Using Source 2 Image for Code Changes
+    name: Trigger automatic rebuilds on code changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -204,7 +204,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-php-codechanges-gogs:
-    name: Using Source 2 Image for Code Changes
+    name: Trigger automatic rebuilds on code changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -212,7 +212,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-python-codechanges-gogs:
-    name: Using Source 2 Image for Code Changes
+    name: Trigger automatic rebuilds on code changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -220,12 +220,14 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-java-pipeline:
-    name: Creating a Jenkins pipeline for your application
+    name: Automate Build and Deployment with Pipelines
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
       USER_NAME:
       USER_PROJECT:
+  nationalparks-java-che:
+    name: Working online with Eclipse Che
 #  canaryrelease:
 #    name: Canary Release to Production
 #    requires:
@@ -247,6 +249,14 @@ modules:
       DOCS_URL:
   common-further-resources:
     name: Further resources
+  common-workshop-links:
+    name: Workshop links
+    vars:
+      CONSOLE_ADDRESS:
+      ROUTER_ADDRESS:
+      INFRA_PROJECT:
+      USER_NAME:
+      USER_PASSWORD:
 #  quotas:
 #    name: Limiting application resource usage
 #  run-as-non-root:

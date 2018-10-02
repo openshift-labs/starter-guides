@@ -1,0 +1,26 @@
+---
+#####
+# Terminals: 
+# https://raw.githubusercontent.com/openshift-evangelists/training-openshift-auth/master/examples/terminal-base.json
+#####
+- name: "Process terminals template"
+  template:
+    src: terminals.yml
+    dest: "{{ tmp_dir.path }}/terminals.yml"
+
+- name: Add terminals template to {{ namespace }}
+  command: "oc apply -f {{ tmp_dir.path }}/terminals.yml -n {{ namespace }}"
+
+- name: Create terminals resources
+  shell: >
+        oc new-app terminal-base-openshift-auth
+        -p ADMIN_USERS={{ openshift_user }}
+        -n {{ namespace }}
+        --dry-run -o yaml > terminals.yml
+  args:
+    chdir: "{{ tmp_dir.path }}"
+
+- name: Apply terminals objects
+  command: "oc apply -f terminals.yml -n {{ namespace }}"
+  args:
+    chdir: "{{ tmp_dir.path }}"

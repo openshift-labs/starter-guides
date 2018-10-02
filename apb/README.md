@@ -129,4 +129,4 @@ There's a set of advanced options that can be set:
 |Variable                   | Default Value            | Description   |
 |---------------------------|--------------------------|---------------|
 |`create_projects`          | true                    | Whether to create user projects or not  |
-|`features_to_install`      | [etherpad, nexus, gogs, guides, nexus, ocp-ops-view, che]          | Sets the features to install  |
+|`features_to_install`      | [etherpad, nexus, gogs, guides, nexus, ocp-ops-view, che, terminals] | Sets the features to install  |

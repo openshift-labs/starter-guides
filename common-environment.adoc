@@ -1,5 +1,3 @@
-## Environment Overview
-
 image::common-environment-ocp-architecture.png[OCP Architecture]
 
 You will be interacting with an OpenShift environment that is running on a 

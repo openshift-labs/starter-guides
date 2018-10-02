@@ -1,11 +1,8 @@
-## Lab: Creating Routes by Exposing Services
-
-### Application description
 In this lab, we're going to make our application visible to the end users, so they can access it.
 
 image::roadshow-app-architecture-parksmap-2.png[Application architecture,800,align="center"]
 
-### Background: Routes
+== Background: Routes
 
 While *Services* provide internal abstraction and load balancing within an
 OpenShift environment, sometimes clients (users, systems, devices, etc.)
@@ -19,7 +16,7 @@ security, such as TLS, for the *Route*. If you want your *Services*, and, by
 extension, your *Pods*, to be accessible from the outside world, you need to
 create a *Route*.
 
-#### Exercise: Creating a Route
+== Exercise: Creating a Route
 
 Fortunately, creating a *Route* is a pretty straight-forward process. You simply
 `expose` the *Service* via the command line. Or, via the web console, just click

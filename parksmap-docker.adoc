@@ -1,11 +1,8 @@
-## Lab: Deploy a Docker Image
-
-### Application description
 In this lab, we're going to deploy the web component of the ParksMap application which is also called `parksmap` and uses OpenShift service discovery mechanism to discover the backend services deployed and shows their data on the map.
 
 image::roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
 
-### Exercise: Deploying your first Image
+== Exercise: Deploying your first Image
 
 Let's start by doing the simplest thing possible - get a plain old
 Docker-formatted image to run on OpenShift. This is incredibly simple to do.
@@ -68,7 +65,7 @@ a single non-exiting CMD to execute on start.
 
 NOTE: Providing appropriate labels is desired when deploying complex applications for organization purposes. OpenShift uses a label *app* to define and group components together in the Overview page. OpenShift will create this label with some default if the user don't provide it explicitly.
 
-### Background: Containers and Pods
+== Background: Containers and Pods
 
 Before we start digging in, we need to understand how containers and *Pods* are
 related. We will not be covering the background on these technologies in this lab but if you have questions please inform the instructor. Instead, we will dive right in and start using them.
@@ -88,7 +85,7 @@ __
 contain a "main process" and any auxiliary services you want to run along with that process. Examples of containers you might put in a *Pod* are, an Apache HTTPD
 server, a log analyzer, and a file service to help manage uploaded files.
 
-### Exercise: Examining the Pod
+== Exercise: Examining the Pod
 
 In the web console's overview page you will see that there is a single *Pod* that
 was created by your actions. 
@@ -173,7 +170,7 @@ node does not already have it cached locally. You can check on the status of the
 image download and deployment in the *Pod* details page, or from the command
 line with the `oc get pods` command that you used before.
 
-### Background: Customizing the image lifecycle behavior
+== Background: Customizing the image lifecycle behavior
 
 Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Docker daemon or CRI-O) to run an image, the runtime will check to make sure it has the right "version" of the image to run.
 If it doesn't, it will pull it from the specified registry.
@@ -181,9 +178,9 @@ If it doesn't, it will pull it from the specified registry.
 There are a number of ways to customize this behavior. They are documented in
 https://{{DOCS_URL}}/dev_guide/application_lifecycle/new_app.html#specifying-an-image[specifying an image]
 as well as
-https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy[image pullpolicy].
+https://{{DOCS_URL}}/dev_guide/managing_images.html=image-pull-policy[image pullpolicy].
 
-#### Background: Services
+== Background: Services
 
 *Services* provide a convenient abstraction layer inside OpenShift to find a
 group of similar *Pods*. They also act as an internal proxy/load balancer between

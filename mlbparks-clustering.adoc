@@ -1,6 +1,4 @@
-## Lab: Clustering Stateful Java EE Applications
-
-### JBoss EAP Clustering
+== JBoss EAP Clustering
 
 Clustering in JBoss EAP is achieved using the Kubernetes discovery mechanism for
 finding other JBoss EAP containers and forming a cluster. This is done by

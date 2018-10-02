@@ -49,6 +49,9 @@
 - include_tasks: install-guides.yml
   when: '"guides" in features_to_install'
 
+- include_tasks: install-terminals.yml
+  when: '"terminals" in features_to_install'
+
 - include_tasks: install-gogs.yml
   when: '"gogs" in features_to_install'
 

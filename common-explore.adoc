@@ -1,11 +1,23 @@
-## Lab: Exploring the CLI and Web Console
-
-### Command Line
+== Command Line
 
 The first thing we want to do to ensure that our `oc` command line tools was
 installed and successfully added to our path is to log in to the OpenShift
-environment that has been provided for this Workshop session.  In
-order to log in, we will use the `oc` command and then specify the server that we
+environment that has been provided for this Workshop session. 
+
+[NOTE]
+====
+In case you had trouble installing the command line tools, you can go ahead and use a hosted version running in our OpenShift cluster. Open a new browser tab and point it to:
+
+
+[source,bash,role=copypaste]
+----
+http://terminal-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}
+----
+
+You will need to log in with your OpenShift user and click on `Allow selected permissions`. You can then continue with the workshop.
+====
+
+In order to log in, we will use the `oc` command and then specify the server that we
 want to authenticate to. Issue the following command:
 
 [source,bash,role=copypaste]
@@ -73,9 +85,9 @@ Congratulations, you are now authenticated to the OpenShift server. The
 OpenShift master includes a built-in OAuth server. Developers and administrators
 obtain OAuth access tokens to authenticate themselves to the API. By default
 your authorization token will last for 24 hours. There is more information about
-the login command and its configuration in the https://{{DOCS_URL}}/cli_reference/get_started_cli.html#basic-setup-and-login[OpenShift Documentation].
+the login command and its configuration in the https://{{DOCS_URL}}/cli_reference/get_started_cli.html=basic-setup-and-login[OpenShift Documentation].
 
-#### Using a project
+== Using a project
 
 Projects are a top level concept to help you organize your deployments. An
 OpenShift project allows a community of users (or a user) to organize and manage
@@ -123,7 +135,7 @@ You will see the following confirmation message:
 Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
 ----
 
-### The Web Console
+== The Web Console
 
 OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser.  To get a feel for how the web console

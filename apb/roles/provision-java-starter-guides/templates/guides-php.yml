@@ -76,6 +76,7 @@ objects:
         - mlbparks-binary-build
         - mlbparks-debugging
         - common-further-resources
+        - common-workshop-links
 - kind: ImageStream
   apiVersion: v1
   metadata:

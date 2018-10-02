@@ -1,10 +1,8 @@
-## Lab: Exploring OpenShift's Logging Capabilities
-
 OpenShift provides some convenient mechanisms for viewing application logs.
 First and foremost is the ability to examine a *Pod*'s logs directly from the
 web console or via the command line.
 
-### Background: Container Logs
+== Background: Container Logs
 
 OpenShift is constructed in such a way that it expects containers to log all
 information to `STDOUT`. In this way, both regular and error information is
@@ -24,7 +22,7 @@ already sends log information to some "external" system or because it writes
 various log information to various files, fear not.
 ====
 
-#### Exercise: Examining Logs
+== Exercise: Examining Logs
 
 Since we already deployed our application, we can take some time to examine its
 logs. In the web console `Overview` page, click on the kebab menu (three squares) at the
@@ -71,7 +69,7 @@ You will see all of the application logs scroll on your screen:
 
 WARNING: You may have noticed an error that mentions a service account. What's that?  Never fear, we will cover that shortly.
 
-#### Exercise: Aggregated Pod Logs
+== Exercise: Aggregated Pod Logs
 
 WARNING: This section is only relevant if the aggregated logging
 capability is available in the OpenShift cluster, as this capability is optional.

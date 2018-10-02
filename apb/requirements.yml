@@ -11,5 +11,5 @@
   name: openshift_workshopper
 
 - src: siamaksade.openshift_eclipse_che
-  version: ocp-3.10
+  version: ocp-3.10-1
   name: openshift_eclipse_che

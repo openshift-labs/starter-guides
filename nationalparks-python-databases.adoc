@@ -1,6 +1,3 @@
-## Lab: Adding a Database
-
-### Application Description
 In this lab, we're going to deploy a Mongo database that will be used to store
 the data for the `nationalparks` application. We will also connect the
 `nationalparks` service with the newly deployed Mongo database, so that the
@@ -14,7 +11,7 @@ automatically.
 
 image::roadshow-app-architecture-nationalparks-2.png[Application architecture,800,align="center"]
 
-### Background: Storage
+== Background: Storage
 
 Most useful applications are "stateful" or "dynamic" in some way, and this is
 usually achieved with a database or other data storage. In this lab we are
@@ -29,7 +26,7 @@ OpenShift's persistent storage mechanism to attach real-world storage (NFS,
 Gluster, EBS, etc) to the *Pods* to give them a persistent place to store their
 data.
 
-### Exercise: Deploy MongoDB
+== Exercise: Deploy MongoDB
 
 As you've seen so far, the web console makes it very easy to deploy things onto
 OpenShift. When we deploy the database, we pass in some values for configuration.
@@ -114,7 +111,7 @@ image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add bind
 
 This change in configuration will trigger a new deployment of the `nationalparks` application with the binding properly injected.
 
-#### Exercise: Exploring OpenShift Magic
+== Exercise: Exploring OpenShift Magic
 As soon as we changed the *DeploymentConfiguration*, some
 magic happened. OpenShift decided that this was a significant enough change to
 warrant updating the internal version number of the *DeploymentConfiguration*. You
@@ -147,7 +144,7 @@ is 0. The desired and current number of instances for the "-2" deployment is 1.
 This means that OpenShift has gracefully torn down our "old" application and
 stood up a "new" instance.
 
-#### Exercise: Data, Data, Everywhere
+== Exercise: Data, Data, Everywhere
 
 Now that we have a database deployed, we can again visit the `nationalparks` web
 service to query for data:
@@ -224,7 +221,7 @@ lifecycle environments on OpenShift without having to modify application code.
 
 ====
 
-#### Exercise: Working With Labels
+== Exercise: Working With Labels
 
 We explored how a *Label* is just a key=value pair earlier when looking at
 *Services* and *Routes* and *Selectors*. In general, a *Label* is simply an

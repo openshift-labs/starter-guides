@@ -1,6 +1,3 @@
-## Lab: Using Templates
-
-### Application description
 In this lab, we're going to deploy a complete backend application, consisting of
 an REST API backend and a mongo database. The complete application will already
 be wired together and described as a backend for the map visualization tool, so
@@ -9,7 +6,7 @@ map.
 
 image::roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
 
-### Background: Templates
+== Background: Templates
 Running all these individual commands can be tedious and error prone.
 Fortunately for you, all of this configuration can be put together into a single
 *Template* which can then be processed to create a full set of resources. As you
@@ -33,7 +30,7 @@ could have used templates to deploy everything in the workshop today, remember
 that it is important for you to understand how to create, deploy, and wire
 resources together.
 
-#### Exercise: Instantiate a Template
+== Exercise: Instantiate a Template
 
 The front end application we've been working with this whole time will display
 as many back end services' data as are created. Adding more stuff with the right

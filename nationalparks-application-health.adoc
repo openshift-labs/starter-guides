@@ -1,6 +1,4 @@
-## Lab: Application Health
-
-### Background: Readiness and Liveness Probes
+== Background: Readiness and Liveness Probes
 As we have seen before in the UI via warnings, there is a concept of application
 health checks in OpenShift. These come in two flavors:
 
@@ -29,7 +27,7 @@ Readiness Probe::
 It sounds complicated, but it really isn't. We will use the web console to add
 these probes to our `nationalparks` application.
 
-### Exercise: Add Health Checks
+== Exercise: Add Health Checks
 As we are going to be implementing a realistic CI/CD pipeline, we will be doing
 some testing of the "development" version of the application. However, in order
 to test the app, it must be ready. This is where OpenShift's application health

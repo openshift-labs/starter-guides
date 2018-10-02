@@ -1,6 +1,4 @@
-## Lab: Binary Builds for Day to Day Development
-
-### Moving on From S2I
+== Moving on From S2I
 As you saw before S2I is a great way to get from source code to a container, but the process is a bit too slow for daily fast iteration
 development. For example, if you want to change some CSS or change one method in a class you don't want to go through
 a full git commit and build cycle. In this lab we are going to show you a more efficient method for quick iteration. While
@@ -8,7 +6,7 @@ we are at it we will also throw in showing you how to debug your code as well.
 
 Now that we built the MLB parks service let's go ahead and make some quick changes
 
-### Fast Iteration Code Change Using Binary Deploy
+== Fast Iteration Code Change Using Binary Deploy
 
 The OpenShift command line has the ability to do a deployment from your local machine. In this case we are going to use S2I,
 but we are going to tell OpenShift to just take the war file from our local machine and bake it in the image.
@@ -22,9 +20,9 @@ machine AND would also not require git commit with a push. Read more in the
 https://{{DOCS_URL}}/dev_guide/dev_tutorials/binary_builds.html[official documentation]
 
 
-#### Exercise: Using binary deployment
+== Exercise: Using binary deployment
 
-##### Clone source
+=== Clone source
 The first step is to clone the MLB source code from GitHub to your local machine:
 
 [source,bash,role=copypaste]
@@ -35,7 +33,7 @@ git clone https://github.com/openshift-roadshow/mlbparks.git
 NOTE: We are using Intellij here in the guide for screenshots but this should work regardless of your tool chain. JBoss
 Developer Studio and JBoss Developer Tools have built in functionality that makes this close to seamless right from the IDE.
 
-##### Setup the Build of the war file
+=== Setup the Build of the war file
 If you have Maven all set up on your machine, then you can just do a:
 
 
@@ -48,7 +46,7 @@ Pay attention to the output location for the ROOT.war, we will need that directo
 
 If you're using IntelliJ or eclipse/JBoss Developer Studio package the maven artifact using the IDE.
 
-##### Code Change
+=== Code Change
 Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
 that gives basic info on the service and can be reached at:
 
@@ -68,7 +66,7 @@ return new Backend("mlbparks", "AMAZING MLB Parks", new Coordinates("39.82", "-9
 
 Don't forget to save the file.
 
-#####  Doing the Binary Build
+=== Doing the Binary Build
 
 Alright we have our war file built, time to kick off a build using it.
 
