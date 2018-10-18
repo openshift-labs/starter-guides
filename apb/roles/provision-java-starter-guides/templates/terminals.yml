@@ -250,10 +250,10 @@ parameters:
   value: "7200"
 - name: OC_VERSION
   required: true
-  value: 3.10.41
+  value: 3.11.16
 - name: ODO_VERSION
   required: true
-  value: 0.0.12
+  value: 0.0.13
 - name: KUBECTL_VERSION
   required: true
-  value: 1.10.0
+  value: 1.11.0
