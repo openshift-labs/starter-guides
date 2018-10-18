@@ -3,7 +3,7 @@ id: workshop
 name: Developing Java Applications on OpenShift - Starter Lab
 
 content:
-  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.10
+  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.11
 
 
 modules:
@@ -19,11 +19,14 @@ modules:
   - parksmap-permissions
   - parksmap-rsh
   - nationalparks-java
-  - nationalparks-databases
+  - nationalparks-java-databases
   - nationalparks-application-health
-  - nationalparks-codechanges-gogs
+  - nationalparks-java-pipeline
+  - nationalparks-java-pipeline-codechanges-gogs
+#  - nationalparks-java-che
   - mlbparks-templates
   - mlbparks-clustering
   - mlbparks-binary-build
   - mlbparks-debugging
   - common-further-resources
+  - common-workshop-links
