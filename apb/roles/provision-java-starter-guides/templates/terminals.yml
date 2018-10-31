@@ -81,7 +81,7 @@ objects:
         name: ${APPLICATION_NAME}-hub-img:latest
     source:
       git:
-        ref: master
+        ref: 1.0.0
         uri: https://github.com/openshift-evangelists/training-openshift-auth.git
       type: Git
     strategy:
@@ -218,7 +218,7 @@ objects:
         name: ${APPLICATION_NAME}-app-base:latest
     source:
       git:
-        ref: master
+        ref: 1.0.0
         uri: https://github.com/openshift-evangelists/workshop-base-image.git
       type: Git
     strategy:
