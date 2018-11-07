@@ -58,7 +58,7 @@ Another way you could have done the same is by using the OpenShift console. Once
 
 image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 
-Add the admin role to the *{{ USER_PROJECT }}/default* Service Account, and then
+Add the view role to the *{{ USER_PROJECT }}/default* Service Account, and then
 click the *"Add"* button.
 
 image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
