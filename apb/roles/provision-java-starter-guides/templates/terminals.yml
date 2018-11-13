@@ -47,7 +47,7 @@ objects:
         name: ${APPLICATION_NAME}-hub-s2i:latest
     source:
       git:
-        ref: 1.0.4
+        ref: 2.0.0
         uri: https://github.com/jupyter-on-openshift/jupyterhub-quickstart.git
       type: Git
     strategy:
@@ -81,7 +81,7 @@ objects:
         name: ${APPLICATION_NAME}-hub-img:latest
     source:
       git:
-        ref: 1.0.0
+        ref: 2.0.0
         uri: https://github.com/openshift-evangelists/training-openshift-auth.git
       type: Git
     strategy:
