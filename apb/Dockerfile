@@ -1,4 +1,4 @@
-FROM ansibleplaybookbundle/apb-base
+FROM ansibleplaybookbundle/apb-base:release-1.2
 
 LABEL "com.redhat.apb.spec"=\
 "dmVyc2lvbjogMS4wCm5hbWU6IHN0YXJ0ZXItd29ya3Nob3AtYXBiCmRlc2NyaXB0aW9uOiBBUEIg\
