@@ -126,7 +126,7 @@ To speed build process, a Sonatype Nexus server is running in the environment
 that will cache your dependencies as you pull them down. To use it, you need to
 scroll down to *Build Configuration* and add an environment variable named
 *MAVEN_MIRROR_URL* with value
-`http://nexus.{{INFRA_PROJECT}}.svc.cluster.local:8081/repository/maven-all-public
+`http://nexus.{{INFRA_PROJECT}}.svc.cluster.local:8081/repository/maven-all-public`
 
 image::nationalparks-java-configure-java-service-maven2.png[Runtimes]
 ====
