@@ -3,14 +3,24 @@
 _cluster=${1:-$APB_TEST_ENV_MASTER_URL}
 _user=${2:-$APB_TEST_ENV_ADMIN_USER}
 _password=${3:-$APB_TEST_ENV_ADMIN_PASSWORD}
-_namespace=${4:-starter-workshop-apb-test}
+__namespace_param=${4:-$APB_TEST_ENV_NAMESPACE}
+_namespace=${__namespace_param:-"starter-workshop-apb-test"}
+# APB_TEST_IMAGE="quay.io/openshiftlabs/starter-workshop-apb:ocp-3.11"
+_image=${APB_TEST_IMAGE:-"starter-workshop-apb"}
+_extra_envs=${APB_TEST_EXTRA_ENVS}
+
+[ "$_cluster" == "" ] || [ "$_user" == "" ] || [ "$_password" == "" ] &&
+  echo "./provision <cluster> <user> <password> [<namepace>] [<extra_params>]" &&
+  exit 1
 
 echo "oc login ${_cluster} -u ${_user} -p ${_password}"
 oc login ${_cluster} -u ${_user} -p ${_password}
 oc new-project ${_namespace}
 oc project ${_namespace}
 
-docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount starter-workshop-apb \
+docker pull $_image
+
+docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount $_image \
        provision -e namespace=${_namespace} \
                  -e master_url=${_cluster} \
                  -e openshift_user=${_user} \
@@ -20,4 +30,4 @@ docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serv
                  -e openshift_user_password=openshift \
                  -e openshift_master_url=${_cluster} \
                  -e infrasvcs_adm_user=adminuser \
-                 -e infrasvcs_adm_password=adminpassword -vvv
+                 -e infrasvcs_adm_password=adminpassword ${_extra_envs} -vvv

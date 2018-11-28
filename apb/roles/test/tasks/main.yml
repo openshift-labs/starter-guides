@@ -1,0 +1,4 @@
+---
+- name: facts
+  set_fact:
+    json_text: "{{ json_text | json_query('access_token') }}"

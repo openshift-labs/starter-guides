@@ -1,0 +1,11 @@
+- name: java-starter-guides playbook to provision the application
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  roles:
+  - role: ansible.kubernetes-modules
+    install_python_requirements: no
+  - role: ansibleplaybookbundle.asb-modules
+  - role: test
+
