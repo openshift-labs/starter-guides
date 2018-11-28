@@ -142,7 +142,7 @@ image::nationalparks-configure-service-labels.png[Adding labels]
 You can then hit the button labeled *"Create"*. Then click *Continue to
 overview*. You will see the build log output directly there.
 
-image::nationalparks-java-new-java-build.png[Nationalparks build]
+image::nationalparks-java-new-java-service-build.png[Nationalparks build]
 
 
 This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build
