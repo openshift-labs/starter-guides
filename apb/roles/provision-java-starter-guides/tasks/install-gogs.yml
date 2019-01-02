@@ -33,7 +33,7 @@
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}-js.git {{ reponame }}
   args:
     chdir: "{{ tmp_dir.path }}"
-  when: workshop_type == "nodejs"
+  when: workshop_type == "node.js"
 - name: "Create local repository to push to git (PHP version)"
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}-php.git {{ reponame }}
   args:
