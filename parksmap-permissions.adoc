@@ -4,10 +4,10 @@ requires going through the OpenShift's control plane API. All API interactions a
 In the log aggregation lab we saw that there was an
 error in reference to a *Service Account*.
 
-As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he issues a command). These actions are performed using a *Service Account* which is a special type of `user` that the platform will use internally.
+As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he or she issues a command). These actions are performed using a *Service Account* which is a special type of `user` that the platform will use internally.
 
 OpenShift automatically creates a few special service accounts in every project.
-The **default** service account is the one tkaing the responsibility of running the pods, and OpenShift uses and injects this service account into
+The **default** service account is the one taking the responsibility of running the pods, and OpenShift uses and injects this service account into
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
@@ -19,18 +19,18 @@ image::parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following command(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-$ oc project {{ USER_PROJECT }}
+oc project {{ USER_PROJECT }}
 ----
 
 Then:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc policy add-role-to-user view -z default
+oc policy add-role-to-user view -z default
 ----
 
 The `oc policy` command above is giving a defined _role_ (`view`) to a user. But
@@ -68,7 +68,7 @@ Once you're finished editing permissions, click on the *"Done Editing"* button.
 image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 
 == Exercise: Redeploy Application
-One more step is required. We need to re-deploy the parks map application because it's
+One more step is required. We need to re-deploy the parksmap application because it's
 given up trying to query the API.
 
 This time we'll use the web console. Find your `{{ USER_PROJECT }}` project,
@@ -96,11 +96,11 @@ If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
 access to your project using the following command:
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the user provided to you.
+CAUTION: In the following command(s), replace `{{ USER_PROJECT }}` with the user name of the person to whom you want to grant access.
 
 [source,bash,role=copypaste]
 ----
-$ oc policy add-role-to-user view {{ USER_PROJECT }}
+oc policy add-role-to-user view {{ USER_PROJECT }}
 ----
 
 Have them go to the project view by clicking the *Projects* button and verify

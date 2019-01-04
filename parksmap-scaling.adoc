@@ -35,10 +35,13 @@ Now that we know the background of what a *ReplicatonController* and
 look at the *DeploymentConfig* (DC) that was created for you when you told
 OpenShift to stand up the `parksmap` image:
 
+[source,bash,role=copypaste]
+----
+oc get dc
+----
+
 [source,bash]
 ----
-$ oc get dc
-
 NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
 parksmap   1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
 ----
@@ -48,10 +51,13 @@ To get more details, we can look into the *ReplicationController* (*RC*).
 Take a look at the *ReplicationController* (RC) that was created for you when
 you told OpenShift to stand up the `parksmap` image:
 
+[source,bash,role=copypaste]
+----
+oc get rc
+----
+
 [source,bash]
 ----
-$ oc get rc
-
 NAME         DESIRED   CURRENT   READY     AGE
 parksmap-1   1         1         0         4h
 ----
@@ -72,7 +78,7 @@ Let's scale our parksmap "application" up to 2 instances. We can do this with
 the `scale` command. You could also do this by clicking the "up" arrow next to
 the *Pod* in the OpenShift web console on the overview page. It's your choice.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 $ oc scale --replicas=2 dc/parksmap
 ----
@@ -83,10 +89,13 @@ image::parksmap-scaleup.png[Scaling]
 
 To verify that we changed the number of replicas, issue the following command:
 
+[source,bash,role=copypaste]
+----
+oc get rc
+----
+
 [source,bash]
 ----
-$ oc get rc
-
 NAME         DESIRED   CURRENT   READY     AGE
 parksmap-1   2         2         0         4h
 ----
@@ -94,10 +103,13 @@ parksmap-1   2         2         0         4h
 You can see that we now have 2 replicas. Let's verify the number of pods with
 the `oc get pods` command:
 
+[source,bash,role=copypaste]
+----
+oc get pods
+----
+
 [source,bash]
 ----
-$ oc get pods
-
 NAME               READY     STATUS    RESTARTS   AGE
 parksmap-1-8g6lb   1/1       Running   0          1m
 parksmap-1-hx0kv   1/1       Running   0          4h
@@ -106,32 +118,35 @@ parksmap-1-hx0kv   1/1       Running   0          4h
 And lastly, let's verify that the *Service* that we learned about in the
 previous lab accurately reflects two endpoints:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc describe svc parksmap
+oc describe svc parksmap
 ----
 
 You will see something like the following output:
 
 [source,bash]
 ----
-Name:			parksmap
-Namespace:		{{ USER_PROJECT }}
-Labels:			app=parksmap
-Selector:		deploymentconfig=parksmap
-Type:			ClusterIP
-IP:			172.30.169.213
-Port:			8080-tcp	8080/TCP
-Endpoints:		10.1.0.5:8080,10.1.1.5:8080
-Session Affinity:	None
-No events.
+Name:              parksmap
+Namespace:         userXY
+Labels:            app=workshop
+                   component=parksmap
+                   role=frontend
+Selector:          deploymentconfig=parksmap
+Type:              ClusterIP
+IP:                172.30.169.213
+Port:              8080-tcp  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.1.0.5:8080,10.1.1.5:8080
+Session Affinity:  None
+Events:            <none>
 ----
 
 Another way to look at a *Service*'s endpoints is with the following:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get endpoints parksmap
+oc get endpoints parksmap
 ----
 
 And you will see something like the following:
@@ -158,17 +173,20 @@ is already cached on the node.
 == Application "Self Healing"
 
 Because OpenShift's *RCs* are constantly monitoring to see that the desired number
-of *Pods* actually is running, you might also expect that OpenShift will "fix" the
+of *Pods* actually are running, you might also expect that OpenShift will "fix" the
 situation if it is ever not right. You would be correct!
 
 Since we have two *Pods* running right now, let's see what happens if we
 "accidentally" kill one. Run the `oc get pods` command again, and choose a *Pod*
 name. Then, do the following:
 
+[source,bash,role=copypaste]
+----
+oc delete pod parksmap-1-hx0kv && oc get pods
+----
+
 [source,bash]
 ----
-$ oc delete pod parksmap-1-hx0kv && oc get pods
-
 pod "parksmap-1-h45hj" deleted
 NAME               READY     STATUS              RESTARTS   AGE
 parksmap-1-h45hj   1/1       Terminating         0          4m

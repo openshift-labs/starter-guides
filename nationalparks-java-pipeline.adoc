@@ -33,7 +33,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 == Configure Manual Deployments on Dev Application
 
 In the *userXY* project, click on *Applications -> Deployments* on the left sidebar menu
-and then on *catalog* deployment. Click on *Actions -> Edit* button:
+and then on *nationalparks* deployment. Click on *Actions -> Edit* button:
 
 image::devops-pipeline-deployment-edit.png[Edit pipeline]
 
@@ -43,7 +43,7 @@ image::devops-pipeline-deployment-triggers.png[Remove triggers]
 
 == Create Your Pipeline
 
-As pipelines provides the ability to promote applications between different stages of the delivery cycle, Jenkins, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
+As pipelines provide the ability to promote applications between different stages of the delivery cycle, Jenkins, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
 We're going to deploy a Jenkins instance to this project to configure and run our pipelines. As we want our Jenkins instance to be able to survive restarts (in case we need to update any plugin configuration) we will select the Jenkins persistent template from the Service Catalog.
 
@@ -51,7 +51,7 @@ Use the *Search Catalog* search field on the menu bar and search for *Jenkins*. 
 
 image::devops-pipeline-catalog-search.png[Empty CICD project]
 
-We will be pronted with the configuration screens for deploying our Jenkins server instance.
+We will be prompted with the configuration screens for deploying our Jenkins server instance.
 
 image::devops-jenkins-template.png[Jenkins template]
 
@@ -88,7 +88,7 @@ oc new-app jenkins-persistent -n userXY
 
 == Store Your Pipeline Definition in Git
 
-For this example, we're going to store our pipeline in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principle, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
+For this example, we're going to store our pipeline in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
 Log into your `nationalparks` repository in Git as we are going to store in this repository our Jenkinsfile, that is, our pipeline definition.
 
@@ -165,7 +165,7 @@ image::devops-pipeline-gogs-add-jenkinsfile.png[Nationalparks project]
 
 As we can see now, the Jenkinsfile is already stored in our version control system.
 
-image::devops-pipeline-jenkinsfile-list.png[Nationalparks project]
+image::devops-pipeline-gogs-jenkinsfile-list.png[Nationalparks project]
 
 A *Pipeline* is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.
 

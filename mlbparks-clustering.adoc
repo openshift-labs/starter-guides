@@ -17,13 +17,13 @@ For `KUBE_PING` to work, the following steps must be taken:
   to be allowed to access Kubernetes' REST api.
 
 You have already configured the default service account to have access to
-Kubernetes' REST api during previous labs. Now you can scale up the *mlbparks*
+Kubernetes' REST API during previous labs. Now you can scale up the *mlbparks*
 pod to two by clicking on the upper arrows on the console. Alternatively, you
 can use the command line to scale up the pods and form a two-member cluster.
 
-[source]
+[source,bash,role=copypaste]
 ----
-$ oc scale dc/mlbparks --replicas=2
+oc scale dc/mlbparks --replicas=2
 ----
 
 For pods based on Java images, the web console also exposes access to a

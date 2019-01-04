@@ -30,35 +30,50 @@ image::parksmap-route-editor.png[Create Route editor,align="center"]
 
 When using the command line, we can first verify that we don't already have any existing route:
 
+[source,bash,role=copypaste]
+----
+oc get routes
+----
+
 [source,bash]
 ----
-$ oc get routes
 No resources found.
 ----
 
 Now we need to get the *Service* name to expose:
 
+[source,bash,role=copypaste]
+----
+oc get services
+----
+
 [source,bash]
 ----
-$ oc get services
-
 NAME       CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 parksmap   172.30.169.213   <none>        8080/TCP   5h
 ----
 
 Once we know the *Service* name, creating a *Route* is a simple one-command task:
 
+[source,bash,role=copypaste]
+----
+oc expose service parksmap
+----
+
 [source,bash]
 ----
-$ oc expose service parksmap
 route "parksmap" exposed
 ----
 
 Verify the *Route* was created with the following command:
 
+[source,bash,role=copypaste]
+----
+oc get route
+----
+
 [source,bash]
 ----
-$ oc get route
 NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
 parksmap   parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}             parksmap   8080-tcp
 ----
