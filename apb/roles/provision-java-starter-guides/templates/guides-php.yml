@@ -72,9 +72,9 @@ objects:
         - nationalparks-application-health
         - nationalparks-php-codechanges-gogs
         - mlbparks-templates
-        - mlbparks-clustering
-        - mlbparks-binary-build
-        - mlbparks-debugging
+      #  - mlbparks-clustering
+      #  - mlbparks-binary-build
+      #  - mlbparks-debugging
         - common-further-resources
         - common-workshop-links
 - kind: ImageStream

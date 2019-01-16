@@ -71,7 +71,7 @@ hand corner as shown here:
 
 image::nationalparks-codechanges-gogs-python-change-code.png[Webhook]
 
-Change line number 35:
+Change line number 48:
 
 [source,java]
 ----
@@ -92,9 +92,9 @@ Once you have committed your changes, a *Build* should almost instantaneously be
 triggered in OpenShift. Look at the *Builds* page in the web console, or run the
 following command to verify:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get builds
+oc get builds
 ----
 
 You should see that a new build is running:
@@ -106,7 +106,7 @@ nationalparks-1   Source    Git@b052ae6   Complete   18 hours ago     36s
 nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago
 ----
 
-Once the build and deploy has finished, verify your new Docker image was
+Once the build and deploy has finished, verify your new image was
 automatically deployed by viewing the application in your browser:
 
 CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
@@ -125,16 +125,16 @@ NOTE: To see this in the map's legend itself, you will need to scale down your p
 
 OpenShift allows you to move between different versions of an application
 without the need to rebuild each time. Every version (past builds) of the
-application exists as a Docker-formatted image in the OpenShift registry. Using
+application exists as an image in the OpenShift registry. Using
 the `oc rollback` and `oc deploy` commands you can move back- or forward between
 various versions of applications.
 
 In order to perform a rollback, you need to know the name of the *Deployment Config*
 which has deployed the application:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get dc
+oc get dc
 ----
 
 The output will be similar to the following:
@@ -148,9 +148,9 @@ nationalparks        9          1         1         config,image(nationalparks:m
 ----
 Now run the following command to rollback the latest code change:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc rollback nationalparks
+oc rollback nationalparks
 ----
 
 You will see output like the following:
@@ -178,9 +178,9 @@ Automatic deployment of new images is disabled as part of the rollback
 to prevent unwanted deployments soon after the rollback is complete. To re-enable
 the automatic deployments run this:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc set triggers dc/nationalparks --auto
+oc set triggers dc/nationalparks --auto
 ----
 ====
 
@@ -193,9 +193,9 @@ even if we are going "back".
 
 So, if we want to return to the "new code" version, that is deployment #4.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc rollback nationalparks-4
+oc rollback nationalparks-4
 ----
 
 And you will see the following:
@@ -206,5 +206,5 @@ Warning: the following images triggers were disabled: nationalparks
   You can re-enable them with: oc set triggers dc/nationalparks --auto
 ----
 
-Cool! Once the *rollback* is complete, verify you again see "OpenShift
+Cool! Once the *rollback* is complete, verify you again see "Amazing
 National Parks".

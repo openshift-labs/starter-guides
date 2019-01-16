@@ -3,8 +3,8 @@ image::common-environment-ocp-architecture.png[OCP Architecture]
 You will be interacting with an OpenShift environment that is running on a 
 public cloud. The environment consists of the following systems:
 
-* {{ ENV_MASTERS }} master nodes
-* {{ ENV_INFRA }} infrastructure nodes
+* {{ ENV_MASTERS }} master node(s)
+* {{ ENV_INFRA }} infrastructure node(s)
 * {{ ENV_NODES }} "application" nodes
 * An NFS server
 
@@ -24,9 +24,9 @@ Before continuing, please visit visit the Etherpad at the following URL:
 http://etherpad-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}/p/workshop
 ----
 
-Decide on a user account, between one of the available users or use 
-the one that has been assigned to you by the instructor. Type that user
-account and your name next to it. This will be your user account for the
+Decide on a user account among one of the available users or use 
+the one that has been assigned to you by the instructor. Find that user
+account and type your name next to it. This will be your user account for the
 duration of these exercises. For example:
 
 ----

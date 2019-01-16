@@ -1,8 +1,8 @@
-In this lab, we're going to deploy the web component of the ParksMap application which is also called `parksmap` and uses OpenShift service discovery mechanism to discover the backend services deployed and shows their data on the map.
+In this lab, we're going to deploy the web component of the ParksMap application which is also called `parksmap` and uses OpenShift's service discovery mechanism to discover the backend services deployed and shows their data on the map.
 
 image::roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
 
-== Exercise: Deploying your first Image
+== Exercise: Deploying your First Image
 
 Let's start by doing the simplest thing possible - get a plain old
 Docker-formatted image to run on OpenShift. This is incredibly simple to do.
@@ -12,15 +12,13 @@ Return to the web console:
 
 *link:{{CONSOLE_ADDRESS}}[]*
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following steps, replace `{{ USER_PROJECT }}` with the project provided to you.
 
-Find your *{{ USER_PROJECT }}* project and click it. Next,
-click on the `Deploy Image` in the *"Add to Project"* drop down.  This will open a dialog that will allow you to specify the information for the image you want to deploy.
+Find your *{{ USER_PROJECT }}* project and click it. On the next page, click *"Add to Project"* and a drop down menu will appear. There are several options, but we are only concerned with "Deploy Image". Click "Deploy Image" in the *"Add to Project"* drop down.  
 
-#TODO: Show image of this drop down.
+image::parksmap-add-to-project-dialog.png[Add to Project]
 
-There are several options, but we are only concerned with "Deploy Image". Click
-it. We will learn more about image streams and image stream tags later. For now,
+This will open a dialog that will allow you to specify the information for the image you want to deploy. We will learn more about image streams and image stream tags later. For now,
 select the "Image Name" option, and copy/paste the following into the box:
 
 [source]
@@ -54,12 +52,12 @@ We will add 3 labels:
 image::parksmap-image-options-labels.png[Explore Project]
 
 Hit the blue "Deploy" button at the bottom of the dialog and then click the
-"Continue to overview" link or the "Close" button. Take a moment to look at the various messages that
+"Continue to the project overview." link or the "Close" button. Take a moment to look at the various messages that
 you now see on the overview page.
 
 WINNING! These few steps are the only ones you need to run to get a
-Docker-formatted image deployed on OpenShift. This should work with any
-Docker-formatted image that follows best practices, such as defining an EXPOSE
+container image deployed on OpenShift. This should work with any
+container image that follows best practices, such as defining an EXPOSE
 port, not needing to run specifically as the *root user* or other user name, and
 a single non-exiting CMD to execute on start. 
 
@@ -102,9 +100,9 @@ happens to be the `parksmap` application - a simple Spring Boot/Java application
 
 You can also examine *Pods* from the command line:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get pod
+oc get pods
 ----
 
 You should see output that looks similar to:
@@ -125,7 +123,7 @@ NOTE: Make sure you use the correct *Pod* name from your output.
 
 [source,bash,role=copypaste]
 ----
-$ oc get pod parksmap-1-hx0kv -o yaml
+oc get pod parksmap-1-hx0kv -o yaml
 ----
 
 You should see something like the following output (which has been truncated due
@@ -170,7 +168,7 @@ node does not already have it cached locally. You can check on the status of the
 image download and deployment in the *Pod* details page, or from the command
 line with the `oc get pods` command that you used before.
 
-== Background: Customizing the image lifecycle behavior
+== Background: Customizing the Image Lifecycle Behavior
 
 Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Docker daemon or CRI-O) to run an image, the runtime will check to make sure it has the right "version" of the image to run.
 If it doesn't, it will pull it from the specified registry.
@@ -178,7 +176,7 @@ If it doesn't, it will pull it from the specified registry.
 There are a number of ways to customize this behavior. They are documented in
 https://{{DOCS_URL}}/dev_guide/application_lifecycle/new_app.html#specifying-an-image[specifying an image]
 as well as
-https://{{DOCS_URL}}/dev_guide/managing_images.html=image-pull-policy[image pullpolicy].
+https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy[image pull policy].
 
 == Background: Services
 
@@ -194,7 +192,7 @@ the requests.
 When you asked OpenShift to run the image, it automatically created a *Service*
 for you. Remember that services are an internal construct. They are not
 available to the "outside world", or anything that is outside the OpenShift
-environment. That's OK, as you will learn later.
+environment. That's okay, as you will learn later.
 
 The way that a *Service* maps to a set of *Pods* is via a system of *Labels* and
 *Selectors*. *Services* are assigned a fixed IP address and many ports and
@@ -208,17 +206,17 @@ Now that we understand the basics of what a *Service* is, let's take a look at
 the *Service* that was created for the image that we just deployed. In order to
 view the *Services* defined in your *Project*, enter in the following command:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get services
+oc get services
 ----
 
 You should see output similar to the following:
 
 [source,bash]
 ----
-NAME       CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-parksmap   172.30.169.213   <none>        8080/TCP   3h
+NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+parksmap   ClusterIP   172.30.169.213  <none>        8080/TCP   3h
 ----
 
 In the above output, we can see that we have a *Service* named `parksmap` with an
@@ -234,9 +232,9 @@ image::parksmap-serviceslist.png[Services list]
 You can also get more detailed information about a *Service* by using the
 following command to display the data in YAML:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get service parksmap -o yaml
+oc get service parksmap -o yaml
 ----
 
 You should see output similar to the following:
@@ -281,9 +279,9 @@ It is also of interest to view the YAML of the *Pod* to understand how OpenShift
 wires components together. For example, run the following command to get the
 name of your `parksmap` *Pod*:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get pods
+oc get pods
 ----
 
 You should see output similar to the following:
@@ -296,9 +294,9 @@ parksmap-1-hx0kv   1/1       Running   0          3h
 
 Now you can view the detailed data for your *Pod* with the following command:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get pod parksmap-1-hx0kv -o yaml
+oc get pod parksmap-1-hx0kv -o yaml
 ----
 
 Under the `metadata` section you should see the following:
@@ -325,9 +323,9 @@ Under the `metadata` section you should see the following:
 matches the *Selector* will be associated with the *Service*. To see this in
 action, issue the following command:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc describe service parksmap
+oc describe service parksmap
 ----
 
 You should see something like the following output:
@@ -345,7 +343,7 @@ IP:                     172.30.169.213
 Port:                   8080-tcp        8080/TCP
 Endpoints:              10.1.2.5:8080
 Session Affinity:       None
-No events.
+Events:                 <none>
 ----
 
 You may be wondering why only one endpoint is listed. That is because there is

@@ -85,9 +85,9 @@ Congratulations, you are now authenticated to the OpenShift server. The
 OpenShift master includes a built-in OAuth server. Developers and administrators
 obtain OAuth access tokens to authenticate themselves to the API. By default
 your authorization token will last for 24 hours. There is more information about
-the login command and its configuration in the https://{{DOCS_URL}}/cli_reference/get_started_cli.html=basic-setup-and-login[OpenShift Documentation].
+the login command and its configuration in the https://{{DOCS_URL}}/cli_reference/get_started_cli.html#basic-setup-and-login[OpenShift Documentation].
 
-== Using a project
+== Using a Project
 
 Projects are a top level concept to help you organize your deployments. An
 OpenShift project allows a community of users (or a user) to organize and manage
@@ -103,7 +103,7 @@ understand all of the terminology as we will cover it in detail in later labs.
 If you didn't have a project already created for you, the first thing we want 
 to do is create the *{{ USER_PROJECT }}* project. You can do this with the following command:
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
@@ -121,7 +121,7 @@ If you had multiple projects, the first thing you would want to do is to switch
 to the *{{ USER_PROJECT }}* project to make sure you're on the correct project from now on. 
 You can do this with the following command:
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
@@ -145,7 +145,7 @@ works, open your browser and go to the following URL:
 
 The first screen you will see is the authentication screen. You will be prompted for the username and password combination for your user account. Use the username and password combination provided to you by the instructor of this workshop:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 Username: {{ USER_NAME }}
 Password: {{USER_PASSWORD}}

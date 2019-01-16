@@ -1,8 +1,7 @@
-In this lab, we're going to deploy a backend service, developed in Java
-programming language that will expose 2 main REST endpoints to the visualizer
+In this lab, we're going to deploy a backend service, developed in Java that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
-The application will query for national parks information (including it's
-coordinates) that is stored in a Mongo database.  This application will also
+The application will query for national parks information (including its
+coordinates) that is stored in a MongoDB database.  This application will also
 provide an external access point, so that the API provided can be directly used
 by the end user.
 
@@ -10,25 +9,25 @@ image::roadshow-app-architecture-nationalparks-1.png[Application architecture,80
 
 == Background: Source-to-Image (S2I)
 
-In a previous lab, we learned how to deploy a pre-existing Docker-formatted
+In a previous lab, we learned how to deploy a pre-existing image
 image. Now we will expand on that by learning how OpenShift builds
-Docker images using source code from an existing repository.  This is accomplished using the Source-to-Image project.
+container images using source code from an existing repository.  This is accomplished using the Source-to-Image project.
 
 https://github.com/openshift/source-to-image[Source-to-Image (S2I)] is a
 open source project sponsored by Red Hat that has the following goal:
 
 [source]
 ----
-Source-to-image (S2I) is a tool for building reproducible Docker images. S2I
-produces ready-to-run images by injecting source code into a Docker image and
-assembling a new Docker image which incorporates the builder image and built
+Source-to-image (S2I) is a tool for building reproducible container images. S2I
+produces ready-to-run images by injecting source code into a container image and
+assembling a new container image which incorporates the builder image and built
 source. The result is then ready to use with docker run. S2I supports
 incremental builds which re-use previously downloaded dependencies, previously
 built artifacts, etc.
 ----
 
 OpenShift is S2I-enabled and can use S2I as one of its build mechanisms (in
-addition to building Docker images from Dockerfiles, and "custom" builds).
+addition to building container images from Dockerfiles, and "custom" builds).
 
 OpenShift runs the S2I process inside a special *Pod*, called a Build
 Pod, and thus builds are subject to quotas, limits, resource scheduling, and
@@ -50,11 +49,11 @@ saying that we are going to deploy a webservice that returns a JSON list of
 places.
 
 === Add to Project
-Because the `nationalparks` component is a back-end to serve data that our
-existing front-end (parksmap) will consume, we are going to build it inside the existing
-project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the Web Console, we will deploy the nationalparks component using the web console.
+Because the `nationalparks` component is a backend to serve data that our
+existing frontend (parksmap) will consume, we are going to build it inside the existing
+project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the web console, we will deploy the nationalparks component using the web console.
 
-=== Using application code on embedded Git server
+=== Using Application Code on an Embedded Git Server
 
 OpenShift can work with any accessible Git repository. This could be GitHub,
 GitLab, or any other server that speaks Git. You can even register webhooks in
@@ -64,7 +63,7 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Gogs username provided to you. Your Gogs credentials are the same as your openshift credentials
+CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Gogs username provided to you. Your Gogs credentials are the same as your OpenShift credentials.
 
 [source,role=copypaste]
 ----
@@ -76,11 +75,11 @@ application. This is a fairly simple Spring framework Java application.
 
 === Build the Code on OpenShift
 
-Similar to how we used "Add to project" before with a Docker-formatted image, we
+Similar to how we used "Add to project" before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple Java S2I image.
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following step(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 In the OpenShift web console, find your `{{ USER_PROJECT }}` project, and then
 click the *"Add to Project"* button and then the browse catalog link as highlighted in the following image:
@@ -111,12 +110,12 @@ NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
 In the *Git Repository* field enter the base of the Git repository for
-your Nationaparks application. This will cause the S2I
+your `nationalparks` application. This will cause the S2I
 process to grab that specific tag in the code repository.
 
 If you were to specify a specific branch or directory in the repository for your code, you would be able to do it in the *Advanced Options*. 
 
-Don't click *Create*, but click on *Advanced Options*, as there's more things we are going to configure.
+Don't click *Create*, but click on *Advanced Options*, as there are more things we are going to configure.
 
 image::nationalparks-java-configure-java-service.png[Runtimes]
 
@@ -140,7 +139,7 @@ We will again set 3 labels to the deployment.
 image::nationalparks-configure-service-labels.png[Adding labels]
 
 You can then hit the button labeled *"Create"*. Then click *Continue to
-overview*. You will see the build log output directly there.
+overview* and toggle the *>* icon next to the deployment config for `nationalparks` . You will see the build log output directly there.
 
 image::nationalparks-java-new-java-build.png[Nationalparks build]
 
@@ -151,9 +150,9 @@ the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get builds
+oc get builds
 ----
 
 You'll see output like:
@@ -166,14 +165,14 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
 
 You can also view the build logs with the following command:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc logs -f builds/nationalparks-1
+oc logs -f builds/nationalparks-1
 ----
 
 After the build has completed and successfully:
 
-* The S2I process will push the resulting Docker-formatted image to the internal OpenShift registry
+* The S2I process will push the resulting image to the internal OpenShift registry
 * The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
   will cause a new deployment to happen.
 * A *ReplicationController* (RC) will be spawned for this new deployment.
@@ -194,9 +193,9 @@ If you look again at the web console, you will notice that, when you create the
 application this way, OpenShift also creates a *Route* for you. You can see the
 URL in the web console, or via the command line:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc get routes
+oc get routes
 ----
 
 Where you should see something like the following:
@@ -212,12 +211,12 @@ In the above example, the URL is:
 
 CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}
 ----
 
-Since this is a back-end application, it doesn't actually have a web interface.
+Since this is a backend application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
 frontend are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:

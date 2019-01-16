@@ -93,7 +93,7 @@ modules:
       USER_PASSWORD:
       DOCS_URL:
   parksmap-docker:
-    name: Deploying our First Docker Image
+    name: Deploying Your First Container Image
     vars:
       CONSOLE_ADDRESS:
       DOCS_URL:
@@ -105,7 +105,7 @@ modules:
       DOCS_URL:
       PARKSMAP_VERSION:
   parksmap-routes:
-    name: Exposing your application to the outside world
+    name: Exposing Your Application to the Outside World
     vars:
       PARKSMAP_VERSION:
   parksmap-logging:
@@ -115,7 +115,7 @@ modules:
   parksmap-permissions:
     name: Role-Based Access Control
   parksmap-rsh:
-    name: Remote access to your application
+    name: Remote Access to Your Application
   nationalparks-java:
     name: Deploying Java Code
     vars:
@@ -123,7 +123,7 @@ modules:
       ROUTER_ADDRESS:
       INFRA_PROJECT:
   nationalparks-javascript:
-    name: Deploying Javascript Code
+    name: Deploying JavaScript Code
     vars:
       DOCS_URL:
       ROUTER_ADDRESS:
@@ -180,7 +180,7 @@ modules:
 #  codechanges:
 #    name: Using Source 2 Image for Code Changes
   nationalparks-java-pipeline-codechanges-gogs:
-    name: Automation for your application on Code Changes
+    name: Automation for Your Application on Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -188,7 +188,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-java-codechanges-gogs:
-    name: Trigger automatic rebuilds on code changes
+    name: Trigger Automatic Rebuilds on Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -196,7 +196,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-javascript-codechanges-gogs:
-    name: Trigger automatic rebuilds on code changes
+    name: Trigger Automatic Rebuilds on Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -204,7 +204,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-php-codechanges-gogs:
-    name: Trigger automatic rebuilds on code changes
+    name: Trigger Automatic Rebuilds on Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -212,7 +212,7 @@ modules:
       USER_PROJECT:
       PARKSMAP_VERSION:
   nationalparks-python-codechanges-gogs:
-    name: Trigger automatic rebuilds on code changes
+    name: Trigger Automatic Rebuilds on Code Changes
     vars:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
@@ -227,7 +227,7 @@ modules:
       USER_NAME:
       USER_PROJECT:
   nationalparks-java-che:
-    name: Working online with Eclipse Che
+    name: Working Online with Eclipse Che
 #  canaryrelease:
 #    name: Canary Release to Production
 #    requires:
@@ -248,9 +248,9 @@ modules:
     vars:
       DOCS_URL:
   common-further-resources:
-    name: Further resources
+    name: Further Resources
   common-workshop-links:
-    name: Workshop links
+    name: Workshop Links
     vars:
       CONSOLE_ADDRESS:
       ROUTER_ADDRESS:

@@ -1,6 +1,6 @@
-In this lab, we're going to deploy a Mongo database that will be used to store
+In this lab, we're going to deploy a MongoDB database that will be used to store
 the data for the `nationalparks` application. We will also connect the
-`nationalparks` service with the newly deployed Mongo database, so that the
+`nationalparks` service with the newly deployed MongoDB database, so that the
 `nationalparks` service can load and query the database for the corresponding
 information.
 
@@ -73,7 +73,7 @@ now, be sure to use the following values in their respective fields:
 * `MONGODB_DATABASE`: `mongodb`
 * `MONGODB_ADMIN_PASSWORD` : `mongodb`
 
-CAUTION: Make sure to have configured the *`MONGODB_DATABASE`* parameter with the appropriate value as by default it will already have a value of `simpledb`.
+CAUTION: Make sure to have configured the *`MONGODB_DATABASE`* parameter with the appropriate value as by default it will already have a value of `sampledb`.
 
 Once you have entered in the above information, click on "Next" to go to the next step which will allow us to add a binding.
 
@@ -81,7 +81,7 @@ image::nationalparks-databases-catalog-databases-mongodb-create-bining.png[Bind 
 
 This creates a *"binding"* (as a secret) in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
 
-While the database deploys, we will fix the labels assigned to the deployment. Currenly we can `not` set
+While the database deploys, we will fix the labels assigned to the deployment. Currenly we can *not* set
 a label when using templates from the Service Catalog, so in this case we will fix this manually.
 
 Like before, we will add 3 labels:
@@ -94,14 +94,14 @@ Execute the following command:
 
 [source,bash,role=copypaste]
 ----
-$ oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
+oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
 ----
 
 Now that the connection and authentication information is in a binding in our project, we need to add it to the nationalparks backend. 
 
 image::nationalparks-databases-binding-view-secret.png[National Parks Binding]
 
-This will bring us to the binding information. Click `reveal` next to the word `Opaque` in the screen.
+This will bring us to the binding information. Click `reveal` next to the word `Opaque` in the screen. Next click `Add to Application`.
 
 image::nationalparks-databases-binding-add-binding-to-app.png[Add binding to application]
 
@@ -151,7 +151,7 @@ service to query for data:
 
 CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/data/all
 ----
@@ -171,7 +171,7 @@ The application provides an endpoint to do just that:
 
 CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/data/load
 ----
@@ -191,7 +191,7 @@ a browser problem, and the application is working properly.
 
 CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
 http://parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}
 ----
@@ -242,10 +242,13 @@ link:https://github.com/openshift-roadshow/parksmap-web/blob/{{PARKSMAP_VERSION}
 Fortunately, the command line provides a convenient way for us to manipulate
 labels. `describe` the `nationalparks` service:
 
+[source,bash,role=copypaste]
+----
+oc describe route nationalparks
+----
+
 [source,bash]
 ----
-$ oc describe route nationalparks
-
 Name:                   nationalparks
 Namespace:              {{ USER_PROJECT }}
 Created:                2 hours ago
@@ -266,9 +269,9 @@ Endpoints:              10.1.9.8:8080
 
 You see that it already has some labels. Now, use `oc label`:
 
-[source,bash]
+[source,bash,role=copypaste]
 ----
-$ oc label route nationalparks type=parksmap-backend
+oc label route nationalparks type=parksmap-backend
 ----
 
 You will see something like:

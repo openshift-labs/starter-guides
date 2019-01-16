@@ -1,4 +1,4 @@
-The exercices in this workshop has shown you how OpenShift can be used not only for deploying
+The exercices in this workshop have shown you how OpenShift can be used not only for deploying
 stateless web applications, but also applications which require persistent
 file system storage.
 
@@ -22,10 +22,10 @@ Below you will find further resources for learning about OpenShift and
 running OpenShift on your own computer, as well as details about OpenShift
 Online or other OpenShift related products and services.
 
-* *link:https://www.openshift.org/[OpenShift Origin]* - The upstream Open
-Source community project that powers OpenShift.
+* *link:https://www.okd.io/[OKD]* - The upstream Open
+Source community distribution of Kubernetes that powers OpenShift.
 
-* *link:https://www.openshift.org/minishift/[Minishift]* - A tool which can
+* *link:https://www.okd.io/minishift/[Minishift]* - A tool which can
 be used to install a local OpenShift cluster on your own computer, running
 in a virtual machine.
 
@@ -47,12 +47,12 @@ cloud environments.
 The following free online eBooks are also available for download related to
 OpenShift.
 
-* *link:https://www.openshift.com/promotions/for-developers.html[OpenShift
+* *link:https://www.openshift.com/for-developers/[OpenShift
 for Developers]*
 
 image::further-resources-openshift-for-developers.png[OpenShift for Developers]
 
-* *link:https://www.openshift.com/promotions/devops-with-openshift.html[DevOps with OpenShift]*
+* *link:https://www.openshift.com/devops-with-openshift/[DevOps with OpenShift]*
 
 image::further-resources-devops-with-openshift.png[DevOps with OpenShift]
 
