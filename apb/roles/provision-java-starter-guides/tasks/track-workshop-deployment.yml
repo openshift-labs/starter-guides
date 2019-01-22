@@ -1,0 +1,9 @@
+####
+# Track Workshop Deployment
+####
+
+- import_role:
+    name: workshop_deployment_tracker
+  vars:
+    apps_hostname_suffix: "{{ apps_hostname_suffix }}"
+    workshop_type: "{{ workshop_type }}"

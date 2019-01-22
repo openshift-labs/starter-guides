@@ -66,3 +66,5 @@
 
 - include_tasks: per_user.yml
   with_sequence: start=1 end={{ user_count }} format={{ user_format }}
+
+- include_tasks: track-workshop-deployment.yml
