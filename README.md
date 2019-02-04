@@ -2,7 +2,7 @@
 
 Workshop content designed to be used by the [Workshopper tool](https://github.com/osevg/workshopper).
 
-## Install the ASB into your Service Catalog
+## Install the APB into your Service Catalog
 
 An [APB](https://hub.docker.com/r/openshiftapb/cloudnative-workshop-apb) is provided for 
 deploying the Cloud-Native Workshop infra (lab instructions, Nexus, Gogs, Eclipse Che, etc) in a project 
