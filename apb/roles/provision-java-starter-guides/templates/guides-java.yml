@@ -132,7 +132,7 @@ objects:
           livenessProbe:
             failureThreshold: 5
             httpGet:
-              path: /
+              path: /debug/session
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 15
@@ -146,7 +146,7 @@ objects:
           readinessProbe:
             failureThreshold: 5
             httpGet:
-              path: /
+              path: /debug/session
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 15
