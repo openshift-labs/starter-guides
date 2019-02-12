@@ -53,3 +53,12 @@
       args:
         chdir: "{{ tmp_dir.path }}"
   when: workshop_type == "php"
+
+#
+# Temporary fix until https://issues.jboss.org/browse/CLOUD-3095 is fixed
+#
+
+- name: "Replace java IS with fixed one"
+  block:
+    - shell: "curl -kL https://gist.github.com/jorgemoralespou/033c27a354406d7c5111711346e79b01/raw 2> /dev/null | oc apply -n openshift -f -"
+  when: workshop_type == "java"
