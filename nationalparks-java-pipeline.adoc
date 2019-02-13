@@ -239,7 +239,7 @@ image::devops-pipeline-jenkins-sso.png[Jenkins SSO]
 
 You need to authorize your user account to access Jenkins.
 
-image::devops-pipeline-jenkins-authorize.png[Jenkins SSO]
+image::devops-pipeline-jenkins-sso-authorize.png[Jenkins SSO]
 
 You will see the output of your maven build as it's running in Jenkins.
 
