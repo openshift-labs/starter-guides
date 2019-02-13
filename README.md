@@ -36,5 +36,5 @@ $ docker run -it --rm -p 8080:8080 -v $(pwd):/app-data \
               -e CONTENT_URL_PREFIX="file:///app-data" \
               -e LOG_TO_STDOUT=true \
               -e WORKSHOPS_URLS="file:///app-data/_workshops/java-starter-guides.yml" \
-              quay.io/osevg/workshopper:latest 
+              quay.io/osevg/workshopper:0.4
 ```

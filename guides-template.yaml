@@ -95,6 +95,13 @@ objects:
       importPolicy: {}
       referencePolicy:
         type: Source
+    - name: 0.4
+      from:
+        kind: DockerImage
+        name: quay.io/osevg/workshopper:0.4
+      importPolicy: {}
+      referencePolicy:
+        type: Source
     - name: previous
       from:
         kind: DockerImage
@@ -184,7 +191,7 @@ objects:
         - ${APPNAME}
         from:
           kind: ImageStreamTag
-          name: workshopper:latest
+          name: workshopper:0.4
       type: ImageChange
 - kind: Service
   apiVersion: v1

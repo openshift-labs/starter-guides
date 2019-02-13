@@ -26,7 +26,7 @@ docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serv
                  -e openshift_user=${_user} \
                  -e openshift_password=${_password} \
                  -e workshop_type=java \
-                 -e user_count=2 \
+                 -e user_count=25 \
                  -e openshift_user_password=openshift \
                  -e openshift_master_url=${_cluster} \
                  -e infrasvcs_adm_user=adminuser \

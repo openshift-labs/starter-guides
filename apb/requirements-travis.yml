@@ -6,9 +6,9 @@
   version: ocp-3.11
   name: openshift_gogs
 
-- src: siamaksade.openshift_workshopper
-  version: ocp-3.11
-  name: openshift_workshopper
+#- src: siamaksade.openshift_workshopper
+#  version: ocp-3.11
+#  name: openshift_workshopper
 
 - src: siamaksade.openshift_eclipse_che
   version: ocp-3.11

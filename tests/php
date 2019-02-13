@@ -8,4 +8,4 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-docker run -it --rm -p 8080:8080 -v $DIR/..:/app-data               -e CONTENT_URL_PREFIX="file:///app-data"               -e WORKSHOPS_URLS="file:///app-data/_workshops/php-starter-guides.yml"               -e LOG_TO_STDOUT=true               quay.io/osevg/workshopper:latest
+docker run -it --rm -p 8080:8080 -v $DIR/..:/app-data               -e CONTENT_URL_PREFIX="file:///app-data"               -e WORKSHOPS_URLS="file:///app-data/_workshops/php-starter-guides.yml"               -e LOG_TO_STDOUT=true               quay.io/osevg/workshopper:0.4
