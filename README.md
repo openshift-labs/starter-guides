@@ -2,6 +2,31 @@
 
 Workshop content designed to be used by the [Workshopper tool](https://github.com/osevg/workshopper).
 
+## Install the APB into your Service Catalog
+
+An [APB](https://hub.docker.com/r/openshiftapb/starter-workshop-apb/) is provided for 
+deploying the Cloud-Native Workshop infra (lab instructions, Nexus, Gogs, Eclipse Che, etc) in a project 
+on an OpenShift cluster via the service catalog. In order to add this APB to the OpenShift service catalog, log in 
+as cluster admin and perform the following in the `openshift-ansible-service-broker` project :
+
+1. Edit the `broker-config` configmap and add this snippet right after `registry:`:
+
+  ```
+    - name: dh
+      type: dockerhub
+      org: openshiftapb
+      tag: ocp-3.11
+      white_list: [.*-apb$]
+  ```
+
+2. Redeploy the `asb` deployment
+
+You can [read more in the docs](https://docs.openshift.com/container-platform/3.11/install_config/oab_broker_configuration.html#oab-config-registry-dockerhub) 
+on how to configure the service catalog.
+
+Note that if you are using the _OpenShift Workshop_ in RHPDS, this APB is already available in your service catalog.
+
+
 ## Using this content
 
 Either use the content directly by pointing at this repository
