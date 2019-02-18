@@ -95,7 +95,7 @@ objects:
       importPolicy: {}
       referencePolicy:
         type: Source
-    - name: 0.4
+    - name: '0.4'
       from:
         kind: DockerImage
         name: quay.io/osevg/workshopper:0.4
