@@ -26,7 +26,7 @@ oc new-project ${_namespace}
 oc project ${_namespace}
 
 # Run the apb container
-oc run -it --image openshiftapb/starter-workshop-apb:latest \
+oc run -it --image openshiftapb/starter-workshop-apb:ocp-3.11 \
        starter-workshop-apb -- \
        provision -e namespace=${_namespace} \
                  -e master_url=${_cluster} \
@@ -52,7 +52,7 @@ _namespace=starter-workshop-apb-test
 oc login ${_cluster} -u ${_user} -p ${_password}
 
 # Run the apb container
-oc run -it --image openshiftapb/starter-workshop-apb:latest \
+oc run -it --image openshiftapb/starter-workshop-apb:ocp-3.11 \
        starter-workshop-apb -- \
        deprovision -e namespace=${_namespace} \
                    -e master_url=${_cluster} \
