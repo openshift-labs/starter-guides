@@ -13,7 +13,7 @@
 
 - name: Create terminals resources
   shell: >
-        oc new-app terminal-base-openshift-auth
+        oc new-app hosted-workshop-production
         -p ADMIN_USERS={{ openshift_user }}
         -p APPLICATION_NAME=terminal
         -n {{ namespace }}
