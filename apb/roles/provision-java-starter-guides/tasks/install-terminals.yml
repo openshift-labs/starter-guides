@@ -1,26 +1,27 @@
 ---
 #####
-# Terminals: 
+# Terminals:
 # https://raw.githubusercontent.com/openshift-evangelists/training-openshift-auth/master/examples/terminal-base.json
 #####
 - name: "Process terminals template"
   template:
-    src: terminals.yml
-    dest: "{{ tmp_dir.path }}/terminals.yml"
+    src: hosted-workshop-production.json
+    dest: "{{ tmp_dir.path }}/hosted-workshop-production.json"
 
 - name: Add terminals template to {{ namespace }}
-  command: "oc apply -f {{ tmp_dir.path }}/terminals.yml -n {{ namespace }}"
+  command: "oc apply -f {{ tmp_dir.path }}/hosted-workshop-production.json -n {{ namespace }}"
 
 - name: Create terminals resources
   shell: >
         oc new-app terminal-base-openshift-auth
         -p ADMIN_USERS={{ openshift_user }}
+        -p APPLICATION_NAME=terminal
         -n {{ namespace }}
-        --dry-run -o yaml > terminals.yml
+        --dry-run -o json > hosted-workshop-production.json
   args:
     chdir: "{{ tmp_dir.path }}"
 
 - name: Apply terminals objects
-  command: "oc apply -f terminals.yml -n {{ namespace }}"
+  command: "oc apply -f hosted-workshop-production.json -n {{ namespace }}"
   args:
     chdir: "{{ tmp_dir.path }}"
