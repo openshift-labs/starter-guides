@@ -26,7 +26,7 @@ oc new-project ${_namespace}
 oc project ${_namespace}
 
 # Run the apb container
-oc run -it --image openshiftapb/starter-workshop-apb:ocp-3.11 \
+oc run -it --image quay.io/openshiftlabs/starter-workshop-apb:ocp-4pre \
        starter-workshop-apb -- \
        provision -e namespace=${_namespace} \
                  -e master_url=${_cluster} \
