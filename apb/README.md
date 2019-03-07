@@ -1,18 +1,21 @@
 # Starter Workshop Installer
 
-The provided Ansible Playbook Bundle automates preparing an OpenShift cluster for the OpenShift Developer Starter Workshop 
-by deploying required services (lab instructions, Gogs, Nexus, Che, etc) which are used during the labs.
+The provided Ansible Playbook Bundle automates preparing an OpenShift cluster
+for the OpenShift Developer Starter Workshop by deploying required services (lab
+instructions, Gogs, Nexus, Che, etc) which are used during the labs.
 
-## Use on OpenShift
+## Use an installed APB on OpenShift
 Select the item from the catalog.
 
 ## Development
 When you develop the APB you can test on a platform in different ways.
 
-### Use as docker image run on OpenShift
-You can run the apb image on OpenShift via `oc run`. This will require that the image is available in a registry. Most typically this will be used when you want to test the image from a registry.
+### Run on OpenShift
+You can run the apb image on OpenShift via `oc run`. This will require that the
+image is available in a registry. Most typically this will be used when you want
+to test the image from a registry.
 
-### Provision
+#### Provision
 
 ```bash
 _user=<CLUSTER_ADMIN_USER>
@@ -40,7 +43,7 @@ oc run -it --image quay.io/openshiftlabs/starter-workshop-apb:ocp-4pre \
                  -e infrasvcs_adm_password=adminpassword
 ```
 
-### Deprovision
+#### Deprovision
 
 ```bash
 _user=<CLUSTER_ADMIN_USER>
@@ -52,7 +55,7 @@ _namespace=starter-workshop-apb-test
 oc login ${_cluster} -u ${_user} -p ${_password}
 
 # Run the apb container
-oc run -it --image openshiftapb/starter-workshop-apb:ocp-3.11 \
+oc run -it --image quay.io/openshiftlabs/starter-workshop-apb:ocp-4pre \
        starter-workshop-apb -- \
        deprovision -e namespace=${_namespace} \
                    -e master_url=${_cluster} \
@@ -64,10 +67,12 @@ oc run -it --image openshiftapb/starter-workshop-apb:ocp-3.11 \
 ### Use as docker image directly from your local system
 You can run the apb image locally with your docker daemon for testing purposes.
 
-You need to add in the serviceaccount directory in this folder the ca.crt of your cluster so that the connection to the cluster will be secured.
-The file is ommited from git, so you'll need to add yours.
+You need to add in the serviceaccount directory in this folder the ca.crt of
+your cluster so that the connection to the cluster will be secured. The file is
+omitted from git, so you'll need to add yours.
 
-There's `provision` and `deprovision` scripts to help you with the process. Set these environment variables on your host:
+There's `provision` and `deprovision` scripts to help you with the process.
+Set these environment variables on your host:
 
 ```bash
 export APB_TEST_ENV_MASTER_URL=<CLUSTER_MASTER_URL>
@@ -75,7 +80,7 @@ export APB_TEST_ENV_ADMIN_USER=<CLUSTER_ADMIN_USER>
 export APB_TEST_ENV_ADMIN_PASSWORD=<CLUSTER_ADMIN_PASSWORD>
 ```
 
-### Provision
+#### Provision
 
 ```bash
 _user=<CLUSTER_ADMIN_USER>
@@ -102,7 +107,7 @@ docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serv
                  -e infrasvcs_adm_password=adminpassword
 ```
 
-### Deprovision
+#### Deprovision
 
 ```bash
 _user=<CLUSTER_ADMIN_USER>
@@ -124,7 +129,6 @@ docker run -it --rm -v $(pwd)/serviceaccount:/var/run/secrets/kubernetes.io/serv
 
 
 ## Advanced options
-There's a set of advanced options that can be set:
 
 |Variable                   | Default Value            | Description   |
 |---------------------------|--------------------------|---------------|
