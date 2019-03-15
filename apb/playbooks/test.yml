@@ -4,7 +4,7 @@
   connection: local
 
   roles:
-  - role: ansible.kubernetes-modules
+  - role: ansible.openshift_raw
     install_python_requirements: no
   - role: ansibleplaybookbundle.asb-modules
   - role: test
