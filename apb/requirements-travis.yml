@@ -18,6 +18,6 @@
   version: 1.0.1
   name: workshop_deployment_tracker
 
-- src: ansible.openshift_raw
+- src: openshift_raw
 
 - src: ansibleplaybookbundle.asb-modules
