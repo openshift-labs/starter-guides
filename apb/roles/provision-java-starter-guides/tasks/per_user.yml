@@ -21,32 +21,22 @@
     - name: Award admin permission for user "{{ my_user }}"
       command: "oc adm policy add-role-to-user admin {{ my_user }} -n {{ my_user }}"
 
-#    # Create cluster quota for the user to prevent abuse
-#    - name: Create user Quota definition - clusterresourcequota
-#      shell: >
-#            oc create clusterquota clusterquota-"{{my_user}}"
-#            --project-annotation-selector=openshift.io/requester="{{my_user}}"
-#            --hard requests.cpu="{{quota_requests_cpu}}"
-#            --hard limits.cpu="{{quota_limits_cpu}}"
-#            --hard requests.memory="{{quota_requests_memory}}"
-#            --hard limits.memory="{{quota_limits_memory}}"
-#            --hard configmaps="{{quota_configmaps}}"
-#            --hard pods="{{quota_pods}}"
-#            --hard persistentvolumeclaims="{{quota_persistentvolumeclaims}}"
-#            --hard services="{{quota_services}}"
-#            --hard secrets="{{quota_secrets}}"
-#            --hard requests.storage="{{quota_requests_storage}}"
-#            --dry-run -o yaml > clusterquota-{{ my_user }}.yml
-#      args:
-#        chdir: "{{ git_dir.path }}"
-#      tags: always
-#
-#
-# TODO: Commented until there is a default project template that sets the defaults
-#
-#    - name: Apply user Quota - clusterresourcequota
-#      command: "oc apply -f clusterquota-{{ my_user }}.yml"
-#      args:
-#        chdir: "{{ git_dir.path }}"
-#      tags: always
+    # Create cluster quota for the user to prevent abuse
+    - name: Create user Quota definition - clusterresourcequota
+      shell: >
+            oc create clusterquota clusterquota-"{{my_user}}"
+            --project-annotation-selector=openshift.io/requester="{{my_user}}"
+            --hard pods="{{quota_pods}}"
+            --hard persistentvolumeclaims="{{quota_persistentvolumeclaims}}"
+            --hard services="{{quota_services}}"
+            --dry-run -o yaml > clusterquota-{{ my_user }}.yml
+      args:
+        chdir: "{{ git_dir.path }}"
+      tags: always
+
+    - name: Apply user Quota - clusterresourcequota
+      command: "oc apply -f clusterquota-{{ my_user }}.yml"
+      args:
+        chdir: "{{ git_dir.path }}"
+      tags: always
   when: create_projects

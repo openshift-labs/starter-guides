@@ -18,3 +18,8 @@ gogs_release_version: 0.11.34
 
 reponame: "nationalparks"
 install_custom_stacks_json: []
+
+# per-user quotas
+quota_pods: 30
+quota_persistentvolumeclaims: 10
+quota_services: 30
