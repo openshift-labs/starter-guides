@@ -1,5 +1,5 @@
 ---
-features_to_install: [etherpad, gogs, guides, nexus, ocp-ops-view, che, terminals]
+features_to_install: [etherpad, gogs, guides, nexus, ocp-ops-view, terminals]
 
 # DEFAULTS
 # namespace: ocp-workshop # This is defined in common-definitions
