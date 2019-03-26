@@ -31,12 +31,12 @@
             --hard services="{{quota_services}}"
             --dry-run -o yaml > clusterquota-{{ my_user }}.yml
       args:
-        chdir: "{{ git_dir.path }}"
+        chdir: "{{ tmp_dir.path }}"
       tags: always
 
     - name: Apply user Quota - clusterresourcequota
       command: "oc apply -f clusterquota-{{ my_user }}.yml"
       args:
-        chdir: "{{ git_dir.path }}"
+        chdir: "{{ tmp_dir.path }}"
       tags: always
   when: create_projects
