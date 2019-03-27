@@ -3,7 +3,7 @@
   block:
     - set_fact:
         my_user: "{{ item }}"
-        
+
     # Create user project and make him admin
     - name: check if workshop user's project for user "{{ my_user }}" exists
       shell: "oc get project {{ my_user }}"
@@ -31,13 +31,13 @@
             --hard services="{{quota_services}}"
             --dry-run -o yaml > clusterquota-{{ my_user }}.yml
       args:
-        chdir: "{{ git_dir.path }}"
+        chdir: "{{ tmp_dir.path }}"
       tags: always
 
 
     - name: Apply user Quota - clusterresourcequota
       command: "oc apply -f clusterquota-{{ my_user }}.yml"
       args:
-        chdir: "{{ git_dir.path }}"
+        chdir: "{{ tmp_dir.path }}"
       tags: always
   when: create_projects
