@@ -2,16 +2,10 @@
 #####
 # Etherpad
 #####
-- name: "Copy etherpad base text file"
-  copy:
-    src: etherpad.txt
+- name: "Create etherpad base text file from template"
+  template:
+    src: etherpad.txt.j2
     dest: "{{ tmp_dir.path }}/etherpad.txt"
-
-- name: Add {{ user_count }} to etherpad.txt file
-  lineinfile:
-    path: "{{ tmp_dir.path }}/etherpad.txt"
-    line: "{{ item }}"
-  with_sequence: start=1 end={{ user_count }} format="{{ user_format }}="
 
 - set_fact:
     etherpad_text: "{{ lookup('file', '{{ tmp_dir.path }}/etherpad.txt') | replace('\n', '\\n')}}"
