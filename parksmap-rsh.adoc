@@ -72,6 +72,11 @@ image::parksmap-rsh-applications-pods-terminal.png[Pod List]
 
 Pretty nifty!  Go ahead and execute the same commands you did when using the CLI to see how the Web Console based terminal behaves.
 
+Before proceeding, close the connection to the pod
+[source,bash,role=copypaste]
+----
+exit
+----
 
 == Exercise: Execute a Command in a Container
 
@@ -84,7 +89,7 @@ In order to show just the JAR file, run the following:
 
 [source,bash,role=copypaste]
 ----
-$ oc exec parksmap-2-tegp4 -- ls -l /parksmap.jar
+oc exec parksmap-2-tegp4 -- ls -l /parksmap.jar
 ----
 
 You would see something like the following:
@@ -106,7 +111,7 @@ You can also specify the shell commands to run directly with the *oc rsh* comman
 
 [source,bash,role=copypaste]
 ----
-$ oc rsh parksmap-2-tegp4 whoami
+oc rsh parksmap-2-tegp4 whoami
 ----
 
 You would see something like:
