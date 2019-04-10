@@ -123,6 +123,7 @@ kubernetes.pod_name:"parksmap-1-hx0kv" AND kubernetes.namespace_name:"{{ USER_PR
 ====
 If your search returns no hits, try changing the time-picker in the top right-hand corner from the default "Last 15 miutes" to something else, like "The day so far" or "Last 1 hour"
 ====
+
 If you want to see all the historical logs for this *Project*, simply remove the
 pod name reference and click the magnifying glass or press the enter key.
 
@@ -148,5 +149,3 @@ CAUTION: In the following Kibana search(es), replace `{{ USER_PROJECT }}` with t
 ----
 kubernetes.namespace_name:"{{ USER_PROJECT }}" AND message:"Failure executing"
 ----
-
-

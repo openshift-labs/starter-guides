@@ -1,4 +1,4 @@
-version: 1.0
+version: '1.0.0'
 name: starter-workshop-apb
 description: APB to deploy required infra components for the Developer Starter Workshop on an OpenShift cluster
 bindable: False
