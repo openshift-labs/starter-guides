@@ -72,7 +72,8 @@ image::parksmap-rsh-applications-pods-terminal.png[Pod List]
 
 Pretty nifty!  Go ahead and execute the same commands you did when using the CLI to see how the Web Console based terminal behaves.
 
-Before proceeding, close the connection to the pod
+Before proceeding, close the connection to the pod.
+
 [source,bash,role=copypaste]
 ----
 exit

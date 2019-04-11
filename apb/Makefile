@@ -6,5 +6,5 @@ build_and_push: apb_build
 
 .PHONY: apb_build
 apb_build:
-	apb prepare
-	docker build -t $(IMAGENAME):$(TAG) .
+  apb bundle prepare
+  docker build -t $(IMAGENAME):$(TAG) .

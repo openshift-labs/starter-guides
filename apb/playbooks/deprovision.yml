@@ -3,6 +3,9 @@
   gather_facts: false
   connection: local
 
+  vars:
+    apb_action: deprovision
+
   roles:
   - role: ansible.kubernetes-modules
     install_python_requirements: no
