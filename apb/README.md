@@ -2,7 +2,7 @@
 
 The provided Ansible Playbook Bundle automates preparing an OpenShift cluster
 for the OpenShift Developer Starter Workshop by deploying required services (lab
-instructions, Gogs, Nexus, Che, etc) which are used during the labs.
+instructions, Gogs, Nexus, etc) which are used during the labs.
 
 ## Use an installed APB on OpenShift
 Select the item from the catalog.
@@ -125,4 +125,4 @@ The deprovision command will prompt you for the specific instance to delete and 
 |Variable                   | Default Value            | Description   |
 |---------------------------|--------------------------|---------------|
 |`create_projects`          | true                    | Whether to create user projects or not  |
-|`features_to_install`      | [etherpad, nexus, gogs, guides, nexus, ocp-ops-view, che, terminals] | Sets the features to install  |
+|`features_to_install`      | [etherpad, gogs, guides, nexus, ocp-ops-view, terminals] | Sets the features to install  |

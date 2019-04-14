@@ -11,7 +11,6 @@ infrasvcs_adm_password: admin123
 openshift_user_password: openshift
 # user_count: 0 # This is defined in common-definitions
 # user_format: user%d # Theis is defined in common-definitions
-che_release_version: 6.7.1
 nexus_release_version: 3.12.1
 gogs_release_version: 0.11.34
 

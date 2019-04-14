@@ -23,7 +23,6 @@ modules:
   - nationalparks-application-health
   - nationalparks-java-pipeline
   - nationalparks-java-pipeline-codechanges-gogs
-#  - nationalparks-java-che
   - mlbparks-templates
   - mlbparks-clustering
   - mlbparks-binary-build
