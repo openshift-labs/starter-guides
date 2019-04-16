@@ -128,7 +128,7 @@ We will again set 3 labels to the deployment.
 
 image::nationalparks-configure-service-labels.png[Adding labels]
 
-You can then hit the button labeled *"Create"*. Then click *Continue to
+You can then hit the button labeled *"Create"*. Then click *Continue to the project
 overview*. You will see the build log output directly there.
 
 image::nationalparks-php-new-php-build.png[Nationalparks build]
