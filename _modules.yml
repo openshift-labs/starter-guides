@@ -226,8 +226,6 @@ modules:
       ROUTER_ADDRESS:
       USER_NAME:
       USER_PROJECT:
-  nationalparks-java-che:
-    name: Working Online with Eclipse Che
 #  canaryrelease:
 #    name: Canary Release to Production
 #    requires:

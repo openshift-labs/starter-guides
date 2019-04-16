@@ -20,23 +20,6 @@
   command: "oc annotate namespace/{{ namespace }} openshift.io/node-selector=\"env=infra\" --overwrite"
   when: infranodes.stdout != ""
 
-#- name: Get apps route suffix
-#  block:
-#    - openshift_v1_route:
-#        name: dummy
-#        namespace: "{{ namespace }}"
-#        state: present
-#        spec_to_kind: Service
-#        spec_to_name: dummy
-#        spec_port_target_port: 8080
-#      register: dummy_route
-#    - set_fact:
-#        apps_hostname_suffix: "{{ dummy_route.route.spec.host|regex_replace('^dummy-' + namespace + '\\.(.*)$', '\\1') }}"
-#    - openshift_v1_route:
-#        name: dummy
-#        namespace: "{{ namespace }}"
-#        state: absent
-
 - name: Get apps route suffix
   block:
     - k8s:
@@ -68,7 +51,6 @@
         name: dummy
         namespace: "{{ namespace }}"
 
-###
 - name: "Create temporary directory"
   tempfile:
     state: directory
@@ -92,9 +74,6 @@
 
 - include_tasks: install-ocp-ops-view.yml
   when: '"ocp-ops-view" in features_to_install'
-
-- include_tasks: install-che.yml
-  when: '"che" in features_to_install'
 
 - include_tasks: per_user.yml
   with_sequence: start=1 end={{ user_count }} format={{ user_format }}
