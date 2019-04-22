@@ -54,7 +54,7 @@ NOTE: You will need the following ENV values:
 
 # Run Guides Locally
 ```
-$ git clone https://github.com/openshift-labs/starter-labs.git
+$ git clone https://github.com/openshift-labs/starter-guides.git
 $ cd starter-labs
 
 $ docker run -it --rm -p 8080:8080 -v $(pwd):/app-data \
