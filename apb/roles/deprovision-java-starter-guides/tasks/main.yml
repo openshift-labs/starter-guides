@@ -13,8 +13,10 @@
     - etherpad
     - gogs
     - nexus
-    - starter-guides
     - ocp-ops-view
+    - ocp-ops-view-redis
+    - starter-guides
+    - terminal
 
 # Remove users projects
 - name: Delete user projects
