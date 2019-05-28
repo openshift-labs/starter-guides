@@ -83,21 +83,21 @@ have your own git repository, let's use it with a simple PHP S2I image.
 CAUTION: In the following step(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
 In the OpenShift web console, find your `{{ USER_PROJECT }}` project, and then
-click the *"Add to Project"* button and then the browse catalog link as highlighted in the following image:
+click the *Add* button and then the *Browse Catalog* link as highlighted in the following image:
 
 image::nationalparks-show-catalog.png[Add to Project]
 
-This is the service catalog which allows a user to select components they want to add to their application.
+This is the developer catalog which allows a user to select components they want to add to their application.
 
-Search for `php`, and finally select "PHP" as shown in the following image:
+Search for `php`, and finally select *PHP* as shown in the following image:
 
-image::nationalparks-php-search-php.png[Service Catalog Languages]
+image::nationalparks-php-search-php.png[Developer Catalog Languages]
 
-After you click `php`, a dialog is presented as shown in the following image:
+After you click *PHP*, a dialog is presented as shown in the following image:
 
 image::nationalparks-php-new-php-service.png[Add PHP]
 
-Click on the "Next" button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
+Click on the *Create Application* button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
 
 CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Git username provided to you.
@@ -114,22 +114,11 @@ In the *Git Repository* field enter the base of the Git repository for
 your Nationaparks application. This will cause the S2I
 process to grab that specific tag in the code repository.
 
-If you were to specify a specific branch or directory in the repository for your code, you would be able to do it in the *Advanced Options*. 
-
-Don't click *Create*, but click on *Advanced Options*, as there's more things we are going to configure.
+Check the box to create a route and then click the *Create* button.
 
 image::nationalparks-php-configure-php-service.png[Runtimes]
 
-We will again set 3 labels to the deployment.
-
-- *__app__=workshop*  (the name we will be giving to the app)
-- *__component__=nationalparks*  (the name of this deployment)
-- *__role__=backend* (the role this component plays in the overall application)
-
-image::nationalparks-configure-service-labels.png[Adding labels]
-
-You can then hit the button labeled *"Create"*. Then click *Continue to the project
-overview*. You will see the build log output directly there.
+To see the build logs, click *Builds -> Builds*, then click on the *nationalparks-1* build, and finally click *Logs*.
 
 image::nationalparks-php-new-php-build.png[Nationalparks build]
 

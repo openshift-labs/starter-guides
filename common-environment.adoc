@@ -12,7 +12,7 @@ The infrastructure node is providing several services:
 
 * Gogs git server
 * This lab manual
-* The OpenShift Docker registry
+* The OpenShift container registry
 * The OpenShift router
 * Etherpad
 

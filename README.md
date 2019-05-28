@@ -32,7 +32,7 @@ Note that if you are using the _OpenShift Workshop_ in RHPDS, this APB is alread
 Either use the content directly by pointing at this repository
 
 ```
-https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.11/
+https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.1/
 ```
 
 ## Create a full workshop
@@ -41,7 +41,7 @@ You can follow this instructions to create a full workshop site:
 
 ```
 $ oc new-project guides
-$ oc apply -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.11/guides-template.yaml
+$ oc apply -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.1/guides-template.yaml
 $ oc new-app starter-guides \
              -p CONSOLE_ADDRESS="https://master.osevg.openshiftworkshop.com" \
              -p ROUTER_ADDRESS="apps.osevg.openshiftworkshop.com"

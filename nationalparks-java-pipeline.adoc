@@ -32,12 +32,12 @@ on the current Deployment to automatically trigger when there is a new image or 
 
 == Configure Manual Deployments on Dev Application
 
-In the *userXY* project, click on *Applications -> Deployments* on the left sidebar menu
-and then on *nationalparks* deployment. Click on *Actions -> Edit* button:
+In the *userXY* project, click on *Workloads -> Deployment Configs* on the left sidebar menu
+and then on *nationalparks* deployment config. Click on *Actions -> Edit Deployment Config*:
 
 image::devops-pipeline-deployment-edit.png[Edit pipeline]
 
-Unselect the checkboxes for the Image Change trigger and for the Config change trigger.
+In the YAML for the deployment config, find the `triggers` section, delete it, and then click the blue *Save* button.
 
 image::devops-pipeline-deployment-triggers.png[Remove triggers]
 
@@ -45,37 +45,31 @@ image::devops-pipeline-deployment-triggers.png[Remove triggers]
 
 As pipelines provide the ability to promote applications between different stages of the delivery cycle, Jenkins, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
-We're going to deploy a Jenkins instance to this project to configure and run our pipelines. As we want our Jenkins instance to be able to survive restarts (in case we need to update any plugin configuration) we will select the Jenkins persistent template from the Service Catalog.
+We're going to deploy a Jenkins instance to this project to configure and run our pipelines. As we want our Jenkins instance to be able to survive restarts (in case we need to update any plugin configuration) we will select the Jenkins persistent template from the Developer Catalog.
 
-Use the *Search Catalog* search field on the menu bar and search for *Jenkins*. Select the one named *Jenkins*.
+In the Developer Catalog, search for *Jenkins*. Select the one named *Jenkins*.
 
 image::devops-pipeline-catalog-search.png[Empty CICD project]
 
-We will be prompted with the configuration screens for deploying our Jenkins server instance.
+We will be prompted with the configuration screens for deploying our Jenkins server instance. Click the blue *Create Service Instance* button to get started.
 
 image::devops-jenkins-template.png[Jenkins template]
 
-Review the configuration if you like and click *next* leaving all the default parameters, as these are ok for this lab.
-
-NOTE: Make sure that Jenkins is configured with at least `1Gi Memory Limit`
+Leave the defaults for all parameters except *Memory Limit*, which should be set to `1Gi`. Then click the blue *Create* button.
 
 image::devops-jenkins-template-config.png[Jenkins template config]
 
-A binding are the credentials and connection info to the service we are about to deploy. These are useful when you want to provide that information to a consumer application. As an example, if you deploy a database you will want to provide the credentials and connection information for that database to your application. 
-
-In the case of Jenkins we can move ahead without creating a binding. Select *Do not bind at this time* and click *Create*.
-
-image::devops-jenkins-template-binding.png[Jenkins template binding]
-
-Jenkins will now be provisioned on the background. Return back to the **userXY** project by clicking *Continue to the project overview* link.
-
-image::devops-jenkins-template-create.png[Jenkins template create]
+Jenkins will now be provisioned on the background. Click *Catalog -> Provisioned Services* in the left navigation to see your Jenkins service. It may take a couple minutes for the provisioning to complete.
 
 We will see now Jenkins being provisioned on our project. Once provisioning is finished, we should see a similar screen to this:
 
 image::devops-jenkins-deployed.png[Jenkins deployed]
 
-Notice how you see the actual Jenkins deployment and a Provisioned Service, this is because we deployed Jenkins from the Service Catalog as a service for our current project.
+Now click *Home -> Status* and you should see the Jenkins deployment on your Project Status page.
+
+image::devops-jenkins-project-status.png[Jenkins deployment]
+
+Notice how you have the actual Jenkins deployment and a Provisioned Service, this is because we deployed Jenkins from the Developer Catalog as a service for our current project.
 
 We could have done the same as we just did by using one single command on the OpenShift CLI. This command will deploy the service Jenkins with a persistent configuration in your **userXY** project. 
 
@@ -184,12 +178,12 @@ This pipeline has 4 stages defined:
 
 Create the OpenShift pipeline definition to use the Jenkins file. This is a regular OpenShift BuildConfig with a *JenkinsPipeline* strategy.
 
-In the **userXY** project, click on *Add to Project* > *Import YAML/JSON* and paste the following YAML file to create a pipeline 
+In the **userXY** project, click on *Add -> Import YAML* and paste the following YAML file to create a pipeline 
 that uses the `Jenkinsfile.workshop` from the `{{USER_NAME}}` git repository
 
 image::devops-pipeline-add-yaml-menu.png[Add yaml to project - Menu]
 
-Now, copy the following code into the yaml input box and click `create`.
+Now, copy the following code into the YAML input box and click *Create*.
 
 [source,shell,role=copypaste]
 ----
@@ -221,7 +215,7 @@ spec:
     - type: ConfigChange
 ----
 
-In OpenShift Web Console, click on **Builds** > **Pipelines** to see the pipeline you just created.
+In OpenShift Web Console, click on *Builds -> Builds* and then **nationalparks-build-1** to see the pipeline you just created.
 
 image::devops-pipeline-running.png[Pipeline running]
 

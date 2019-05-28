@@ -38,42 +38,33 @@ We are going to add both a readiness and liveness probe to the existing
 instances to the service until they pass the readiness checks, and will ensure
 that unhealthy instances are restarted (if they fail the liveness checks).
 
-Click *Applications* &rarr; *Deployments* on the left-side bar. Click
-`nationalparks`. Click on `Configuration`.
-You will see the warning about health checks, with a link to
-click in order to add them.
+Click *Workloads -> Deployment Configs* on the left navigation. Click
+`nationalparks`. Click on *YAML*. We will be editing the YAML for the deployment config in order to add the health checks.
 
-image::nationalparks-application-health-warning.png[Healthchecks warning,align="center"]
+Add the following code below `imagePullPolicy: Always` as shown in the screenshot. 
 
-Click *Add health checks* now.
-
-You will want to click both *Add Readiness Probe* and *Add Liveness Probe* and
-then fill them out as follows:
-
-_Readiness Probe_
-
-* Path: `/ws/healthz/`
-* Initial Delay: `20`
-* Timeout: `1`
-
-_Liveness Probe_
-
-* Path: `/ws/healthz/`
-* Initial Delay: `120`
-* Timeout: `1`
-
-This is shown in the following image:
+[source,bash,role=copypaste]
+----
+readinessProbe:
+  httpGet:
+    path: /ws/healthz/
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 20
+  timeoutSeconds: 1
+livenessProbe:
+  httpGet:
+    path: /ws/healthz/
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 120
+  timeoutSeconds: 1
+----
 
 image::nationalparks-application-health-config.png[Readiness and Liveness Probe]
 
 WARNING: Note the trailing slash in the URL
 
-Once you have entered in the values show above, click *Save* and then click the *Overview* button in the left navigation. You
+Once you have entered in the values show above, click *Save* and then *Workloads -> Deployment Configs* in the left navigation. You
 will notice that these changes caused a new deployment -- they counted as a
 configuration change.
-
-You will also notice that the circle around the new deployment stays light blue
-for a while. This is a sign that the pod(s) have not yet passed their readiness
-checks -- it's working!
-
-image::nationalparks-application-health-redeploy.png[Application Health]

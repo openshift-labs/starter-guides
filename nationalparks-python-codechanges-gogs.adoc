@@ -8,13 +8,13 @@ hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
 == Exercise: Configuring Gogs Web Hooks
-In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ USER_PROJECT }}` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
+In this lab you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ USER_PROJECT }}` project, and then click *Builds -> Build Configs* in the left navigation. Click `nationalparks-build` build and scroll down to the Webhooks section.
 
-On this screen you will see the option to copy the generic webhook URL as shown in the following image:
+On this screen you will see two webhook URLs as shown in the following image:
 
-image::nationalparks-codechanges-webhook-config.png[Webhook]
+image::nationalparks-pipeline-codechanges-webhook-config.png[Webhook]
 
-Once you have the URL copied to your clipboard, navigate to the code repository
+Note that the webhook URLs have placeholder text for the secret. We will get the real secret values in a moment. But for now, copy the Generic Webhook URL. Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on your local Gogs:
 
 CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Git username provided to you.
@@ -40,6 +40,12 @@ image::nationalparks-codechanges-gogs-add-webhook.png[Webhook]
 In the next screen, paste your link into the "URL" field. You can leave the
 secret token field blank -- the secret is already in the URL and does not need
 to be in the payload, or copy it from the URL.
+
+Now go back to the Build Config page and click on *YAML*. Copy the Generic secret value from the triggers section. 
+
+image::nationalparks-codechanges-gogs-copy-secret.png[Secret]
+
+Go back to Gogs and replace `<secret>` in the URL with the value you just copied.
 
 Change the `Content Type` to `application/x-www-form-urlencoded`.
 
@@ -142,7 +148,7 @@ The output will be similar to the following:
 [source,bash]
 ----
 NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb              1          1         1         config,image(mongodb:3.2)
+mongodb              1          1         1         config,image(mongodb:3.6)
 parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
 nationalparks        9          1         1         config,image(nationalparks:master)
 ----

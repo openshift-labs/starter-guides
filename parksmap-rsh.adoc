@@ -20,15 +20,17 @@ You should an output similar to the following:
 
 [source,bash]
 ----
-NAME               READY     STATUS    RESTARTS   AGE
-parksmap-2-tegp4   1/1       Running   0          2m
+NAME                READY   STATUS      RESTARTS   AGE
+parksmap-1-deploy   0/1     Completed   0          3h15m
+parksmap-2-deploy   0/1     Completed   0          172m
+parksmap-2-mcjsw    1/1     Running     0          172m
 ----
 
 Now you can establish a remote shell session into the pod by using the pod name:
 
 [source,bash,role=copypaste]
 ----
-oc rsh parksmap-2-tegp4
+oc rsh parksmap-2-mcjsw
 ----
 
 You would see the following output:
@@ -61,16 +63,16 @@ anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt 
 
 The OpenShift Web Console also provides a convenient way to access a terminal session on the container without having to use the CLI.
 
-In order to access a pods terminal via the Web Console, click on "Applications", then "Pods" and finally the pod name as shown in the following image:
+In order to access a pods terminal via the Web Console, click on *Workloads -> Pods* and finally the pod name as shown in the following image:
 
 image::parksmap-rsh-applications-pods.png[Pod List]
 
-Once you are viewing the information for the selected pod, click on the "Terminal" tab to open up a shell session.
+Once you are viewing the information for the selected pod, click on the *Terminal* tab to open up a shell session.
 
 image::parksmap-rsh-applications-pods-terminal.png[Pod List]
 
 
-Pretty nifty!  Go ahead and execute the same commands you did when using the CLI to see how the Web Console based terminal behaves.
+Go ahead and execute the same commands you did when using the CLI to see how the Web Console based terminal behaves.
 
 Before proceeding, close the connection to the pod.
 
@@ -90,7 +92,7 @@ In order to show just the JAR file, run the following:
 
 [source,bash,role=copypaste]
 ----
-oc exec parksmap-2-tegp4 -- ls -l /parksmap.jar
+oc exec parksmap-2-mcjsw -- ls -l /parksmap.jar
 ----
 
 You would see something like the following:
@@ -112,7 +114,7 @@ You can also specify the shell commands to run directly with the *oc rsh* comman
 
 [source,bash,role=copypaste]
 ----
-oc rsh parksmap-2-tegp4 whoami
+oc rsh parksmap-2-mcjsw whoami
 ----
 
 You would see something like:

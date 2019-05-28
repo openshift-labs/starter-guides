@@ -75,17 +75,24 @@ https://{{DOCS_URL}}/dev_guide/pod_autoscaling.html[Horizontal Pod Autoscaler he
 == Exercise: Scaling the Application
 
 Let's scale our parksmap "application" up to 2 instances. We can do this with
-the `scale` command. You could also do this by clicking the "up" arrow next to
-the *Pod* in the OpenShift web console on the overview page. It's your choice.
+the `scale` command. You could also do this by incrementing the Desired Count in the OpenShift web console. It's your choice.
 
 [source,bash,role=copypaste]
 ----
-$ oc scale --replicas=2 dc/parksmap
+oc scale --replicas=2 dc/parksmap
 ----
 
-You can also scale up to two pods by clicking the up arrow in the web console as shown in the following image:
+You can also scale up to two pods in the web console. From the project status page, first click the *>* symbol to toggle the details panel as shown in the following image:
 
 image::parksmap-scaleup.png[Scaling]
+
+Next, click the edit icon in the Desired Count section:
+
+image::parksmap-scaleup-2.png[Desired Count]
+
+Finally, click the *+* to scale up to 2 pods and then click the blue *Save* button.
+
+image::parksmap-scaleup-3.png[Scale Up]
 
 To verify that we changed the number of replicas, issue the following command:
 
@@ -110,9 +117,10 @@ oc get pods
 
 [source,bash]
 ----
-NAME               READY     STATUS    RESTARTS   AGE
-parksmap-1-8g6lb   1/1       Running   0          1m
-parksmap-1-hx0kv   1/1       Running   0          4h
+NAME                READY   STATUS      RESTARTS   AGE
+parksmap-1-deploy   0/1     Completed   0          59m
+parksmap-1-gxbgq    1/1     Running     0          59m
+parksmap-1-j2lw9    1/1     Running     0          31m
 ----
 
 And lastly, let's verify that the *Service* that we learned about in the
@@ -128,16 +136,15 @@ You will see something like the following output:
 [source,bash]
 ----
 Name:              parksmap
-Namespace:         userXY
-Labels:            app=workshop
-                   component=parksmap
-                   role=frontend
+Namespace:         user2
+Labels:            app=parksmap
+Annotations:       openshift.io/generated-by: OpenShiftWebConsole
 Selector:          deploymentconfig=parksmap
 Type:              ClusterIP
-IP:                172.30.169.213
+IP:                172.30.250.179
 Port:              8080-tcp  8080/TCP
 TargetPort:        8080/TCP
-Endpoints:         10.1.0.5:8080,10.1.1.5:8080
+Endpoints:         10.130.2.68:8080,10.130.2.70:8080
 Session Affinity:  None
 Events:            <none>
 ----
@@ -153,8 +160,8 @@ And you will see something like the following:
 
 [source,bash]
 ----
-NAME       ENDPOINTS                                   AGE
-parksmap   10.1.0.5:8080,10.1.1.5:8080                 4h
+NAME       ENDPOINTS                           AGE
+parksmap   10.130.2.68:8080,10.130.2.70:8080   59m
 ----
 
 Your IP addresses will likely be different, as each pod receives a unique IP
@@ -182,20 +189,19 @@ name. Then, do the following:
 
 [source,bash,role=copypaste]
 ----
-oc delete pod parksmap-1-hx0kv && oc get pods
+oc delete pod parksmap-1-gxbgq && oc get pods
 ----
 
 [source,bash]
 ----
-pod "parksmap-1-h45hj" deleted
-NAME               READY     STATUS              RESTARTS   AGE
-parksmap-1-h45hj   1/1       Terminating         0          4m
-parksmap-1-q4b4r   0/1       ContainerCreating   0          1s
-parksmap-1-vdkd9   1/1       Running             0          32s
+pod "parksmap-1-gxbgq" deleted
+NAME                READY   STATUS      RESTARTS   AGE
+parksmap-1-7678z    1/1     Running     0          13s
+parksmap-1-deploy   0/1     Completed   0          62m
+parksmap-1-j2lw9    1/1     Running     0          34m
 ----
 
-Did you notice anything? There is a container being terminated (the one we deleted),
-and there's a new container already being created.
+Did you notice anything? One container has been deleted, and there's a new container already being created. 
 
 Also, the names of the *Pods* are slightly changed.
 That's because OpenShift almost immediately detected that the current state (1

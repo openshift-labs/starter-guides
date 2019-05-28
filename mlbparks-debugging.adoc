@@ -36,18 +36,25 @@ oc get pods
 
 [source,bash]
 ----
-NAME                       READY     STATUS      RESTARTS   AGE
-mlbparks-1-build           0/1       Completed   0          9m
-mlbparks-2-7c6zb           1/1       Running     0          4m
-mongodb-mlbparks-1-887pq   1/1       Running     0          8m
-parksmap-2-wms5l           1/1       Running     0          13m
+NAME                             READY   STATUS      RESTARTS   AGE
+jenkins-1-deploy                 0/1     Completed   0          4d19h
+jenkins-1-l2g2c                  1/1     Running     0          4d19h
+mlbparks-1-build                 0/1     Completed   0          4d
+mlbparks-1-deploy                0/1     Completed   0          4d
+mlbparks-1-hook-post             0/1     Completed   0          4d
+mlbparks-2-build                 0/1     Completed   0          10m
+mlbparks-2-deploy                0/1     Completed   0          9m49s
+mlbparks-2-hook-post             0/1     Completed   0          8m59s
+mlbparks-3-deploy                1/1     Running     0          25s
+mlbparks-3-hcd8g                 0/1     Running     0          10s
+...
 ----
 
-Now we are all set to set up the port-forward:
+Now we can set to set up the port-forward:
 
 [source,bash,role=copypaste]
 ----
-oc port-forward mlbparks-2-7c6zb 8787:8787
+oc port-forward mlbparks-3-hcd8g 8787:8787
 ----
 
 We said to port-forward from port 8787 on the pod to 8787 on the local machine. Now we can attach a remote debugger.

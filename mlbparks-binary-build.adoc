@@ -11,7 +11,7 @@ Now that we built the MLB parks service let's go ahead and make some quick chang
 The OpenShift command line has the ability to do a deployment from your local machine. In this case we are going to use S2I,
 but we are going to tell OpenShift to just take the war file from our local machine and bake it in the image.
 
-Doing this pattern of development let's us do quick builds on our local machine (benefitting from our local cache and
+Doing this pattern of development lets us do quick builds on our local machine (benefitting from our local cache and
 all the horsepower on our machine) and then just quickly send up the war file.
 
 NOTE: You could also use this pattern to actually send up your working directory to the S2I builder to have it do the Maven build
@@ -34,11 +34,12 @@ NOTE: We are using Intellij here in the guide for screenshots but this should wo
 Developer Studio and JBoss Developer Tools have built in functionality that makes this close to seamless right from the IDE.
 
 === Setup the Build of the war file
-If you have Maven all set up on your machine, then you can just do a:
+If you have Maven all set up on your machine, then you can `cd` into the `mlbparks` directory and run `mvn package`
 
 
 [source,bash,role=copypaste]
 ----
+cd mlbparks
 mvn package
 ----
 

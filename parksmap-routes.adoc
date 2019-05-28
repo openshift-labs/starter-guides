@@ -20,15 +20,13 @@ create a *Route*.
 
 Fortunately, creating a *Route* is a pretty straight-forward process. You simply
 `expose` the *Service* via the command line. Or, via the web console, just click
-the "Create Route" button associated with the service and choose the defaults as highlighted in the following image:
+*Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
 
 image::parksmap-route-create.png[Create Route,align="center"]
 
-When creating a route, some options can be provided, like the hostname for the route or the TLS configuration for the Route.
+When creating a *Route*, some other options can be provided, like the hostname for the *Route* or the TLS configuration for the *Route*.
 
-image::parksmap-route-editor.png[Create Route editor,align="center"]
-
-When using the command line, we can first verify that we don't already have any existing route:
+When using the command line, we can first verify that we don't already have any existing *Routes*:
 
 [source,bash,role=copypaste]
 ----
@@ -62,7 +60,7 @@ oc expose service parksmap
 
 [source,bash]
 ----
-route "parksmap" exposed
+route.route.openshift.io/parksmap exposed
 ----
 
 Verify the *Route* was created with the following command:
@@ -78,7 +76,7 @@ NAME       HOST/PORT                            PATH      SERVICES   PORT       
 parksmap   parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}             parksmap   8080-tcp
 ----
 
-You can also verify the *Route* by looking at the project in the OpenShift web console:
+You can also verify the *Route* by looking at the project in the OpenShift web console under *Networking -> Routes*:
 
 image::parksmap-route-created.png[Route created]
 

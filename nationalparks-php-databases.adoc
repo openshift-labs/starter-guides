@@ -42,16 +42,14 @@ persistent storage!). The image will ensure that:
 - The user can access the specified database with the specified password
 
 In the web console in your `{{ USER_PROJECT }}` project,
-click the *"Add to Project"* button and then *"Browse Catalog"*. Select the *"Databases"* category and then *"Mongo"*.
+click the *Add* button and then *"Browse Catalog"*. Select the *"Databases"* category and then *"Mongo"*.
 
 image::nationalparks-databases-catalog-databases.png[Data Stores]
 
 Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, scroll down to find the *MongoDB
 (Ephemeral)* template, and select it.  You will notice that there are several
 MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
-template is what you should choose.  Go ahead and select the ephemeral template and click the next button.
-
-image::nationalparks-databases-catalog-databases-mongodb.png[MongoDB]
+template is what you should choose.  Go ahead and select the ephemeral template and click the *Create Service Instance* button.
 
 When we performed the application build, there was no template. Rather, we selected the
 builder image directly and OpenShift presented only the standard build workflow.
@@ -75,37 +73,17 @@ now, be sure to use the following values in their respective fields:
 
 CAUTION: Make sure to have configured the *`MONGODB_DATABASE`* parameter with the appropriate value as by default it will already have a value of `sampledb`.
 
-Once you have entered in the above information, click on "Next" to go to the next step which will allow us to add a binding.
+Once you have entered in the above information, click on *Create* to go to the next step which will allow us to add a binding.
 
 image::nationalparks-databases-catalog-databases-mongodb-create-bining.png[Bind Mongo]
 
-This creates a *"binding"* (as a secret) in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
+Click the *Create Service Binding* button and then *Create*. This creates a *"binding"* (as a secret) in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
 
-While the database deploys, we will fix the labels assigned to the deployment. Currenly we can *not* set
-a label when using templates from the Service Catalog, so in this case we will fix this manually.
-
-Like before, we will add 3 labels:
-
-- *__app__=workshop*  (the name we will be giving to the app)
-- *__component__=nationalparks*  (the name of this deployment)
-- *__role__=backend* (the role this component plays in the overall application)
-
-Execute the following command:
-
-[source,bash,role=copypaste]
-----
-oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
-----
-
-Now that the connection and authentication information is in a binding in our project, we need to add it to the nationalparks backend. 
+Now that the connection and authentication information is in a binding in our project, we need to add it to the `nationalparks` backend. Click the blue *Add Secret to Workload* button.
 
 image::nationalparks-databases-binding-view-secret.png[National Parks Binding]
 
-This will bring us to the binding information. Click `reveal` next to the word `Opaque` in the screen.
-
-image::nationalparks-databases-binding-add-binding-to-app.png[Add binding to application]
-
-Select `nationalparks` application and click `Save`.
+Select the `nationalparks` workload and click *Save*.
 
 image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add binding to application]
 
@@ -120,7 +98,7 @@ can verify this by looking at the output of `oc get dc`:
 [source,bash]
 ----
 NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb-nationalparks   1          1         1         config,image(mongodb:3.2)
+mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
 nationalparks           2          1         1         config,image(nationalparks:master)
 parksmap                2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}}))
 ----
@@ -252,9 +230,7 @@ oc describe route nationalparks
 Name:                   nationalparks
 Namespace:              {{ USER_PROJECT }}
 Created:                2 hours ago
-Labels:                 app=workshop
-                        component=nationalparks
-                        role=backend
+Labels:                 app=nationalparks
 Requested Host:         nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}
                         exposed on router router 2 hours ago
 Path:                   <none>
@@ -267,7 +243,7 @@ Weight:                 100 (100%)
 Endpoints:              10.1.9.8:8080
 ----
 
-You see that it already has some labels. Now, use `oc label`:
+You see that it already has one label. Now, use `oc label`:
 
 [source,bash,role=copypaste]
 ----
@@ -278,7 +254,7 @@ You will see something like:
 
 [source,bash]
 ----
-route "nationalparks" labeled
+route.route.openshift.io/nationalparks labeled
 ----
 
 If you check your browser now:

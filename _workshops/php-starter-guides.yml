@@ -23,7 +23,6 @@ modules:
   - nationalparks-application-health
   - nationalparks-php-codechanges-gogs
   - mlbparks-templates
-  - mlbparks-clustering
   - mlbparks-binary-build
   - mlbparks-debugging
   - common-further-resources
