@@ -73,7 +73,6 @@ objects:
         - nationalparks-java-pipeline
         - nationalparks-java-pipeline-codechanges-gogs
         - mlbparks-templates
-        - mlbparks-clustering
         - mlbparks-binary-build
         - mlbparks-debugging
         - common-further-resources
