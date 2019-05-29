@@ -2,12 +2,11 @@
 
 The first thing we want to do to ensure that our `oc` command line tools was
 installed and successfully added to our path is to log in to the OpenShift
-environment that has been provided for this Workshop session. 
+environment that has been provided for this Workshop session.
 
 [NOTE]
 ====
 In case you had trouble installing the command line tools, you can go ahead and use a hosted version running in our OpenShift cluster. Open a new browser tab and point it to:
-
 
 [source,bash,role=copypaste]
 ----
@@ -17,7 +16,7 @@ http://terminal-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}
 You will need to log in with your OpenShift user and click on `Allow selected permissions`. You can then continue with the workshop.
 ====
 
-In order to log in, we will use the `oc` command and then specify the server that we
+In order to log in, we will use the `oc login` command and then specify the server that we
 want to authenticate to. Issue the following command:
 
 [source,bash,role=copypaste]
@@ -34,11 +33,11 @@ You can bypass the certificate check, but any data you send to the server could 
 Use insecure connections? (y/n):
 ----
 
-Enter in *Y* to use a potentially insecure connection. The reason you received
+Enter in *y* to use a potentially insecure connection. The reason you received
 this message is because we are using a self-signed certificate for this
 workshop, but we did not provide you with the CA certificate that was generated
 by OpenShift. In a real-world scenario, either OpenShift's certificate would be
-signed by a standard CA (eg: Thawte, Verisign, StartSSL, etc.) or signed by a
+signed by a standard CA (e.g., Thawte, Verisign, StartSSL, etc.) or signed by a
 corporate-standard CA that you already have installed on your system.
 
 [NOTE]
@@ -73,7 +72,7 @@ Using project "{{ USER_PROJECT }}".
 
 [TIP]
 ====
-If you don't have any projects. You can try to create a new project, by running:
+If you don't have any projects. You can try to create a new project by running:
 
 [source]
 ----
@@ -83,8 +82,7 @@ oc new-project <projectname>
 
 Congratulations, you are now authenticated to the OpenShift server. The
 OpenShift master includes a built-in OAuth server. Developers and administrators
-obtain OAuth access tokens to authenticate themselves to the API. By default
-your authorization token will last for 24 hours. There is more information about
+obtain OAuth access tokens to authenticate themselves to the API. By default, your authorization token will last for 24 hours. There is more information about
 the login command and its configuration in the https://{{DOCS_URL}}/cli_reference/get_started_cli.html#basic-setup-and-login[OpenShift Documentation].
 
 == Using a Project
@@ -100,7 +98,7 @@ During this lab, we are going to use a few different commands to make sure that
 things in the environment are working as expected.  Don't worry if you don't
 understand all of the terminology as we will cover it in detail in later labs.
 
-If you didn't have a project already created for you, the first thing we want 
+If you didn't have a project already created for you, the first thing we want
 to do is create the *{{ USER_PROJECT }}* project. You can do this with the following command:
 
 CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
@@ -117,8 +115,8 @@ You will see the following confirmation message:
 Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
 ----
 
-If you had multiple projects, the first thing you would want to do is to switch 
-to the *{{ USER_PROJECT }}* project to make sure you're on the correct project from now on. 
+If you had multiple projects, the first thing you would want to do is to switch
+to the *{{ USER_PROJECT }}* project to make sure you're on the correct project from now on.
 You can do this with the following command:
 
 CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
@@ -158,10 +156,10 @@ After you have authenticated to the web console, you will be presented with the 
 image::explore-webconsole1sc.png[Web Console]
 
 Click on the *{{ USER_PROJECT }}* project link. When you click on the
-*{{ USER_PROJECT }}* project, you will be taken to the project status page, 
+*{{ USER_PROJECT }}* project, you will be taken to the project status page,
 which will list all of the resources that you have running as part of your project. There's nothing there now, but that's about to change.
 
 image::explore-webconsole2.png[Explore Project]
 
-We will be using a mix of command line tooling and the web console for the labs.
+We will be using a mix of command line tooling and the web console for the upcoming labs.
 Get ready!

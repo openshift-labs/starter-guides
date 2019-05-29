@@ -6,7 +6,7 @@ image::roadshow-app-architecture-parksmap-1.png[Application architecture,800,ali
 
 Let's start by doing the simplest thing possible - get a plain old
 Docker-formatted image to run on OpenShift. This is incredibly simple to do.
-With OpenShift it can be done directly from the web console.
+With OpenShift, it can be done directly from the web console.
 
 Return to the web console:
 
@@ -14,7 +14,7 @@ Return to the web console:
 
 CAUTION: In the following steps, replace `{{ USER_PROJECT }}` with the project provided to you.
 
-Find your *{{ USER_PROJECT }}* project and click it. On the next page, click *Add* and a drop down menu will appear. There are several options, but we are only concerned with *Deploy Image*. Click *Deploy Image* in the *Add* drop down.  
+Find your *{{ USER_PROJECT }}* project and click it. On the next page, click *Add* and a drop down menu will appear. There are several options, but we are only concerned with *Deploy Image*. Click *Deploy Image* in the *Add* drop down.
 
 image::parksmap-add-to-project-dialog.png[Add to Project]
 
@@ -34,23 +34,23 @@ out to the container registry specified and interrogate the image. You then are
 presented with some options to add environment variables -- which we will learn about later.
 
 
-Make sure to have the correct application name:
+Make sure to have the correct application name. The application name should be `parksmap` as shown below:
 
 image::parksmap-image-options.png[Explore Project]
 
-Next, click the blue *Deploy* button. You will be directed to the Project Status page, 
-where you should see the entry for the `parksmap` deployment config. 
+Next, click the blue *Deploy* button. You will be directed to the Project Status page,
+where you should see the entry for the `parksmap` deployment config.
 
 These few steps are the only ones you need to run to get a
 container image deployed on OpenShift. This should work with any
 container image that follows best practices, such as defining an EXPOSE
 port, not needing to run specifically as the *root user* or other user name, and
-a single non-exiting CMD to execute on start. 
+a single non-exiting CMD to execute on start.
 
 == Background: Containers and Pods
 
 Before we start digging in, we need to understand how containers and *Pods* are
-related. We will not be covering the background on these technologies in this lab but if you have questions please inform the instructor. Instead, we will dive right in and start using them.
+related. We will not be covering the background on these technologies in this lab, but, if you have questions, please ask your instructor. Instead, we will dive right in and start using them.
 
 In OpenShift, the smallest deployable unit is a *Pod*. A *Pod* is a group of one or more OCI containers deployed together and guaranteed to be on the same host.
 From the official OpenShift documentation:
@@ -64,18 +64,18 @@ single operation.
 __
 
 *Pods* can contain multiple OCI containers. The general idea is for a *Pod* to
-contain a "main process" and any auxiliary services you want to run along with that process. Examples of containers you might put in a *Pod* are, an Apache HTTPD
-server, a log analyzer, and a file service to help manage uploaded files.
+contain a "main process" and any auxiliary services you want to run along with that process. Examples of containers you might put in a *Pod* are an Apache HTTPD
+server, a log analyzer, or a file service to help manage uploaded files.
 
 == Exercise: Examining the Pod
 
-In the web console's project status page you will see that there is a single *Pod* that
-was created by your actions. 
+In the web console's project status page, you will see that there is a single *Pod* that
+was created by your actions.
 
 image::parksmap-overview.png[Pod overview]
 
-You can also get a list of all the *Pods* created within your *Project*, by navigating to 
-*Workloads -> Pods*
+You can also get a list of all the *Pods* created within your *Project* by navigating to
+the *Workloads* tab on the left side of the web console and then clicking on *Pods*:
 
 image::parksmap-podlist.png[Pod list]
 
@@ -104,7 +104,7 @@ get more information about the *Pod* using the `oc get` command.  To make the
 output readable, I suggest changing the output type to *YAML* using the
 following syntax:
 
-NOTE: Make sure you use the correct *Pod* name from your output.
+CAUTION: Make sure you use the correct *Pod* name from your output above in the command below by replacing `parksmap-1-gxbgq` with your pod's name.
 
 [source,bash,role=copypaste]
 ----
@@ -180,7 +180,7 @@ the requests.
 
 When you asked OpenShift to run the image, it automatically created a *Service*
 for you. Remember that services are an internal construct. They are not
-available to the "outside world", or anything that is outside the OpenShift
+available to the outside world, or anything that is outside the OpenShift
 environment. That's okay, as you will learn later.
 
 The way that a *Service* maps to a set of *Pods* is via a system of *Labels* and
@@ -213,7 +213,7 @@ IP/Port combination of 172.30.169.213/8080TCP. Your IP address may be different,
 each *Service* receives a unique IP address upon creation. *Service* IPs are
 fixed and never change for the life of the *Service*.
 
-In the web console, service information is available by clicking *Networking -> Services*.
+In the web console, service information is available by clicking the *Networking* tab on the left side of the web console screen and finally by  Services*.
 
 image::parksmap-serviceslist.png[Services list]
 
@@ -304,7 +304,7 @@ Under the `metadata` section you should see the following:
 ** `deployment=parksmap-1`
 ** `deploymentconfig=parksmap`
 
-*Labels* are just key/value pairs. Any *Pod* in this *Project* that has a *Label* that
+*Labels* are just key-value pairs. Any *Pod* in this *Project* that has a *Label* that
 matches the *Selector* will be associated with the *Service*. To see this in
 action, issue the following command:
 
@@ -332,6 +332,6 @@ Events:            <none>
 ----
 
 You may be wondering why only one endpoint is listed. That is because there is
-only one *Pod* currently running.  In the next lab, we will learn how to scale
-an application, at which point you will be able to see multiple endpoints
+only one *Pod* currently running. In the next lab, you will learn how to scale
+an application. When you scale the application, you will be able to see multiple endpoints
 associated with the *Service*.

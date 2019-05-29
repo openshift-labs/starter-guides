@@ -59,30 +59,32 @@ oc get rc
 [source,bash]
 ----
 NAME         DESIRED   CURRENT   READY     AGE
-parksmap-1   1         1         0         4h
+parksmap-1   1         1         1         4h
 ----
 
 This lets us know that, right now, we expect one *Pod* to be deployed
 (`Desired`), and we have one *Pod* actually deployed (`Current`). By changing
 the desired number, we can tell OpenShift that we want more or less *Pods*.
 
-OpenShift's *HorizontalPodAutoscaler* effectively monitors the CPU usage of a
+OpenShift's *Horizontal Pod Autoscaler* effectively monitors the CPU usage of a
 set of instances and then manipulates the RCs accordingly.
 
-You can learn more about the CPU-based
-https://{{DOCS_URL}}/dev_guide/pod_autoscaling.html[Horizontal Pod Autoscaler here]
+Learn more about the CPU-based *Horizontal Pod Autoscaler*
+https://{{DOCS_URL}}/dev_guide/pod_autoscaling.html[here]
 
 == Exercise: Scaling the Application
 
-Let's scale our parksmap "application" up to 2 instances. We can do this with
+Let's scale our parksmap application up to 2 instances. We can do this with
 the `scale` command. You could also do this by incrementing the Desired Count in the OpenShift web console. It's your choice.
+
+To `scale` using `oc`, run the following command:
 
 [source,bash,role=copypaste]
 ----
 oc scale --replicas=2 dc/parksmap
 ----
 
-You can also scale up to two pods in the web console. From the project status page, first click the *>* symbol to toggle the details panel as shown in the following image:
+To `scale` using the web console, from the project status page, first click the *>* symbol to toggle the details panel as shown in the following image:
 
 image::parksmap-scaleup.png[Scaling]
 
@@ -104,7 +106,7 @@ oc get rc
 [source,bash]
 ----
 NAME         DESIRED   CURRENT   READY     AGE
-parksmap-1   2         2         0         4h
+parksmap-1   2         2         2         4h
 ----
 
 You can see that we now have 2 replicas. Let's verify the number of pods with
@@ -124,7 +126,7 @@ parksmap-1-j2lw9    1/1     Running     0          31m
 ----
 
 And lastly, let's verify that the *Service* that we learned about in the
-previous lab accurately reflects two endpoints:
+previous lab now has two endpoints:
 
 [source,bash,role=copypaste]
 ----
@@ -172,7 +174,7 @@ You can also see that both *Pods* are running using the web console:
 
 image::parksmap-scaled.png[Scaling]
 
-Overall, that's how simple it is to scale an application (*Pods* in a
+That's how simple it is to scale an application (*Pods* in a
 *Service*). Application scaling can happen extremely quickly because OpenShift
 is just launching new instances of an existing image, especially if that image
 is already cached on the node.
@@ -180,11 +182,10 @@ is already cached on the node.
 == Application "Self Healing"
 
 Because OpenShift's *RCs* are constantly monitoring to see that the desired number
-of *Pods* actually are running, you might also expect that OpenShift will "fix" the
+of *Pods* actually are running, you might also expect that OpenShift will fix the
 situation if it is ever not right. You would be correct!
 
-Since we have two *Pods* running right now, let's see what happens if we
-"accidentally" kill one. Run the `oc get pods` command again, and choose a *Pod*
+Since we have two *Pods* running right now, let's see what happens if we kill one. Run the `oc get pods` command again, and choose a *Pod*
 name. Then, do the following:
 
 [source,bash,role=copypaste]
@@ -195,13 +196,13 @@ oc delete pod parksmap-1-gxbgq && oc get pods
 [source,bash]
 ----
 pod "parksmap-1-gxbgq" deleted
-NAME                READY   STATUS      RESTARTS   AGE
-parksmap-1-7678z    1/1     Running     0          13s
-parksmap-1-deploy   0/1     Completed   0          62m
-parksmap-1-j2lw9    1/1     Running     0          34m
+NAME                READY   STATUS              RESTARTS   AGE
+parksmap-1-7678z    1/1     Running             0          13s
+parksmap-1-deploy   0/1     Completed           0          62m
+parksmap-1-j2lw9    0/1     ContainerCreating   0          2s
 ----
 
-Did you notice anything? One container has been deleted, and there's a new container already being created. 
+Did you notice anything? One container has been deleted, and there's a new container already being created.
 
 Also, the names of the *Pods* are slightly changed.
 That's because OpenShift almost immediately detected that the current state (1
@@ -216,7 +217,7 @@ any installed language.
 
 Based on these health checks, if OpenShift decided that our `parksmap`
 application instance wasn't alive, it would kill the instance and then restart
-it, always ensuring that the desired number of replicas was in place.
+it, ensuring that the desired number of replicas was in place.
 
 More information on probing applications is available in the
 https://{{DOCS_URL}}/dev_guide/application_health.html[Application

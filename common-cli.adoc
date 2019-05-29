@@ -2,8 +2,8 @@
 
 OpenShift ships with a feature rich web console as well as command line tools
 to provide users with a nice interface to work with applications deployed to the
-platform.  The OpenShift tools are a single executable written in the Go
-programming language and is available for the following operating systems:
+platform. The OpenShift tools are a single executable written in the Go
+programming language and are available for the following operating systems:
 
 - Microsoft Windows
 - macOS 10
@@ -24,7 +24,7 @@ You should see the following (or something similar):
 {{OC_VERSION}}
 ----
 
-If the `oc` doesn't exist or you have an older version of the OpenShift CLI, follow
+If `oc` doesn't exist or you have an older version of the OpenShift CLI, follow
 the next sections to install or update the OpenShift CLI. Otherwise, skip to the
 next lab.
 
@@ -178,8 +178,16 @@ You should see the following (or something similar):
 If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
+=== Download CLI for Mac via Homebrew
 
-== Tab Completion 
+If you have `brew` installed, you can simply run the following to download the OpenShift CLI:
+
+[source,bash]
+----
+brew install openshift-cli
+----
+
+== Tab Completion
 
 The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.
 
@@ -262,5 +270,5 @@ appropriate values:
 
 export https_proxy=http://USERNAME:PASSOWRD@proxy-server.mycorp.com:3128/
 
-__Special Characters__: If your password contains special characters, you must replace them with ASCII codes, for example the at sign @ must be replaced by the %40 code, e.g. p@ssword = p%40ssword. 
+__Special Characters__: If your password contains special characters, you must replace them with ASCII codes, for example the at sign @ must be replaced by the %40 code, e.g. p@ssword = p%40ssword.
 ====

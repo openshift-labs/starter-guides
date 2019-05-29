@@ -5,7 +5,7 @@ public cloud. The environment consists of the following systems:
 
 * {{ ENV_MASTERS }} master node(s)
 * {{ ENV_INFRA }} infrastructure node(s)
-* {{ ENV_NODES }} application nodes
+* {{ ENV_NODES }} "application" nodes
 * An NFS server
 
 The infrastructure node is providing several services:
