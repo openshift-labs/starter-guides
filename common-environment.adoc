@@ -42,7 +42,7 @@ modification of the command before execution. If you see a command block with
 a red border (see below), the command will require modification. Typically
 this is a substitution of your username or user number:
 
-CAUTION: In the following Kibana search(es), replace `{{ USER_PROJECT }}` with the project provided to you and the pod_name to match your pod.
+CAUTION: In the following command, replace `{{ USER_NAME }}` with the username provided to you.
 
 [source,role=copypaste]
 ----
