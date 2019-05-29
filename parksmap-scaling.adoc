@@ -228,4 +228,4 @@ Health] section of the documentation and later in this guide.
 Before we continue, go ahead and scale your application down to a single
 instance. Feel free to do this using whatever method you like.
 
-WARNING: Don't forget to scale down back to 1 instance your `parksmap` component as otherwise you might experience some weird behavior in later labs. This is due to how the application has been coded and not to OpenShift itself.
+WARNING: Don't forget to scale down back to 1 instance of your `parksmap` component. If left scaled to 2 pods, you might experience some weird behavior in later labs. This is due to how the application has been coded and not to OpenShift itself.
