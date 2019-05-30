@@ -19,13 +19,13 @@ all users. Users can create *Templates* and load them
 into their own *Projects* for other users (with access) to share and use.
 
 The great thing about *Templates* is that they can speed up the deployment
-workflow for application development by providing a "recipe" of sorts that can
-be deployed with a single command.  Not only that, they can be loaded into
+workflow for application development by providing a recipe of sorts that can
+be deployed with a single command. Not only that, they can be loaded into
 OpenShift from an external URL, which will allow you to keep your templates in a
-version control system. 
+version control system.
 
 Let's combine all of the exercises we have performed in the last several labs by
-using a *Template* that we can instantiate with a single command.  While we
+using a *Template* that we can instantiate with a single command. While we
 could have used templates to deploy everything in the workshop today, remember
 that it is important for you to understand how to create, deploy, and wire
 resources together.
@@ -37,7 +37,7 @@ as many back end services' data as are created. Adding more stuff with the right
 *Label* will make more stuff show up on the map.
 
 Now you will deploy a map of Major League Baseball stadiums in the US by using a
-template. It is pre-configured to build the back end Java application, and
+template. It is pre-configured to build the back end Java application and
 deploy the MongoDB database. It also uses a *Hook* to call the `/ws/data/load`
 endpoint to cause the data to be loaded into the database from a JSON file in
 the source code repository. Execute the following command:
@@ -152,7 +152,7 @@ resources for our *mlbparks* application.
 oc get template mlbparks -o yaml
 ----
 
-But as always, you can use the OpenShift web console to do the same. In the left navigation, click *Home -> Search*, then select *Templates* from the dropdown, and click *mlbparks*. 
+But as always, you can use the OpenShift web console to do the same. In the left navigation, click *Home -> Search*, then select *Templates* from the dropdown, and click *mlbparks*.
 
 image::mlbparks-templates-yaml-menu.png[Complete overview]
 

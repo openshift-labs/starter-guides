@@ -1,7 +1,7 @@
 Almost every interaction with an OpenShift environment that you can think of
 requires going through the OpenShift's control plane API. All API interactions are both authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to do what you are asking?).
 
-In the log aggregation lab we saw that there was an
+In the log aggregation lab, we saw that there was an
 error in reference to a *Service Account*.
 
 As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he or she issues a command). These actions are performed using a *Service Account* which is a special type of `user` that the platform will use internally.
@@ -11,7 +11,7 @@ The **default** service account is the one taking the responsibility of running 
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
-You can view current permissions in the web UI, by navigating to *Workloads -> Deployment Configs* page. From there, click on the *Namespace*.
+You can view current permissions in the web UI by navigating to the *Workloads -> Deployment Configs* page. From there, click on the *Namespace*.
 
 image::parksmap-permissions-namespace.png[Namespace]
 
@@ -55,14 +55,14 @@ The `-z` flag will only work for service accounts in the *current* project.
 If you're referring to a service account in a different project, use the `-n <project>`switch.
 ====
 
-Now that the `default` *Service Account* now has **view** access, so now it can query the API to see what resources are within the *Project*. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.
+Now that the `default` *Service Account* has **view** access, it can query the API to see what resources are within the *Project*. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.
 
-Another way you could have done the same is by using the OpenShift console. Once you're on the 
+Another way you could have done the same is by using the OpenShift console. Once you're on the
 *Workloads -> Deployment Configs* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
 
 image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 
-Select *Namespace Role Binding* for the Binding Type, *view* for the Role Binding Name *{{ USER_PROJECT }}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{{ USER_PROJECT }}* for the Subject Namespace, and *default* for the Subject Name.
+Select *Namespace Role Binding* for the Binding Type, *view* for the Role Binding Name, *{{ USER_PROJECT }}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{{ USER_PROJECT }}* for the Subject Namespace, and *default* for the Subject Name.
 
 image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
 
@@ -87,11 +87,11 @@ page and watch it happen. You might not be fast enough! But it will be reflected
 
 image::parksmap-permissions-redeployed.png[Application deployed]
 
-If you look at the logs for the application now, you should see no errors.  That's great.
+If you look at the logs for the application now, you should see no errors. That's great.
 
 == Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
-you can grant access to other users, too. If you like, give your neighbor view
+you can grant access to other users too. If you like, give your neighbor view
 access to your project using the following command:
 
 CAUTION: In the following command(s), replace `{{ USER_PROJECT }}` with the user name of the person to whom you want to grant access.

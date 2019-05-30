@@ -8,18 +8,17 @@ OpenShift is constructed in such a way that it expects containers to log all
 information to `STDOUT`. In this way, both regular and error information is
 captured via standardized Docker mechanisms. When exploring the *Pod*'s logs
 directly, you are essentially going through the Docker daemon to access the
-container's logs, through OpenShift's API. Neat!
+container's logs, through OpenShift's API.
 
 [NOTE]
 ====
 In some cases, applications may not have been designed to send all of their
 information to `STDOUT` and `STDERR`. In many cases, multiple local log files
 are used. While OpenShift cannot parse any information from these files, nothing
-prevents them from being created, either. In other cases, log information is
+prevents them from being created either. In other cases, log information is
 sent to some external system. Here, too, OpenShift does not prohibit these
 behaviors. If you have an application that does not log to `STDOUT`, either because it
-already sends log information to some "external" system or because it writes
-various log information to various files, fear not.
+already sends log information to some external system or because it writes log information to various files, fear not.
 ====
 
 == Exercise: Examining Logs
@@ -82,7 +81,7 @@ WARNING: This section is only relevant if the aggregated logging
 capability is available in the OpenShift cluster, as this capability is optional.
 
 When your application consists of only one *Pod* and it never fails, restarts,
-or has other issues, these ways to view logs may not be so bad. However in a
+or has other issues, the ways above of viewing logs may not be so bad. However in a
 scaled-out application where *Pods* may have restarted, been scaled up or down,
 or if you just want to get historical information, these mechanisms may be
 insufficient.
@@ -90,7 +89,7 @@ insufficient.
 Fortunately, OpenShift provides an optional system for log aggregation that uses
 Elasticsearch, Fluentd, and Kibana (EFK).
 
-In the OpenShift web console, click *Monitoring -> Logging* from the left navigation. 
+In the OpenShift web console, click *Monitoring -> Logging* from the left navigation.
 
 Clicking this link takes you to the Kibana web interface. This interface is
 secured with OpenShift's role-based access controls, so you can only see logs

@@ -19,12 +19,12 @@ create a *Route*.
 == Exercise: Creating a Route
 
 Fortunately, creating a *Route* is a pretty straight-forward process. You simply
-`expose` the *Service* via the command line. Or, via the web console, just click
-*Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
+`expose` the *Service* via the command line or via the web console. Just click
+*Networking* tab on the left side of the web console, then click *Routes*, and then hit the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
 
 image::parksmap-route-create.png[Create Route,align="center"]
 
-When creating a *Route*, some other options can be provided, like the hostname for the *Route* or the TLS configuration for the *Route*.
+When creating a *Route*, some other options can be provided, such as the hostname for the *Route* or the TLS configuration for the *Route*.
 
 When using the command line, we can first verify that we don't already have any existing *Routes*:
 

@@ -43,7 +43,7 @@ sh-4.2$
 [NOTE]
 ====
 The default shell used by `oc rsh` is `/bin/sh`. If the deployed container does
-not have *sh* installed and uses another shell, (e.g. *A Shell*) the shell command
+not have *sh* installed and uses another shell (e.g., *A Shell*), the shell command
 can be specified after the pod name in the issued command.
 ====
 
@@ -54,6 +54,8 @@ Run the following command to list the files in the top folder:
 ls /
 ----
 
+The output should show:
+
 [source,bash]
 ----
 anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  parksmap.jar  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -63,7 +65,7 @@ anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt 
 
 The OpenShift Web Console also provides a convenient way to access a terminal session on the container without having to use the CLI.
 
-In order to access a pods terminal via the Web Console, click on *Workloads -> Pods* and finally the pod name as shown in the following image:
+In order to access a pod's terminal via the Web Console, click on *Workloads -> Pods* and finally the pod name as shown in the following image:
 
 image::parksmap-rsh-applications-pods.png[Pod List]
 
@@ -74,7 +76,7 @@ image::parksmap-rsh-applications-pods-terminal.png[Pod List]
 
 Go ahead and execute the same commands you did when using the CLI to see how the Web Console based terminal behaves.
 
-Before proceeding, close the connection to the pod.
+Before proceeding, close the connection to the pod from your local command line.
 
 [source,bash,role=copypaste]
 ----
@@ -85,10 +87,10 @@ exit
 
 In addition to remote shell, it is also possible to run a command remotely in an
 already running container using the `oc exec` command. This does not require
-that a shell is installed, but only that the desired command is present and in
+that a shell is installed but only that the desired command is present and in
 the executable path.
 
-In order to show just the JAR file, run the following:
+In order to show just the JAR file for the `parksmap` application, run the following:
 
 [source,bash,role=copypaste]
 ----
@@ -101,7 +103,6 @@ You would see something like the following:
 ----
 -rw-r--r--. 1 root root 21753918 Nov 23 15:54 /parksmap.jar
 ----
-
 
 [NOTE]
 ====
@@ -128,7 +129,7 @@ command terminated with exit code 1
 [NOTE]
 ====
 It is important to understand that, for security reasons, OpenShift does not run containers as the user specified in the Dockerfile by default. In fact,
-when OpenShift launches a container its user is actually randomized.
+when OpenShift launches a container, its user is actually randomized.
 
 If you want or need to allow OpenShift users to deploy container images that do
 expect to run as root (or any specific user), a small configuration change is

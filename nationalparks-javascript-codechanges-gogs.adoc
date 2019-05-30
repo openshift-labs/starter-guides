@@ -1,14 +1,14 @@
 == Background: Web Hooks
 
 Most Git repository servers support the concept of web hooks -- calling to an
-external source via HTTP(S) when a change in the code repository happens.
+external source via HTTP(S) when a change in a code repository happens.
 OpenShift provides an API endpoint that supports receiving hooks from
 remote systems in order to trigger builds. By pointing the code repository's
 hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
 == Exercise: Configuring Gogs Web Hooks
-In this lab you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ USER_PROJECT }}` project, and then click *Builds -> Build Configs* in the left navigation. Click `nationalparks-build` build and scroll down to the Webhooks section.
+In this lab, you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ USER_PROJECT }}` project and then click *Builds -> Build Configs* in the left navigation. Click `nationalparks-build` build and scroll down to the Webhooks section.
 
 On this screen you will see two webhook URLs as shown in the following image:
 
@@ -33,15 +33,15 @@ Click the Settings link on the top right of the screen:
 
 image::nationalparks-codechanges-gogs-settings.png[Webhook]
 
-Click on webhooks, and the on `Add Webhook` button.
+Click on webhooks and the on `Add Webhook` button.
 
 image::nationalparks-codechanges-gogs-add-webhook.png[Webhook]
 
-In the next screen, paste your link into the "URL" field. You can leave the
+On the next screen, paste your link into the "URL" field. You can leave the
 secret token field blank -- the secret is already in the URL and does not need
 to be in the payload, or copy it from the URL.
 
-Now go back to the Build Config page and click on *YAML*. Copy the Generic secret value from the triggers section. 
+Now go back to the Build Config page and click on *YAML*. Copy the Generic secret value from the triggers section.
 
 image::nationalparks-codechanges-gogs-copy-secret.png[Secret]
 
@@ -59,9 +59,9 @@ this out.
 
 == Exercise: Using Gogs Web Hooks
 Click "Project" at the top of the Gogs page, and then "Files" towards the
-middle of the page. This is Gogs's repository view. 
+middle of the page. This is Gogs's repository view.
 
-CAUTION: Make sure that the drop-down menu at the upper right is set for 
+CAUTION: Make sure that the drop-down menu at the upper right is set for
 the *`master`* branch. Navigate to the
 following path:
 

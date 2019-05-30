@@ -35,13 +35,13 @@ features come in very handy.
 
 We are going to add both a readiness and liveness probe to the existing
 `nationalparks` deployment. This will ensure that OpenShift does not add any
-instances to the service until they pass the readiness checks, and will ensure
+instances to the service until they pass the readiness checks and will ensure
 that unhealthy instances are restarted (if they fail the liveness checks).
 
 Click *Workloads -> Deployment Configs* on the left navigation. Click
 `nationalparks`. Click on *YAML*. We will be editing the YAML for the deployment config in order to add the health checks.
 
-Add the following code below `imagePullPolicy: Always` as shown in the screenshot. 
+Add the following code below `imagePullPolicy: Always` as shown in the screenshot.
 
 [source,bash,role=copypaste]
 ----

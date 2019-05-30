@@ -1,12 +1,12 @@
 In this lab, we're going to deploy a MongoDB database that will be used to store
 the data for the `nationalparks` application. We will also connect the
-`nationalparks` service with the newly deployed MongoDB database, so that the
+`nationalparks` service with the newly deployed MongoDB database so that the
 `nationalparks` service can load and query the database for the corresponding
 information.
 
 Finally, we will mark the `nationalparks` application as a backend for the map
-visualization tool, so that it can be dynamically discovered by the `parksmap`
-component using the OpenShift discovery mechanism and the map will be displayed
+visualization tool. When properly set up, it can be dynamically discovered by the `parksmap`
+component using the OpenShift discovery mechanism, and the map will be displayed
 automatically.
 
 image::roadshow-app-architecture-nationalparks-2.png[Application architecture,800,align="center"]
@@ -14,15 +14,15 @@ image::roadshow-app-architecture-nationalparks-2.png[Application architecture,80
 == Background: Storage
 
 Most useful applications are "stateful" or "dynamic" in some way, and this is
-usually achieved with a database or other data storage. In this lab we are
+usually achieved with a database or other data storage. In this lab, we are
 going to add MongoDB to our `nationalparks` application and then rewire it to
 talk to the database using environment variables via a secret.
 
 We are going to use the MongoDB image that is included with OpenShift.
 
-By default, this will use *EmptyDir* for data storage, which means if the *Pod*
-disappears the data does as well. In a real application you would use
-OpenShift's persistent storage mechanism to attach real-world storage (NFS,
+By default, this will use *EmptyDir* for data storage, which means, if the *Pod*
+disappears, the data does as well. In a real application, you would use
+OpenShift's persistent storage mechanism to attach storage (NFS,
 Gluster, EBS, etc) to the *Pods* to give them a persistent place to store their
 data.
 
@@ -42,17 +42,17 @@ persistent storage!). The image will ensure that:
 - The user can access the specified database with the specified password
 
 In the web console in your `{{ USER_PROJECT }}` project,
-click the *Add* button and then *"Browse Catalog"*. Select the *"Databases"* category and then *"Mongo"*.
+click the *Add* button and then *Browse Catalog*. Lastly, select the *Databases* category.
 
 image::nationalparks-databases-catalog-databases.png[Data Stores]
 
 Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, scroll down to find the *MongoDB
-(Ephemeral)* template, and select it.  You will notice that there are several
-MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
-template is what you should choose.  Go ahead and select the ephemeral template and click the *Create Service Instance* button.
+(Ephemeral)* template and select it. You will notice that there are several
+MongoDB templates available. We do not need a database with persistent storage, so the ephemeral Mongo
+template is what you should choose. Go ahead and select the ephemeral template and click the *Create Service Instance* button.
 
 When we performed the application build, there was no template. Rather, we selected the
-builder image directly and OpenShift presented only the standard build workflow.
+builder image directly, and OpenShift presented only the standard build workflow.
 Now we are using a template - a preconfigured set of resources that includes
 parameters that can be customized. In our case, the parameters we are concerned
 with are -- user, password, database, and
@@ -77,13 +77,13 @@ Once you have entered in the above information, click on *Create* to go to the n
 
 image::nationalparks-databases-catalog-databases-mongodb-create-bining.png[Bind Mongo]
 
-Click the *Create Service Binding* button and then *Create*. This creates a *"binding"* (as a secret) in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
+Click the *Create Service Binding* button and then *Create*. This creates a *binding* (as a secret) in our project that we can use in other components, such as the national parks backend, to authenticate to the database.
 
-Now that the connection and authentication information is in a binding in our project, we need to add it to the `nationalparks` backend. 
+Now that the connection and authentication information is in a binding in our project, we need to add it to the `nationalparks` backend.
 
 image::nationalparks-databases-binding-view-secret.png[National Parks Binding]
 
-Select the `nationalparks` workload and click *Save*.
+Click on the *Add Secret to Workload* button in the top right corner of the web console. Select the `nationalparks` workload and click *Save*.
 
 image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add binding to application]
 
@@ -117,10 +117,10 @@ parksmap-1                0         0         0         6h
 parksmap-2                1         1         1         5h
 ----
 
-We see that the desired and current number of instances for the "-1" deployment
-is 0. The desired and current number of instances for the "-2" deployment is 1.
-This means that OpenShift has gracefully torn down our "old" application and
-stood up a "new" instance.
+We see that the desired and current number of instances for the nationalparks-1 deployment
+is 0. The desired and current number of instances for the nationalparks-2 deployment is 1.
+This means that OpenShift has gracefully torn down our old application and
+stood up a new instance.
 
 == Exercise: Data, Data, Everywhere
 
@@ -142,8 +142,7 @@ And the result?
 ----
 
 Where's the data? Think about the process you went through. You deployed the
-application and then deployed the database. Nothing actually loaded anything
-*INTO* the database, though.
+application and then deployed the database. Nothing actually loaded anything into the database, though.
 
 The application provides an endpoint to do just that:
 
@@ -169,13 +168,14 @@ a browser problem, and the application is working properly.
 
 CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
 
+Now we can go back to observe if the frontend, map component of the application is displaying the newly loaded data:
+
 [source,bash,role=copypaste]
 ----
 http://parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}
 ----
 
-Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
-That's because the front end parks map only tries to talk to services that have
+Hmm... the main map still isn't displaying the parks. That's because the front end parks map only tries to talk to services that have
 the right *Label*.
 
 [NOTE]
@@ -186,7 +186,6 @@ environment variables, secrets, or configMaps to define connections to dependent
 for application portability across different environments.  The source file that
 performs the connection as well as creates the database schema can be viewed
 here:
-
 
 [source,bash,role=copypaste]
 ----
@@ -215,7 +214,6 @@ API and asking about the *Routes* and *Services* in the project. If any of them 
 the endpoints to look for map data.
 You can see the code that does this
 link:https://github.com/openshift-roadshow/parksmap-web/blob/{{PARKSMAP_VERSION}}/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20[here].
-
 
 Fortunately, the command line provides a convenient way for us to manipulate
 labels. `describe` the `nationalparks` service:
