@@ -129,6 +129,8 @@ need help, raise your hand and the instructor will assist.
 
 == Download and Install OpenShift CLI on Mac
 
+The OpenShift CLI can be downloaded for Mac using the steps below or using `brew` described under the `Download CLI for Mac via Homebrew` section.
+
 Download the the OpenShift CLI tool for link:{{DOWNLOAD_CLIENT_MAC}}[Mac]
 
 Once the file has been downloaded, you will need to extract the contents as it
@@ -160,6 +162,15 @@ Now you can add the OpenShift CLI tools to your PATH.
 $ export PATH=$PATH:~/openShift
 ----
 
+=== Download CLI for Mac via Homebrew
+
+If you have `brew` installed, you can simply run the following to download the OpenShift CLI:
+
+[source,bash]
+----
+brew install openshift-cli
+----
+
 At this point, we should have the oc tool available for use. Let's test this
 out by printing the version of the oc command:
 
@@ -177,15 +188,6 @@ You should see the following (or something similar):
 
 If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
-
-=== Download CLI for Mac via Homebrew
-
-If you have `brew` installed, you can simply run the following to download the OpenShift CLI:
-
-[source,bash]
-----
-brew install openshift-cli
-----
 
 == Tab Completion
 
