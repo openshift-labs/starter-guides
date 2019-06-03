@@ -119,13 +119,6 @@ CAUTION: In the following Kibana search(es), replace `{{ USER_PROJECT }}` with t
 kubernetes.namespace_name:"{{ USER_PROJECT }}"
 ----
 
-If you click the "x" in the column for the container name, and, in the left bar,
-click "add" for `kubernetes.pod_name`, you'll then see your old *Pod*'s logs,
-too. Remember, we scaled them down before coming here, so you can see how the
-log system is keeping a historical record.
-
-image::parksmap-logging-kibana-parksmap-headers.png[Kibana Interface]
-
 Try the following search string ensuring that you use the correct name for your project:
 
 CAUTION: In the following Kibana search(es), replace `{{ USER_PROJECT }}` with the project provided to you.
