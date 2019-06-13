@@ -21,12 +21,17 @@ parameters:
   displayName: Workshop Url
   required: true
 - name: CONSOLE_ADDRESS
-  description: Console url (e.g. https://master.mycluster.openshiftworkshop.com)
+  description: Console url (e.g. https://console-openshift-console.apps.cluster-osevg.osevg.openshiftworkshop.com)
   value:
   displayName: Console url
   required: true
+- name: API_ADDRESS
+  description: API url (e.g.https://api.cluster-osevg.osevg.openshiftworkshop.com:6443)
+  value:
+  displayName: API url
+  required: true
 - name: ROUTER_ADDRESS
-  description: Application subdomain (e.g. apps.mycluster.openshiftworkshop.com)
+  description: Application subdomain (e.g. apps.mycluster.openshiftworkshop.com or apps.mycluster.gce.pixy.io)
   value:
   displayName: Application subdomain
   required: true
@@ -39,7 +44,6 @@ objects:
       app: ${APPNAME}
       role: config
   data:
-    LOG_TO_STDOUT: "true"
     WORKSHOPS_URLS: ${WORKSHOPS_URLS}
     workshop.yml: |+
       ---
@@ -51,6 +55,7 @@ objects:
 
       vars:
         CONSOLE_ADDRESS: ${CONSOLE_ADDRESS}
+        API_ADDRESS: ${API_ADDRESS}
         ROUTER_ADDRESS: ${ROUTER_ADDRESS}
 
 
@@ -97,13 +102,6 @@ objects:
       from:
         kind: DockerImage
         name: quay.io/osevg/workshopper:0.4
-      importPolicy: {}
-      referencePolicy:
-        type: Source
-    - name: previous
-      from:
-        kind: DockerImage
-        name: docker.io/osevg/workshopper:latest
       importPolicy: {}
       referencePolicy:
         type: Source

@@ -4,7 +4,8 @@ features_to_install: [etherpad, gogs, guides, nexus, ocp-ops-view, terminals]
 # DEFAULTS
 # namespace: ocp-workshop # This is defined in common-definitions
 apps_hostname_suffix: apps.osevg.openshiftworkshop.com
-openshift_master_url: https://master.osevg.openshiftworkshop.com
+openshift_master_url: https://console-openshift-console.apps.cluster-osevg.osevg.openshiftworkshop.com
+openshift_api_url: https://api.cluster-osevg.osevg.openshiftworkshop.com:6443
 workshop_type: java
 infrasvcs_adm_user: adminuser
 infrasvcs_adm_password: admin123

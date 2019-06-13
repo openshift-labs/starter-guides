@@ -6,6 +6,9 @@ config:
     - name: CONSOLE_ADDRESS
       desc: Address to access the OpenShift console
       value: https://master.osevg.openshiftworkshop.com
+    - name: API_ADDRESS
+      desc: Address to access the OpenShift API
+      value: https://master.osevg.openshiftworkshop.com
     - name: ROUTER_ADDRESS
       desc: Router DNS suffix (https://appname-project.<suffix>)
       value: "apps.osevg.openshiftworkshop.com"
@@ -89,6 +92,7 @@ modules:
   common-explore:
     name: Exploring the CLI and Web Console
     vars:
+      API_ADDRESS:
       CONSOLE_ADDRESS:
       USER_PASSWORD:
       DOCS_URL:

@@ -64,7 +64,14 @@ plans:
       display_group: Workshop
     - name: openshift_master_url
       title: OpenShift Master URL
-      description: The address to OpenShift master URL to be displayed in the lab guide to participants
+      description: The address to OpenShift master URL to be displayed in the lab guide to participants (e.g. https://console-openshift-console.apps.cluster-osevg.osevg.openshiftworkshop.com)
+      type: string
+      required: true
+      display_type: text
+      display_group: Lab Guide
+    - name: openshift_api_url
+      title: OpenShift API URL
+      description: The address to OpenShift API URL to be displayed in the lab guide to participants (e.g. https://api.cluster-osevg.osevg.openshiftworkshop.com:6443)
       type: string
       required: true
       display_type: text

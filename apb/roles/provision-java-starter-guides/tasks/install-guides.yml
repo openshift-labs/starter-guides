@@ -30,6 +30,7 @@
   shell: >
         oc new-app starter-guides
         -p CONSOLE_ADDRESS={{ openshift_master_url }}
+        -p API_ADDRESS={{ openshift_api_url }}
         -p ROUTER_ADDRESS={{ apps_hostname_suffix }}
         -n {{ namespace }}
         --dry-run -o yaml > guide.yml

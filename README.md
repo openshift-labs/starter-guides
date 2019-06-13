@@ -43,13 +43,15 @@ You can follow this instructions to create a full workshop site:
 $ oc new-project guides
 $ oc apply -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.1/guides-template.yaml
 $ oc new-app starter-guides \
-             -p CONSOLE_ADDRESS="https://master.osevg.openshiftworkshop.com" \
+             -p CONSOLE_ADDRESS="https://console-openshift-console.apps.cluster-osevg.osevg.openshiftworkshop.com" \
+             -p API_ADDRESS="https://api.cluster-osevg.osevg.openshiftworkshop.com:6443" \
              -p ROUTER_ADDRESS="apps.osevg.openshiftworkshop.com"
 ```
 
 NOTE: You will need the following ENV values:
 
 * *CONSOLE_ADDRESS*: Address to the master server's console
+* *API_ADDRESS*: Address to the master server's API
 * *ROUTER_ADDRESS*: Wildcard DNS used for deployed apps
 
 # Run Guides Locally

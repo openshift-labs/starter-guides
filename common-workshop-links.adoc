@@ -2,7 +2,8 @@ You can find all urls, hostnames, usernames and passwords that are needed during
 
 == OpenShift cluster URL
 
-Address: {{CONSOLE_ADDRESS}} +
+Console Address: {{CONSOLE_ADDRESS}} +
+API Address: {{API_ADDRESS}} +
 
 Username: `{{ USER_NAME }}` + 
 Password: `{{ USER_PASSWORD }}` +

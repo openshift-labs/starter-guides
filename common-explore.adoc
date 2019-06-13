@@ -22,7 +22,7 @@ want to authenticate to. Issue the following command:
 
 [source,bash,role=copypaste]
 ----
-oc login {{CONSOLE_ADDRESS}}
+oc login {{API_ADDRESS}}
 ----
 
 You may see the following output:
@@ -49,7 +49,7 @@ the following command:
 
 [source,bash]
 ----
-oc login {{CONSOLE_ADDRESS}} --insecure-skip-tls-verify=true
+oc login {{API_ADDRESS}} --insecure-skip-tls-verify=true
 ----
 ====
 
@@ -114,7 +114,7 @@ You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
+Now using project "{{ USER_PROJECT }}" on server "{{API_ADDRESS}}".
 ----
 
 If you had multiple projects, the first thing you would want to do is to switch 
@@ -132,7 +132,7 @@ You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
+Now using project "{{ USER_PROJECT }}" on server "{{API_ADDRESS}}".
 ----
 
 == The Web Console

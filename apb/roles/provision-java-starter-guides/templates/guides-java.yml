@@ -21,9 +21,14 @@ parameters:
   displayName: Workshop Url
   required: true
 - name: CONSOLE_ADDRESS
-  description: Console url (e.g. https://master.mycluster.openshiftworkshop.com or https://console.mycluster.gce.pixy.io:8443)
+  description: Console url (e.g. https://console-openshift-console.apps.cluster-osevg.osevg.openshiftworkshop.com)
   value:
   displayName: Console url
+  required: true
+- name: API_ADDRESS
+  description: API url (e.g.https://api.cluster-osevg.osevg.openshiftworkshop.com:6443)
+  value:
+  displayName: API url
   required: true
 - name: ROUTER_ADDRESS
   description: Application subdomain (e.g. apps.mycluster.openshiftworkshop.com or apps.mycluster.gce.pixy.io)
@@ -50,6 +55,7 @@ objects:
 
       vars:
         CONSOLE_ADDRESS: ${CONSOLE_ADDRESS}
+        API_ADDRESS: ${API_ADDRESS}
         ROUTER_ADDRESS: ${ROUTER_ADDRESS}
         INFRA_PROJECT: {{ namespace }}
         USER_PASSWORD: {{ openshift_user_password }}
