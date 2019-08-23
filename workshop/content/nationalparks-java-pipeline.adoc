@@ -20,7 +20,7 @@ in turn can be committed to a project’s source control repository. This is the
 "Pipeline-as-code"; treating the CD pipeline a part of the application to be versioned
 and reviewed like any other code.
 
-image::devops-pipeline-flow.png[Pipelines]
+image::images/devops-pipeline-flow.png[Pipelines]
 
 == Set Up Your Pipeline
 
@@ -35,11 +35,11 @@ on the current Deployment to automatically trigger when there is a new image or 
 In the *userXY* project, click on *Workloads -> Deployment Configs* on the left sidebar menu
 and then on *nationalparks* deployment config. Click on *Actions -> Edit Deployment Config*:
 
-image::devops-pipeline-deployment-edit.png[Edit pipeline]
+image::images/devops-pipeline-deployment-edit.png[Edit pipeline]
 
 In the YAML for the deployment config, find the `triggers` section, delete it, and then click the blue *Save* button.
 
-image::devops-pipeline-deployment-triggers.png[Remove triggers]
+image::images/devops-pipeline-deployment-triggers.png[Remove triggers]
 
 == Create Your Pipeline
 
@@ -49,25 +49,25 @@ We're going to deploy a Jenkins instance to this project to configure and run ou
 
 In the Developer Catalog, search for *Jenkins*. Select the one named *Jenkins*.
 
-image::devops-pipeline-catalog-search.png[Empty CICD project]
+image::images/devops-pipeline-catalog-search.png[Empty CICD project]
 
 We will be prompted with the configuration screens for deploying our Jenkins server instance. Click the blue *Create Service Instance* button to get started.
 
-image::devops-jenkins-template.png[Jenkins template]
+image::images/devops-jenkins-template.png[Jenkins template]
 
 Leave the defaults for all parameters except *Memory Limit*, which should be set to `1Gi`. Then click the blue *Create* button.
 
-image::devops-jenkins-template-config.png[Jenkins template config]
+image::images/devops-jenkins-template-config.png[Jenkins template config]
 
 Jenkins will now be provisioned on the background. Click *Catalog -> Provisioned Services* in the left navigation to see your Jenkins service. It may take a couple minutes for the provisioning to complete.
 
 We will see now Jenkins being provisioned on our project. Once provisioning is finished, we should see a similar screen to this:
 
-image::devops-jenkins-deployed.png[Jenkins deployed]
+image::images/devops-jenkins-deployed.png[Jenkins deployed]
 
 Now click *Home -> Status* and you should see the Jenkins deployment on your Project Status page.
 
-image::devops-jenkins-project-status.png[Jenkins deployment]
+image::images/devops-jenkins-project-status.png[Jenkins deployment]
 
 Notice how you have the actual Jenkins deployment and a Provisioned Service, this is because we deployed Jenkins from the Developer Catalog as a service for our current project.
 
@@ -86,14 +86,14 @@ For this example, we're going to store our pipeline in the same Gogs repository 
 
 Log into your `nationalparks` repository in Git as we are going to store in this repository our Jenkinsfile, that is, our pipeline definition.
 
-CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Git username provided to you.
+CAUTION: In the following url(s), replace `%username%` with the Git username provided to you.
 
 [source,bash,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks
+http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks
 ----
 
-image::devops-pipeline-gogs-nationalparks.png[Nationalparks project]
+image::images/devops-pipeline-gogs-nationalparks.png[Nationalparks project]
 
 We are going to create a Jenkinsfile to build and deploy our `nationalparks` application.
 
@@ -108,7 +108,7 @@ pipeline {
   stages {
     stage('Build JAR') {
       steps {
-        git url: 'http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks'
+        git url: 'http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks'
         sh "cp .settings.xml ~/.m2/settings.xml"
         sh "mvn package"
       }
@@ -155,11 +155,11 @@ pipeline {
 
 And commit the changes into the git server.
 
-image::devops-pipeline-gogs-add-jenkinsfile.png[Nationalparks project]
+image::images/devops-pipeline-gogs-add-jenkinsfile.png[Nationalparks project]
 
 As we can see now, the Jenkinsfile is already stored in our version control system.
 
-image::devops-pipeline-gogs-jenkinsfile-list.png[Nationalparks project]
+image::images/devops-pipeline-gogs-jenkinsfile-list.png[Nationalparks project]
 
 A *Pipeline* is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.
 
@@ -181,7 +181,7 @@ Create the OpenShift pipeline definition to use the Jenkins file. This is a regu
 In the **userXY** project, click on *Add -> Import YAML* and paste the following YAML file to create a pipeline 
 that uses the `Jenkinsfile.workshop` from the `{{USER_NAME}}` git repository
 
-image::devops-pipeline-add-yaml-menu.png[Add yaml to project - Menu]
+image::images/devops-pipeline-add-yaml-menu.png[Add yaml to project - Menu]
 
 Now, copy the following code into the YAML input box and click *Create*.
 
@@ -196,7 +196,7 @@ spec:
   source:
     git:
       ref: master
-      uri: "http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks"
+      uri: "http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks"
     type: Git
   strategy:
     jenkinsPipelineStrategy:
@@ -217,7 +217,7 @@ spec:
 
 In OpenShift Web Console, click on *Builds -> Builds* and then **nationalparks-build-1** to see the pipeline you just created.
 
-image::devops-pipeline-running.png[Pipeline running]
+image::images/devops-pipeline-running.png[Pipeline running]
 
 The pipeline will start automatically and execute all stages that are defined in the Jenkinsfile 
 in the git repository.
@@ -229,22 +229,22 @@ first time that pipeline runs, it will pull the jenkins slave image from the reg
 
 As the pipeline is running, you can watch the build logs. Click on the `view Logs` link in the appropriate build and you will be directed to Jenkins. In order to grant you access, Jenkins is configured to use Single Sign On with OpenShift, and you'll need to log in with OpenShift credentials.
 
-image::devops-pipeline-jenkins-sso.png[Jenkins SSO]
+image::images/devops-pipeline-jenkins-sso.png[Jenkins SSO]
 
 You need to authorize your user account to access Jenkins.
 
-image::devops-pipeline-jenkins-sso-authorize.png[Jenkins SSO]
+image::images/devops-pipeline-jenkins-sso-authorize.png[Jenkins SSO]
 
 You will see the output of your maven build as it's running in Jenkins.
 
-image::devops-pipeline-jenkins-log.png[Jenkins logs]
+image::images/devops-pipeline-jenkins-log.png[Jenkins logs]
 
 After a little while, it will finish, hopefully with success.
 
-image::devops-pipeline-finished.png[Pipeline finished]
+image::images/devops-pipeline-finished.png[Pipeline finished]
 
 Once the pipeline has finished, you should see the nationalparks application redeployed in your project. 
 
 You should notice that the number of the deployment (the number to the side of the deployment name) has increased. 
 
-image::devops-pipeline-nationalparks-deployed.png[Nationalparks component deployed]
+image::images/devops-pipeline-nationalparks-deployed.png[Nationalparks component deployed]

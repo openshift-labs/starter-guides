@@ -50,12 +50,12 @@ OpenShift.
 * *link:https://www.openshift.com/for-developers/[OpenShift
 for Developers]*
 
-image::further-resources-openshift-for-developers.png[OpenShift for Developers]
+image::images/further-resources-openshift-for-developers.png[OpenShift for Developers]
 
 * *link:https://www.openshift.com/devops-with-openshift/[DevOps with OpenShift]*
 
-image::further-resources-devops-with-openshift.png[DevOps with OpenShift]
+image::images/further-resources-devops-with-openshift.png[DevOps with OpenShift]
 
 * *link:https://www.openshift.com/deploying-to-openshift/[Deploying with OpenShift]*
 
-image::further-resources-deploying-to-openshift.png[Deploying to OpenShift]
+image::images/further-resources-deploying-to-openshift.png[Deploying to OpenShift]

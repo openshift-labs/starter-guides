@@ -1,0 +1,63 @@
+modules:
+    common-environment:
+        name: Environment Overview
+        exit_sign: Start Workshop
+    common-parksmap-architecture:
+        name: Architecture Overview of the ParksMap Application
+    common-cli:
+        name: Installing the *oc* client tool
+    common-explore:
+        name: Exploring the CLI and Web Console
+    parksmap-docker:
+        name: Deploying Your First Container Image
+    parksmap-scaling:
+        name: Scaling and Self Healing
+    parksmap-routes:
+        name: Exposing Your Application to the Outside World
+    parksmap-logging:
+        name: Exploring OpenShift's Logging Capabilities
+    parksmap-permissions:
+        name: Role-Based Access Control
+    parksmap-rsh:
+        name: Remote Access to Your Application
+    nationalparks-java:
+        name: Deploying Java Code
+    nationalparks-javascript:
+        name: Deploying JavaScript Code
+    nationalparks-php:
+        name: Deploying PHP Code
+    nationalparks-python:
+        name: Deploying Python Code
+    nationalparks-java-databases:
+        name: Adding a Database (MongoDB)
+    nationalparks-javascript-databases:
+        name: Adding a Database (MongoDB)
+    nationalparks-python-databases:
+        name: Adding a Database (MongoDB)
+    nationalparks-php-databases:
+        name: Adding a Database (MongoDB)
+    nationalparks-application-health:
+        name: Application Health
+    nationalparks-java-pipeline-codechanges-gogs:
+        name: Automation for Your Application on Code Changes
+    nationalparks-java-codechanges-gogs:
+        name: Trigger Automatic Rebuilds on Code Changes
+    nationalparks-javascript-codechanges-gogs:
+        name: Trigger Automatic Rebuilds on Code Changes
+    nationalparks-php-codechanges-gogs:
+        name: Trigger Automatic Rebuilds on Code Changes
+    nationalparks-python-codechanges-gogs:
+        name: Trigger Automatic Rebuilds on Code Changes
+    nationalparks-java-pipeline:
+        name: Automate Build and Deployment with Pipelines
+    mlbparks-templates:
+        name: Using Application Templates
+    mlbparks-binary-build:
+        name: Binary Builds for Day to Day Development
+    mlbparks-debugging:
+        name: Using Port-Forwarding and Remote Debugging
+    common-further-resources:
+        name: Further Resources
+        exit_sign: Finish Workshop
+    common-workshop-links:
+        name: Workshop Links

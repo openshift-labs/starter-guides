@@ -1,6 +1,6 @@
 In this lab, we're going to deploy the web component of the ParksMap application which is also called `parksmap` and uses OpenShift's service discovery mechanism to discover the backend services deployed and shows their data on the map.
 
-image::roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
+image::images/roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
 
 == Exercise: Deploying your First Image
 
@@ -16,7 +16,7 @@ CAUTION: In the following steps, replace `{{ USER_PROJECT }}` with the project p
 
 Find your *{{ USER_PROJECT }}* project and click it. On the next page, click *Add* and a drop down menu will appear. There are several options, but we are only concerned with *Deploy Image*. Click *Deploy Image* in the *Add* drop down.  
 
-image::parksmap-add-to-project-dialog.png[Add to Project]
+image::images/parksmap-add-to-project-dialog.png[Add to Project]
 
 This will open a dialog that will allow you to specify the information for the image you want to deploy. In the *Image Name* field, copy/paste the following into the box:
 
@@ -27,7 +27,7 @@ docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 
 Your screen will end up looking something like this:
 
-image::parksmap-image.png[Explore Project]
+image::images/parksmap-image.png[Explore Project]
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
 out to the container registry specified and interrogate the image. You then are
@@ -36,7 +36,7 @@ presented with some options to add environment variables -- which we will learn 
 
 Make sure to have the correct application name:
 
-image::parksmap-image-options.png[Explore Project]
+image::images/parksmap-image-options.png[Explore Project]
 
 Next, click the blue *Deploy* button. You will be directed to the Project Status page, 
 where you should see the entry for the `parksmap` deployment config. 
@@ -72,12 +72,12 @@ server, a log analyzer, and a file service to help manage uploaded files.
 In the web console's project status page you will see that there is a single *Pod* that
 was created by your actions. 
 
-image::parksmap-overview.png[Pod overview]
+image::images/parksmap-overview.png[Pod overview]
 
 You can also get a list of all the *Pods* created within your *Project*, by navigating to 
 *Workloads -> Pods*
 
-image::parksmap-podlist.png[Pod list]
+image::images/parksmap-podlist.png[Pod list]
 
 This *Pod* contains a single container, which
 happens to be the `parksmap` application - a simple Spring Boot/Java application.
@@ -149,7 +149,7 @@ The web interface also shows a lot of the same information on the *Pod* details
 page. If you click on the name of the *Pod*, you will
 find the details page. You can also get there by clicking *Workloads -> Pods* and then clicking the *Pod* name.
 
-image::parksmap-pod.png[Pod list]
+image::images/parksmap-pod.png[Pod list]
 
 Getting the `parksmap` image running may take a little while to complete. Each
 OpenShift node that is asked to run the image has to pull (download) it, if the
@@ -215,7 +215,7 @@ fixed and never change for the life of the *Service*.
 
 In the web console, service information is available by clicking *Networking -> Services*.
 
-image::parksmap-serviceslist.png[Services list]
+image::images/parksmap-serviceslist.png[Services list]
 
 You can also get more detailed information about a *Service* by using the
 following command to display the data in YAML:
@@ -261,7 +261,7 @@ Take note of the `selector` stanza. Remember it.
 
 Alternatively, you can use the web console to view information about the *Service*.
 
-image::parksmap-service.png[Service]
+image::images/parksmap-service.png[Service]
 
 It is also of interest to view the YAML of the *Pod* to understand how OpenShift
 wires components together. For example, run the following command to get the

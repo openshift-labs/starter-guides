@@ -1,0 +1,26 @@
+---
+name: Starter labs (Java)
+description: Developing Java Applications on OpenShift - Starter Lab
+
+modules:
+  activate:
+  - common-environment
+  - common-parksmap-architecture
+  - common-cli
+  - common-explore
+  - parksmap-docker
+  - parksmap-scaling
+  - parksmap-routes
+  - parksmap-logging
+  - parksmap-permissions
+  - parksmap-rsh
+  - nationalparks-java
+  - nationalparks-java-databases
+  - nationalparks-application-health
+  - nationalparks-java-pipeline
+  - nationalparks-java-pipeline-codechanges-gogs
+  - mlbparks-templates
+  - mlbparks-binary-build
+  - mlbparks-debugging
+  - common-further-resources
+  - common-workshop-links

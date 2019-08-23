@@ -4,7 +4,7 @@ be wired together and described as a backend for the map visualization tool, so
 that once the application is built and deployed, you will be able to see the new
 map.
 
-image::roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
+image::images/roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
 
 == Background: Templates
 Running all these individual commands can be tedious and error prone.
@@ -142,7 +142,7 @@ several app servers, databases, and more.  You could deploy the entire set of
 resources with one command, and then hack on them to develop new features,
 microservices, fix bugs, and more.
 
-image::mlbparks-templates-complete-overview.png[Complete overview]
+image::images/mlbparks-templates-complete-overview.png[Complete overview]
 
 As a final exercise, look at the template that was used to create the
 resources for our *mlbparks* application.
@@ -154,8 +154,8 @@ oc get template mlbparks -o yaml
 
 But as always, you can use the OpenShift web console to do the same. In the left navigation, click *Home -> Search*, then select *Templates* from the dropdown, and click *mlbparks*. 
 
-image::mlbparks-templates-yaml-menu.png[Complete overview]
+image::images/mlbparks-templates-yaml-menu.png[Complete overview]
 
 On the next page, click *YAML* to see/edit the YAML from here.
 
-image::mlbparks-templates-yaml-edit.png[Template YAML edit]
+image::images/mlbparks-templates-yaml-edit.png[Template YAML edit]

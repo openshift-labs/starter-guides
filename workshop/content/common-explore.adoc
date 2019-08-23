@@ -58,7 +58,7 @@ password combination for your user account. Use the username and password combin
 
 [source,bash,role=copypaste]
 ----
-Username: {{ USER_NAME }}
+Username: %username%
 Password: {{USER_PASSWORD}}
 ----
 
@@ -147,21 +147,21 @@ The first screen you will see is the authentication screen. You will be prompted
 
 [source,bash,role=copypaste]
 ----
-Username: {{ USER_NAME }}
+Username: %username%
 Password: {{USER_PASSWORD}}
 ----
 
-image::ocp-login.png[OpenShift Login Screen]
+image::images/ocp-login.png[OpenShift Login Screen]
 
 After you have authenticated to the web console, you will be presented with the list of Projects that you can access. You will see something that looks like the following image:
 
-image::explore-webconsole1sc.png[Web Console]
+image::images/explore-webconsole1sc.png[Web Console]
 
 Click on the *{{ USER_PROJECT }}* project link. When you click on the
 *{{ USER_PROJECT }}* project, you will be taken to the project status page, 
 which will list all of the resources that you have running as part of your project. There's nothing there now, but that's about to change.
 
-image::explore-webconsole2.png[Explore Project]
+image::images/explore-webconsole2.png[Explore Project]
 
 We will be using a mix of command line tooling and the web console for the labs.
 Get ready!

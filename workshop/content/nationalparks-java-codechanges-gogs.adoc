@@ -12,16 +12,16 @@ In this lab you can use a build webhook to trigger a build execution every time 
 
 On this screen you will see the option to copy the generic webhook URL as shown in the following image:
 
-image::nationalparks-codechanges-webhook-config.png[Webhook]
+image::images/nationalparks-codechanges-webhook-config.png[Webhook]
 
 Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on your local Gogs:
 
-CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Git username provided to you.
+CAUTION: In the following url(s), replace `%username%` with the Git username provided to you.
 
 [source,bash,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks
+http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks
 ----
 
 [NOTE]
@@ -31,11 +31,11 @@ The credentials for this Gogs instance are the same as for our OpenShift instanc
 
 Click the Settings link on the top right of the screen:
 
-image::nationalparks-codechanges-gogs-settings.png[Webhook]
+image::images/nationalparks-codechanges-gogs-settings.png[Webhook]
 
 Click on webhooks, and the on `Add Webhook` button.
 
-image::nationalparks-codechanges-gogs-add-webhook.png[Webhook]
+image::images/nationalparks-codechanges-gogs-add-webhook.png[Webhook]
 
 In the next screen, paste your link into the "URL" field. You can leave the
 secret token field blank -- the secret is already in the URL and does not need
@@ -45,7 +45,7 @@ Change the `Content Type` to `application/x-www-form-urlencoded`.
 
 Finally, click on "Add webhook".
 
-image::nationalparks-codechanges-gogs-config-webhook.png[Webhook]
+image::images/nationalparks-codechanges-gogs-config-webhook.png[Webhook]
 
 Boom! From now on, every time you commit new source code to your Gogs
 repository, a new build and deploy will occur inside of OpenShift.  Let's try
@@ -69,7 +69,7 @@ Then click on the `BackendController.java` file.
 Once you have the file on the screen, click the edit button in the top right
 hand corner as shown here:
 
-image::nationalparks-codechanges-gogs-change-code.png[Webhook]
+image::images/nationalparks-codechanges-gogs-change-code.png[Webhook]
 
 Change line number 20:
 

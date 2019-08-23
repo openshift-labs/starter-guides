@@ -68,12 +68,12 @@ Under the Run menu (alt-u), choose edit configurations. This will bring up the n
 
 Click the plus in the top left corner, scroll down, and choose remote.
 
-image::mlbparks-debugging-intellij-debug-new.png[IntelliJ New Configuration]
+image::images/mlbparks-debugging-intellij-debug-new.png[IntelliJ New Configuration]
 
 On the resulting dialog page, change the name at the top to "on OpenShift" or whatever is informative to you. Then
 towards the bottom right, change the port number to 8787. When you have done that click "OK".
 
-image::mlbparks-debugging-intellij-debug-info.png[IntelliJ New Configuration]
+image::images/mlbparks-debugging-intellij-debug-info.png[IntelliJ New Configuration]
 
 Now when you click the Debug icon in IntelliJ, it will open the debugger and attach to JVM in the pod on OpenShift. Go
 ahead and set a break point in any class you want and it will do normal debugging - just like you know and love!

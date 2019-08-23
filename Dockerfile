@@ -15,6 +15,7 @@ RUN rm -rf /tmp/src/.git* && \
 #    chmod 0440 /etc/sudoers.d/*
 
 # ENV TERMINAL_TAB=split
+#ENV WORKSHOP_FILE=java-workshop.yml
 
 USER 1001
 

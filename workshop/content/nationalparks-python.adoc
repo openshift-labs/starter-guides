@@ -6,7 +6,7 @@ coordinates) that is stored in a MongoDB database.  This application will also
 provide an external access point, so that the API provided can be directly used
 by the end user.
 
-image::roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
+image::images/roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
 
 == Background: Source-to-Image (S2I)
 
@@ -64,11 +64,11 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Gogs username provided to you. Your Gogs credentials are the same as your OpenShift credentials.
+CAUTION: In the following url(s), replace `%username%` with the Gogs username provided to you. Your Gogs credentials are the same as your OpenShift credentials.
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks.git
 ----
 
 Later in the lab, we want you to make a code change and then rebuild your
@@ -85,26 +85,26 @@ CAUTION: In the following step(s), replace `{{ USER_PROJECT }}` with the project
 In the OpenShift web console, find your `{{ USER_PROJECT }}` project, and then
 click the *Add* button and then the *Browse Catalog* link as highlighted in the following image:
 
-image::nationalparks-show-catalog.png[Add to Project]
+image::images/nationalparks-show-catalog.png[Add to Project]
 
 This is the developer catalog which allows a user to select components they want to add to their application.
 
 Search for `python`, and click *Python* as shown in the following image:
 
-image::nationalparks-python-sarch-python.png[Developer Catalog Languages]
+image::images/nationalparks-python-sarch-python.png[Developer Catalog Languages]
 
 After you click *Python*, a dialog is presented as shown in the following image:
 
-image::nationalparks-python-new-python-service.png[Add application]
+image::images/nationalparks-python-new-python-service.png[Add application]
 
 Click on the *Create Application* button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
 and for the Git repository URL, enter:
 
-CAUTION: In the following url(s), replace `{{ USER_NAME }}` with the Git username provided to you.
+CAUTION: In the following url(s), replace `%username%` with the Git username provided to you.
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/{{ USER_NAME }}/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks.git
 ----
 
 NOTE: All of these runtimes shown are made available via *Templates* and
@@ -116,11 +116,11 @@ process to grab that specific tag in the code repository.
 
 Check the box to create a route and then click the *Create* button.
 
-image::nationalparks-python-configure-python-service.png[Runtimes]
+image::images/nationalparks-python-configure-python-service.png[Runtimes]
 
 To see the build logs, click *Builds -> Builds*, then click on the *nationalparks-1* build, and finally click *Logs*.
 
-image::nationalparks-python-new-python-build.png[Nationalparks build]
+image::images/nationalparks-python-new-python-build.png[Nationalparks build]
 
 The initial build will take a few minutes to downloads all of the dependencies needed for
 the application. You can see all of this happening in real time!

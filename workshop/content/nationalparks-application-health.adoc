@@ -61,7 +61,7 @@ livenessProbe:
   timeoutSeconds: 1
 ----
 
-image::nationalparks-application-health-config.png[Readiness and Liveness Probe]
+image::images/nationalparks-application-health-config.png[Readiness and Liveness Probe]
 
 WARNING: Note the trailing slash in the URL
 
