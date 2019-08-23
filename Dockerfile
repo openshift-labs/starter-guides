@@ -9,10 +9,10 @@ RUN rm -rf /tmp/src/.git* && \
     chgrp -R 0 /tmp/src && \
     chmod -R g+w /tmp/src
 
-COPY sudoers/ /etc/sudoers.d/
-
-RUN chown root:root /etc/sudoers.d/* && \
-    chmod 0440 /etc/sudoers.d/*
+#COPY sudoers/ /etc/sudoers.d/
+#
+#RUN chown root:root /etc/sudoers.d/* && \
+#    chmod 0440 /etc/sudoers.d/*
 
 # ENV TERMINAL_TAB=split
 
