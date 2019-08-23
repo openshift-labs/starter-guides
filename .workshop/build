@@ -13,7 +13,8 @@ mv workshop /opt/app-root/workshop
 # Also delete some of the other files from the top of the Git repository we
 # don't need for running the workshop.
 
-rm -f Dockerfile README.md LICENSE apb
+rm -f Dockerfile README.md LICENSE 
+rm -rf apb
 
 # mv -f code/* . && rmdir code
 
