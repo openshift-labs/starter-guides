@@ -1,67 +1,133 @@
-# Developing Java applications on OpenShift - Starter Guides 
+Lab - Starter Workshop
+=======================
 
-Workshop content designed to be used by the [Workshopper tool](https://github.com/osevg/workshopper).
+This is a workshop on enabling operators through OperatorHub, as well as the process for creating, building and testing your own operator.
 
-## Install the APB into your Service Catalog
+WARNING WARNING WARNING
+-----------------------
 
-An [APB](https://hub.docker.com/r/openshiftapb/starter-workshop-apb/) is provided for 
-deploying the Cloud-Native Workshop infra (lab instructions, Nexus, Gogs, etc) in a project 
-on an OpenShift cluster via the service catalog. In order to add this APB to the OpenShift service catalog, log in 
-as cluster admin and perform the following in the `openshift-ansible-service-broker` project :
+This workshop grants the user cluster admin access. It also uses ``buildah`` inside of a container in the OpenShift cluster to build images. Using ``buildah`` in a container currently requires that it be run as ``root`` and inside of a ``privileged`` container.
 
-1. Edit the `broker-config` configmap and add this snippet right after `registry:`:
+Because of the elevated access rights, only use this workshop on an expendable cluster which is going to be destroyed when the workshop is finished.
 
-  ```
-    - name: dh
-      type: dockerhub
-      org: openshiftapb
-      tag: ocp-3.11
-      white_list: [.*-apb$]
-  ```
+Deploying the Workshop
+----------------------
 
-2. Redeploy the `asb` deployment
-
-You can [read more in the docs](https://docs.openshift.com/container-platform/3.11/install_config/oab_broker_configuration.html#oab-config-registry-dockerhub) 
-on how to configure the service catalog.
-
-Note that if you are using the _OpenShift Workshop_ in RHPDS, this APB is already available in your service catalog.
-
-
-## Using this content
-
-Either use the content directly by pointing at this repository
+To deploy the workshop, first clone this Git repository to your own machine. Use the command:
 
 ```
-https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.1/
+git clone --recurse-submodules https://github.com/openshift-labs/lab-build-an-operator.git
 ```
 
-## Create a full workshop
-
-You can follow this instructions to create a full workshop site:
+The ``--recurse-submodules`` option ensures that Git submodules are checked out. If you forget to use this option, after having clone the repository, run:
 
 ```
-$ oc new-project guides
-$ oc apply -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.1/guides-template.yaml
-$ oc new-app starter-guides \
-             -p CONSOLE_ADDRESS="https://console-openshift-console.apps.cluster-osevg.osevg.openshiftworkshop.com" \
-             -p API_ADDRESS="https://api.cluster-osevg.osevg.openshiftworkshop.com:6443" \
-             -p ROUTER_ADDRESS="apps.osevg.openshiftworkshop.com"
+git submodule update --recursive --remote
 ```
 
-NOTE: You will need the following ENV values:
+Next create a project in OpenShift into which the workshop is to be deployed.
 
-* *CONSOLE_ADDRESS*: Address to the master server's console
-* *API_ADDRESS*: Address to the master server's API
-* *ROUTER_ADDRESS*: Wildcard DNS used for deployed apps
-
-# Run Guides Locally
 ```
-$ git clone https://github.com/openshift-labs/starter-guides.git
-$ cd starter-labs
-
-$ docker run -it --rm -p 8080:8080 -v $(pwd):/app-data \
-              -e CONTENT_URL_PREFIX="file:///app-data" \
-              -e LOG_TO_STDOUT=true \
-              -e WORKSHOPS_URLS="file:///app-data/_workshops/java-starter-guides.yml" \
-              quay.io/osevg/workshopper:0.4
+oc new-project workshops
 ```
+
+From within the top level of the Git repository, now run:
+
+```
+./.workshop/scripts/deploy-spawner.sh
+```
+
+The name of the deployment will be ``lab-build-an-operator``.
+
+You can determine the hostname for the URL to access the workshop by running:
+
+```
+oc get route lab-build-an-operator
+```
+
+When the URL for the workshop is accessed you will be prompted for a user name and password. Use your email address or some other unique identifier for the user name. This is only used to ensure you get a unique session and can attach to the same session from a different browser or computer if need be. The password you must supply is ``openshift``.
+
+Building the Workshop
+---------------------
+
+The deployment created above will use an image from ``quay.io`` for this workshop based on the ``master`` branch of the repository.
+
+To make changes to the workshop content and test them, edit the files in the Git repository and then run:
+
+```
+./.workshop/scripts/build-workshop.sh
+```
+
+This will replace the existing image used by the active deployment.
+
+If you are running an existing instance of the workshop, if you want to start over with a fresh project, first delete the project used for the session.
+
+```
+oc delete project $PROJECT_NAMESPACE
+```
+
+Then select "Restart Workshop" from the menu top right of the workshop environment dashboard.
+
+When you are happy with your changes, push them back to the remote Git repository.
+
+If you need to change the RBAC definitions, or what resources are created when a project is created, change the definitions in the ``templates`` directory. You can then re-run:
+
+```
+./.workshop/scripts/deploy-spawner.sh
+```
+
+and it will update the active definitions.
+
+Note that if you do this, you will need to re-run:
+
+```
+./.workshop/scripts/build-workshop.sh
+```
+
+to have any local content changes be used once again as it will revert back to using the image on ``quay.io``.
+
+Deleting the Workshop
+---------------------
+
+To delete the spawner and any active sessions, including projects, run:
+
+```
+./.workshop/scripts/delete-spawner.sh
+```
+
+To delete the build configuration for the workshop image, run:
+
+```
+./.workshop/scripts/delete-workshop.sh
+```
+
+To delete any global resources which may have been created, run:
+
+```
+./.workshop/scripts/delete-resources.sh
+```
+
+
+Developing the content locally
+------------------------
+To build the workshop image locally using docker you would run:
+
+```bash
+docker build -t lab-sample-workshop .
+```
+
+To run the image, you would then use:
+
+```bash
+docker run --rm -p 10080:10080 lab-sample-workshop
+```
+
+You can then access the workshop environment using http://localhost:10080.
+
+If you want to be able to do iterative changes and test them without needing to rebuild the image each time, you can run:
+
+````bash
+docker run --rm -p 10080:10080 -v `pwd`:/opt/app-root/src lab-sample-workshop
+```
+
+This will mount your local Git repository directory into the container and the local files will be used. Each time you change the content of a page, refresh the web browser to view the latest version. You will only need to stop and restart the container if you make changes to the YAML configuration files or the config.js file if you are using it.

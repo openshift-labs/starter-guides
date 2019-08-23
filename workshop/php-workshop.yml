@@ -1,10 +1,6 @@
 ---
-id: php-starter-workshop
-name: Developing Php Applications on OpenShift - Starter Lab
-
-content:
-  url: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.9
-
+name: Starter labs (PHP)
+description: Developing Php Applications on OpenShift - Starter Lab
 
 modules:
   activate:

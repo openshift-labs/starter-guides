@@ -1,18 +1,14 @@
 - src: siamaksade.openshift_sonatype_nexus
-  version: ocp-3.11
+  version: 1.1.0
   name: openshift_sonatype_nexus
 
 - src: siamaksade.openshift_gogs
-  version: ocp-3.11
+  version: 1.1.0
   name: openshift_gogs
 
-#- src: siamaksade.openshift_workshopper
-#  version: ocp-3.11
-#  name: openshift_workshopper
-
-- src: siamaksade.openshift_eclipse_che
-  version: ocp-3.11
-  name: openshift_eclipse_che
+- src: git+https://github.com/openshift-homeroom/ansible-labs-deployer
+  version: 0.1.0
+  name: homeroom_labs_deployer
 
 - src: openshift_labs.workshop_deployment_tracker
   version: 1.0.1

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# This 'build' script is where you can add steps that should be run when
+# building the image for your custom workshop.
+
+# Move the workshop content to '/opt/app-root/workshop'. It could be left
+# at it's default location of '/opt/app-root/src/workshop', but by moving it,
+# it is out of view of the user doing the workshop and they aren't likely to
+# delete it by accident and break the display of the workshop content.
+
+mv workshop /opt/app-root/workshop
+
+# Also delete some of the other files from the top of the Git repository we
+# don't need for running the workshop.
+
+rm -f Dockerfile README.md LICENSE apb
+
+# mv -f code/* . && rmdir code
+
+# mkdir -p .bin && echo "export PATH=$HOME/.bin:$PATH" >> .bash_profile

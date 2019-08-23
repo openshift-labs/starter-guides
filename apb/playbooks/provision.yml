@@ -15,7 +15,5 @@
   #     openshift_user
   #     openshift_password
   #     openshift_token
-  # Output:
-  #     apps_hostname_suffix
   - role: provision-java-starter-guides
     playbook_debug: true

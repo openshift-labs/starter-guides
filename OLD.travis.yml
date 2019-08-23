@@ -10,7 +10,7 @@ env:
 - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:$PWD/apb/roles
 
 before_install:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker login quay.io -u $DOCKER_USER -p $DOCKER_PASS
 
 install:
   - pip install ansible
@@ -18,7 +18,7 @@ install:
   - ansible-playbook apb/playbooks/provision.yml --syntax-check
 
 script:
-  - cd apb && docker build -t openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT .
+  - cd apb && docker build -t quay.io/openshiftapb/starter-workshop-apb:$TRAVIS_COMMIT .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then export TAG="latest"; else export TAG=$TRAVIS_BRANCH ; fi
