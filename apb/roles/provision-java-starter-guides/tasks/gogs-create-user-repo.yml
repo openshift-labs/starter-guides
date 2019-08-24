@@ -34,5 +34,5 @@
         git config --local user.name "{{ my_user }}"
         git push -f --all {{ my_user }}
       args:
-        chdir: "{{ tmp_dir.path }}/{{ reponame }}"
+        chdir: "{{ apb_tmp_dir.path }}/{{ reponame }}"
       when: repo_result.status != 200

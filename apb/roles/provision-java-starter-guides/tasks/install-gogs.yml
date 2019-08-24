@@ -22,22 +22,22 @@
 - name: "Create local repository to push to git (Java version)"
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}.git
   args:
-    chdir: "{{ tmp_dir.path }}"
+    chdir: "{{ apb_tmp_dir.path }}"
   when: workshop_type == "java"
 - name: "Create local repository to push to git (Python version)"
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}-py.git {{ reponame }}
   args:
-    chdir: "{{ tmp_dir.path }}"
+    chdir: "{{ apb_tmp_dir.path }}"
   when: workshop_type == "python"
 - name: "Create local repository to push to git (node.js version)"
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}-js.git {{ reponame }}
   args:
-    chdir: "{{ tmp_dir.path }}"
+    chdir: "{{ apb_tmp_dir.path }}"
   when: workshop_type == "node.js"
 - name: "Create local repository to push to git (PHP version)"
   command: git clone https://github.com/openshift-roadshow/{{ reponame }}-php.git {{ reponame }}
   args:
-    chdir: "{{ tmp_dir.path }}"
+    chdir: "{{ apb_tmp_dir.path }}"
   when: workshop_type == "php"
 
 - include_tasks: gogs-create-user-repo.yml

@@ -31,13 +31,18 @@
             --hard services="{{quota_services}}"
             --dry-run -o yaml > clusterquota-{{ my_user }}.yml
       args:
-        chdir: "{{ tmp_dir.path }}"
+        chdir: "{{ apb_tmp_dir.path }}"
       tags: always
 
+# TODO: Verify what's wrong with applying this quota, in 4.x as it gives an error with UnsupportedMediaType
+#       For now, we delete the quota right before creating it
+    - name: Apply user Quota - clusterresourcequota
+      command: "oc delete clusterquota/clusterquota-{{ my_user }}"
+      tags: always
 
     - name: Apply user Quota - clusterresourcequota
       command: "oc apply -f clusterquota-{{ my_user }}.yml"
       args:
-        chdir: "{{ tmp_dir.path }}"
+        chdir: "{{ apb_tmp_dir.path }}"
       tags: always
   when: create_projects

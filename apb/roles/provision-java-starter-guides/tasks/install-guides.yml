@@ -6,6 +6,7 @@
   import_role:
     name: homeroom_labs_deployer
   vars:
+    project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
     workshop_file: "java-workshop.yml"
@@ -15,6 +16,7 @@
   import_role:
     name: homeroom_labs_deployer
   vars:
+    project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
     workshop_file: "python-workshop.yml"
@@ -24,6 +26,7 @@
   import_role:
     name: homeroom_labs_deployer
   vars:
+    project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
     workshop_file: "javascript-workshop.yml"
@@ -33,6 +36,7 @@
   import_role:
     name: homeroom_labs_deployer
   vars:
+    project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
     workshop_file: "php-workshop.yml"
@@ -46,8 +50,8 @@
   block:
     - copy:
         src: php-is.yml
-        dest: "{{ tmp_dir.path }}/php-is.yml"
+        dest: "{{ apb_tmp_dir.path }}/php-is.yml"
     - command: "oc replace -f php-is.yml -n openshift"
       args:
-        chdir: "{{ tmp_dir.path }}"
+        chdir: "{{ apb_tmp_dir.path }}"
   when: workshop_type == "php"

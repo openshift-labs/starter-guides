@@ -5,27 +5,27 @@
 - name: "Create etherpad base text file from template"
   template:
     src: etherpad.txt.j2
-    dest: "{{ tmp_dir.path }}/etherpad.txt"
+    dest: "{{ apb_tmp_dir.path }}/etherpad.txt"
 
 - set_fact:
-    etherpad_text: "{{ lookup('file', '{{ tmp_dir.path }}/etherpad.txt') | replace('\n', '\\n')}}"
+    etherpad_text: "{{ lookup('file', '{{ apb_tmp_dir.path }}/etherpad.txt') | replace('\n', '\\n')}}"
 
 - name: "Process etherpad template"
   template:
     src: etherpad.yml
-    dest: "{{ tmp_dir.path }}/etherpad.yml"
+    dest: "{{ apb_tmp_dir.path }}/etherpad.yml"
 
 - name: Add etherpad template to {{ namespace }}
-  command: "oc apply -f {{ tmp_dir.path }}/etherpad.yml -n {{ namespace }}"
+  command: "oc apply -f {{ apb_tmp_dir.path }}/etherpad.yml -n {{ namespace }}"
 
 - name: Create install etherpad resources
   shell: >
         oc new-app etherpad --name=etherpad -n {{ namespace }}
         --dry-run -o yaml > etherpad.yml
   args:
-    chdir: "{{ tmp_dir.path }}"
+    chdir: "{{ apb_tmp_dir.path }}"
 
 - name: Apply etherpad objects
   command: "oc apply -f etherpad.yml -n {{ namespace }}"
   args:
-    chdir: "{{ tmp_dir.path }}"
+    chdir: "{{ apb_tmp_dir.path }}"

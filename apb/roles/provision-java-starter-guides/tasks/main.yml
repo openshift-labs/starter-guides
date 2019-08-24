@@ -55,7 +55,7 @@
   tempfile:
     state: directory
     path: "/tmp/"
-  register: tmp_dir
+  register: apb_tmp_dir
 
 #- include_tasks: install-etherpad.yml
 #  when: '"etherpad" in features_to_install'
