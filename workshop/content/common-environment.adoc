@@ -21,7 +21,7 @@ Additionally, a predefined number of user accounts have been provisioned.
 Before continuing, please visit visit the Etherpad at the following URL:
 
 ----
-http://etherpad-{{ INFRA_PROJECT }}.%cluster_subdomain%/p/workshop
+http://etherpad-{{ INFRA_PROJECT }}.{{ cluster_subdomain }}/p/workshop
 ----
 
 Decide on a user account among one of the available users or use 
@@ -30,7 +30,7 @@ account and type your name next to it. This will be your user account for the
 duration of these exercises. For example:
 
 ----
-%username%=Luke Skywalker
+{{ username }}=Luke Skywalker
 ----
 
 If you already see a name next to a user account, it means that someone 
@@ -44,5 +44,5 @@ this is a substitution of your username or user number:
 
 [source,role=copypaste]
 ----
-some command for %username%
+some command for {{ username }}
 ----

@@ -61,3 +61,6 @@ modules:
         exit_sign: Finish Workshop
     common-workshop-links:
         name: Workshop Links
+
+config:
+    template_engine: liquid.js

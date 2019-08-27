@@ -9,7 +9,7 @@
     project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
-    workshop_file: "java-workshop.yml"
+    settings: "java"
   when: workshop_type == "java"
 
 - name: "Process guides template (for python workshop)"
@@ -19,7 +19,7 @@
     project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
-    workshop_file: "python-workshop.yml"
+    settings: "python"
   when: workshop_type == "python"
 
 - name: "Process guides template (for node.js workshop)"
@@ -29,7 +29,7 @@
     project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
-    workshop_file: "javascript-workshop.yml"
+    settings: "javascript"
   when: workshop_type == "node.js"
 
 - name: "Process guides template (for php workshop)"
@@ -39,7 +39,7 @@
     project_name: "{{ namespace }}"
     lab_repo: "{{ workshop_repo }}"
     lab_branch: "{{ workshop_branch }}"
-    workshop_file: "php-workshop.yml"
+    settings: "php"
   when: workshop_type == "php"
 
 #
