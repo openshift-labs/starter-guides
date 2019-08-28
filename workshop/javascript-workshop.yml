@@ -1,6 +1,6 @@
 ---
-name: Starter labs (Javascript)
-description: Developing Javascript Applications on OpenShift - Starter Lab
+name: Starter Labs (Node.js)
+description: Developing Node.js Applications on OpenShift - Starter Lab
 
 modules:
   activate:

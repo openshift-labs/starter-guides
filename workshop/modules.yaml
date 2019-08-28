@@ -64,3 +64,49 @@ modules:
 
 config:
     template_engine: liquid.js
+    vars:
+    ##
+    # Common fixed variables
+    # 
+    - name: DOCS_URL
+      desc: URL prefix to access docs (docs.openshift.org/latest) without the protocol prefix. (https:// will be used.)
+      value: docs.openshift.com/container-platform/latest
+    ##
+    # Module environment
+    # 
+    - name: ENV_MASTERS
+      desc: Number of master nodes in the cluster
+      value: 1
+    - name: ENV_INFRA
+      desc:  Number of ENV_INFRA nodes in the cluster
+      value: 1
+    - name: ENV_NODES
+      desc: Number of container nodes in the cluster
+      value: 20
+    ##
+    # Module installing CLI
+    # 
+    - name: DOWNLOAD_CLIENT_WINDOWS
+      desc: URL to download oc client for Windows
+      value: "https://mirror.openshift.com/pub/openshift-v3/clients/4.0.22/windows/oc.zip"
+    - name: DOWNLOAD_CLIENT_MAC
+      desc: URL to download oc client for macOS
+      value: "https://mirror.openshift.com/pub/openshift-v3/clients/4.0.22/macosx/oc.tar.gz"
+    - name: DOWNLOAD_CLIENT_LIN32
+      desc: URL to download oc client for 32bit Linux
+      value: ""
+    - name: DOWNLOAD_CLIENT_LIN64
+      desc: URL to download oc client for 64bit Linux
+      value: "https://mirror.openshift.com/pub/openshift-v3/clients/4.0.22/linux-aarch64/oc.tar.gz"
+    - name: OC_VERSION
+      desc: Expected oc version when `oc version` is executed
+      value: "Client Version: v4.1.7-201907171753+1e3cff4-dirty\nServer Version: v1.13.4+4b86cc5"
+    ##
+    # Module docker
+    # 
+    - name: PARKSMAP_IMAGENAME
+      desc: Docker image name for the parksmap application
+      value: "parksmap"
+    - name: PARKSMAP_VERSION
+      desc: Version of parksmap to use
+      value: "1.3.0"

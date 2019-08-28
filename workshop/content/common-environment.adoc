@@ -3,9 +3,9 @@ image::images/common-environment-ocp-architecture.png[OCP Architecture]
 You will be interacting with an OpenShift environment that is running on a 
 public cloud. The environment consists of the following systems:
 
-* {{ ENV_MASTERS }} master node(s)
-* {{ ENV_INFRA }} infrastructure node(s)
-* {{ ENV_NODES }} "application" nodes
+* Master node(s)
+* Infrastructure node(s)
+* Worker or "application" nodes
 * An NFS server
 
 The infrastructure node is providing several services:
@@ -14,35 +14,27 @@ The infrastructure node is providing several services:
 * This lab manual
 * The OpenShift container registry
 * The OpenShift router
-* Etherpad
 
 Additionally, a predefined number of user accounts have been provisioned.
 
-Before continuing, please visit visit the Etherpad at the following URL:
-
-----
-http://etherpad-{{ INFRA_PROJECT }}.{{ cluster_subdomain }}/p/workshop
-----
-
-Decide on a user account among one of the available users or use 
-the one that has been assigned to you by the instructor. Find that user
-account and type your name next to it. This will be your user account for the
-duration of these exercises. For example:
-
-----
-{{ username }}=Luke Skywalker
-----
-
-If you already see a name next to a user account, it means that someone 
-else has already claimed it.
-
 You will see various code and command blocks throughout these exercises. 
-Some of the command blocks can be copy/pasted directly. Others will require 
-modification of the command before execution. If you see a command block with 
-a red border (see below), the command will require modification. Typically 
-this is a substitution of your username or user number:
+Some of the command blocks can be executed directly by clicking on them.
 
-[source,role=copypaste]
+[source,bash,role=execute-1]
+----
+echo "execute in terminal 1"
+----
+
+Others will require modification of the command before execution. If you see a command block with 
+this "copy and edit" icon 
+
+image::images/common-environment-copy-and-edit-icon.png[copy and edit icon]
+
+the command will require modification. Clicking it will copy it to the clipboard. You can paste and edit it in the terminal before executing it. 
+
+Typically this is a substitution of your username or user number:
+
+[source,bash,role=copy-and-edit]
 ----
 some command for {{ username }}
 ----

@@ -84,7 +84,7 @@ happens to be the `parksmap` application - a simple Spring Boot/Java application
 
 You can also examine *Pods* from the command line:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get pods
 ----
@@ -106,7 +106,7 @@ following syntax:
 
 NOTE: Make sure you use the correct *Pod* name from your output.
 
-[source,bash,role=copypaste]
+[source,bash,role=copy-and-edit]
 ----
 oc get pod parksmap-1-gxbgq -o yaml
 ----
@@ -195,7 +195,7 @@ Now that we understand the basics of what a *Service* is, let's take a look at
 the *Service* that was created for the image that we just deployed. In order to
 view the *Services* defined in your *Project*, enter in the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get services
 ----
@@ -220,7 +220,7 @@ image::images/parksmap-serviceslist.png[Services list]
 You can also get more detailed information about a *Service* by using the
 following command to display the data in YAML:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get service parksmap -o yaml
 ----
@@ -267,7 +267,7 @@ It is also of interest to view the YAML of the *Pod* to understand how OpenShift
 wires components together. For example, run the following command to get the
 name of your `parksmap` *Pod*:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get pods
 ----
@@ -283,7 +283,7 @@ parksmap-1-gxbgq    1/1     Running     0          12m
 
 Now you can view the detailed data for your *Pod* with the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=copy-and-edit]
 ----
 oc get pod parksmap-1-gxbgq -o yaml
 ----

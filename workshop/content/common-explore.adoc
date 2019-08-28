@@ -1,28 +1,23 @@
-== Command Line
+== Command Line Interface
 
-The first thing we want to do to ensure that our `oc` command line tools was
-installed and successfully added to our path is to log in to the OpenShift
-environment that has been provided for this Workshop session. 
+OpenShift ships with a feature-rich web console as well as command line tools
+to provide users with a nice interface to work with applications deployed to the
+platform.  The OpenShift tools are a single executable written in the Go
+programming language and are available for the following operating systems:
 
-[NOTE]
-====
-In case you had trouble installing the command line tools, you can go ahead and use a hosted version running in our OpenShift cluster. Open a new browser tab and point it to:
+- Microsoft Windows
+- macOS 10
+- Linux
 
-
-[source,bash,role=copypaste]
-----
-http://terminal-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}
-----
-
-You will need to log in with your OpenShift user and click on `Allow selected permissions`. You can then continue with the workshop.
-====
+This lab environment already has the `oc` command line tool installed. Let's start by logging into 
+the OpenShift cluster that is provided for this workshop.
 
 In order to log in, we will use the `oc` command and then specify the server that we
 want to authenticate to. Issue the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
-oc login {{API_ADDRESS}}
+oc login {{ API_ADDRESS }}
 ----
 
 You may see the following output:
@@ -41,25 +36,13 @@ by OpenShift. In a real-world scenario, either OpenShift's certificate would be
 signed by a standard CA (eg: Thawte, Verisign, StartSSL, etc.) or signed by a
 corporate-standard CA that you already have installed on your system.
 
-[NOTE]
-====
-On some versions of Microsoft Windows, you may get an error that the
-server has an invalid x.509 certificate.  If you receive this error, enter in
-the following command:
-
-[source,bash]
-----
-oc login {{API_ADDRESS}} --insecure-skip-tls-verify=true
-----
-====
-
 Once you issue the `oc login` command, you will be prompted for the username and
 password combination for your user account. Use the username and password combination provided to you by the instructor of this workshop:
 
 [source,bash,role=copypaste]
 ----
-Username: %username%
-Password: {{USER_PASSWORD}}
+Username:  {{ username }}
+Password:  {{ USER_PASSWORD }}
 ----
 
 Once you have authenticated to the OpenShift server, you will see the
@@ -77,7 +60,7 @@ If you don't have any projects. You can try to create a new project, by running:
 
 [source]
 ----
-oc new-project <projectname>
+oc new-project {{ USER_PROJECT }}
 ----
 ====
 
@@ -123,7 +106,7 @@ You can do this with the following command:
 
 CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc project {{ USER_PROJECT }}
 ----
@@ -147,7 +130,7 @@ The first screen you will see is the authentication screen. You will be prompted
 
 [source,bash,role=copypaste]
 ----
-Username: %username%
+Username: {{username}}
 Password: {{USER_PASSWORD}}
 ----
 

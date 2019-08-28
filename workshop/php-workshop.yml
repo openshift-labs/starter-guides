@@ -1,6 +1,6 @@
 ---
-name: Starter labs (PHP)
-description: Developing Php Applications on OpenShift - Starter Lab
+name: Starter Labs (PHP)
+description: Developing PHP Applications on OpenShift - Starter Lab
 
 modules:
   activate:
