@@ -13,7 +13,7 @@ parameters:
   value: etherpad
 - name: ETHERPAD_IMAGE
   description: Etherpad Image to be used
-  value: "quay.io/wkulhanek/etherpad:1.6.5"
+  value: "quay.io/wkulhanek/etherpad:1.7.0"
   required: true
 - description: Username for MySQL user that will be used for accessing the database.
   displayName: MySQL Connection Username
