@@ -18,9 +18,8 @@ create a *Route*.
 
 == Exercise: Creating a Route
 
-Fortunately, creating a *Route* is a pretty straight-forward process. You simply
-`expose` the *Service* via the command line. Or, via the web console, just click
-*Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
+You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 
+create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the Administrator Console, just click *Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
 
 image::images/parksmap-route-create.png[Create Route,align="center"]
 
@@ -28,7 +27,7 @@ When creating a *Route*, some other options can be provided, like the hostname f
 
 When using the command line, we can first verify that we don't already have any existing *Routes*:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get routes
 ----
@@ -40,7 +39,7 @@ No resources found.
 
 Now we need to get the *Service* name to expose:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get services
 ----
@@ -53,7 +52,7 @@ parksmap   172.30.169.213   <none>        8080/TCP   5h
 
 Once we know the *Service* name, creating a *Route* is a simple one-command task:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc expose service parksmap
 ----
@@ -65,7 +64,7 @@ route.route.openshift.io/parksmap exposed
 
 Verify the *Route* was created with the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get route
 ----
@@ -73,14 +72,14 @@ oc get route
 [source,bash]
 ----
 NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
-parksmap   parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}             parksmap   8080-tcp
+parksmap   parksmap-{{project_namespace}}.{{cluster_subdomain}}             parksmap   8080-tcp
 ----
 
-You can also verify the *Route* by looking at the project in the OpenShift web console under *Networking -> Routes*:
+You can also verify the *Route* in the Developer Console under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
 
 image::images/parksmap-route-created.png[Route created]
 
-Pretty nifty, huh?  This application is now available at the URL shown in the
-web console. Click the link and you will see:
+This application is now available at the URL shown in the Developer Console. Click the link and you will see:
 
 image::images/parksmap-route-empty-map.png[Empty map]
+

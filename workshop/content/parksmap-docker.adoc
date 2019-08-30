@@ -10,9 +10,7 @@ With OpenShift it can be done directly from the web console.
 
 Return to the web console:
 
-*link:{{ CONSOLE_URL }}[]*
-
-CAUTION: In the following steps, replace `{{ USER_PROJECT }}` with the project provided to you.
+link:{{console_url}}[Web Console]
 
 In the *Administrator* view, click *Projects* in the left navigation if it isn't already selected. Find your *{{ USER_PROJECT }}* project and click it. 
 
@@ -52,6 +50,7 @@ We will add 3 labels:
 - *__component__=parksmap*  (the name of this deployment)
 - *__role__=frontend* (the role this component plays in the overall application)
 
+Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
 image::images/parksmap-image-options.png[Explore Project]
 
