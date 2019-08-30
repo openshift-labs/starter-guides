@@ -10,17 +10,25 @@ With OpenShift it can be done directly from the web console.
 
 Return to the web console:
 
-*link:{{CONSOLE_ADDRESS}}[]*
+*link:{{ CONSOLE_URL }}[]*
 
 CAUTION: In the following steps, replace `{{ USER_PROJECT }}` with the project provided to you.
 
-Find your *{{ USER_PROJECT }}* project and click it. On the next page, click *Add* and a drop down menu will appear. There are several options, but we are only concerned with *Deploy Image*. Click *Deploy Image* in the *Add* drop down.  
+In the *Administrator* view, click *Projects* in the left navigation if it isn't already selected. Find your *{{ USER_PROJECT }}* project and click it. 
 
-image::images/parksmap-add-to-project-dialog.png[Add to Project]
+image::images/parksmap-administrator-projects.png[Select Project]
 
-This will open a dialog that will allow you to specify the information for the image you want to deploy. In the *Image Name* field, copy/paste the following into the box:
+On the next page, you'll see some details about the resources in your project. Since the project is currently empty, there isn't much to see here for now. Click *Administrator* to switch to the *Developer* console.
 
-[source]
+image::images/parksmap-administrator-project-details.png[Project Details]
+
+This will take you to the *Topology* view in the Developer Console. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.  
+
+image::images/parksmap-devconsole-container-image.png[Add from Container Image]
+
+In the *Image Name* field, copy/paste the following into the box:
+
+[source,role=copypaste]
 ----
 docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 ----
@@ -31,21 +39,33 @@ image::images/parksmap-image.png[Explore Project]
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
 out to the container registry specified and interrogate the image. You then are
-presented with some options to add environment variables -- which we will learn about later.
+presented with some options to add labels, scaling, etc. -- which we will learn about later.
 
 
-Make sure to have the correct application name:
+Make sure to have the correct values in the *Application Name* and *Name* fields. 
+
+At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
+
+We will add 3 labels:
+
+- *__app__=workshop*  (the name we will be giving to the app)
+- *__component__=parksmap*  (the name of this deployment)
+- *__role__=frontend* (the role this component plays in the overall application)
+
 
 image::images/parksmap-image-options.png[Explore Project]
 
-Next, click the blue *Deploy* button. You will be directed to the Project Status page, 
-where you should see the entry for the `parksmap` deployment config. 
+Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.
+
+image::images/parksmap-dc-topology.png[Topology View with Parksmap]
 
 These few steps are the only ones you need to run to get a
 container image deployed on OpenShift. This should work with any
 container image that follows best practices, such as defining an EXPOSE
-port, not needing to run specifically as the *root user* or other user name, and
-a single non-exiting CMD to execute on start. 
+port, not needing to run specifically as the *root user* or other user name, and a single non-exiting CMD to execute on start. 
+
+NOTE: Providing appropriate labels is desired when deploying complex applications for organization purposes. OpenShift uses a label *app* to define and group components together in the Overview page. OpenShift will create this label with some default if the user doesn't provide it explicitly.
+
 
 == Background: Containers and Pods
 
@@ -69,13 +89,11 @@ server, a log analyzer, and a file service to help manage uploaded files.
 
 == Exercise: Examining the Pod
 
-In the web console's project status page you will see that there is a single *Pod* that
-was created by your actions. 
+If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. On that panel, you will see that there is a single *Pod* that was created by your actions. 
 
 image::images/parksmap-overview.png[Pod overview]
 
-You can also get a list of all the *Pods* created within your *Project*, by navigating to 
-*Workloads -> Pods*
+You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the *Administrator* console.
 
 image::images/parksmap-podlist.png[Pod list]
 
@@ -147,7 +165,9 @@ metadata:
 
 The web interface also shows a lot of the same information on the *Pod* details
 page. If you click on the name of the *Pod*, you will
-find the details page. You can also get there by clicking *Workloads -> Pods* and then clicking the *Pod* name.
+find the details page. You can also get there by clicking on the `parksmap` deployment config on the Topology page, selecting Resources, and then clicking the *Pod* name.
+
+image::images/parksmap-dc-resources.png[Parksmap Resources]
 
 image::images/parksmap-pod.png[Pod list]
 
@@ -163,7 +183,7 @@ Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Do
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://{{DOCS_URL}}/dev_guide/application_lifecycle/new_app.html#specifying-an-image[specifying an image]
+https://{{DOCS_URL}}/applications/application-life-cycle-management/creating-new-applications.html#applications-create-using-cli-image-creating-new-applications[specifying an image]
 as well as
 https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy[image pull policy].
 
@@ -188,7 +208,7 @@ The way that a *Service* maps to a set of *Pods* is via a system of *Labels* and
 protocols can be mapped.
 
 There is a lot more information about
-https://{{DOCS_URL}}/architecture/core_concepts/pods_and_services.html#services[Services],
+https://{{DOCS_URL}}/architecture/understanding-development.html#understanding-kubernetes-pods[Services],
 including the YAML format to make one by hand, in the official documentation.
 
 Now that we understand the basics of what a *Service* is, let's take a look at
@@ -205,15 +225,15 @@ You should see output similar to the following:
 [source,bash]
 ----
 NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-parksmap   ClusterIP   172.30.169.213  <none>        8080/TCP   3h
+parksmap   ClusterIP   172.30.22.209  <none>        8080/TCP   3h
 ----
 
 In the above output, we can see that we have a *Service* named `parksmap` with an
-IP/Port combination of 172.30.169.213/8080TCP. Your IP address may be different, as
+IP/Port combination of 172.30.22.209/8080TCP. Your IP address may be different, as
 each *Service* receives a unique IP address upon creation. *Service* IPs are
 fixed and never change for the life of the *Service*.
 
-In the web console, service information is available by clicking *Networking -> Services*.
+In the Developer Console from the Topology view, service information is available by clicking the `parksmap` deployment config, then *Resources*, and then you should see the `parksmap` entry in the *Services* section.
 
 image::images/parksmap-serviceslist.png[Services list]
 
@@ -234,22 +254,28 @@ kind: Service
 metadata:
   annotations:
     openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: 2019-05-20T17:45:36Z
+  creationTimestamp: "2019-08-30T14:10:12Z"
   labels:
-    app: parksmap
+    app: workshop
+    app.kubernetes.io/component: parksmap
+    app.kubernetes.io/instance: parksmap
+    app.kubernetes.io/part-of: workshop
+    component: parksmap
+    role: frontend
   name: parksmap
-  namespace: user2
-  resourceVersion: "5539180"
-  selfLink: /api/v1/namespaces/user2/services/parksmap
-  uid: 12f10c9a-7b27-11e9-853e-0a3e73a24f9c
+  namespace: lab-getting-started-starter-workshop-apb-test-user1
+  resourceVersion: "1062269"
+  selfLink: /api/v1/namespaces/lab-getting-started-starter-workshop-apb-test-user1/services/parksmap
+  uid: e1ff69c8-cb2f-11e9-82a1-0267eec7e1a0
 spec:
-  clusterIP: 172.30.250.179
+  clusterIP: 172.30.22.209
   ports:
   - name: 8080-tcp
     port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
+    app: parksmap
     deploymentconfig: parksmap
   sessionAffinity: None
   type: ClusterIP
@@ -259,7 +285,7 @@ status:
 
 Take note of the `selector` stanza. Remember it.
 
-Alternatively, you can use the web console to view information about the *Service*.
+Alternatively, you can use the web console to view information about the *Service* by clicking on it from the previous screen.
 
 image::images/parksmap-service.png[Service]
 
@@ -308,7 +334,7 @@ Under the `metadata` section you should see the following:
 matches the *Selector* will be associated with the *Service*. To see this in
 action, issue the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc describe service parksmap
 ----
@@ -318,15 +344,20 @@ You should see something like the following output:
 [source,bash]
 ----
 Name:              parksmap
-Namespace:         {{ USER_PROJECT }}
-Labels:            app=parksmap
+Namespace:         lab-getting-started-starter-workshop-apb-test-user1
+Labels:            app=workshop
+                   app.kubernetes.io/component=parksmap
+                   app.kubernetes.io/instance=parksmap
+                   app.kubernetes.io/part-of=workshop
+                   component=parksmap
+                   role=frontend
 Annotations:       openshift.io/generated-by: OpenShiftWebConsole
-Selector:          deploymentconfig=parksmap
+Selector:          app=parksmap,deploymentconfig=parksmap
 Type:              ClusterIP
-IP:                172.30.250.179
+IP:                172.30.22.209
 Port:              8080-tcp  8080/TCP
 TargetPort:        8080/TCP
-Endpoints:         10.130.2.68:8080
+Endpoints:         10.128.2.90:8080
 Session Affinity:  None
 Events:            <none>
 ----
