@@ -5,34 +5,31 @@ You can find all urls, hostnames, usernames and passwords that are needed during
 Console Address: {{CONSOLE_ADDRESS}} +
 API Address: {{API_ADDRESS}} +
 
-Username: `%username%` + 
+Username: `{{ username}}` + 
 Password: `{{ USER_PASSWORD }}` +
 
 
 
 == Workshop Guides
 
-Web: http://starter-guides-{{ INFRA_PROJECT }}.%cluster_subdomain%
+Web: http://starter-guides-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
 
-== Etherpad
-
-Web: http://etherpad-{{ INFRA_PROJECT }}.%cluster_subdomain%/p/workshop
 
 == Web terminal
 
-Web: http://terminal-{{ INFRA_PROJECT }}.%cluster_subdomain%
+Web: http://terminal-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
 
 == Git Server
 
-Web: http://gogs-{{ INFRA_PROJECT }}.%cluster_subdomain%
+Web: http://gogs-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
 
-Username: `%username%` + 
+Username: `{{username}}` + 
 Password: `{{ USER_PASSWORD }}` + 
 
 == Nexus Maven repository
 
-Web: http://nexus-{{ INFRA_PROJECT }}.%cluster_subdomain%
+Web: http://nexus-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
 
 == OpenShift Ops View
 
-Web: http://ocp-ops-view-{{ INFRA_PROJECT }}.%cluster_subdomain%
+Web: http://ocp-ops-view-{{ INFRA_PROJECT }}.{{cluster_subdomain}}

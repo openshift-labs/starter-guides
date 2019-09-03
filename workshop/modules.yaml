@@ -83,6 +83,10 @@ config:
     - name: ENV_NODES
       desc: Number of container nodes in the cluster
       value: 20
+    - name: INFRA_PROJECT
+      value: undefined
+      aliases:
+      - JUPYTERHUB_NAMESPACE
     ##
     # Module installing CLI
     # 
