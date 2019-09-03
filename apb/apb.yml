@@ -42,7 +42,7 @@ plans:
       display_group: OpenShift User
     - name: workshop_type
       title: Workshop type
-      description: Type of workshop to deliver (Java, Python, node.js)
+      description: Type of workshop to deliver (Java, Python, Node.js, PHP)
       type: enum
       enum: ['java', 'python', 'node.js', 'php']
       required: true

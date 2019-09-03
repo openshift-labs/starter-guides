@@ -8,7 +8,7 @@ OpenShift is constructed in such a way that it expects containers to log all
 information to `STDOUT`. In this way, both regular and error information is
 captured via standardized Docker mechanisms. When exploring the *Pod*'s logs
 directly, you are essentially going through the Docker daemon to access the
-container's logs, through OpenShift's API. Neat!
+container's logs, through OpenShift's API.
 
 [NOTE]
 ====
@@ -25,9 +25,11 @@ various log information to various files, fear not.
 == Exercise: Examining Logs
 
 Since we already deployed our application, we can take some time to examine its
-logs. In the web console, click on *Workloads -> Pods* then click on the running pod and then the  `Logs` tab.
+logs. In the Developer Console, from Topology view, click the `parksmap` entry and then the *Resources* tab. You should see a *View Logs* link next to the *Pod* entry.
 
-You should see a nice view of the *Pod*'s logs:
+image::images/parksmap-view-logs-link.png[View Logs for Pod]
+
+Click the *View Logs* link and you should see a nice view of the *Pod*'s logs:
 
 image::images/parksmap-logging-console-logs.png[Application Logs]
 
@@ -36,7 +38,7 @@ WARNING: If you notice some errors in the log, that's okay. We'll remedy those i
 You also have the option of viewing logs from the command line. Get the name of
 your *Pod*:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get pods
 ----
@@ -49,7 +51,7 @@ parksmap-1-hx0kv   1/1       Running   0          5h
 
 And then use the `logs` command to view this *Pod*'s logs:
 
-[source,bash,role=copypaste]
+[source,bash,role=copy-and-edit]
 ----
 oc logs parksmap-1-hx0kv
 ----

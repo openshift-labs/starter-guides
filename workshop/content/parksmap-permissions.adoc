@@ -11,7 +11,7 @@ The **default** service account is the one taking the responsibility of running 
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
-You can view current permissions in the web UI, by navigating to *Workloads -> Deployment Configs* page. From there, click on the *Namespace*.
+You can view current permissions in the web console, go to the Topology view in the Developer Console, click the `parksmap` entry, and then click the *Namespace*. 
 
 image::images/parksmap-permissions-namespace.png[Namespace]
 
@@ -23,16 +23,16 @@ image::images/parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
-CAUTION: In the following command(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following command(s), replace `{{ project_namespace }}` with the project provided to you.
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
-oc project {{ USER_PROJECT }}
+oc project {{ project_namespace }}
 ----
 
 Then:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc policy add-role-to-user view -z default
 ----
@@ -47,7 +47,7 @@ we are using a special flag, `-z`. What does this flag do? From the `-h` output:
 
 The `-z` syntax is a special one that saves us from having to type out the
 entire string, which, in this case, is
-`system:serviceaccount:{{ USER_PROJECT }}:default`. It's a nifty shortcut.
+`system:serviceaccount:{{ project_namespace }}:default`. It's a nifty shortcut.
 
 [NOTE]
 ====
@@ -62,7 +62,7 @@ Another way you could have done the same is by using the OpenShift console. Once
 
 image::images/parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 
-Select *Namespace Role Binding* for the Binding Type, *view* for the Role Binding Name *{{ USER_PROJECT }}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{{ USER_PROJECT }}* for the Subject Namespace, and *default* for the Subject Name.
+Select *view* for the Role Binding Name *{{ project_namespace }}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{{ project_namespace }}* for the Subject Namespace, and *default* for the Subject Name.
 
 image::images/parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
 
@@ -74,16 +74,11 @@ image::images/parksmap-permissions-membership-serviceaccount-done.png[Service ac
 One more step is required. We need to re-deploy the `parksmap` application because it's
 given up trying to query the API.
 
-This time we'll use the web console. Click *Workloads -> Deployment Configs*. You'll see your only
-application, `parksmap`, listed. Click that.
-
-The deployment screen tells you a lot about how the application will be
-deployed. At the top right, there is a dropdown menu labeled *Actions*. Click that and select *Start Rollout* (which you know creates a new *ReplicationController*, right?).
+This time we'll use the web console. In the Developer Console, in Topology view, click the `parksmap` entry. Then, in the *Actions* dropdown menu, select *Start Rollout*.
 
 image::images/parksmap-permissions-start-rollout.png[Start rollout]
 
-A new deployment is immediately started. Return to *Home -> Status*
-page and watch it happen. You might not be fast enough! But it will be reflected in the number next to the deployment config.
+A new deployment is immediately started. Return to Topology view and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *Latest Version* number.
 
 image::images/parksmap-permissions-redeployed.png[Application deployed]
 
@@ -96,7 +91,7 @@ access to your project using the following command:
 
 CAUTION: In the following command(s), replace `{{ USER_PROJECT }}` with the user name of the person to whom you want to grant access.
 
-[source,bash,role=copypaste]
+[source,bash,role=copy-and-edit]
 ----
 oc policy add-role-to-user view {{ USER_PROJECT }}
 ----

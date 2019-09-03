@@ -11,7 +11,7 @@ need to run an SSH service inside each container. In order to establish an
 interactive session inside a container, you can use the `oc rsh` command. First
 get the list of available pods:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get pods
 ----
@@ -28,7 +28,7 @@ parksmap-2-mcjsw    1/1     Running     0          172m
 
 Now you can establish a remote shell session into the pod by using the pod name:
 
-[source,bash,role=copypaste]
+[source,bash,role=copy-and-edit]
 ----
 oc rsh parksmap-2-mcjsw
 ----
@@ -49,7 +49,7 @@ can be specified after the pod name in the issued command.
 
 Run the following command to list the files in the top folder:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 ls /
 ----
@@ -63,9 +63,9 @@ anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt 
 
 The OpenShift Web Console also provides a convenient way to access a terminal session on the container without having to use the CLI.
 
-In order to access a pods terminal via the Web Console, click on *Workloads -> Pods* and finally the pod name as shown in the following image:
+In order to access a pod's terminal via the Web Console, go to the Topology view in the Developer Console, click the `parksmap` entry, and then click on the *Pod*. 
 
-image::images/parksmap-rsh-applications-pods.png[Pod List]
+image::images/parksmap-rsh-dev-console-pod.png[Pod in Dev Console]
 
 Once you are viewing the information for the selected pod, click on the *Terminal* tab to open up a shell session.
 
@@ -76,7 +76,7 @@ Go ahead and execute the same commands you did when using the CLI to see how the
 
 Before proceeding, close the connection to the pod.
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 exit
 ----
@@ -90,7 +90,7 @@ the executable path.
 
 In order to show just the JAR file, run the following:
 
-[source,bash,role=copypaste]
+[source,bash,role=copy-and-edit]
 ----
 oc exec parksmap-2-mcjsw -- ls -l /parksmap.jar
 ----
@@ -99,7 +99,7 @@ You would see something like the following:
 
 [source,bash]
 ----
--rw-r--r--. 1 root root 21753918 Nov 23 15:54 /parksmap.jar
+-rw-r--r--. 1 root root 39138901 Apr  1 16:54 /parksmap.jar
 ----
 
 
@@ -112,7 +112,7 @@ end and where the actual command to execute begins. Take a look at `oc exec
 
 You can also specify the shell commands to run directly with the *oc rsh* command:
 
-[source,bash,role=copypaste]
+[source,bash,role=copy-and-edit]
 ----
 oc rsh parksmap-2-mcjsw whoami
 ----
@@ -121,8 +121,7 @@ You would see something like:
 
 [source,bash]
 ----
-whoami: cannot find name for user ID 1000060000
-command terminated with exit code 1
+1000580000
 ----
 
 [NOTE]
@@ -133,8 +132,6 @@ when OpenShift launches a container its user is actually randomized.
 If you want or need to allow OpenShift users to deploy container images that do
 expect to run as root (or any specific user), a small configuration change is
 needed. You can learn more about the
-https://{{DOCS_URL}}/creating_images/guidelines.html[container image guidelines]
-for OpenShift, or you can look at the section on
-https://{{DOCS_URL}}/admin_guide/manage_scc.html#enable-images-to-run-with-user-in-the-dockerfile[enabling
-images to run with a USER in the Dockerfile].
+https://{{DOCS_URL}}/openshift_images/create-images.html#images-create-guide-general_create-images[container image guidelines]
+for OpenShift.
 ====
