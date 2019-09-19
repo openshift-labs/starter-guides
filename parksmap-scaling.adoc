@@ -30,7 +30,7 @@ or a *Service*, and others, so feel free to ask us about them after the labs.
 
 == Exercise: Exploring Deployment-related Objects
 
-Now that we know the background of what a *ReplicatonController* and
+Now that we know the background of what a *ReplicationController* and
 *DeploymentConfig* are, we can explore how they work and are related. Take a
 look at the *DeploymentConfig* (DC) that was created for you when you told
 OpenShift to stand up the `parksmap` image:

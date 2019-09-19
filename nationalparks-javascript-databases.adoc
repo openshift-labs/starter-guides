@@ -235,9 +235,11 @@ In the case of the parks map, the application is actually querying the OpenShift
 API and asking about the *Routes* and *Services* in the project. If any of them have a
 *Label* that is `type=parksmap-backend`, the application knows to interrogate
 the endpoints to look for map data.
-You can see the code that does this
-link:https://github.com/openshift-roadshow/parksmap-web/blob/{{PARKSMAP_VERSION}}/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20[here].
-
+You can see the code that does this here:
+[source,bash,role=copypaste]
+----
+https://github.com/openshift-roadshow/parksmap-web/blob/{{PARKSMAP_VERSION}}/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20
+----
 
 Fortunately, the command line provides a convenient way for us to manipulate
 labels. `describe` the `nationalparks` service:

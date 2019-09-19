@@ -71,7 +71,7 @@ hand corner as shown here:
 
 image::nationalparks-codechanges-gogs-javascript-change-code.png[Webhook]
 
-Change line number 17:
+Change line number 18:
 
 [source,javascript]
 ----
