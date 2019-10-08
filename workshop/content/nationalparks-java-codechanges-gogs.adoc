@@ -8,7 +8,7 @@ hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
 == Exercise: Configuring Gogs Web Hooks
-In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ USER_PROJECT }}` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
+In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ project_namespace  }}` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
 
 On this screen you will see the option to copy the generic webhook URL as shown in the following image:
 
@@ -109,11 +109,11 @@ nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago
 Once the build and deploy has finished, verify your new image was
 automatically deployed by viewing the application in your browser:
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
 ----
 
 You should now see the new name you have set in the JSON string returned.
@@ -165,11 +165,11 @@ Warning: the following images triggers were disabled: nationalparks:live
 Once the deploy is complete, verify that the page header is reverted to the
 original header by viewing the application in your browser.
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
 ----
 
 [NOTE]

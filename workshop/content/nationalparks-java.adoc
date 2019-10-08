@@ -79,9 +79,9 @@ Similar to how we used "Add to project" before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple Java S2I image.
 
-CAUTION: In the following step(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following step(s), replace `{{ project_namespace  }}` with the project provided to you.
 
-In the OpenShift web console, find your `{{ USER_PROJECT }}` project, and then
+In the OpenShift web console, find your `{{ project_namespace  }}` project, and then
 click the *Add* button and then the *Browse Catalog* link as highlighted in the following image:
 
 image::images/nationalparks-show-catalog.png[Add to Project]
@@ -181,17 +181,17 @@ Where you should see something like the following:
 [source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}             nationalparks   8080-tcp
-parksmap        parksmap-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}                  parksmap        8080-tcp
+nationalparks   nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}             nationalparks   8080-tcp
+parksmap        parksmap-{{ project_namespace  }}.{{ROUTER_ADDRESS}}                  parksmap        8080-tcp
 ----
 
 In the above example, the URL is:
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}
+http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}
 ----
 
 Since this is a backend application, it doesn't actually have a web interface.
@@ -199,11 +199,11 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
 
-CAUTION: In the following url(s), replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ USER_PROJECT }}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
 ----
 
 WARNING: The trailing slash is *required*.

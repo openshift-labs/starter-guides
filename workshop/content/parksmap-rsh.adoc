@@ -63,7 +63,7 @@ anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt 
 
 The OpenShift Web Console also provides a convenient way to access a terminal session on the container without having to use the CLI.
 
-In order to access a pod's terminal via the Web Console, go to the Topology view in the Developer Console, click the `parksmap` entry, and then click on the *Pod*. 
+In order to access a pod's terminal via the Web Console, go to the Topology view in the Developer Perspective, click the `parksmap` entry, and then click on the *Pod*. 
 
 image::images/parksmap-rsh-dev-console-pod.png[Pod in Dev Console]
 

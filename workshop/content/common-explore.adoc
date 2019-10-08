@@ -51,7 +51,7 @@ following confirmation message:
 [source]
 ----
 Login successful.
-Using project "{{ USER_PROJECT }}".
+Using project "{{ project_namespace  }}".
 ----
 
 [TIP]
@@ -60,7 +60,7 @@ If you don't have any projects. You can try to create a new project, by running:
 
 [source]
 ----
-oc new-project {{ USER_PROJECT }}
+oc new-project {{ project_namespace  }}
 ----
 ====
 
@@ -84,38 +84,38 @@ things in the environment are working as expected.  Don't worry if you don't
 understand all of the terminology as we will cover it in detail in later labs.
 
 If you didn't have a project already created for you, the first thing we want 
-to do is create the *{{ USER_PROJECT }}* project. You can do this with the following command:
+to do is create the *{{ project_namespace  }}* project. You can do this with the following command:
 
-CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following command, replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
-oc new-project {{ USER_PROJECT }}
+oc new-project {{ project_namespace  }}
 ----
 
 You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "{{ USER_PROJECT }}" on server "{{API_ADDRESS}}".
+Now using project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
 ----
 
 If you had multiple projects, the first thing you would want to do is to switch 
-to the *{{ USER_PROJECT }}* project to make sure you're on the correct project from now on. 
+to the *{{ project_namespace  }}* project to make sure you're on the correct project from now on. 
 You can do this with the following command:
 
-CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
+CAUTION: In the following command, replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=execute-1]
 ----
-oc project {{ USER_PROJECT }}
+oc project {{ project_namespace  }}
 ----
 
 You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "{{ USER_PROJECT }}" on server "{{API_ADDRESS}}".
+Now using project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
 ----
 
 == The Web Console
@@ -140,8 +140,8 @@ After you have authenticated to the web console, you will be presented with the 
 
 image::images/explore-webconsole1sc.png[Web Console]
 
-Click on the *{{ USER_PROJECT }}* project link. When you click on the
-*{{ USER_PROJECT }}* project, you will be taken to the project status page, 
+Click on the *{{ project_namespace  }}* project link. When you click on the
+*{{ project_namespace  }}* project, you will be taken to the project status page, 
 which will list all of the resources that you have running as part of your project. There's nothing there now, but that's about to change.
 
 image::images/explore-webconsole2.png[Explore Project]

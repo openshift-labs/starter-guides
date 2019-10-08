@@ -82,7 +82,7 @@ the `scale` command. You could also do this by incrementing the Desired Count in
 oc scale --replicas=2 dc/parksmap
 ----
 
-You can also scale up to two pods in the Developer Console. From the Topology view, first click the `parksmap` deployment config and select the *Overview* tab:
+You can also scale up to two pods in the Developer Perspective. From the Topology view, first click the `parksmap` deployment config and select the *Overview* tab:
 
 image::images/parksmap-scaleup.png[Scaling]
 
@@ -169,7 +169,7 @@ Your IP addresses will likely be different, as each pod receives a unique IP
 within the OpenShift environment. The endpoint list is a quick way to see how
 many pods are behind a service.
 
-You can also see that both *Pods* are running in the Developer Console:
+You can also see that both *Pods* are running in the Developer Perspective:
 
 image::images/parksmap-scaled.png[Scaling]
 

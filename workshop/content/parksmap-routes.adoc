@@ -19,7 +19,7 @@ create a *Route*.
 == Exercise: Creating a Route
 
 You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 
-create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the Administrator Console, just click *Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
+create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the Administrator Perspective, just click *Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
 
 image::images/parksmap-route-create.png[Create Route,align="center"]
 
@@ -75,11 +75,11 @@ NAME       HOST/PORT                            PATH      SERVICES   PORT       
 parksmap   parksmap-{{project_namespace}}.{{cluster_subdomain}}             parksmap   8080-tcp
 ----
 
-You can also verify the *Route* in the Developer Console under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
+You can also verify the *Route* in the Developer Perspective under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
 
 image::images/parksmap-route-created.png[Route created]
 
-This application is now available at the URL shown in the Developer Console. Click the link and you will see:
+This application is now available at the URL shown in the Developer Perspective. Click the link and you will see:
 
 image::images/parksmap-route-empty-map.png[Empty map]
 
