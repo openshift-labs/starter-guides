@@ -14,8 +14,5 @@ mv workshop /opt/app-root/workshop
 # don't need for running the workshop.
 
 rm -f Dockerfile README.md LICENSE 
+
 rm -rf apb
-
-# mv -f code/* . && rmdir code
-
-# mkdir -p .bin && echo "export PATH=$HOME/.bin:$PATH" >> .bash_profile
