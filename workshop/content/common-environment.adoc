@@ -15,6 +15,6 @@ The infrastructure node is providing several services:
 * The OpenShift container registry
 * The OpenShift router
 
-You will have your own user account in the OpenShift environment. Your user name is ``{{username}}``.
+You will have your own user account in the OpenShift environment. Your user name is **{{username}}**.
 
-You will also have a dedicated project namespace to work in. The name of your project namespace is ``{{project_namespace}}``.
+You will also have a dedicated project namespace to work in. The name of your project namespace is **{{project_namespace}}**.
