@@ -4,6 +4,7 @@ description: Developing Node.js Applications on OpenShift - Starter Lab
 
 modules:
   activate:
+  - common-workshop-summary
   - common-environment
   - common-parksmap-architecture
 #  - common-cli

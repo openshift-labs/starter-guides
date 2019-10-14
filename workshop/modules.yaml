@@ -1,4 +1,7 @@
 modules:
+    common-workshop-summary:
+        name: Workshop Summary
+        exit_sign: Environment Overview
     common-environment:
         name: Environment Overview
         exit_sign: Start Workshop
@@ -67,13 +70,13 @@ config:
     vars:
     ##
     # Common fixed variables
-    # 
+    #
     - name: DOCS_URL
       desc: URL prefix to access docs (docs.openshift.org/latest) without the protocol prefix. (https:// will be used.)
       value: docs.openshift.com/container-platform/latest
     ##
     # Module environment
-    # 
+    #
     - name: ENV_MASTERS
       desc: Number of master nodes in the cluster
       value: 1
@@ -89,7 +92,7 @@ config:
       - JUPYTERHUB_NAMESPACE
     ##
     # Module installing CLI
-    # 
+    #
     - name: DOWNLOAD_CLIENT_WINDOWS
       desc: URL to download oc client for Windows
       value: "https://mirror.openshift.com/pub/openshift-v3/clients/4.0.22/windows/oc.zip"
@@ -107,7 +110,7 @@ config:
       value: "Client Version: v4.1.7-201907171753+1e3cff4-dirty\nServer Version: v1.13.4+4b86cc5"
     ##
     # Module docker
-    # 
+    #
     - name: PARKSMAP_IMAGENAME
       desc: Docker image name for the parksmap application
       value: "parksmap"
