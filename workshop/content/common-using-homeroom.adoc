@@ -57,7 +57,7 @@ How to paste a value into the terminals will depend on the operating system and 
 
 If at any time a glitch occurs and the workshop content does not display properly because of a network issue, and so an error is displayed, or it shows as a white page, select the dropdown hamburger menu top right in the banner above the terminals and select "Reload Workshop". That menu item will reload just the workshop content and leave you on the same page.
 
-Similarly, if the terminals stop working or show as closed, select "Reload Terminal" from the dropdown hamburger menu.
+Similarly, if the terminals stop working or show as closed, select "Reload Terminal" from the dropdown hamburger menu. And if the embedded web console has connection issues, select "Reload Console".
 
 Do not use the ability of the browser to reload the whole browser page as you will loose where you were up to in the workshop content. Also do not use the "Restart Session" menu item unless specifically directed to as you will loose all your work.
 
