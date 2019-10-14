@@ -33,8 +33,8 @@ understand all of the terminology as we will cover it in detail in later labs.
 
 In this lab environment, you already have access to single project: *{{ project_namespace  }}*.
 
-If you had multiple projects, the first thing you would want to do is to switch 
-to the *{{ project_namespace  }}* project to make sure you're on the correct project from now on. 
+If you had multiple projects, the first thing you would want to do is to switch
+to the *{{ project_namespace  }}* project to make sure you're on the correct project from now on.
 You can do this with the following command:
 
 [source,bash,role=execute-1]
@@ -52,17 +52,16 @@ Now using project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
 == The Web Console
 
 OpenShift ships with a web-based console that will allow users to
-perform various tasks via a browser.  To get a feel for how the web console
-works, open your browser and go to the following URL:
+perform various tasks via a browser. In the Homeroom environment, the web console is embedded within the dashboard you are using to access the workshop.
 
-link:{{console_url}}[Web Console]
+To get a feel for how the web console works, switch to the web console by clicking on the **Console** tab or click here on this link:{{console_url}}[Web Console] +++<span class="fas fa-window-restore"></span>+++ link.
 
 The first time you access the web console, you will most likely be in the Administrator perspective. You will be presented with the list of Projects that you can access, and you will see something that looks like the following image:
 
 image::images/explore-webconsole1sc.png[Web Console]
 
 Click on the *{{ project_namespace  }}* project link. When you click on the
-*{{ project_namespace  }}* project, you will be taken to the project details page, 
+*{{ project_namespace  }}* project, you will be taken to the project details page,
 which will list some metrics and details about your project. There's nothing there now, but that will change as you progress through the lab.
 
 image::images/explore-webconsole2.png[Explore Project]

@@ -8,40 +8,53 @@ Let's start by doing the simplest thing possible - get a plain old
 Docker-formatted image to run on OpenShift. This is incredibly simple to do.
 With OpenShift it can be done directly from the web console.
 
-Return to the web console:
+Return to the link:{{console_url}}/topology/ns/{{project_namespace}}[Web Console] +++<span class="fas fa-window-restore"></span>+++.
 
-link:{{console_url}}[Web Console]
-
-If you're no longer on the *Topology* view in the Developer perspective, return there now. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.  
+If you're no longer on the *Topology* view in the Developer perspective, return there now. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
 
 image::images/parksmap-devconsole-container-image.png[Add from Container Image]
 
 In the *Image Name* field, copy/paste the following into the box:
 
-[source,role=copypaste]
+[source,role=copy]
 ----
 docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 ----
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
-out to the container registry specified and interrogate the image. 
+out to the container registry specified and interrogate the image.
 
 Your screen will end up looking something like this:
 
 image::images/parksmap-image.png[Explore Project]
 
 
-Make sure to have the correct values in the *Application Name* and *Name* fields. 
+Make sure to have the correct values in the *Application Name* and *Name* fields.
 
 image::images/parksmap-image-options.png[Explore Project]
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
-We will add 3 labels:
+We will add 3 labels. First the name to be given to the application.
 
-- *__app__=workshop*  (the name we will be giving to the app)
-- *__component__=parksmap*  (the name of this deployment)
-- *__role__=frontend* (the role this component plays in the overall application)
+[source,role=copy]
+----
+app=workshop
+----
+
+Next the name of this deployment.
+
+[source,role=copy]
+----
+component=parksmap
+----
+
+And finally, the role this component plays in the overall application.
+
+[source,role=copy]
+----
+role=frontend
+----
 
 Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
@@ -53,7 +66,7 @@ image::images/parksmap-dc-topology.png[Topology View with Parksmap]
 These few steps are the only ones you need to run to get a
 container image deployed on OpenShift. This should work with any
 container image that follows best practices, such as defining an EXPOSE
-port, not needing to run specifically as the *root user* or other user name, and a single non-exiting CMD to execute on start. 
+port, not needing to run specifically as the *root user* or other user name, and a single non-exiting CMD to execute on start.
 
 NOTE: Providing appropriate labels is desired when deploying complex applications for organization purposes. OpenShift uses a label *app* to define and group components together in the Overview page. OpenShift will create this label with some default if the user doesn't provide it explicitly.
 
@@ -80,11 +93,11 @@ server, a log analyzer, and a file service to help manage uploaded files.
 
 == Exercise: Examining the Pod
 
-If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Overview* tab. On that panel, you will see that there is a single *Pod* that was created by your actions. 
+If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Overview* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
 
 image::images/parksmap-overview.png[Pod overview]
 
-You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the *Administrator* console.
+You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the Administrator perspective of the web console.
 
 image::images/parksmap-podlist.png[Pod list]
 
@@ -100,7 +113,7 @@ oc get pods
 
 You should see output that looks similar to:
 
-[source,bash]
+[source,text]
 ----
 NAME                READY   STATUS      RESTARTS   AGE
 parksmap-1-deploy   0/1     Completed   0          4m56s
@@ -123,7 +136,7 @@ oc get pod parksmap-1-gxbgq -o yaml
 You should see something like the following output (which has been truncated due
 to space considerations of this workshop manual):
 
-[source,bash]
+[source,text]
 ----
 apiVersion: v1
 kind: Pod
@@ -156,7 +169,7 @@ metadata:
 
 The web interface also shows a lot of the same information on the *Pod* details
 page. If you click on the name of the *Pod*, you will
-find the details page. You can also get there by clicking on the `parksmap` deployment config on the Topology page, selecting Resources, and then clicking the *Pod* name.
+find the details page. You can also get there by clicking on the `parksmap` deployment config on the *Topology* page, selecting *Resources*, and then clicking the *Pod* name.
 
 image::images/parksmap-dc-resources.png[Parksmap Resources]
 
@@ -224,7 +237,7 @@ IP/Port combination of 172.30.22.209/8080TCP. Your IP address may be different, 
 each *Service* receives a unique IP address upon creation. *Service* IPs are
 fixed and never change for the life of the *Service*.
 
-In the Developer Perspective from the Topology view, service information is available by clicking the `parksmap` deployment config, then *Resources*, and then you should see the `parksmap` entry in the *Services* section.
+In the Developer perspective from the *Topology* view, service information is available by clicking the `parksmap` deployment config, then *Resources*, and then you should see the `parksmap` entry in the *Services* section.
 
 image::images/parksmap-serviceslist.png[Services list]
 
@@ -238,7 +251,7 @@ oc get service parksmap -o yaml
 
 You should see output similar to the following:
 
-[source,bash]
+[source,text]
 ----
 apiVersion: v1
 kind: Service
@@ -332,7 +345,7 @@ oc describe service parksmap
 
 You should see something like the following output:
 
-[source,bash]
+[source,text]
 ----
 Name:              parksmap
 Namespace:         lab-getting-started-starter-workshop-apb-test-user1
