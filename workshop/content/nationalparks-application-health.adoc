@@ -38,8 +38,7 @@ We are going to add both a readiness and liveness probe to the existing
 instances to the service until they pass the readiness checks, and will ensure
 that unhealthy instances are restarted (if they fail the liveness checks).
 
-Click *Workloads -> Deployment Configs* on the left navigation. Click
-`nationalparks`. Click on *YAML*. We will be editing the YAML for the deployment config in order to add the health checks.
+From the *Topology* view, click `nationalparks`. On the side panel, click the *Actions* dropdown menu and the select *Edit Deployment Config*. We will be editing the YAML for the deployment config in order to add the health checks.
 
 Add the following code below `imagePullPolicy: Always` as shown in the screenshot. 
 
@@ -65,6 +64,6 @@ image::images/nationalparks-application-health-config.png[Readiness and Liveness
 
 WARNING: Note the trailing slash in the URL
 
-Once you have entered in the values show above, click *Save* and then *Workloads -> Deployment Configs* in the left navigation. You
+Once you have entered in the values show above, click *Save* and then click the *Overview* tab. You
 will notice that these changes caused a new deployment -- they counted as a
 configuration change.

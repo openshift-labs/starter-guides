@@ -12,15 +12,7 @@ Return to the web console:
 
 link:{{console_url}}[Web Console]
 
-In the *Administrator* view, click *Projects* in the left navigation if it isn't already selected. Find your *{{ project_namespace }}* project and click it. 
-
-image::images/parksmap-administrator-projects.png[Select Project]
-
-On the next page, you'll see some details about the resources in your project. Since the project is currently empty, there isn't much to see here for now. Click *Administrator* to switch to the *Developer* console.
-
-image::images/parksmap-administrator-project-details.png[Project Details]
-
-This will take you to the *Topology* view in the Developer Perspective. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.  
+If you're no longer on the *Topology* view in the Developer perspective, return there now. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.  
 
 image::images/parksmap-devconsole-container-image.png[Add from Container Image]
 

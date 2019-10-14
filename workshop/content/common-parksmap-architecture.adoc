@@ -8,9 +8,6 @@ There will be a set of independent backend services deployed that will provide d
 
 * WorldWide National Parks
 * Major League Baseball Stadiums in the US
-* International Airports
-* Earthquakes epicenters in New Zealand in November 2017
-* Aussie Dunnies
 
 The original source code for this application is located link:https://github.com/openshift-roadshow/[here].
 

@@ -82,7 +82,7 @@ application. This is a fairly simple JavaScript application.
 
 === Build the Code on OpenShift
 
-Similar to how we used "Add to project" before with an existing image, we
+Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple JavaScript S2I image.
 
@@ -96,7 +96,7 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/%username%/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
 ----
 
 Select Node.js as your Builder Image.

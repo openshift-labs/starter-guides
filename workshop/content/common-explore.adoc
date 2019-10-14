@@ -1,74 +1,22 @@
 == Command Line Interface
 
-OpenShift ships with a feature-rich web console as well as command line tools
+OpenShift includes a feature-rich web console with both an Administrator perspective and a Developer perspective. In addition to the web console, OpenShift includes command line tools
 to provide users with a nice interface to work with applications deployed to the
-platform.  The OpenShift tools are a single executable written in the Go
-programming language and are available for the following operating systems:
+platform.  The `oc` command line tool is an executable written in the Go
+programming language and is available for the following operating systems:
 
 - Microsoft Windows
 - macOS 10
 - Linux
 
-This lab environment already has the `oc` command line tool installed. Let's start by logging into 
-the OpenShift cluster that is provided for this workshop.
+This lab environment has the `oc` command line tool installed, and your lab user is already logged in to the OpenShift cluster.
 
-In order to log in, we will use the `oc` command and then specify the server that we
-want to authenticate to. Issue the following command:
+Issue the following command to see help information:
 
 [source,bash,role=execute-1]
 ----
-oc login {{ API_ADDRESS }}
+oc help
 ----
-
-You may see the following output:
-
-[source,bash]
-----
-The server uses a certificate signed by an unknown authority.
-You can bypass the certificate check, but any data you send to the server could be intercepted by others.
-Use insecure connections? (y/n):
-----
-
-Enter in *Y* to use a potentially insecure connection. The reason you received
-this message is because we are using a self-signed certificate for this
-workshop, but we did not provide you with the CA certificate that was generated
-by OpenShift. In a real-world scenario, either OpenShift's certificate would be
-signed by a standard CA (eg: Thawte, Verisign, StartSSL, etc.) or signed by a
-corporate-standard CA that you already have installed on your system.
-
-Once you issue the `oc login` command, you will be prompted for the username and
-password combination for your user account. Use the username and password combination provided to you by the instructor of this workshop:
-
-[source,bash,role=copypaste]
-----
-Username:  {{ username }}
-Password:  {{ USER_PASSWORD }}
-----
-
-Once you have authenticated to the OpenShift server, you will see the
-following confirmation message:
-
-[source]
-----
-Login successful.
-Using project "{{ project_namespace  }}".
-----
-
-[TIP]
-====
-If you don't have any projects. You can try to create a new project, by running:
-
-[source]
-----
-oc new-project {{ project_namespace  }}
-----
-====
-
-Congratulations, you are now authenticated to the OpenShift server. The
-OpenShift master includes a built-in OAuth server. Developers and administrators
-obtain OAuth access tokens to authenticate themselves to the API. By default
-your authorization token will last for 24 hours. There is more information about
-the login command and its configuration in the https://{{DOCS_URL}}/cli_reference/get_started_cli.html#basic-setup-and-login[OpenShift Documentation].
 
 == Using a Project
 
@@ -83,28 +31,11 @@ During this lab, we are going to use a few different commands to make sure that
 things in the environment are working as expected.  Don't worry if you don't
 understand all of the terminology as we will cover it in detail in later labs.
 
-If you didn't have a project already created for you, the first thing we want 
-to do is create the *{{ project_namespace  }}* project. You can do this with the following command:
-
-CAUTION: In the following command, replace `{{ project_namespace  }}` with the project provided to you.
-
-[source,bash,role=copypaste]
-----
-oc new-project {{ project_namespace  }}
-----
-
-You will see the following confirmation message:
-
-[source,bash]
-----
-Now using project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
-----
+In this lab environment, you already have access to single project: *{{ project_namespace  }}*.
 
 If you had multiple projects, the first thing you would want to do is to switch 
 to the *{{ project_namespace  }}* project to make sure you're on the correct project from now on. 
 You can do this with the following command:
-
-CAUTION: In the following command, replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=execute-1]
 ----
@@ -124,27 +55,25 @@ OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser.  To get a feel for how the web console
 works, open your browser and go to the following URL:
 
-*link:{{CONSOLE_ADDRESS}}[]*
+link:{{console_url}}[Web Console]
 
-The first screen you will see is the authentication screen. You will be prompted for the username and password combination for your user account. Use the username and password combination provided to you by the instructor of this workshop:
-
-[source,bash,role=copypaste]
-----
-Username: {{username}}
-Password: {{USER_PASSWORD}}
-----
-
-image::images/ocp-login.png[OpenShift Login Screen]
-
-After you have authenticated to the web console, you will be presented with the list of Projects that you can access. You will see something that looks like the following image:
+The first time you access the web console, you will most likely be in the Administrator perspective. You will be presented with the list of Projects that you can access, and you will see something that looks like the following image:
 
 image::images/explore-webconsole1sc.png[Web Console]
 
 Click on the *{{ project_namespace  }}* project link. When you click on the
-*{{ project_namespace  }}* project, you will be taken to the project status page, 
-which will list all of the resources that you have running as part of your project. There's nothing there now, but that's about to change.
+*{{ project_namespace  }}* project, you will be taken to the project details page, 
+which will list some metrics and details about your project. There's nothing there now, but that will change as you progress through the lab.
 
 image::images/explore-webconsole2.png[Explore Project]
+
+At the top of the left navigation menu, you can toggle between the Administrator perspective and the Developer perspective.
+
+image::images/explore-perspective-toggle.png[Toggle Between Perspectives]
+
+Select *Developer* to switch to the Developer perspective. Once the Developer perspective loads, you should be in the *Topology* view. Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application here.
+
+image::images/explore-topology-view.png[Topology View]
 
 We will be using a mix of command line tooling and the web console for the labs.
 Get ready!
