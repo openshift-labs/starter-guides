@@ -54,7 +54,7 @@ Now using project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
 OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser. In the Homeroom environment, the web console is embedded within the dashboard you are using to access the workshop.
 
-To get a feel for how the web console works, switch to the web console by clicking on the **Console** tab or click here on this link:{{console_url}}[Web Console] +++<span class="fas fa-window-restore"></span>+++ link.
+To get a feel for how the web console works, switch to the web console by clicking on the **Console** tab or click here on this link:{{console_url}}/k8s/cluster/projects[Web Console] +++<span class="fas fa-window-restore"></span>+++ link.
 
 The first time you access the web console, you will most likely be in the Administrator perspective. You will be presented with the list of Projects that you can access, and you will see something that looks like the following image:
 
