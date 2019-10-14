@@ -62,7 +62,7 @@ objects:
       modules:
         activate:
         - common-environment
-        - common-cli
+#        - common-cli
         - common-explore
         - common-parksmap-architecture
         - parksmap-docker

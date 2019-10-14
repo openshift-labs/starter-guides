@@ -6,7 +6,7 @@ modules:
   activate:
   - common-environment
   - common-parksmap-architecture
-  - common-cli
+#  - common-cli
   - common-explore
   - parksmap-docker
   - parksmap-scaling
