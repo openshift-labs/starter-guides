@@ -1,6 +1,6 @@
 image::images/common-environment-ocp-architecture.png[OCP Architecture]
 
-You will be interacting with an OpenShift environment that is running on a 
+The workshop is hosted in an OpenShift environment that is running on a
 public cloud. The environment consists of the following systems:
 
 * Master node(s)
@@ -15,26 +15,6 @@ The infrastructure node is providing several services:
 * The OpenShift container registry
 * The OpenShift router
 
-Additionally, a predefined number of user accounts have been provisioned.
+You will have your own user account in the OpenShift environment. Your user name is ``{{username}}``.
 
-You will see various code and command blocks throughout these exercises. 
-Some of the command blocks can be executed directly by clicking on them.
-
-[source,bash,role=execute-1]
-----
-echo "execute in terminal 1"
-----
-
-Others will require modification of the command before execution. If you see a command block with 
-this "copy and edit" icon 
-
-image::images/common-environment-copy-and-edit-icon.png[copy and edit icon]
-
-the command will require modification. Clicking it will copy it to the clipboard. You can paste and edit it in the terminal before executing it. 
-
-Typically this is a substitution of your username or user number:
-
-[source,bash,role=copy-and-edit]
-----
-some command for {{ username }}
-----
+You will also have a dedicated project namespace to work in. The name of your project namespace is ``{{project_namespace}}``.

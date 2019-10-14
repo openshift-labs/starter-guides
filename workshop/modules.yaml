@@ -4,6 +4,9 @@ modules:
         exit_sign: Environment Overview
     common-environment:
         name: Environment Overview
+        exit_sign: Using Homeroom
+    common-using-homeroom:
+        name: Using Homeroom
         exit_sign: Start Workshop
     common-parksmap-architecture:
         name: Architecture Overview of the ParksMap Application

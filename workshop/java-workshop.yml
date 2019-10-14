@@ -6,6 +6,7 @@ modules:
   activate:
   - common-workshop-summary
   - common-environment
+  - common-using-homeroom
   - common-parksmap-architecture
 #  - common-cli
   - common-explore
