@@ -1,6 +1,8 @@
 Access to the workshop is provided by link:https:https://github.com/openshift-homeroom[Homeroom], an interactive training environment you can use in your web browser without needing to install anything on your local machine.
 
-The Homeroom dashboard provides you access to the workshop content and one or more terminals. The interactive shells are hosted in a container running inside of OpenShift. Any special command line programs you need are already pre-installed.
+The Homeroom dashboard provides you access to the workshop content, one or more terminals, and an instance of the OpenShift web console.
+
+The interactive shells are hosted in a container running inside of OpenShift. Any special command line programs you need are already pre-installed.
 
 As you work through the workshop content you will encounter commands that you need to run in the terminals. These will appear as:
 
@@ -31,7 +33,7 @@ If you encounter a command block showing `<ctrl-c>`, this is treated in a specia
 <ctrl-c>
 ----
 
-Click on this and you will see that it will send an interrupt to the terminal. You could also have used `<ctrl-c>` yourself in the terminal.
+Click on this and you will see that it will send an interrupt to the command running in the terminal. You could also have used `<ctrl-c>` yourself in the terminal.
 
 At times, instead of running a command, you may need to copy the value and paste it into the terminal or other web page. This will be indicated using the copy symbol +++<span class="fas fa-copy"></span>+++.
 
