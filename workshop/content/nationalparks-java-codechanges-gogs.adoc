@@ -17,17 +17,18 @@ image::images/nationalparks-codechanges-webhook-config.png[Webhook]
 Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on your local Gogs:
 
-CAUTION: In the following url(s), replace `%username%` with the Git username provided to you.
+[source,bash,role=copypaste]
+----
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks
+----
+
+Your Gogs credentials are:
 
 [source,bash,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks
+username: {{username}}
+password: {{GOGS_PASSWORD}}
 ----
-
-[NOTE]
-====
-The credentials for this Gogs instance are the same as for our OpenShift instance
-====
 
 Click the Settings link on the top right of the screen:
 
@@ -113,7 +114,7 @@ CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the pr
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
 ----
 
 You should now see the new name you have set in the JSON string returned.
@@ -169,7 +170,7 @@ CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the pr
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
 ----
 
 [NOTE]

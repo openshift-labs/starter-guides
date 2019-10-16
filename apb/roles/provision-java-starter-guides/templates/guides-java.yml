@@ -58,7 +58,7 @@ objects:
         API_ADDRESS: ${API_ADDRESS}
         ROUTER_ADDRESS: ${ROUTER_ADDRESS}
         INFRA_PROJECT: {{ namespace }}
-        USER_PASSWORD: {{ openshift_user_password }}
+        #USER_PASSWORD: {{ openshift_user_password }}
 
 
       modules:

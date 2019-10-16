@@ -42,7 +42,7 @@ plans:
       display_group: OpenShift User
     - name: workshop_type
       title: Workshop type
-      description: Type of workshop to deliver (Java, Python, Node.js, PHP)
+      description: Type of workshop to deliver (java, python, node.js, php)
       type: enum
       enum: ['java', 'python', 'node.js', 'php']
       required: true
@@ -51,17 +51,17 @@ plans:
       display_group: Workshop
     - name: user_count
       title: Number of participants
-      description: Number of participants for the workshop. There will be provisioned infrastructure/project for each participant
+      description: Number of participants for the workshop. There will be provisioned infrastructure for each participant
       type: number
       required: true
       display_group: Workshop
-    - name: openshift_user_password
-      title: OpenShift User Password
-      description: The OpenShift password for participants to be displayed in the lab guide to participants
-      type: string
-      required: true
-      display_type: text
-      display_group: Workshop
+#    - name: openshift_user_password
+#      title: OpenShift User Password
+#      description: The OpenShift password for participants to be displayed in the lab guide to participants
+#      type: string
+#      required: true
+#      display_type: text
+#      display_group: Workshop
     - name: infrasvcs_adm_user
       title: Infrastructure Services Admin User
       description: Admin user for infrastructure services (Gogs, Nexus, ...)

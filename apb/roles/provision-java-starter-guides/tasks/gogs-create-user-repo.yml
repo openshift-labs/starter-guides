@@ -10,7 +10,7 @@
       uri:
         url: http://{{ gogs_hostname }}/api/v1/repos/{{ my_user }}/{{ reponame }}
         user: "{{ my_user }}"
-        password: "{{ openshift_user_password }}"
+        password: "openshift"
         force_basic_auth: true
         status_code: 200,404
       register: repo_result
@@ -22,14 +22,14 @@
         body: '{"name": "{{ reponame }}", "private": false}'
         body_format: json
         user: "{{ my_user }}"
-        password: "{{ openshift_user_password }}"
+        password: "openshift"
         status_code: 200,201
         force_basic_auth: true
       when: repo_result.status != 200
 
     - name: Push {{ reponame }} to git repository in Gogs for user "{{ my_user }}"
       shell: |
-        git remote add {{ my_user }} http://{{ my_user }}:{{ openshift_user_password }}@{{ gogs_hostname }}/{{ my_user }}/{{ reponame }}.git
+        git remote add {{ my_user }} http://{{ my_user }}:openshift@{{ gogs_hostname }}/{{ my_user }}/{{ reponame }}.git
         git config --local user.email "{{ my_user }}@example.com"
         git config --local user.name "{{ my_user }}"
         git push -f --all {{ my_user }}

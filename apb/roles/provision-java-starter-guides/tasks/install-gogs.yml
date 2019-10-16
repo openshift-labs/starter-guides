@@ -14,7 +14,7 @@
     gogs_admin_user: "{{ infrasvcs_adm_user }}"
     gogs_admin_password: "{{ infrasvcs_adm_password }}"
     gogs_user: "developer"
-    gogs_password: "{{ openshift_user_password }}"
+    gogs_password: "openshift"
     gogs_generate_user_count: "{{ user_count }}"
     gogs_generate_user_format: "{{ user_format }}"
     clean_deploy: false

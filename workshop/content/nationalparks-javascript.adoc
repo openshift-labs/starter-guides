@@ -64,12 +64,12 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-CAUTION: In the following url(s), replace `{{username}}` with the Gogs username provided to you. Your Gogs credentials are:
+Your Gogs credentials are:
 
 [source,bash,role=copypaste]
 ----
 username: {{username}}
-password: {{user_password}}
+password: {{GOGS_PASSWORD}}
 ----
 
 [source,role=copypaste]

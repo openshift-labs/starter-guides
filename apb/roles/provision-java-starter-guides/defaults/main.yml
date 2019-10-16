@@ -6,7 +6,7 @@ features_to_install: [etherpad, gogs, guides, nexus, ocp-ops-view, terminals]
 workshop_type: java
 infrasvcs_adm_user: adminuser
 infrasvcs_adm_password: admin123
-openshift_user_password: openshift
+#openshift_user_password: openshift
 # user_count: 0 # This is defined in common-definitions
 # user_format: user%d # Theis is defined in common-definitions
 nexus_release_version: 3.12.1

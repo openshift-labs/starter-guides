@@ -64,12 +64,12 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-CAUTION: In the following url(s), replace `{{username}}` with the Gogs username provided to you. Your Gogs credentials are:
+Your Gogs credentials are:
 
 [source,bash,role=copypaste]
 ----
 username: {{username}}
-password: {{user_password}}
+password: {{GOGS_PASSWORD}}
 ----
 
 [source,role=copypaste]
@@ -96,7 +96,7 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/%username%/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
 ----
 
 Select Python as your Builder Image.
@@ -128,7 +128,7 @@ the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get builds
 ----
@@ -143,7 +143,7 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
 
 You can also view the build logs with the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc logs -f builds/nationalparks-1
 ----
@@ -171,7 +171,7 @@ If you look again at the web console, you will notice that, when you create the
 application this way, OpenShift also creates a *Route* for you. You can see the
 URL in the web console, or via the command line:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get routes
 ----
@@ -181,17 +181,15 @@ Where you should see something like the following:
 [source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}             nationalparks   8080-tcp
-parksmap        parksmap-{{ project_namespace  }}.{{ROUTER_ADDRESS}}                  parksmap        8080-tcp
+nationalparks   nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}             nationalparks   8080-tcp
+parksmap        parksmap-{{ project_namespace  }}.{{cluster_subdomain}}                  parksmap        8080-tcp
 ----
 
 In the above example, the URL is:
 
-CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
-
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}
+http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}
 ----
 
 Since this is a backend application, it doesn't actually have a web interface.
@@ -203,7 +201,7 @@ CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the pr
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
 ----
 
 WARNING: The trailing slash is *required*.

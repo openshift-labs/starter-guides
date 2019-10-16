@@ -1,4 +1,4 @@
-In this lab, we're going to deploy a backend service, developed in Java that will expose 2 main REST endpoints to the visualizer
+In this section, we're going to deploy a backend service, developed in Java that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
 The application will query for national parks information (including its
 coordinates) that is stored in a MongoDB database.  This application will also
@@ -63,61 +63,60 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-CAUTION: In the following url(s), replace `%username%` with the Gogs username provided to you. Your Gogs credentials are the same as your OpenShift credentials.
+Your Gogs credentials are:
+
+[source,bash,role=copypaste]
+----
+username: {{username}}
+password: {{GOGS_PASSWORD}}
+----
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
 ----
+
 
 Later in the lab, we want you to make a code change and then rebuild your
 application. This is a fairly simple Spring framework Java application.
 
 === Build the Code on OpenShift
 
-Similar to how we used "Add to project" before with an existing image, we
+Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple Java S2I image.
 
-CAUTION: In the following step(s), replace `{{ project_namespace  }}` with the project provided to you.
+In the Developer Perspective, click *+Add* in the left navigation and then choose "From Git"
 
-In the OpenShift web console, find your `{{ project_namespace  }}` project, and then
-click the *Add* button and then the *Browse Catalog* link as highlighted in the following image:
+image::images/nationalparks-show-add-options.png[Add to Project]
 
-image::images/nationalparks-show-catalog.png[Add to Project]
+The *Import from Git* workflow will guide you through the process of deploying your app based on a few selections.
 
-This is the developer catalog which allows a user to select components they want to add to their application.  In this case, we are using Spring Boot so we want to select a JDK without an application server.
-
-Search for `openjdk`, and click *Red Hat OpenJDK 8* as shown in the following image:
-
-image::images/nationalparks-java-sarch-jdk.png[Developer Catalog Languages]
-
-After you click *Red Hat OpenJDK 8*, a dialog is presented as shown in the following image:
-
-image::images/nationalparks-java-new-java-service.png[Create application]
-
-Click on the *Create Application* button and then enter a name and a Git repository URL. For the name, enter `nationalparks`,
-and for the Git repository URL, enter:
-
-CAUTION: In the following url(s), replace `%username%` with the Git username provided to you.
+Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
 ----
+
+Select Java as your Builder Image.
+
+image::images/nationalparks-import-from-git-url-builder.png[Import from Git]
 
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
-In the *Git Repository* field enter the base of the Git repository for
-your `nationalparks` application. This will cause the S2I
-process to grab that specific tag in the code repository.
+Scroll down to the *General* section. Select `workshop` as your application, and `nationalparks` as the name.
 
-Check the box to create a route and then click the *Create* button.
+Expand the Labels section and add 3 labels:
 
-image::images/nationalparks-java-configure-java-service.png[Runtimes]
+- *__app__=workshop*  (the name we will be giving to the app)
+- *__component__=nationalparks*  (the name of this deployment)
+- *__role__=backend* (the role this component plays in the overall application)
 
-To see the build logs, click *Builds -> Builds*, then click on the *nationalparks-1* build, and finally click *Logs*.
+image::images/nationalparks-configure-service.png[Runtimes]
+
+To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
 
 image::images/nationalparks-java-new-java-build.png[Nationalparks build]
 
@@ -128,7 +127,7 @@ the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get builds
 ----
@@ -143,7 +142,7 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
 
 You can also view the build logs with the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc logs -f builds/nationalparks-1
 ----
@@ -171,7 +170,7 @@ If you look again at the web console, you will notice that, when you create the
 application this way, OpenShift also creates a *Route* for you. You can see the
 URL in the web console, or via the command line:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get routes
 ----
@@ -181,17 +180,15 @@ Where you should see something like the following:
 [source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}             nationalparks   8080-tcp
-parksmap        parksmap-{{ project_namespace  }}.{{ROUTER_ADDRESS}}                  parksmap        8080-tcp
+nationalparks   nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}             nationalparks   8080-tcp
+parksmap        parksmap-{{ project_namespace  }}.{{cluster_subdomain}}                  parksmap        8080-tcp
 ----
 
 In the above example, the URL is:
 
-CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
-
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}
+http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}
 ----
 
 Since this is a backend application, it doesn't actually have a web interface.
@@ -203,7 +200,7 @@ CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the pr
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
+http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
 ----
 
 WARNING: The trailing slash is *required*.

@@ -86,11 +86,9 @@ For this example, we're going to store our pipeline in the same Gogs repository 
 
 Log into your `nationalparks` repository in Git as we are going to store in this repository our Jenkinsfile, that is, our pipeline definition.
 
-CAUTION: In the following url(s), replace `%username%` with the Git username provided to you.
-
 [source,bash,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks
 ----
 
 image::images/devops-pipeline-gogs-nationalparks.png[Nationalparks project]
@@ -108,7 +106,7 @@ pipeline {
   stages {
     stage('Build JAR') {
       steps {
-        git url: 'http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks'
+        git url: 'http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks'
         sh "cp .settings.xml ~/.m2/settings.xml"
         sh "mvn package"
       }
@@ -196,7 +194,7 @@ spec:
   source:
     git:
       ref: master
-      uri: "http://gogs-{{INFRA_PROJECT}}.{{ROUTER_ADDRESS}}/%username%/nationalparks"
+      uri: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks"
     type: Git
   strategy:
     jenkinsPipelineStrategy:

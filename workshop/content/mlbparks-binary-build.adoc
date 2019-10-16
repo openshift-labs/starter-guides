@@ -55,7 +55,7 @@ CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the gu
 
 [source,bash,role=copypaste]
 ----
-http://mlbparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
+http://mlbparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
 ----
 
 Please change line 23 to add a _AMAZING_ in front of "MLB Parks" look like this:
@@ -91,7 +91,7 @@ CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the pr
 
 [source,bash,role=copypaste]
 ----
-http://mlbparks-{{ project_namespace  }}.{{ROUTER_ADDRESS}}/ws/info/
+http://mlbparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
 ----
 
 So now you have seen how we can speed up the build and deploy process.

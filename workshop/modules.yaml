@@ -77,6 +77,9 @@ config:
     - name: DOCS_URL
       desc: URL prefix to access docs (docs.openshift.org/latest) without the protocol prefix. (https:// will be used.)
       value: docs.openshift.com/container-platform/latest
+    - name: GOGS_PASSWORD
+      desc: Password to use for logging into GOGS_PASSWORD
+      value: openshift
     ##
     # Module environment
     #
