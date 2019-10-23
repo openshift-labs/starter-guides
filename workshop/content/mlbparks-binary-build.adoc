@@ -25,7 +25,7 @@ https://{{DOCS_URL}}/dev_guide/dev_tutorials/binary_builds.html[official documen
 === Clone source
 The first step is to clone the MLB source code from GitHub to your local machine:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 git clone https://github.com/openshift-roadshow/mlbparks.git
 ----
@@ -37,7 +37,7 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 If you have Maven all set up on your machine, then you can `cd` into the `mlbparks` directory and run `mvn package`
 
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 cd mlbparks
 mvn package
@@ -50,8 +50,6 @@ If you're using IntelliJ or eclipse/JBoss Developer Studio package the maven art
 === Code Change
 Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
 that gives basic info on the service and can be reached at:
-
-CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the guid provided to you.
 
 [source,bash,role=copypaste]
 ----
@@ -73,7 +71,7 @@ Alright we have our war file built, time to kick off a build using it.
 
 If you built your war with Maven:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc start-build bc/mlbparks --from-file=target/ROOT.war --follow
 ----
@@ -86,8 +84,6 @@ automatically gets added back with our new title.  This would not have happened 
 rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.
 
 When the deployment is finished and the container is deployed you will see the new content at:
-
-CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----

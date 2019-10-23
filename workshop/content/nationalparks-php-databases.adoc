@@ -104,7 +104,7 @@ Like before, we'll add 3 labels:
 Execute the following command:
 [source,bash,role=execute-1]
 ----
-oc label dc/mongodb svc/mongodb app=workshop component=nationalparks role=database --overwrite
+oc label dc/mongodb-nationalparks svc/mongodb app=workshop component=nationalparks role=database --overwrite
 ----
 
 == Exercise: Exploring OpenShift Magic

@@ -23,8 +23,6 @@ image::images/parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
-CAUTION: In the following command(s), replace `{{ project_namespace }}` with the project provided to you.
-
 [source,bash,role=execute-1]
 ----
 oc project {{ project_namespace }}

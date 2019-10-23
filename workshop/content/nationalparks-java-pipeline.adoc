@@ -32,8 +32,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 
 == Configure Manual Deployments on Dev Application
 
-In the *userXY* project, click on *Workloads -> Deployment Configs* on the left sidebar menu
-and then on *nationalparks* deployment config. Click on *Actions -> Edit Deployment Config*:
+In the {{project_namespace}} project, click on the `nationalparks` component from Topology view. From the side panel, click on *Actions -> Edit Deployment Config*:
 
 image::images/devops-pipeline-deployment-edit.png[Edit pipeline]
 
@@ -47,37 +46,31 @@ As pipelines provide the ability to promote applications between different stage
 
 We're going to deploy a Jenkins instance to this project to configure and run our pipelines. As we want our Jenkins instance to be able to survive restarts (in case we need to update any plugin configuration) we will select the Jenkins persistent template from the Developer Catalog.
 
-In the Developer Catalog, search for *Jenkins*. Select the one named *Jenkins*.
+In the left navigation menu, click *+Add* and then *From Catalog*. In the Developer Catalog, search for *Jenkins*. Select the one named *Jenkins*.
 
 image::images/devops-pipeline-catalog-search.png[Empty CICD project]
 
-We will be prompted with the configuration screens for deploying our Jenkins server instance. Click the blue *Create Service Instance* button to get started.
+We will be prompted with the configuration screens for deploying our Jenkins server instance. Click the blue *Instantiate Template* button to get started.
 
 image::images/devops-jenkins-template.png[Jenkins template]
 
-Leave the defaults for all parameters except *Memory Limit*, which should be set to `1Gi`. Then click the blue *Create* button.
+Leave the defaults for all parameters and click the blue *Create* button.
 
 image::images/devops-jenkins-template-config.png[Jenkins template config]
 
-Jenkins will now be provisioned on the background. Click *Catalog -> Provisioned Services* in the left navigation to see your Jenkins service. It may take a couple minutes for the provisioning to complete.
+Jenkins will now be provisioned on the background. Click *Topology* in the left navigation to see your Jenkins service in Topology view. It may take a couple minutes for the provisioning to complete. You can click and drag the Jenkins service into your workshop application grouping.
 
-We will see now Jenkins being provisioned on our project. Once provisioning is finished, we should see a similar screen to this:
+We will see now Jenkins being provisioned on our project. Click on the Jenkins service component to view the provisioning status. Once provisioning is finished, we should see a similar screen to this:
 
 image::images/devops-jenkins-deployed.png[Jenkins deployed]
 
-Now click *Home -> Status* and you should see the Jenkins deployment on your Project Status page.
-
-image::images/devops-jenkins-project-status.png[Jenkins deployment]
-
-Notice how you have the actual Jenkins deployment and a Provisioned Service, this is because we deployed Jenkins from the Developer Catalog as a service for our current project.
-
-We could have done the same as we just did by using one single command on the OpenShift CLI. This command will deploy the service Jenkins with a persistent configuration in your **userXY** project. 
+We could have done the same as we just did by using one single command on the OpenShift CLI. This command will deploy the service Jenkins with a persistent configuration in your {{project_namespace}} project. 
 
 WARNING: If you have successfully deployed Jenkins, do NOT execute this command.
 
-[source,shell]
+[source,shell,role=copypaste]
 ----
-oc new-app jenkins-persistent -n userXY
+oc new-app jenkins-persistent -n {{project_namespace}}
 ----
 
 == Store Your Pipeline Definition in Git
@@ -176,12 +169,11 @@ This pipeline has 4 stages defined:
 
 Create the OpenShift pipeline definition to use the Jenkins file. This is a regular OpenShift BuildConfig with a *JenkinsPipeline* strategy.
 
-In the **userXY** project, click on *Add -> Import YAML* and paste the following YAML file to create a pipeline 
-that uses the `Jenkinsfile.workshop` from the `{{USER_NAME}}` git repository
+From the Developer perspective click *+Add* in the left navigation menu and then select *YAML*.
 
 image::images/devops-pipeline-add-yaml-menu.png[Add yaml to project - Menu]
 
-Now, copy the following code into the YAML input box and click *Create*.
+Now, copy the following code into the YAML input box and click *Create* to create a pipeline that uses the `Jenkinsfile.workshop` from your Gogs repository.
 
 [source,shell,role=copypaste]
 ----
@@ -213,7 +205,7 @@ spec:
     - type: ConfigChange
 ----
 
-In OpenShift Web Console, click on *Builds -> Builds* and then **nationalparks-build-1** to see the pipeline you just created.
+In the left navigation menu, click on *Builds* and then *national-parks* and from the *Builds* tab, click *nationalparks-1* to see the pipeline you just created.
 
 image::images/devops-pipeline-running.png[Pipeline running]
 

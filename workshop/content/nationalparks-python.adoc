@@ -197,8 +197,6 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a `/ws/info/` endpoint. To test, the
 complete URL to enter in your browser is:
 
-CAUTION: In the following url(s), replace `{{ project_namespace  }}` with the project provided to you.
-
 [source,bash,role=copypaste]
 ----
 http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/

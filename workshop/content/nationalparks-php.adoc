@@ -86,8 +86,6 @@ Similar to how we used "Add to project" before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple PHP S2I image.
 
-CAUTION: In the following step(s), replace `{{ project_namespace  }}` with the project provided to you.
-
 In the OpenShift web console, find your `{{ project_namespace  }}` project, and then
 click the *Add* button and then the *Browse Catalog* link as highlighted in the following image:
 

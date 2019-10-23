@@ -103,7 +103,7 @@ image::images/nationalparks-codechanges-pipeline-running.png[Webhook]
 or run the
 following command to verify:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get builds
 ----
@@ -144,7 +144,7 @@ various versions of applications.
 In order to perform a rollback, you need to know the name of the *Deployment Config*
 which has deployed the application:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get dc
 ----
@@ -160,7 +160,7 @@ nationalparks        9          1         1         config,image(nationalparks:m
 ----
 Now run the following command to rollback the latest code change:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc rollback nationalparks
 ----
@@ -188,7 +188,7 @@ Automatic deployment of new images is disabled as part of the rollback
 to prevent unwanted deployments soon after the rollback is complete. To re-enable
 the automatic deployments run this:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc set triggers dc/nationalparks --auto
 ----
@@ -203,7 +203,7 @@ even if we are going "back".
 
 So, if we want to return to the "new code" version, that is deployment #4.
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc rollback nationalparks-4
 ----

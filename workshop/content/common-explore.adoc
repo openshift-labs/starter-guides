@@ -46,7 +46,7 @@ You will see the following confirmation message:
 
 [source,bash]
 ----
-Now using project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
+Already on project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
 ----
 
 == The Web Console
