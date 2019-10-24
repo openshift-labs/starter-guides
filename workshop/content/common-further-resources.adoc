@@ -16,25 +16,18 @@ through various scenarios related to using OpenShift.
 The online interactive learning environment is always available so you
 can continue to work on those exercises even after the workshop is over.
 
-* *link:http://cookbook.openshift.org/[OpenShift Cookbook]* - Recipes of common tasks that users could need to do on OpenShift.
+* *link:https://developers.redhat.com/openshift/[OpenShift Resources on developers.redhat.com]* - A collection of resources for developers who are building and deploying applications on OpenShift.
 
 Below you will find further resources for learning about OpenShift and
 running OpenShift on your own computer, as well as details about OpenShift
 Online or other OpenShift related products and services.
 
-* *link:https://www.okd.io/[OKD]* - The upstream Open
-Source community distribution of Kubernetes that powers OpenShift.
-
-* *link:https://www.okd.io/minishift/[Minishift]* - A tool which can
+* *link:https://developers.redhat.com/products/codeready-containers/overview[CodeReady Containers]* - A tool which can
 be used to install a local OpenShift cluster on your own computer, running
 in a virtual machine.
 
 * *link:https://manage.openshift.com/[OpenShift Online]* - A shared public
 hosting environment for running your applications using OpenShift.
-
-* *link:https://openshift.io/[OpenShift.io]* - An online development
-environment for planning, creating and deploying hybrid cloud services
-using OpenShift.
 
 * *link:https://www.openshift.com/dedicated[OpenShift Dedicated]* - A
 dedicated hosting environment for running your applications, managed and
@@ -43,6 +36,8 @@ supported for you by Red Hat.
 * *link:https://www.openshift.com/[OpenShift Container Platform]* - The Red
 Hat supported OpenShift product for installation on premise or in hosted
 cloud environments.
+
+* *link:https://commons.openshift.org[OpenShift Commons]* - A community for users, partners, customers, and contributors to come together to collaborate and work together on OpenShift.
 
 The following free online eBooks are also available for download related to
 OpenShift.

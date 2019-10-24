@@ -233,8 +233,6 @@ After a little while, it will finish, hopefully with success.
 
 image::images/devops-pipeline-finished.png[Pipeline finished]
 
-Once the pipeline has finished, you should see the nationalparks application redeployed in your project. 
-
-You should notice that the number of the deployment (the number to the side of the deployment name) has increased. 
+Once the pipeline has finished, click `nationalparks` from Topology view. You should notice that the *Latest Version* number of the has increased. 
 
 image::images/devops-pipeline-nationalparks-deployed.png[Nationalparks component deployed]

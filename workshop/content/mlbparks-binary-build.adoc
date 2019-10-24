@@ -23,7 +23,7 @@ https://{{DOCS_URL}}/dev_guide/dev_tutorials/binary_builds.html[official documen
 == Exercise: Using Binary Deployment
 
 === Clone source
-The first step is to clone the MLB source code from GitHub to your local machine:
+The first step is to clone the MLB source code from GitHub to your workshop environment:
 
 [source,bash,role=execute-1]
 ----

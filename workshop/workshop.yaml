@@ -23,6 +23,6 @@ modules:
   - nationalparks-java-pipeline-codechanges-gogs
   - mlbparks-templates
   - mlbparks-binary-build
-  - mlbparks-debugging
+#  - mlbparks-debugging
   - common-further-resources
   - common-workshop-links

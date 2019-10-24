@@ -8,14 +8,14 @@ hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
 == Exercise: Configuring Gogs Web Hooks
-In this lab you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{{ project_namespace  }}` project, and then click *Builds -> Build Configs* in the left navigation. Click `nationalparks-build` build and scroll down to the Webhooks section.
+In this lab you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the Developer Perspective, click *Builds* in the left navigation menu. Click `nationalparks-build` and scroll down to the Webhooks section.
 
 On this screen you will see two webhook URLs as shown in the following image:
 
 image::images/nationalparks-pipeline-codechanges-webhook-config.png[Webhook]
 
-Note that the webhook URLs have placeholder text for the secret. We will get the real secret values in a moment. But for now, copy the Generic Webhook URL. Once you have the URL copied to your clipboard, navigate to the code repository
-that you have on your local Gogs:
+Click *Copy URL with Secret* for the Generic webhook. Once you have the URL copied to your clipboard, navigate to the code repository
+that you have on Gogs:
 
 [source,bash,role=copypaste]
 ----
@@ -34,23 +34,17 @@ Click the Settings link on the top right of the screen:
 
 image::images/nationalparks-codechanges-gogs-settings.png[Webhook]
 
-Click on webhooks, and the on `Add Webhook` button.
+Click on *Webhooks*, then the *Add Webhook* button, and finally select *Gogs*.
 
 image::images/nationalparks-codechanges-gogs-add-webhook.png[Webhook]
 
-In the next screen, paste your link into the "URL" field. You can leave the
+In the next screen, paste your link into the "Payload URL" field. You can leave the
 secret token field blank -- the secret is already in the URL and does not need
-to be in the payload, or copy it from the URL.
-
-Now go back to the Build Config page and click on *YAML*. Copy the Generic secret value from the triggers section. 
-
-image::images/nationalparks-codechanges-gogs-copy-secret.png[Secret]
-
-Go back to Gogs and replace `<secret>` in the URL with the value you just copied.
+to be in the payload.
 
 Change the `Content Type` to `application/x-www-form-urlencoded`.
 
-Finally, click on "Add webhook".
+Finally, click on *Add Webhook*.
 
 image::images/nationalparks-codechanges-gogs-config-webhook.png[Webhook]
 
@@ -59,8 +53,7 @@ repository, a new build and deploy will occur inside of OpenShift.  Let's try
 this out.
 
 == Exercise: Using Gogs Web Hooks
-Click "Project" at the top of the Gogs page, and then "Files" towards the
-middle of the page. This is Gogs's repository view. 
+Click the *Files* tab in Gogs. This is Gogs's repository view.  
 
 CAUTION: Make sure that the drop-down menu at the upper right is set for 
 the *`master`* branch. Navigate to the
@@ -96,7 +89,7 @@ Click on Commit changes at the bottom of the screen. Feel free to enter a commit
 message.
 
 Once you have committed your changes, a  *Build* should almost instantaneously be
-triggered in OpenShift. Look at the *Builds* page in the web console,
+triggered in OpenShift. Click *Builds* in the left navigation menu then `nationalparks-build`, then the *Builds* tab. You should see a new build running: 
 
 image::images/nationalparks-codechanges-pipeline-running.png[Webhook]
 

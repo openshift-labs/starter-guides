@@ -42,7 +42,7 @@ deploy the MongoDB database. It also uses a *Hook* to call the `/ws/data/load`
 endpoint to cause the data to be loaded into the database from a JSON file in
 the source code repository. Execute the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json
 ----
@@ -51,7 +51,7 @@ What just happened? What did you just `create`? The item that we passed to the `
 command is a *Template*. `create` simply makes the template available in
 your *Project*. You can see this with the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get template
 ----
@@ -65,7 +65,7 @@ mlbparks      Application template MLBParks backend running on Wildfly and using
 
 Run the following command to instantiate the template:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc new-app mlbparks -p APPLICATION_NAME=mlbparks
 ----
@@ -142,17 +142,27 @@ several app servers, databases, and more.  You could deploy the entire set of
 resources with one command, and then hack on them to develop new features,
 microservices, fix bugs, and more.
 
+In Topology view, you can drag `mlbparks` and `mongodb-mlbparks` into the `workshop` application grouping.
+
 image::images/mlbparks-templates-complete-overview.png[Complete overview]
+
+In addition to being able to instantiate templates from the command line as we did above, templates can also be instantiated from the Developer Perspective in the web console. Click *+Add*, then *From Catalog* and search for `mlb`. You should see a result for `MLBparks`.
+
+image::images/mlbparks-templates-dev-catalog.png[Template in Developer Catalog]
+
+If you click on `MLBparks` and then click the *Instantiate Template* button, you'll see a form that guides you through the different required and optional parameters needed to instantiate this template.
+
+CAUTION: Do not actually instantiate the template from the web console now, since you have already done so via the command line.
 
 As a final exercise, look at the template that was used to create the
 resources for our *mlbparks* application.
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get template mlbparks -o yaml
 ----
 
-But as always, you can use the OpenShift web console to do the same. In the left navigation, click *Home -> Search*, then select *Templates* from the dropdown, and click *mlbparks*. 
+But as always, you can use the OpenShift web console to do the same. In the Developer Perspective, click *Advanced -> Search* in the left navigation, then select *Templates* from the dropdown, and click *mlbparks*. 
 
 image::images/mlbparks-templates-yaml-menu.png[Complete overview]
 
