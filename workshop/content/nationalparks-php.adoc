@@ -64,17 +64,14 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
+link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git[Gogs Repository]
+
 Your Gogs credentials are:
 
-[source,bash,role=copypaste]
+[source,bash]
 ----
 username: {{username}}
 password: {{GOGS_PASSWORD}}
-----
-
-[source,role=copypaste]
-----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
 ----
 
 Later in the lab, we want you to make a code change and then rebuild your
@@ -129,7 +126,7 @@ the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get builds
 ----
@@ -144,7 +141,7 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
 
 You can also view the build logs with the following command:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc logs -f builds/nationalparks-1
 ----
@@ -172,7 +169,7 @@ If you look again at the web console, you will notice that, when you create the
 application this way, OpenShift also creates a *Route* for you. You can see the
 URL in the web console, or via the command line:
 
-[source,bash,role=copypaste]
+[source,bash,role=execute-1]
 ----
 oc get routes
 ----
@@ -195,13 +192,9 @@ http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}
 
 Since this is a back-end application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
-frontend are required to implement a `/ws/info/` endpoint. To test, the
-complete URL to enter in your browser is:
+frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
-[source,bash,role=copypaste]
-----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
-----
+link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
 
 WARNING: The trailing slash is *required*.
 

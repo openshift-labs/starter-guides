@@ -16,11 +16,13 @@ through various scenarios related to using OpenShift.
 The online interactive learning environment is always available so you
 can continue to work on those exercises even after the workshop is over.
 
-* *link:https://developers.redhat.com/openshift/[OpenShift Resources on developers.redhat.com]* - A collection of resources for developers who are building and deploying applications on OpenShift.
-
 Below you will find further resources for learning about OpenShift and
 running OpenShift on your own computer, as well as details about OpenShift
 Online or other OpenShift related products and services.
+
+* *link:https://docs.openshift.com[OpenShift Documentation]* - The landing page for OpenShift documentation.
+
+* *link:https://developers.redhat.com/openshift/[OpenShift Resources on developers.redhat.com]* - A collection of resources for developers who are building and deploying applications on OpenShift.
 
 * *link:https://developers.redhat.com/products/codeready-containers/overview[CodeReady Containers]* - A tool which can
 be used to install a local OpenShift cluster on your own computer, running

@@ -17,14 +17,13 @@ image::images/nationalparks-pipeline-codechanges-webhook-config.png[Webhook]
 Click *Copy URL with Secret* for the Generic webhook. Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on Gogs:
 
-[source,bash,role=copypaste]
-----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks
-----
+
+link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks[Gogs Repository]
+
 
 Your Gogs credentials are:
 
-[source,bash,role=copypaste]
+[source,bash]
 ----
 username: {{username}}
 password: {{GOGS_PASSWORD}}
@@ -116,10 +115,9 @@ nationalparks-build-2   JenkinsPipeline   Git@master    Running    58 seconds ag
 Once the build and deploy has finished, verify your new image was
 automatically deployed by viewing the application in your browser:
 
-[source,bash,role=copypaste]
-----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
-----
+
+link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
+
 
 You should now see the new name you have set in the JSON string returned.
 
@@ -170,10 +168,8 @@ Warning: the following images triggers were disabled: nationalparks:latest
 Once the deploy is complete, verify that the page header is reverted to the
 original header by viewing the application in your browser.
 
-[source,bash,role=copypaste]
-----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
-----
+
+link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
 
 [NOTE]
 ====

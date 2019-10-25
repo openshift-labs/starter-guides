@@ -42,13 +42,6 @@ You can do this with the following command:
 oc project {{ project_namespace  }}
 ----
 
-You will see the following confirmation message:
-
-[source,bash]
-----
-Already on project "{{ project_namespace  }}" on server "{{API_ADDRESS}}".
-----
-
 == The Web Console
 
 OpenShift ships with a web-based console that will allow users to

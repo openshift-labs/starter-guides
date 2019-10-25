@@ -64,18 +64,17 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
+link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git[Gogs Repository]
+
 Your Gogs credentials are:
 
-[source,bash,role=copypaste]
+[source,bash]
 ----
 username: {{username}}
 password: {{GOGS_PASSWORD}}
 ----
 
-[source,role=copypaste]
-----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
-----
+
 
 Later in the lab, we want you to make a code change and then rebuild your
 application. This is a fairly simple Python application.
@@ -194,12 +193,9 @@ http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}
 
 Since this is a backend application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
-frontend are required to implement a `/ws/info/` endpoint. To test, the
-complete URL to enter in your browser is:
+frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
-[source,bash,role=copypaste]
-----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
+link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
 ----
 
 WARNING: The trailing slash is *required*.

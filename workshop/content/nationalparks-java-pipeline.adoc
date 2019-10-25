@@ -205,7 +205,7 @@ spec:
     - type: ConfigChange
 ----
 
-In the left navigation menu, click on *Builds* and then *national-parks* and from the *Builds* tab, click *nationalparks-1* to see the pipeline you just created.
+Click the *Builds* tab, then *nationalparks-build-1* to see the pipeline you just created.
 
 image::images/devops-pipeline-running.png[Pipeline running]
 

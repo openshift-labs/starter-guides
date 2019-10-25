@@ -17,14 +17,13 @@ image::images/nationalparks-codechanges-webhook-config.png[Webhook]
 Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on your local Gogs:
 
-[source,bash,role=copypaste]
-----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks
-----
+
+link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks[Gogs Repository]
+
 
 Your Gogs credentials are:
 
-[source,bash,role=copypaste]
+[source,bash]
 ----
 username: {{username}}
 password: {{GOGS_PASSWORD}}
@@ -110,10 +109,8 @@ nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago
 Once the build and deploy has finished, verify your new image was
 automatically deployed by viewing the application in your browser:
 
-[source,bash,role=copypaste]
-----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
-----
+
+link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
 
 You should now see the new name you have set in the JSON string returned.
 
@@ -164,10 +161,9 @@ Warning: the following images triggers were disabled: nationalparks:live
 Once the deploy is complete, verify that the page header is reverted to the
 original header by viewing the application in your browser.
 
-[source,bash,role=copypaste]
-----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/
-----
+
+link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
+
 
 [NOTE]
 ====

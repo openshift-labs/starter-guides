@@ -162,7 +162,7 @@ resources for our *mlbparks* application.
 oc get template mlbparks -o yaml
 ----
 
-But as always, you can use the OpenShift web console to do the same. In the Developer Perspective, click *Advanced -> Search* in the left navigation, then select *Templates* from the dropdown, and click *mlbparks*. 
+But as always, you can use the OpenShift web console to do the same. In the Developer Perspective, click *Advanced -> Search* in the left navigation, then select *Template* from the dropdown, and click *mlbparks*. 
 
 image::images/mlbparks-templates-yaml-menu.png[Complete overview]
 
