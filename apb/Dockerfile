@@ -57,6 +57,10 @@ cmluZwogICAgICBkZWZhdWx0OiAiYWRtaW4xMjMiCiAgICAgIHJlcXVpcmVkOiB0cnVlCiAgICAg\
 IGRpc3BsYXlfdHlwZTogdGV4dAogICAgICBkaXNwbGF5X2dyb3VwOiBJbmZyYXN0cnVjdHVyZSBT\
 ZXJ2aWNlcwo="
 
+# Download newer oc client into /usr/bin/oc
+RUN curl -kL https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.1/linux/oc.tar.gz -o /tmp/oc.tar.gz \
+    && tar -xvzf /tmp/oc.tar.gz && chmod 755 oc && mv oc /usr/bin/oc
+
 COPY playbooks /opt/apb/actions
 COPY roles /opt/ansible/roles
 ADD requirements.yml /opt/apb/actions/requirements.yml
