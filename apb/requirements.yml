@@ -3,7 +3,7 @@
   name: openshift_sonatype_nexus
 
 - src: siamaksade.openshift_gogs
-  version: 1.1.0
+  version: 1.2.0
   name: openshift_gogs
 
 - src: openshift_labs.workshop_deployment_tracker
