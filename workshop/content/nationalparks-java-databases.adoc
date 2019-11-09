@@ -1,8 +1,5 @@
-In this sectuib, we're going to deploy a MongoDB database that will be used to store
-the data for the `nationalparks` application. We will also connect the
-`nationalparks` service with the newly deployed MongoDB database, so that the
-`nationalparks` service can load and query the database for the corresponding
-information.
+In this section we will deploy and connect a MongoDB database where the
+`nationalparks` application will store location information.
 
 Finally, we will mark the `nationalparks` application as a backend for the map
 visualization tool, so that it can be dynamically discovered by the `parksmap`
