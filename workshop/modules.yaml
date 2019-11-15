@@ -95,6 +95,7 @@ config:
     - name: INFRA_PROJECT
       value: undefined
       aliases:
+      - SPAWNER_NAMESPACE
       - JUPYTERHUB_NAMESPACE
     ##
     # Module installing CLI
