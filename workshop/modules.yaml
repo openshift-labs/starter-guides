@@ -70,6 +70,7 @@ modules:
 
 config:
     template_engine: liquid.js
+    google_tracking_id: UA-135921114-11
     vars:
     ##
     # Common fixed variables
