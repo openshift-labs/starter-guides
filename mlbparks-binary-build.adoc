@@ -27,7 +27,7 @@ The first step is to clone the MLB source code from GitHub to your local machine
 
 [source,bash,role=copypaste]
 ----
-git clone https://github.com/openshift-roadshow/mlbparks.git
+git clone https://github.com/openshift-roadshow/mlbparks.git ; cd mlbparks
 ----
 
 NOTE: We are using Intellij here in the guide for screenshots but this should work regardless of your tool chain. JBoss
