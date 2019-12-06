@@ -231,7 +231,7 @@ labels. `describe` the `nationalparks` service:
 
 [source,bash,role=execute-1]
 ----
-$ oc describe route nationalparks
+oc describe route nationalparks
 ----
 
 [source,bash]

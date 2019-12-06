@@ -80,7 +80,7 @@ config:
       value: docs.openshift.com/container-platform/latest
     - name: GOGS_PASSWORD
       desc: Password to use for logging into GOGS_PASSWORD
-      value: openshift
+      value: gogs
     ##
     # Module environment
     #
