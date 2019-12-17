@@ -11,5 +11,5 @@
   name: workshop_deployment_tracker
 
 - src: git+https://github.com/openshift-homeroom/ansible-labs-deployer
-  version: 0.1.0
+  version: 0.1.1
   name: homeroom_labs_deployer
