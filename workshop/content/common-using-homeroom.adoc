@@ -1,4 +1,4 @@
-Access to the workshop is provided by link:https:https://github.com/openshift-homeroom[Homeroom], an interactive training environment you can use in your web browser without needing to install anything on your local machine.
+Access to the workshop is provided by link:https://github.com/openshift-homeroom[Homeroom], an interactive training environment you can use in your web browser without needing to install anything on your local machine.
 
 The Homeroom dashboard provides you access to the workshop content, one or more terminals, and an instance of the OpenShift web console.
 

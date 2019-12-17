@@ -35,7 +35,7 @@ image::images/parksmap-image-options.png[Explore Project]
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
-We will add 3 labels. First the name to be given to the application.
+We will add 3 labels. After you enter the name=value pair for each label, press *enter* before typing the next. First the name to be given to the application.
 
 [source,role=copy]
 ----
