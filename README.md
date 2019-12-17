@@ -9,7 +9,7 @@ Deploying the Workshop
 To deploy the workshop, first clone this Git repository to your own machine. Use the command:
 
 ```
-git clone --recurse-submodules https://github.com/openshift-labs/lab-getting-started.git
+git clone --recurse-submodules https://github.com/openshift-labs/starter-guides.git
 ```
 
 The ``--recurse-submodules`` option ensures that Git submodules are checked out. If you forget to use this option, after having clone the repository, run:
