@@ -65,9 +65,7 @@ do
       -e _nexus_operator_project=${WORKSHOP_PROJECT} \
       -e project_name=${WORKSHOP_PROJECT} \
       -e ocp_username=${ocp_username} \
-      -e num_users=10 \
-      -e user_count=20 \
-      -e ACTION="create"
+      --extra-vars '{"num_users": 10, "user_count": 10, "ACTION": "create"}'
 done
 ```
 
