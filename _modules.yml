@@ -26,7 +26,7 @@ config:
     # 
     - name: DOCS_URL
       desc: URL prefix to access docs (docs.openshift.org/latest) without the protocol prefix. (https:// will be used.)
-      value: docs.openshift.com/container-platform/latest
+      value: docs.openshift.com/container-platform/3.11
     ##
     # Module environment
     # 
