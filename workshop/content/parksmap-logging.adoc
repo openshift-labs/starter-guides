@@ -92,7 +92,7 @@ insufficient.
 Fortunately, OpenShift provides an optional system for log aggregation that uses
 Elasticsearch, Fluentd, and Kibana (EFK).
 
-In the OpenShift web console, click *Monitoring -> Logging* from the left navigation. 
+In the Administrator perspective, click *Monitoring -> Logging* from the left navigation. 
 
 Clicking this link takes you to the Kibana web interface. This interface is
 secured with OpenShift's role-based access controls, so you can only see logs
@@ -100,9 +100,9 @@ for projects that you have access to. You will need to accept the SSL certificat
 
 image::images/parksmap-logging-kibana.png[Kibana Interface]
 
-CAUTION: In the following Kibana search(es), replace `{{ project_namespace }}` with the project provided to you and the pod_name to match your pod.
+CAUTION: In the following Kibana search(es), replace the pod_name to match the name of your pod.
 
-[source,bash,role=copypaste]
+[source,bash,role=copyandedit]
 ----
 kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"{{ project_namespace }}"
 ----
@@ -115,23 +115,19 @@ If your search returns no hits, try changing the time-picker in the top right-ha
 If you want to see all the historical logs for this *Project*, simply remove the
 pod name reference and click the magnifying glass or press the enter key.
 
-CAUTION: In the following Kibana search(es), replace `{{ project_namespace }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----
 kubernetes.namespace_name:"{{ project_namespace }}"
 ----
 
-If you click the "x" in the column for the container name, and, in the left bar,
-click "add" for `kubernetes.pod_name`, you'll then see your old *Pod*'s logs,
+If you click "add" for `kubernetes.pod_name` in the left bar, you'll then see your old *Pod*'s logs,
 too. Remember, we scaled them down before coming here, so you can see how the
 log system is keeping a historical record.
 
 image::images/parksmap-logging-kibana-parksmap-headers.png[Kibana Interface]
 
 Try the following search string ensuring that you use the correct name for your project:
-
-CAUTION: In the following Kibana search(es), replace `{{ project_namespace }}` with the project provided to you.
 
 [source,bash,role=copypaste]
 ----

@@ -54,7 +54,7 @@ We will be prompted with the configuration screens for deploying our Jenkins ser
 
 image::images/devops-jenkins-template.png[Jenkins template]
 
-Leave the defaults for all parameters and click the blue *Create* button.
+Change **Disable memory intensive administrative monitors** to **true** to speed up the deployment time in the workshop, and leave the defaults for all parameters and click the blue *Create* button.
 
 image::images/devops-jenkins-template-config.png[Jenkins template config]
 
