@@ -88,8 +88,9 @@ Fortunately, OpenShift provides an optional system for log aggregation that uses
 Elasticsearch, Fluentd, and Kibana (EFK).
 
 In the OpenShift web console on the *Pod*'s logs page, at the right you will see
-a "View Archive" link. Go ahead and click it. If you do not see the "archive" link, ensure that you have at least two pods running.  If you don't, use the information you learned in a previous lab to scale up to two instances of the application.  You will need to accept the SSL
+a "View Archive" link. Go ahead and click it. If you do not see the "archive" link, ensure that you have at least two pods running.  If you don't, use the information you learned in a previous lab to scale up to two instances of the application.  You will need to accept the SSL 
 certificate.
+Also, ensure you're looking at the *Pod*'s logs page (under Applications | Pods), not the Deployment's log (under Applications | Deployments ).
 
 image::parksmap-logging-view-log-archive.png[View Logs]
 
