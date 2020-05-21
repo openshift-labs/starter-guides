@@ -63,7 +63,7 @@ Once the cluster is deployed, follow the directions in the [Running the Workshop
 The recommend way to deploy this workshop is directly from the RHPDS catalog as described above. You want to deploy it manually, you can order the base OpenShift 4.2 Workshop and deploy the Getting Started workshop via the instructions below.
 
 **Prerequisites**
-* An OpenShift 4.2 or 4.3 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.2 Workshop**.
+* An OpenShift 4.4 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.4 Workshop**.
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop. 
 
@@ -75,10 +75,23 @@ Next, clone the AgnosticD repository (or your fork of it, if you are making chan
 git clone https://github.com/redhat-cop/agnosticd
 ```
 
-In your terminal, cd into the agnosticd repository and run:
+In your terminal, cd into the agnosticd repository:
+
+```
+cd agnosticd
+```
+
+If you are running Docker or Moby, type:
 
 ```
 docker run -it --rm -v $(pwd):/opt/app-root/src -v $HOME/.kube:/opt/app-root/src/.kube \
+--entrypoint bash quay.io/osevg/agnosticd-runner
+```
+
+If you are running Podman, type:
+
+```
+podman run -it --rm --user 0 -v $(pwd):/opt/app-root/src:Z -v $HOME/.kube:/opt/app-root/src/.kube:Z \
 --entrypoint bash quay.io/osevg/agnosticd-runner
 ```
 
@@ -93,7 +106,7 @@ Run the following script to deploy all the components of the starter workshop. C
 
 ```
 TARGET_HOST=localhost
-GUID=sampleuser
+GUID=<your-GUID>
 ocp_username=opentlc-mgr
 # WORKLOAD SPECIFICS
 WORKSHOP_PROJECT=lab
