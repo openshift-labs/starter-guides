@@ -106,14 +106,14 @@ Run the following script to deploy all the components of the starter workshop. C
 
 ```
 TARGET_HOST=localhost
-GUID=<your-GUID>
+GUID=<YOUR_GUID>
 ocp_username=opentlc-mgr
 # WORKLOAD SPECIFICS
 WORKSHOP_PROJECT=lab
 workloads=("ocp-workload-etherpad" \
            "ocp-workload-ocp-ops-view" \
            "ocp-workload-gogs" \
-           "ocp4-workload-nexus-operator" \
+           "ocp4_workload_nexus_operator" \
            "ocp-workload-gogs-load-repository" \
            "ocp4-workload-homeroomlab-starter-guides")
 
@@ -127,7 +127,7 @@ do
       -e etherpad_project=${WORKSHOP_PROJECT} \
       -e gogs_project=${WORKSHOP_PROJECT} \
       -e opsview_project=${WORKSHOP_PROJECT} \
-      -e _nexus_operator_project=${WORKSHOP_PROJECT} \
+      -e ocp4_workload_nexus_operator_project=${WORKSHOP_PROJECT} \
       -e project_name=${WORKSHOP_PROJECT} \
       -e ocp_username=${ocp_username} \
       --extra-vars '{"num_users": 5, "user_count": 5, "ACTION": "create"}'
