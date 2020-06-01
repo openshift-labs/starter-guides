@@ -29,7 +29,7 @@ Your screen will end up looking something like this:
 image::images/parksmap-image.png[Explore Project]
 
 
-Make sure to have the correct values in the *Application Name* and *Name* fields.
+Make sure to have the correct values in the *Application Name* and *Name* fields, and pick *Deployment Config* from *Resource* section.
 
 image::images/parksmap-image-options.png[Explore Project]
 

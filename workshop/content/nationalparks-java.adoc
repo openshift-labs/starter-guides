@@ -105,6 +105,8 @@ NOTE: All of these runtimes shown are made available via *Templates* and
 
 Scroll down to the *General* section. Select `workshop` as your application, and `nationalparks` as the name.
 
+In *Resources* section, select *Deployment Config*.
+
 Expand the Labels section and add 3 labels:
 
 - *__app__=workshop*  (the name we will be giving to the app)

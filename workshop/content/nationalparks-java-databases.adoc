@@ -72,9 +72,11 @@ CAUTION: Make sure to have configured the *`MongoDB Database Name`* parameter wi
 
 Once you have entered in the above information, click on *Create* to go to the next step which will allow us to add a binding.
 
-image::images/nationalparks-databases-catalog-databases-mongodb-create-bining.png[Bind Mongo]
+Select *Administrator* view, go to *Workload* section, then click to *Secrets*.
 
-Click the secret name listed under *Parameters*. The secret can be used in other components, such as the `nationalparks` backend, to authenticate to the database.
+image::images/nationalparks-databases-list-secrets.png[List Secrets]
+
+Click the secret name listed that we will use for *Parameters*. The secret can be used in other components, such as the `nationalparks` backend, to authenticate to the database.
 
 Now that the connection and authentication information stored in a secret in our project, we need to add it to the `nationalparks` backend. Click the *Add Secret to Workload* button.
 
