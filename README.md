@@ -18,7 +18,13 @@
 | Supported Number of Users | Up to 100 per cluster |
 | Average Time to Complete | 90 minutes |
 
-This workshop is intended to give you a hands on introduction to using OpenShift from the perspective of a developer.
+This workshop is intended to give you a hands on introduction to using OpenShift from the perspective of a developer. You'll learn how to deploy an application through a pre-existing container, interact with app details, and configure it through the OpenShift container platform.
+
+Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
+
+For developers looking to kickstart their projets, OpenShift enables efficient application development through streamlined workflows and validated integrations.
+
+## Objectives
 
 Topics which this workshop will cover include:
 * Using the OpenShift command line client and web console.
@@ -41,14 +47,14 @@ There are 4 programming language variants of the workshop:
 * Python
 * PHP
 
+## Services Used
+
 The full workshop contains several components:
 * Etherpad - So users can claim a username
 * A GOGS server and GOGS repositories for each user
 * Nexus - Currently only used by the Java version of the workshop
 * OCP Ops View - An instance of the [ops-view](https://github.com/hjacobs/kube-ops-view) cluster visualizer
 * An instance of the homeroom workshop chooser application and the 4 starter lab guides (Java, Node.js, Python, PHP) from this repository.
-
-An example of the Java lab guide can be found [here](http://lab-getting-started-ocp4-starter-guide.apps.osd4-demo.u6k6.p1.openshiftapps.com/workshop/common-workshop-summary).
 
 ## Deploying the Workshop
 This workshop is designed to be deployed from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). 
