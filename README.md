@@ -47,7 +47,7 @@ There are 4 programming language variants of the workshop:
 * Python
 * PHP
 
-## Services Used
+### Services Used
 
 The full workshop contains several components:
 * Etherpad - So users can claim a username
@@ -60,28 +60,28 @@ The full workshop contains several components:
 This workshop is designed to be deployed from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). 
 
 ### Deploying on Red Hat Product Demo System
-The workshop is found in the catalog under the **Workshops** folder and is named **OCP4 - Getting Started Workshop**.
+Upon logging into RHPDS, highlight the **Services** sidebar, and select the **Catalogs** menu. The workshop is found in the catalog under the **Workshops** folder and is named **OCP4 - Getting Started Workshop**.
 
-Once the cluster is deployed, follow the directions in the [Running the Workshop](#running-the-workshop) section to begin the workshop itself.
+Once the cluster is deployed, which may take up to 75 minutes, follow the directions in the [Running the Workshop](#running-the-workshop) section to begin the workshop itself.
 
 ### Deploying to an OpenShift Cluster
 
-The recommend way to deploy this workshop is directly from the RHPDS catalog as described above. You want to deploy it manually, you can order the base OpenShift 4.2 Workshop and deploy the Getting Started workshop via the instructions below.
+The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.2 Workshop and deploy the Getting Started workshop via the instructions below.
 
 **Prerequisites**
 * An OpenShift 4.2 or 4.3 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.2 Workshop**.
 
-[AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop. 
+[AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
 
-First, log into the OpenShift cluster where you want to deploy the workshop. You need to log in with cluster admin permissions.
+1. First, log into the OpenShift cluster where you want to deploy the workshop. You'll need to log in with cluster admin permissions.
 
-Next, clone the AgnosticD repository (or your fork of it, if you are making changes):
+2. Next, clone the AgnosticD repository (or your fork of it, if you are making changes):
 
 ```
 git clone https://github.com/redhat-cop/agnosticd
 ```
 
-In your terminal, cd into the agnosticd repository and run:
+3. In your terminal, cd into the agnosticd repository and run:
 
 ```
 docker run -it --rm -v $(pwd):/opt/app-root/src -v $HOME/.kube:/opt/app-root/src/.kube \
@@ -90,12 +90,12 @@ docker run -it --rm -v $(pwd):/opt/app-root/src -v $HOME/.kube:/opt/app-root/src
 
 This will get you a bash shell into an AgnosticD enabled environment. In this environment, you'll be able to run or test AgnosticD workloads.
 
-cd into the ansible directory:
+4. cd into the ansible directory:
 ```
 cd ansible
 ```
 
-Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop.
+5. Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop.
 
 ```
 TARGET_HOST=localhost
@@ -130,7 +130,7 @@ done
 ## Running the Workshop
 
 ### Starting the Workshop for Participants
-Once the deployment finishes, go to the `labs` project and view the Routes there. The structure of the Route URLs is as follows. If your GUID is, for example, `abc-1234`, and the route name is `myroute`, the Route URL will be http://`myroute`-labs.apps.cluster-`abc-1234`.`abc-1234`.example.opentlc.com
+Once the deployment finishes, navigate to the OpenShift administrator perspective. After, go to the `labs` project and view the Routes there. The structure of the Route URLs is as follows. If your GUID is, for example, `abc-1234`, and the route name is `myroute`, the Route URL will be http://`myroute`-labs.apps.cluster-`abc-1234`.`abc-1234`.example.opentlc.com
 
 * The `etherpad` route is for the etherpad deployment. Append `/p/workshop` to the end of this route and share that URL with lab participants so they can claim a username.
 * The `homeroom` route is the one that launches the workshop chooser. Give this URL to lab participants after they've claimed a username.
@@ -141,7 +141,7 @@ Once the deployment finishes, go to the `labs` project and view the Routes there
 ## Deploying the Lab Guides Only
 **Note**: For this workshop, you will typically want to deploy the full workshop, per the instructions above. Deploying the lab guides only is normally only done if you are making changes to the lab guide content and want to quickly verify and view your changes.
 
-To deploy the lab guides only, first clone this Git repository (or your fork of it, if you are making changes) to your own machine. Use the command:
+1. To deploy the lab guides only, first clone this Git repository (or your fork of it, if you are making changes) to your own machine. Use the command:
 
 ```
 git clone --recurse-submodules https://github.com/openshift-labs/lab-getting-started.git
@@ -153,13 +153,13 @@ The ``--recurse-submodules`` option ensures that Git submodules are checked out.
 git submodule update --recursive --remote
 ```
 
-Next create a project in OpenShift into which the workshop is to be deployed. You must be logged in as cluster admin to deploy the guides.
+2. Next create a project in OpenShift into which the workshop is to be deployed. You must be logged in as cluster admin to deploy the guides.
 
 ```
 oc new-project workshops
 ```
 
-From within the top level of the Git repository, now run:
+3. From within the top level of the Git repository, now run:
 
 ```
 .workshop/scripts/deploy-spawner.sh
@@ -167,7 +167,7 @@ From within the top level of the Git repository, now run:
 
 The name of the deployment will be ``lab-getting-started``.
 
-You can determine the hostname for the URL to access the workshop by running:
+4. You can determine the hostname for the URL to access the workshop by running:
 
 ```
 oc get route lab-getting-started
@@ -178,7 +178,7 @@ When the URL for the workshop is accessed you will be prompted for a user name a
 ## Development
 
 
-The deployment created above will use an image from ``quay.io`` for this workshop based on the ``ocp-4.2`` branch of the repository.
+The deployment created above will use an image from [Quay.io](https://quay.io/) for this workshop, a container automatization platform, based on the ``ocp-4.2`` branch of the repository.
 
 To make changes to the workshop content and test them, edit the files in the Git repository and then run:
 
