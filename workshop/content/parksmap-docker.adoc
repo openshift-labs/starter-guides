@@ -5,8 +5,8 @@ image::images/roadshow-app-architecture-parksmap-1.png[Application architecture,
 == Exercise: Deploying your First Image
 
 Let's start by doing the simplest thing possible - get a plain old
-Docker-formatted image to run on OpenShift. This is incredibly simple to do.
-With OpenShift it can be done directly from the web console.
+Docker-formatted image to run on OpenShift. Docker container images are lightweight, standalone, executable packages of software that include everything needed to run an application.
+This is incredible easy with OpenShift, and it can be done directly from the web console.
 
 Return to the http://console-openshift-console.{{cluster_subdomain}}/k8s/cluster/projects[Web Console].
 
@@ -21,8 +21,7 @@ In the *Image Name* field, copy/paste the following into the box:
 docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 ----
 
-Either press *enter* or click on the magnifying glass. OpenShift will then go
-out to the container registry specified and interrogate the image.
+Either press enter or click on the magnifying glass. OpenShift will then go out to the container registry specified and interrogate the image.
 
 Your screen will end up looking something like this:
 
@@ -32,6 +31,10 @@ image::images/parksmap-image.png[Explore Project]
 Make sure to have the correct values in the *Application Name* and *Name* fields.
 
 image::images/parksmap-image-options.png[Explore Project]
+
+For *Resources*, ensure Deployment Config is selected to automatically manage the ReplicationController (RC), which we'll learn about soon.
+
+Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
@@ -55,8 +58,6 @@ And finally, the role this component plays in the overall application.
 ----
 role=frontend
 ----
-
-Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
 
 Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.

@@ -92,7 +92,9 @@ insufficient.
 Fortunately, OpenShift provides an optional system for log aggregation that uses
 Elasticsearch, Fluentd, and Kibana (EFK).
 
-In the Administrator perspective, click *Monitoring -> Logging* from the left navigation. 
+In the Administrator perspective, click *Monitoring -> Logging* from the left navigation. You'll have to authorize account permissions through the prompt as seen below.
+
+image::images/parksmap-logging-kibana-access.png[Kibana Access]
 
 Clicking this link takes you to the Kibana web interface. This interface is
 secured with OpenShift's role-based access controls, so you can only see logs
