@@ -18,16 +18,16 @@
 | Supported Number of Users | Up to 100 per cluster |
 | Average Time to Complete | 90 minutes |
 
-This workshop is intended to give you a hands on introduction to using OpenShift from the perspective of a developer. You'll learn how to deploy an application through a pre-existing container, interact with app details, and configure it through the OpenShift container platform.
+This workshop is intended to give you a hands-on introduction to using OpenShift from the perspective of a developer.
 
-Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
+Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
 
-For developers looking to kickstart their projets, OpenShift enables efficient application development through streamlined workflows and validated integrations.
+For developers looking to kickstart their projects, OpenShift enables efficient application development through streamlined workflows and validated integrations.
 
-## Objectives
+### Objectives
 
 Topics which this workshop will cover include:
-* Using the OpenShift command line client and web console.
+* Using the OpenShift command-line client and web console.
 * Deploying an application using a pre-existing container image.
 * Working with application labels to identify component parts.
 * Scaling up your application in order to handle web traffic.
@@ -38,7 +38,7 @@ Topics which this workshop will cover include:
 * Deploying an application from source code in a Git repository.
 * Deploying a database from the OpenShift developer catalog.
 * Configuring an application so it can access a database.
-* Setting up web hooks to enable automated application builds.
+* Setting up webhooks to enable automated application builds.
 * Additional topics may also be covered relevant to the specific programming language used by the applications being deployed.
 
 There are 4 programming language variants of the workshop:
@@ -47,7 +47,7 @@ There are 4 programming language variants of the workshop:
 * Python
 * PHP
 
-### Services Used
+### Components Used
 
 The full workshop contains several components:
 * Etherpad - So users can claim a username
@@ -69,9 +69,11 @@ Once the cluster is deployed, which may take up to 75 minutes, follow the direct
 The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.2 Workshop and deploy the Getting Started workshop via the instructions below.
 
 **Prerequisites**
-* An OpenShift 4.2 or 4.3 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.2 Workshop**.
+* An OpenShift 4.3 or 4.4 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.4 Workshop**.
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
+
+**Deploying**
 
 1. First, log into the OpenShift cluster where you want to deploy the workshop. You'll need to log in with cluster admin permissions.
 
@@ -87,8 +89,7 @@ git clone https://github.com/redhat-cop/agnosticd
 docker run -it --rm -v $(pwd):/opt/app-root/src -v $HOME/.kube:/opt/app-root/src/.kube \
 --entrypoint bash quay.io/osevg/agnosticd-runner
 ```
-
-This will get you a bash shell into an AgnosticD enabled environment. In this environment, you'll be able to run or test AgnosticD workloads.
+   This will get you a bash shell into an AgnosticD enabled environment. In this environment, you'll be able to run or test AgnosticD workloads.
 
 4. cd into the ansible directory:
 ```
@@ -153,7 +154,7 @@ The ``--recurse-submodules`` option ensures that Git submodules are checked out.
 git submodule update --recursive --remote
 ```
 
-2. Next create a project in OpenShift into which the workshop is to be deployed. You must be logged in as cluster admin to deploy the guides.
+2. Next, create a project in OpenShift into which the workshop is to be deployed. You must be logged in as cluster admin to deploy the guides.
 
 ```
 oc new-project workshops
