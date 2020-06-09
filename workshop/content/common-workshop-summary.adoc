@@ -1,6 +1,6 @@
 This workshop is intended to give you a hands on introduction to using OpenShift from the perspective of a developer.
 
-Topics which this workshop will cover include:
+== Objectives
 
 * Using the OpenShift command line client and web console.
 * Deploying an application using a pre-existing container image.

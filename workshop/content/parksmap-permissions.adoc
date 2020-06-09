@@ -1,10 +1,10 @@
 Almost every interaction with an OpenShift environment that you can think of
 requires going through the OpenShift's control plane API. All API interactions are both authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to do what you are asking?).
 
-In the log aggregation lab we saw that there was an
+In the log aggregation lab, we saw that there was an
 error in reference to a *Service Account*.
 
-As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he or she issues a command). These actions are performed using a *Service Account* which is a special type of `user` that the platform will use internally.
+As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end-user (when he or she issues a command). These actions are performed using a *Service Account* which is a special type of `user` that the platform will use internally.
 
 OpenShift automatically creates a few special service accounts in every project.
 The **default** service account is the one taking the responsibility of running the pods, and OpenShift uses and injects this service account into
@@ -55,8 +55,7 @@ If you're referring to a service account in a different project, use the `-n <pr
 
 Now that the `default` *Service Account* now has **view** access, so now it can query the API to see what resources are within the *Project*. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.
 
-Another way you could have done the same is by using the OpenShift console. Once you're on the 
-*Workloads -> Deployment Configs* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
+Another way you could have done the same is by using the OpenShift console. From the Administrator perspective,navigate to the *Workloads -> Deployment Configs* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
 
 image::images/parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 

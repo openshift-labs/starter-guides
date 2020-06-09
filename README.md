@@ -26,7 +26,6 @@ For developers looking to kickstart their projects, OpenShift enables efficient 
 
 ### Objectives
 
-Topics which this workshop will cover include:
 * Using the OpenShift command-line client and web console.
 * Deploying an application using a pre-existing container image.
 * Working with application labels to identify component parts.
