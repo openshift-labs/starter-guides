@@ -55,7 +55,7 @@ If you're referring to a service account in a different project, use the `-n <pr
 
 Now that the `default` *Service Account* now has **view** access, so now it can query the API to see what resources are within the *Project*. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.
 
-Another way you could have done the same is by using the OpenShift console. From the Administrator perspective,navigate to the *Workloads -> Deployment Configs* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
+Another way you could have done the same is by using the OpenShift console. From the Administrator perspective, navigate to the *Workloads -> Deployment Configs* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
 
 image::images/parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 

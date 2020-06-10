@@ -178,7 +178,7 @@ When the URL for the workshop is accessed you will be prompted for a user name a
 ## Development
 
 
-The deployment created above will use an image from [Quay.io](https://quay.io/) for this workshop, a container automatization platform, based on the ``ocp-4.2`` branch of the repository.
+The deployment created above will use an image from [Quay.io](https://quay.io/) for this workshop, a container automation platform, based on the ``ocp-4.2`` branch of the repository.
 
 To make changes to the workshop content and test them, edit the files in the Git repository and then run:
 
