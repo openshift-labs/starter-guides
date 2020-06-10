@@ -6,7 +6,7 @@ image::images/roadshow-app-architecture-parksmap-1.png[Application architecture,
 
 Let's start by doing the simplest thing possible - get a plain old
 Docker-formatted image to run on OpenShift. Docker container images are lightweight, standalone, executable packages of software that include everything needed to run an application.
-This is incredible easy with OpenShift, and it can be done directly from the web console.
+Launching such containers is incredible easy with OpenShift, and it can be done directly from the web console.
 
 Return to the http://console-openshift-console.{{cluster_subdomain}}/k8s/cluster/projects[Web Console].
 
