@@ -63,7 +63,7 @@ Upon logging into RHPDS, highlight the **Services** sidebar, and select the **Ca
 
 Once the cluster is deployed, which may take up to 75 minutes, follow the directions in the [Running the Workshop](#running-the-workshop) section to begin the workshop itself.
 
-NOTE: It will take up to 75 minutes to deploy the OCP4 cluster via RHPDS.
+**Note:** It will take up to 75 minutes to deploy the OCP4 cluster via RHPDS.
 
 ### Deploying to an OpenShift Cluster
 
