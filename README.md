@@ -61,7 +61,7 @@ This workshop is designed to be deployed from [Red Hat Product Demo System (RHPD
 ### Deploying on Red Hat Product Demo System
 Upon logging into RHPDS, highlight the **Services** sidebar, and select the **Catalogs** menu. The workshop is found in the catalog under the **Workshops** folder and is named **OCP4 - Getting Started Workshop**.
 
-Once the cluster is deployed, which may take up to 75 minutes, follow the directions in the [Running the Workshop](#running-the-workshop) section to begin the workshop itself.
+Follow the directions in the [Running the Workshop](#running-the-workshop) section to begin the workshop itself.
 
 **Note:** It will take up to 75 minutes to deploy the OCP4 cluster via RHPDS.
 
