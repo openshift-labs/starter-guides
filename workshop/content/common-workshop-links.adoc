@@ -2,11 +2,11 @@ You can find all urls, hostnames, usernames and passwords that are needed during
 
 == OpenShift cluster URL
 
-Console Address: {{CONSOLE_ADDRESS}} +
-API Address: {{API_ADDRESS}} +
+Console Address: http://console-openshift-console.{{cluster_subdomain}} +
+API Address: https://api.{{cluster_subdomain}}:6443 +
 
 Username: `{{ username}}` + 
-Password: `{{ USER_PASSWORD }}` +
+Password: `openshift` +
 
 
 
@@ -24,7 +24,7 @@ Web: http://terminal-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
 Web: http://gogs-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
 
 Username: `{{username}}` + 
-Password: `{{ USER_PASSWORD }}` + 
+Password: `{{ GOGS_PASSWORD }}` + 
 
 == Nexus Maven repository
 
