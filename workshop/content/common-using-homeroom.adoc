@@ -1,6 +1,6 @@
 Access to the workshop is provided by link:https://github.com/openshift-homeroom[Homeroom], an interactive training environment you can use in your web browser without needing to install anything on your local machine.
 
-The Homeroom dashboard provides you access to the workshop content, one or more terminals, and an instance of the OpenShift web console.
+The Homeroom dashboard provides you access to the workshop content and one or more terminals.
 
 The interactive shells are hosted in a container running inside of OpenShift. Any special command line programs you need are already pre-installed.
 
@@ -59,8 +59,8 @@ How to paste a value into the terminals will depend on the operating system and 
 
 If at any time a glitch occurs and the workshop content does not display properly because of a network issue, and so an error is displayed, or it shows as a white page, select the dropdown hamburger menu top right in the banner above the terminals and select "Reload Workshop". That menu item will reload just the workshop content and leave you on the same page.
 
-Similarly, if the terminals stop working or show as closed, select "Reload Terminal" from the dropdown hamburger menu. And if the embedded web console has connection issues, select "Reload Console".
+Similarly, if the terminals stop working or show as closed, select "Reload Terminal" from the dropdown hamburger menu.
 
-Do not use the ability of the browser to reload the whole browser page as you will loose where you were up to in the workshop content. Also do not use the "Restart Session" menu item unless specifically directed to as you will loose all your work.
+Do not use the ability of the browser to reload the whole browser page as you will lose your progress in the workshop content. Also do not use the "Restart Session" menu item unless specifically directed to as you will lose all your work.
 
 If you have any issues which using the reload menu items do not solve, ask the workshop instructor.

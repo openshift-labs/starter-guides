@@ -74,7 +74,7 @@ https://{{DOCS_URL}}/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscali
 
 == Exercise: Scaling the Application
 
-Let's scale our parksmap "application" up to 2 instances. We can do this with
+Let's scale our `parksmap` "application" up to 2 instances. We can do this with
 the `scale` command. You could also do this by incrementing the Desired Count in the OpenShift web console. Pick one of these methods; it's your choice.
 
 [source,bash,role=execute-1]
