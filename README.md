@@ -130,6 +130,15 @@ do
 done
 ```
 
+**Note:** If you would like participants to be able to do the optional cluster logging aspect of the lab (with Kibana) you need to add the following to the list of workloads (or run this workload separately after all the other workloads):
+```
+workloads=("ocp4-workload-logging")
+```
+and you need to provide an --extra-var that tells agonstic about the cloud provider.  For instance, if your cluster is running in AWS, you need to add the following to the `ansible-playbook` command line above
+
+```
+-e cloud_provider="ec2"
+```
 ## Running the Workshop
 
 ### Starting the Workshop for Participants
