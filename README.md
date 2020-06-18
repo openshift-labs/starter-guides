@@ -122,7 +122,8 @@ do
       -e etherpad_project=${WORKSHOP_PROJECT} \
       -e gogs_project=${WORKSHOP_PROJECT} \
       -e opsview_project=${WORKSHOP_PROJECT} \
-      -e _nexus_operator_project=${WORKSHOP_PROJECT} \
+      -e '{ "ocp4_workload_nexus_operator_vars": {"project": "${WORKSHOP_PROJECT}"} }' \
+      -e skip_tls_verify=true \
       -e project_name=${WORKSHOP_PROJECT} \
       -e ocp_username=${ocp_username} \
       --extra-vars '{"num_users": 5, "user_count": 5, "ACTION": "create"}'
