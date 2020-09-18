@@ -61,7 +61,7 @@ As pipelines provide the ability to promote applications between different stage
 For this example, we're going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
 
-[source,shell,role=copypaste]
+[source,shell,role=execute1]
 ----
 oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/pipeline/nationalparks-pipeline-all.yaml -n {{project_namespace}}
 ----
@@ -169,43 +169,20 @@ This pipeline has 4 Tasks defined:
 - *build-image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it `s2i-java11-binary`
 - *redeploy*: it will deploy the created image on OpenShift using the DeploymentConfig named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
 
+From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline* to see the pipeline you just created.
+
+image::images/devops-pipeline-created.png[Pipeline created]
+
+The Pipeline is parametric, with default value on the one we need to use. 
+
+
 == Run the Pipeline
 
-In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameter to send to the pipeline:
+In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline:
 
-[source,shell,role=copypaste]
+[source,shell,role=execute1]
 ----
 oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/pipeline/nationalparks-pipelinerun.yaml -n {{project_namespace}}
 ----
 
-Click the *Pipeline* tab, then *nationalparks-build-1* to see the pipeline you just created.
-
-image::images/devops-pipeline-running.png[Pipeline running]
-
-The pipeline will start automatically and execute all stages that are defined in the Jenkinsfile 
-in the git repository.
-
-NOTE: the first time you are running it might take a little while before the pipeline starts. The reason for that is 
-that you are using the built-in https://plugins.jenkins.io/kubernetes[Kubernetes Jenkins Plugin] which dynamically provisions 
-a Jenkins slave pod to run the pipeline. The dynamic provisioning allows scaling the pipeline execution to many concurrent jobs. The 
-first time that pipeline runs, it will pull the jenkins slave image from the registry and therefore it might take a little bit of time.
-
-As the pipeline is running, you can watch the build logs. Click on the `view Logs` link in the appropriate build and you will be directed to Jenkins. In order to grant you access, Jenkins is configured to use Single Sign On with OpenShift, and you'll need to log in with OpenShift credentials.
-
-image::images/devops-pipeline-jenkins-sso.png[Jenkins SSO]
-
-You need to authorize your user account to access Jenkins.
-
-image::images/devops-pipeline-jenkins-sso-authorize.png[Jenkins SSO]
-
-You will see the output of your maven build as it's running in Jenkins.
-
-image::images/devops-pipeline-jenkins-log.png[Jenkins logs]
-
-After a little while, it will finish, hopefully with success.
-
-image::images/devops-pipeline-finished.png[Pipeline finished]
-
-Once the pipeline has finished, click `nationalparks` from Topology view. You should notice that the *Latest Version* number of the has increased. 
-
-image::images/devops-pipeline-nationalparks-deployed.png[Nationalparks component deployed]
+You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on one of the step to follow the Logs:
