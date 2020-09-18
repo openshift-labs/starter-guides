@@ -25,17 +25,22 @@ Let's see each component in detail:
 
 Now let's create them all together for our Pipeline:
 
-[source,shell,role=execute1]
+[source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/pipeline/nationalparks-triggers.yaml -n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/pipeline/nationalparks-triggers-all.yaml -n {{project_namespace}}
 ----
 
-This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline:
+This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.
+
+From left side menu, click on *Topology* to verify if a new Deployment *el-nationalparks* for the `EventListener` has ben created:
+
+image::images/devops-pipeline-eventlistener.png[EventListener created]
+
+ 
 
 == Exercise: Configuring Gogs Web Hooks
 
-Click *Copy URL with Secret* for the Generic webhook. Once you have the URL copied to your clipboard, navigate to the code repository
-that you have on Gogs:
+Click on the Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL. Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:
 
 
 link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks[Gogs Repository]
@@ -112,22 +117,14 @@ triggered in OpenShift. Click *Pipeline* in the left navigation menu then `natio
 
 image::images/nationalparks-codechanges-pipeline-running.png[Webhook]
 
-or run the
-following command to verify:
+or run the following command to verify:
 
 [source,bash,role=execute-1]
 ----
 oc get PipelineRun
 ----
 
-You should see that a new build is running:
-
-[source,bash]
-----
-----
-
-Once the build and deploy has finished, verify your new image was
-automatically deployed by viewing the application in your browser:
+Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:
 
 
 link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]

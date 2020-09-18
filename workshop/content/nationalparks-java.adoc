@@ -96,7 +96,7 @@ Enter the following for Git Repo URL:
 http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
 ----
 
-Select Java as your Builder Image, and be sure to select version 8.
+Select Java as your Builder Image, and be sure to select version 11.
 
 image::images/nationalparks-import-from-git-url-builder.png[Import from Git]
 

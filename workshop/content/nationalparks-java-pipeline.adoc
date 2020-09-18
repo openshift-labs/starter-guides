@@ -61,9 +61,9 @@ As pipelines provide the ability to promote applications between different stage
 For this example, we're going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
 
-[source,shell,role=execute1]
+[source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/pipeline/nationalparks-pipeline-all.yaml -n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/pipeline/nationalparks-pipeline-all.yaml -n {{project_namespace}}
 ----
 
 Now let's review our Tekton Pipeline:
@@ -173,16 +173,35 @@ From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*
 
 image::images/devops-pipeline-created.png[Pipeline created]
 
-The Pipeline is parametric, with default value on the one we need to use. 
+The Pipeline is parametric, with default value on the one we need to use.
+
+It is using two *Workspace*:
+
+- *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
+- *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
 
 
 == Run the Pipeline
 
 In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline:
 
-[source,shell,role=execute1]
+[source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/pipeline/nationalparks-pipelinerun.yaml -n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/pipeline/nationalparks-pipelinerun.yaml -n {{project_namespace}}
 ----
 
-You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on one of the step to follow the Logs:
+You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:
+
+image::images/devops-pipeline-run-1.png[Pipeline running]
+
+The click on the `PipelineRun` *national-parks-deploy-run-*:
+
+image::images/devops-pipeline-run-2.png[Pipeline running animation]
+
+Then click on the *Task* running to check logs:
+
+image::images/devops-pipeline-run-3.png[Pipeline Task log]
+
+Verify PipelineRun has been completed with success:
+
+image::images/devops-pipeline-run-4.png[PipelineRun completed]
