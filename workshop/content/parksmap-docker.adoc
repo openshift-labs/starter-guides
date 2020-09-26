@@ -18,7 +18,7 @@ In the *Image Name* field, copy/paste the following into the box:
 
 [source,role=copy]
 ----
-docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
+quay.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
 ----
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
