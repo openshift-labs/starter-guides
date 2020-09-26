@@ -29,9 +29,14 @@ Your screen will end up looking something like this:
 image::images/parksmap-image.png[Explore Project]
 
 
-Make sure to have the correct values in the *Application Name* and *Name* fields, and pick *Deployment Config* from *Resource* section.
+Make sure to have the correct values in:
 
-image::images/parksmap-image-options.png[Explore Project]
+* *Application Name* : workshop
+* *Name* : parksmap
+
+Pick *Deployment Config* from *Resource* section.
+
+Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
@@ -56,8 +61,7 @@ And finally, the role this component plays in the overall application.
 role=frontend
 ----
 
-Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
-
+image::images/parksmap-image-options.png[Deploy image]
 
 Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.
 
@@ -93,7 +97,7 @@ server, a log analyzer, and a file service to help manage uploaded files.
 
 == Exercise: Examining the Pod
 
-If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Overview* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
+If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
 
 image::images/parksmap-overview.png[Pod overview]
 
@@ -157,7 +161,7 @@ metadata:
     openshift.io/deployment.name: parksmap-1
     openshift.io/generated-by: OpenShiftWebConsole
     openshift.io/scc: restricted
-  creationTimestamp: 2019-05-20T17:45:45Z
+  creationTimestamp: 2020-09-20T17:45:45Z
   generateName: parksmap-1-
   labels:
     app: parksmap
@@ -187,9 +191,9 @@ Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Do
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://{{DOCS_URL}}/applications/application-life-cycle-management/creating-new-applications.html#applications-create-using-cli-image-creating-new-applications[specifying an image]
+https://{{DOCS_URL}}/applications/application_life_cycle_management/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli[specifying an image]
 as well as
-https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy[image pull policy].
+https://{{DOCS_URL}}/openshift_images/managing_images/image-pull-policy.html[image pull policy].
 
 == Background: Services
 
@@ -258,7 +262,7 @@ kind: Service
 metadata:
   annotations:
     openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: "2019-08-30T14:10:12Z"
+  creationTimestamp: "2020-09-30T14:10:12Z"
   labels:
     app: workshop
     app.kubernetes.io/component: parksmap
@@ -267,9 +271,9 @@ metadata:
     component: parksmap
     role: frontend
   name: parksmap
-  namespace: lab-getting-started-starter-workshop-apb-test-user1
+  namespace: user1
   resourceVersion: "1062269"
-  selfLink: /api/v1/namespaces/lab-getting-started-starter-workshop-apb-test-user1/services/parksmap
+  selfLink: /api/v1/namespaces/user1/services/parksmap
   uid: e1ff69c8-cb2f-11e9-82a1-0267eec7e1a0
 spec:
   clusterIP: 172.30.22.209
@@ -348,7 +352,7 @@ You should see something like the following output:
 [source,text]
 ----
 Name:              parksmap
-Namespace:         lab-getting-started-starter-workshop-apb-test-user1
+Namespace:         user1
 Labels:            app=workshop
                    app.kubernetes.io/component=parksmap
                    app.kubernetes.io/instance=parksmap

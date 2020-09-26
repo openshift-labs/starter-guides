@@ -103,7 +103,7 @@ and for the Git repository URL, enter:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-php.git
 ----
 
 NOTE: All of these runtimes shown are made available via *Templates* and
@@ -117,7 +117,7 @@ Check the box to create a route and then click the *Create* button.
 
 image::images/nationalparks-php-configure-php-service.png[Runtimes]
 
-To see the build logs, click *Builds -> Builds*, then click on the *nationalparks-1* build, and finally click *Logs*.
+To see the build logs, in Topology view, click the nationalparks entry, then click on View Logs in the Builds section of the Resources tab.
 
 image::images/nationalparks-php-new-php-build.png[Nationalparks build]
 

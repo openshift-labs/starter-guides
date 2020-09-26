@@ -63,7 +63,7 @@ For this example, we're going to deploy our pipeline which is stored in the same
 
 [source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/pipeline/nationalparks-pipeline-all.yaml -n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n {{project_namespace}}
 ----
 
 Now let's review our Tekton Pipeline:
@@ -81,7 +81,7 @@ spec:
       description: The application name
       name: APP_NAME
       type: string
-    - default: 'https://github.com/blues-man/nationalparks.git'
+    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
       description: The application git repository url
       name: APP_GIT_URL
       type: string
@@ -147,6 +147,8 @@ spec:
       params:
         - name: DEPLOYMENT_CONFIG
           value: $(params.APP_NAME)
+        - name: IMAGE_STREAM
+          value: '$(params.APP_NAME):latest'
       runAfter:
         - build-image
       taskRef:
@@ -187,7 +189,7 @@ In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, repr
 
 [source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/pipeline/nationalparks-pipelinerun.yaml -n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml -n {{project_namespace}}
 ----
 
 You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:

@@ -41,6 +41,8 @@ persistent storage!). The image will ensure that:
 In the Developer Perspective in your `{{ project_namespace }}` project,
 click *+Add* and then *Database*. In the Databases view, you can click *Mongo* to filter for just MongoDB.
 
+NOTE: Make sure to uncheck *Operator Backed* option from *Type* section
+
 image::images/nationalparks-databases-catalog-databases.png[Data Stores]
 
 Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, find the *MongoDB (Ephemeral)* template and select it.  You will notice that there are multiple
