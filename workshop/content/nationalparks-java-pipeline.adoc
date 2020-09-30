@@ -185,11 +185,33 @@ It is using two *Workspace*:
 
 == Run the Pipeline
 
-In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline:
+In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline.
 
-[source,shell,role=execute-1]
+From the Developer perspective click *+Add* in the left navigation menu and then select *YAML*.
+
+image::images/devops-pipeline-add-yaml-menu.png[Add yaml to project - Menu]
+
+Now, copy the following code into the YAML input box and click *Create* to a *PipelineRun* resource to start your pipeline:
+
+[source,shell,role=copypaste]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml -n {{project_namespace}}
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: nationalparks-deploy-run-
+spec:
+  params:
+   - name: APP_GIT_URL
+     value: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git"
+  pipelineRef:
+    name: nationalparks-pipeline
+  workspaces:
+  - name: app-source
+    persistentVolumeClaim:
+      claimName: app-source-pvc
+  - name: maven-settings
+    emptyDir: {}
+
 ----
 
 You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:
