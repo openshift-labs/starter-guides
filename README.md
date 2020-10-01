@@ -160,7 +160,7 @@ Once the deployment finishes, navigate to the OpenShift administrator perspectiv
 1. To deploy the lab guides only, first clone this Git repository (or your fork of it, if you are making changes) to your own machine. Use the command:
 
 ```
-git clone --recurse-submodules https://github.com/openshift-labs/lab-getting-started.git
+git clone --recurse-submodules https://github.com/openshift-labs/starter-guides.git
 ```
 
 The ``--recurse-submodules`` option ensures that Git submodules are checked out. If you forget to use this option, after having cloned the repository, run:
