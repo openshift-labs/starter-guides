@@ -10,24 +10,38 @@ its way to being released. This process involves building the software in a reli
 manner, as well as progressing the built software (called a "build") through multiple stages of
 testing and deployment.
 
-Pipeline provides an extensible set of tools for modeling simple-to-complex delivery pipelines
-"as code" via the link:https://jenkins.io/doc/book/pipeline/syntax[Pipeline domain-specific language (DSL)]
-syntax. OpenShift provides also an link:https://github.com/openshift/jenkins-client-plugin[OpenShift Jenkins Pipeline DSL]
-for interacting with the platform from within a Jenkins pipeline in a fluent manner.
-
-The definition of a Jenkins Pipeline is written into a text file (called a Jenkinsfile) which
-in turn can be committed to a project’s source control repository. This is the foundation of
-"Pipeline-as-code"; treating the CD pipeline a part of the application to be versioned
-and reviewed like any other code.
+OpenShift Pipelines is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using https://tekton.dev/[Tekton]. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying details.
 
 image::images/devops-pipeline-flow.png[Pipelines]
+
+== Understanding Tekton
+
+Tekton defines a number of https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/[Kubernetes custom resources] as building blocks in order to standardize pipeline concepts and provide a terminology that is consistent across CI/CD solutions. 
+
+The custom resources needed to define a pipeline are listed below:
+
+* `Task`: a reusable, loosely coupled number of steps that perform a specific task (e.g. building a container image)
+* `Pipeline`: the definition of the pipeline and the `Tasks` that it should perform
+* `TaskRun`: the execution and result of running an instance of task
+* `PipelineRun`: the execution and result of running an instance of pipeline, which includes a number of `TaskRuns`
+
+image::images/tekton-architecture.png[Tekton Architecture]
+
+In short, in order to create a pipeline, one does the following:
+
+* Create custom or install https://github.com/tektoncd/catalog[existing] reusable `Tasks`
+* Create a `Pipeline` and `PipelineResources` to define your application's delivery pipeline
+* Create a `PersistentVolumeClaim` to provide the volume/filesystem for pipeline execution or provide a `VolumeClaimTemplate` which creates a `PersistentVolumeClaim`
+* Create a `PipelineRun` to instantiate and invoke the pipeline
+
+For further details on pipeline concepts, refer to the https://github.com/tektoncd/pipeline/tree/master/docs#learn-more[Tekton documentation] that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.
 
 == Set Up Your Pipeline
 
 A deployment configuration in OpenShift can contain 
-https://{{DOCS_URL}}/dev_guide/deployments/basic_deployment_operations.html#triggers[triggers], which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.
+https://{{DOCS_URL}}/applications/deployments/what-deployments-are.html#deployments-and-deploymentconfigs_what-deployments-are[Triggers], which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.
 
-As we want the Jenkins pipeline to control when builds and deployments happen, we need to disable the ability
+As we want the Tekton pipeline to control when builds and deployments happen, we need to disable the ability
 on the current Deployment to automatically trigger when there is a new image or a configuration change.
 
 == Configure Manual Deployments on Dev Application
@@ -42,197 +56,176 @@ image::images/devops-pipeline-deployment-triggers.png[Remove triggers]
 
 == Create Your Pipeline
 
-As pipelines provide the ability to promote applications between different stages of the delivery cycle, Jenkins, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
+As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
-We're going to deploy a Jenkins instance to this project to configure and run our pipelines. As we want our Jenkins instance to be able to survive restarts (in case we need to update any plugin configuration) we will select the Jenkins persistent template from the Developer Catalog.
+For this example, we're going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
-In the left navigation menu, click *+Add* and then *From Catalog*. In the Developer Catalog, search for *Jenkins*. Select the one named *Jenkins*.
 
-image::images/devops-pipeline-catalog-search.png[Empty CICD project]
+[source,shell,role=execute-1]
+----
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n {{project_namespace}}
+----
 
-We will be prompted with the configuration screens for deploying our Jenkins server instance. Click the blue *Instantiate Template* button to get started.
-
-image::images/devops-jenkins-template.png[Jenkins template]
-
-Change **Disable memory intensive administrative monitors** to **true** to speed up the deployment time in the workshop, and leave the defaults for all parameters and click the blue *Create* button.
-
-image::images/devops-jenkins-template-config.png[Jenkins template config]
-
-Jenkins will now be provisioned on the background. Click *Topology* in the left navigation to see your Jenkins service in Topology view. It may take a couple minutes for the provisioning to complete. You can click and drag the Jenkins service into your workshop application grouping.
-
-We will see now Jenkins being provisioned on our project. Click on the Jenkins service component to view the provisioning status. Once provisioning is finished, we should see a similar screen to this:
-
-image::images/devops-jenkins-deployed.png[Jenkins deployed]
-
-We could have done the same as we just did by using one single command on the OpenShift CLI. This command will deploy the service Jenkins with a persistent configuration in your {{project_namespace}} project. 
-
-WARNING: If you have successfully deployed Jenkins, do NOT execute this command.
+Now let's review our Tekton Pipeline:
 
 [source,shell,role=copypaste]
 ----
-oc new-app jenkins-persistent -n {{project_namespace}}
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: nationalparks-pipeline
+spec:
+  params:
+    - default: nationalparks
+      description: The application name
+      name: APP_NAME
+      type: string
+    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
+      description: The application git repository url
+      name: APP_GIT_URL
+      type: string
+    - default: master
+      description: The application git repository revision
+      name: APP_GIT_REVISION
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: $(params.APP_GIT_URL)
+        - name: revision
+          value: $(params.APP_GIT_REVISION)
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '1'
+        - name: sslVerify
+          value: 'true'
+        - name: deleteExisting
+          value: 'true'
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: app-source
+    - name: test-and-build
+      params:
+        - name: GOALS
+          value:
+            - package
+        - name: PROXY_PROTOCOL
+          value: http
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: app-source
+        - name: maven-settings
+          workspace: maven-settings
+    - name: build-image
+      params:
+        - name: PATH_CONTEXT
+          value: .
+        - name: TLSVERIFY
+          value: 'false'
+        - name: OUTPUT_IMAGE_STREAM
+          value: '$(params.APP_NAME):latest'
+      runAfter:
+        - test-and-build
+      taskRef:
+        kind: Task
+        name: s2i-java-11-binary
+      workspaces:
+        - name: source
+          workspace: app-source
+    - name: redeploy
+      params:
+        - name: DEPLOYMENT_CONFIG
+          value: $(params.APP_NAME)
+        - name: IMAGE_STREAM
+          value: '$(params.APP_NAME):latest'
+      runAfter:
+        - build-image
+      taskRef:
+        kind: Task
+        name: redeploy
+  workspaces:
+    - name: app-source
+    - name: maven-settings
+
 ----
 
-== Store Your Pipeline Definition in Git
+A `Pipeline` is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.
 
-For this example, we're going to store our pipeline in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
+A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* are available to all user within a cluster where OpenShift Pipelines has been installed, while *Tasks* can be custom.
 
-Log into your `nationalparks` repository in Git as we are going to store in this repository our Jenkinsfile, that is, our pipeline definition.
+This pipeline has 4 Tasks defined:
 
-[source,bash,role=copypaste]
-----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks
-----
+- *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *test-and-build*: will test and build our Java application using `maven` `ClusterTask`
+- *build-image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it `s2i-java11-binary`
+- *redeploy*: it will deploy the created image on OpenShift using the DeploymentConfig named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
 
-image::images/devops-pipeline-gogs-nationalparks.png[Nationalparks project]
+From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline* to see the pipeline you just created.
 
-We are going to create a Jenkinsfile to build and deploy our `nationalparks` application.
+image::images/devops-pipeline-created.png[Pipeline created]
 
-Create a file called `Jenkinsfile.workshop` with the following content:
+The Pipeline is parametric, with default value on the one we need to use.
 
-[source,shell,role=copypaste]
-----
-pipeline {
-  agent {
-      label 'maven'
-  }
-  stages {
-    stage('Build JAR') {
-      steps {
-        git url: 'http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks'
-        sh "cp .settings.xml ~/.m2/settings.xml"
-        sh "mvn package"
-      }
-    }
-    stage('Archive JAR') {
-      steps {
-        sh "mvn deploy -DskipTests"
-      }
-    }
-    stage('Build Image') {
-      steps {
-        script {
-          openshift.withCluster() {
-            openshift.withProject() {
-              openshift.startBuild("nationalparks", 
-                                   "--from-file=target/nationalparks.jar", 
-                                   "--wait")
-            }
-          }
-        }
-      }
-    }
-    stage('Deploy') {
-      steps {
-        script {
-          openshift.withCluster() {
-            openshift.withProject() {
-              def result, dc = openshift.selector("dc", "nationalparks")
-              dc.rollout().latest()
-              timeout(10) {
-                  result = dc.rollout().status("-w")
-              }
-              if (result.status != 0) {
-                  error(result.err)
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
+It is using two *Workspace*:
 
-And commit the changes into the git server.
+- *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
+- *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
 
-image::images/devops-pipeline-gogs-add-jenkinsfile.png[Nationalparks project]
 
-As we can see now, the Jenkinsfile is already stored in our version control system.
+== Run the Pipeline
 
-image::images/devops-pipeline-gogs-jenkinsfile-list.png[Nationalparks project]
-
-A *Pipeline* is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.
-
-A *stage* block defines a conceptually distinct subset of tasks performed through the entire Pipeline (e.g. _Build_, _Test_ and _Deploy_ stages), which is used by many plugins to visualize or present Jenkins Pipeline status/progress.
-
-*Step* is a single task. Fundamentally, a step tells Jenkins what to do at a particular point in time (or "step" in the process).
-
-This pipeline has 4 stages defined:
-
-- *Build JAR*: will clone our source repository for nationalparks and will use maven's package goal to create a .jar file.
-- *Archive JAR*: will upload our .jar file to nexus repository, to have it under control.
-- *Build Image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created.
-- *Deploy*: it will deploy the created image on OpenShift using the DeploymentConfig named `nationalparks` we created in the previous lab.
-
-== Create Your Pipeline Definition on OpenShift
-
-Create the OpenShift pipeline definition to use the Jenkins file. This is a regular OpenShift BuildConfig with a *JenkinsPipeline* strategy.
+In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline.
 
 From the Developer perspective click *+Add* in the left navigation menu and then select *YAML*.
 
 image::images/devops-pipeline-add-yaml-menu.png[Add yaml to project - Menu]
 
-Now, copy the following code into the YAML input box and click *Create* to create a pipeline that uses the `Jenkinsfile.workshop` from your Gogs repository.
+Now, copy the following code into the YAML input box and click *Create* to a *PipelineRun* resource to start your pipeline:
 
 [source,shell,role=copypaste]
 ----
-apiVersion: build.openshift.io/v1
-kind: BuildConfig
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
 metadata:
-  name: nationalparks-build
+  generateName: nationalparks-deploy-run-
 spec:
-  runPolicy: Serial
-  source:
-    git:
-      ref: master
-      uri: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks"
-    type: Git
-  strategy:
-    jenkinsPipelineStrategy:
-      env:
-        - name: NEXUS_URL
-          value: "http://nexus.{{INFRA_PROJECT}}.svc:8081"
-      jenkinsfilePath: Jenkinsfile.workshop
-    type: JenkinsPipeline
-  triggers:
-    - github:
-        secret: CqPGlXcKJXXqKxW4Ye6z
-      type: GitHub
-    - generic:
-        secret: 4LXwMdx9vhQY4WXbLcFR
-      type: Generic
-    - type: ConfigChange
+  params:
+   - name: APP_GIT_URL
+     value: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git"
+  pipelineRef:
+    name: nationalparks-pipeline
+  workspaces:
+  - name: app-source
+    persistentVolumeClaim:
+      claimName: app-source-pvc
+  - name: maven-settings
+    emptyDir: {}
+
 ----
 
-Click the *Builds* tab, then *nationalparks-build-1* to see the pipeline you just created.
+You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:
 
-image::images/devops-pipeline-running.png[Pipeline running]
+image::images/devops-pipeline-run-1.png[Pipeline running]
 
-The pipeline will start automatically and execute all stages that are defined in the Jenkinsfile 
-in the git repository.
+The click on the `PipelineRun` *national-parks-deploy-run-*:
 
-NOTE: the first time you are running it might take a little while before the pipeline starts. The reason for that is 
-that you are using the built-in https://plugins.jenkins.io/kubernetes[Kubernetes Jenkins Plugin] which dynamically provisions 
-a Jenkins slave pod to run the pipeline. The dynamic provisioning allows scaling the pipeline execution to many concurrent jobs. The 
-first time that pipeline runs, it will pull the jenkins slave image from the registry and therefore it might take a little bit of time.
+image::images/devops-pipeline-run-2.png[Pipeline running animation]
 
-As the pipeline is running, you can watch the build logs. Click on the `view Logs` link in the appropriate build and you will be directed to Jenkins. In order to grant you access, Jenkins is configured to use Single Sign On with OpenShift, and you'll need to log in with OpenShift credentials.
+Then click on the *Task* running to check logs:
 
-image::images/devops-pipeline-jenkins-sso.png[Jenkins SSO]
+image::images/devops-pipeline-run-3.png[Pipeline Task log]
 
-You need to authorize your user account to access Jenkins.
+Verify PipelineRun has been completed with success:
 
-image::images/devops-pipeline-jenkins-sso-authorize.png[Jenkins SSO]
-
-You will see the output of your maven build as it's running in Jenkins.
-
-image::images/devops-pipeline-jenkins-log.png[Jenkins logs]
-
-After a little while, it will finish, hopefully with success.
-
-image::images/devops-pipeline-finished.png[Pipeline finished]
-
-Once the pipeline has finished, click `nationalparks` from Topology view. You should notice that the *Latest Version* number of the has increased. 
-
-image::images/devops-pipeline-nationalparks-deployed.png[Nationalparks component deployed]
+image::images/devops-pipeline-run-4.png[PipelineRun completed]

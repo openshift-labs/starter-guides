@@ -96,14 +96,22 @@ Enter the following for Git Repo URL:
 http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
 ----
 
-Select Java as your Builder Image, and be sure to select version 8.
+In *Git Type* select *Other*.
+
+Select *Java* as your Builder Image, and be sure to select version *11*.
 
 image::images/nationalparks-import-from-git-url-builder.png[Import from Git]
 
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
-Scroll down to the *General* section. Select `workshop` as your application, and `nationalparks` as the name.
+Scroll down to the *General* section. Select:
+
+* *Application Name* : workshop
+* *Name* : nationalparks
+
+
+In *Resources* section, select *Deployment Config*.
 
 Expand the Labels section and add 3 labels:
 

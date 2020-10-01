@@ -91,7 +91,7 @@ This change in configuration will trigger a new deployment of the `nationalparks
 
 Back in the *Topology* view, click and drag the `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it.
 
-image::images/nationalparks-databases-add-mongodb-to-workshop-app.png[Add mongodb to the workshop app]
+image::images/nationalparks-databases-add-mongodb-to-workshop-app-js.png[Add mongodb to the workshop app]
 
 Next, let's fix the labels assigned to the `mongodb-nationalparks` deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually. 
 

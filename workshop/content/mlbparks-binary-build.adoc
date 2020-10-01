@@ -45,11 +45,10 @@ mvn package
 
 Pay attention to the output location for the ROOT.war, we will need that directory later.
 
-If you're using IntelliJ or eclipse/JBoss Developer Studio package the maven artifact using the IDE.
 
 === Code Change
-Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
-that gives basic info on the service and can be reached at:
+Time for a source code change! Go to `src/main/java/com/openshift/evg/roadshow/rest/BackendController.java`.and edit it with `vi` or `nano`.
+This is the REST endpoint that gives basic info on the service and can be reached at:
 
 [source,bash,role=copypaste]
 ----
@@ -63,7 +62,13 @@ Please change line 23 to add a _AMAZING_ in front of "MLB Parks" look like this:
 return new Backend("mlbparks", "AMAZING MLB Parks", new Coordinates("39.82", "-98.57"), 5);
 ----
 
-Don't forget to save the file and run `mvn package` again.
+Don't forget to save the file and run `mvn package` again:
+
+[source,bash,role=execute-1]
+----
+cd /opt/app-root/src/mlbparks
+mvn package
+----
 
 === Doing the Binary Build
 
@@ -83,7 +88,7 @@ When the pod is torn down, the parksmap service removes the MLBParks map from th
 automatically gets added back with our new title.  This would not have happened with a rolling deployment because
 rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.
 
-When the deployment is finished and the container is deployed you will see the new content at:
+You can follow the deployment in progress from Topology view, and when it is completed, you will see the new content at:
 
 [source,bash,role=copypaste]
 ----

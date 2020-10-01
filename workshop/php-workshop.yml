@@ -20,8 +20,8 @@ modules:
   - nationalparks-php-databases
   - nationalparks-application-health
   - nationalparks-php-codechanges-gogs
-  - mlbparks-templates
-  - mlbparks-binary-build
+#  - mlbparks-templates
+#  - mlbparks-binary-build
 #  - mlbparks-debugging
   - common-further-resources
   - common-workshop-links

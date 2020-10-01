@@ -11,7 +11,7 @@ The **default** service account is the one taking the responsibility of running 
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
-You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the `parksmap` entry, and then click the *Namespace*. 
+You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the `parksmap` entry, go to the *Details* tab, and then click the *Namespace*. 
 
 image::images/parksmap-permissions-namespace.png[Namespace]
 

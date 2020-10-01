@@ -87,7 +87,7 @@ You will see some output similar to this:
 
 [source,bash]
 ----
---> Deploying template "user5/mlbparks" to project user5
+--> Deploying template "user1/mlbparks" to project user1
 
      MLBparks
      ---------

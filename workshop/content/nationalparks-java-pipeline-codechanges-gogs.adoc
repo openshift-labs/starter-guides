@@ -4,18 +4,46 @@ Most Git repository servers support the concept of web hooks -- calling to an
 external source via HTTP(S) when a change in the code repository happens.
 OpenShift provides an API endpoint that supports receiving hooks from
 remote systems in order to trigger builds. By pointing the code repository's
-hook at the OpenShift API, automated code/build/deploy pipelines can be
+hook at the OpenShift Pipelines resources, automated code/build/deploy pipelines can be
 achieved.
 
+== Adding Triggers to your Pipeline
+
+Tekton *Triggers* enable us to configure Pipelines to respond to external events (Git push events, pull requests etc) such as Web Hooks.
+
+Adding triggering support requires the creation of a `TriggerTemplate`, `TriggerBinding`, and an `EventListener` in our project.
+
+
+
+image::images/devops-pipeline-triggers.png[Triggers]
+
+Let's see each component in detail:
+
+* *TriggerTemplate*: a trigger template is a template for newly created resources. It supports parameters to create specific `PipelineResources` and `PipelineRuns`.
+* *TriggerBinding*: validates events and extracts payload fields
+* *EventListener*: connects `TriggerBindings` and `TriggerTemplates` into an addressable endpoint (the event sink). It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.
+
+Now let's create them all together for our Pipeline:
+
+[source,shell,role=execute-1]
+----
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml -n {{project_namespace}}
+----
+
+This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.
+
+From left side menu, click on *Topology* to verify if a new Deployment *el-nationalparks* for the `EventListener` has ben created:
+
+image::images/devops-pipeline-triggers-eventlistener.png[EventListener created]
+
+
 == Exercise: Configuring Gogs Web Hooks
-In this lab you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the Developer Perspective, click *Builds* in the left navigation menu. Click `nationalparks-build` and scroll down to the Webhooks section.
 
-On this screen you will see two webhook URLs as shown in the following image:
+Click on the Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
 
-image::images/nationalparks-pipeline-codechanges-webhook-config.png[Webhook]
+image::images/devops-pipeline-triggers-route.png[EventListener created]
 
-Click *Copy URL with Secret* for the Generic webhook. Once you have the URL copied to your clipboard, navigate to the code repository
-that you have on Gogs:
+Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:
 
 
 link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks[Gogs Repository]
@@ -41,7 +69,7 @@ In the next screen, paste your link into the "Payload URL" field. You can leave 
 secret token field blank -- the secret is already in the URL and does not need
 to be in the payload.
 
-Change the `Content Type` to `application/x-www-form-urlencoded`.
+Change the `Content Type` to `application/json`.
 
 Finally, click on *Add Webhook*.
 
@@ -87,33 +115,19 @@ return new Backend("nationalparks","Amazing National Parks", new Coordinates("47
 Click on Commit changes at the bottom of the screen. Feel free to enter a commit
 message.
 
-Once you have committed your changes, a  *Build* should almost instantaneously be
-triggered in OpenShift. Click *Builds* in the left navigation menu then `nationalparks-build`, then the *Builds* tab. You should see a new build running: 
+Once you have committed your changes, a new *PipelineRun* should almost instantaneously be
+triggered in OpenShift. Click *Pipeline* in the left navigation menu then `nationalparks-pipeline`. You should see a new one running: 
 
 image::images/nationalparks-codechanges-pipeline-running.png[Webhook]
 
-or run the
-following command to verify:
+or run the following command to verify:
 
 [source,bash,role=execute-1]
 ----
-oc get builds
+oc get PipelineRun
 ----
 
-You should see that a new build is running:
-
-[source,bash]
-----
-NAME                    TYPE              FROM          STATUS     STARTED          DURATION
-nationalparks-1         Source            Git@b052ae6   Complete   18 hours ago     36s
-nationalparks-2         Source            Git@3b26e1a   Complete   35 minutes ago
-nationalparks-3         Binary            Git@3a56cb1   Running    43 seconds ago
-nationalparks-build-1   JenkinsPipeline   Git@master    Complete   35 minutes ago
-nationalparks-build-2   JenkinsPipeline   Git@master    Running    58 seconds ago
-----
-
-Once the build and deploy has finished, verify your new image was
-automatically deployed by viewing the application in your browser:
+Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:
 
 
 link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
