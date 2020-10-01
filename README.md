@@ -72,7 +72,7 @@ Follow the directions in the [Running the Workshop](#running-the-workshop) secti
 The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.2 Workshop and deploy the Getting Started workshop via the instructions below.
 
 **Prerequisites**
-* An OpenShift 4.4 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.4 Workshop**.
+* An OpenShift 4.5 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.5 Workshop**.
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
 
@@ -193,7 +193,7 @@ When the URL for the workshop is accessed you will be prompted for a user name a
 
 ## Development
 
-The deployment created above will use an image from [Quay.io](https://quay.io/) for this workshop, a container automation platform, based on the ``ocp-4.4`` branch of the repository.
+The deployment created above will use an image from [Quay.io](https://quay.io/) for this workshop, a container automation platform, based on the ``ocp-4.5`` branch of the repository.
 
 To make changes to the workshop content and test them, edit the files in the Git repository and then run:
 

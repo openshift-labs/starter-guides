@@ -185,34 +185,25 @@ It is using two *Workspace*:
 
 == Run the Pipeline
 
-In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline.
+We can start now the Pipeline from the Web Console. From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
 
-From the Developer perspective click *+Add* in the left navigation menu and then select *YAML*.
+image::images/devops-pipeline-start-1.png[Start Pipeline]
 
-image::images/devops-pipeline-add-yaml-menu.png[Add yaml to project - Menu]
+You will be prompted with parameters to add the Pipeline, showing default ones. 
 
-Now, copy the following code into the YAML input box and click *Create* to a *PipelineRun* resource to start your pipeline:
+Add in *APP_GIT_URL* the `nationalparks` repository you have in Gogs:
 
-[source,shell,role=copypaste]
-----
-apiVersion: tekton.dev/v1beta1
-kind: PipelineRun
-metadata:
-  generateName: nationalparks-deploy-run-
-spec:
-  params:
-   - name: APP_GIT_URL
-     value: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git"
-  pipelineRef:
-    name: nationalparks-pipeline
-  workspaces:
-  - name: app-source
-    persistentVolumeClaim:
-      claimName: app-source-pvc
-  - name: maven-settings
-    emptyDir: {}
+[source,role=copypaste]
+---
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git"
+---
 
-----
+In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
+
+Click on *Start* to run your Pipeline.
+
+image::images/devops-pipeline-start-2.png[Add parameters]
+
 
 You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:
 
