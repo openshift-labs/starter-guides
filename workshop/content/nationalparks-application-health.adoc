@@ -38,32 +38,26 @@ We are going to add both a readiness and liveness probe to the existing
 instances to the service until they pass the readiness checks, and will ensure
 that unhealthy instances are restarted (if they fail the liveness checks).
 
-From the *Topology* view, click `nationalparks`. On the side panel, click the *Actions* dropdown menu and the select *Edit Deployment Config*. We will be editing the YAML for the deployment config in order to add the health checks.
+From the *Topology* view, click `nationalparks`. On the side panel, click the *Actions* dropdown menu and the select *Add Health Checks*.
 
-Add the following code below `imagePullPolicy: Always` as shown in the screenshot. 
+image::images/nationalparks-application-health-menu.png[Add Health Checks]
 
-[source,bash,role=copypaste]
-----
-readinessProbe:
-  httpGet:
-    path: /ws/healthz/
-    port: 8080
-    scheme: HTTP
-  initialDelaySeconds: 20
-  timeoutSeconds: 1
-livenessProbe:
-  httpGet:
-    path: /ws/healthz/
-    port: 8080
-    scheme: HTTP
-  initialDelaySeconds: 120
-  timeoutSeconds: 1
-----
+Click to *Add Readiness Probe* and add in *Path* field: `/ws/healthz/`
 
-image::images/nationalparks-application-health-config.png[Readiness and Liveness Probe]
+Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick to confirm:
+
+image::images/nationalparks-application-health-settings.png[Add Readiness and Liveness Probe]
+
+Repeat the same procedure for Liveness Probe, click to *Add Liveness Probe* and add in *Path* field: `/ws/healthz/`
+
+Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick to confirm.
 
 WARNING: Note the trailing slash in the URL
 
-Once you have entered in the values show above, click *Save* and then click the *Overview* tab. You
-will notice that these changes caused a new deployment -- they counted as a
+Finally confirm all new changes clicking to *Add*:
+
+image::images/nationalparks-application-health-add.png[Add Probes]
+
+
+You will notice that these changes caused a new deployment -- they counted as a
 configuration change.
