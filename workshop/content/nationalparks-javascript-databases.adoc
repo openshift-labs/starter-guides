@@ -75,7 +75,9 @@ CAUTION: Make sure to have configured the *`MongoDB Database Name`* parameter wi
 
 Once you have entered in the above information, click on *Create* to go to the next step which will allow us to add a binding.
 
-image::images/nationalparks-databases-catalog-databases-mongodb-create-bining.png[Bind Mongo]
+From left-side menu, click to *Secrets*.
+
+image::images/nationalparks-databases-list-secrets.png[List Secrets]
 
 Click the secret name listed under *Parameters*. The secret can be used in other components, such as the `nationalparks` backend, to authenticate to the database.
 

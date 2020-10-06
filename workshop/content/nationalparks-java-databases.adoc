@@ -74,7 +74,7 @@ CAUTION: Make sure to have configured the *`MongoDB Database Name`* parameter wi
 
 Once you have entered in the above information, click on *Create* to go to the next step which will allow us to add a binding.
 
-Select *Administrator* view, go to *Workload* section, then click to *Secrets*.
+From left-side menu, click to *Secrets*.
 
 image::images/nationalparks-databases-list-secrets.png[List Secrets]
 
