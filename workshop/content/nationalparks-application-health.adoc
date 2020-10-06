@@ -42,13 +42,23 @@ From the *Topology* view, click `nationalparks`. On the side panel, click the *A
 
 image::images/nationalparks-application-health-menu.png[Add Health Checks]
 
-Click to *Add Readiness Probe* and add in *Path* field: `/ws/healthz/`
+Click to *Add Readiness Probe* and add in *Path* field: 
+
+[source,role=copypaste]
+----
+/ws/healthz/
+----
 
 Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick to confirm:
 
 image::images/nationalparks-application-health-settings.png[Add Readiness and Liveness Probe]
 
-Repeat the same procedure for Liveness Probe, click to *Add Liveness Probe* and add in *Path* field: `/ws/healthz/`
+Repeat the same procedure for Liveness Probe, click to *Add Liveness Probe* and add in *Path* field: 
+
+[source,role=copypaste]
+----
+/ws/healthz/
+----
 
 Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick to confirm.
 
