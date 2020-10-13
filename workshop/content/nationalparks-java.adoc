@@ -115,9 +115,26 @@ In *Resources* section, select *Deployment Config*.
 
 Expand the Labels section and add 3 labels:
 
-- *__app__=workshop*  (the name we will be giving to the app)
-- *__component__=nationalparks*  (the name of this deployment)
-- *__role__=backend* (the role this component plays in the overall application)
+The name of the Application group:
+
+[source,role=copy]
+----
+app=workshop
+----
+
+Next the name of this deployment.
+
+[source,role=copy]
+----
+component=nationalparks
+----
+
+And finally, the role this component plays in the overall application.
+
+[source,role=copy]
+----
+role=backend
+----
 
 image::images/nationalparks-configure-service.png[Runtimes]
 
