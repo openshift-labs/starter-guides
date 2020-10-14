@@ -7,7 +7,7 @@ The main service is a web application which has a server-side component in charg
 There will be a set of independent backend services deployed that will provide different mapping and geo-spatial information. The set of available backend services that provide geo-spatial information are:
 
 * WorldWide National Parks
-* Major League Baseball Stadiums in the US
+* Major League Baseball Stadiums in North America
 
 The original source code for this application is located link:https://github.com/openshift-roadshow/[here].
 
