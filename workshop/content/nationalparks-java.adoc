@@ -98,6 +98,8 @@ http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.g
 
 In *Git Type* select *Other*.
 
+NOTE: if you copied the Gogs URL correctly (check spaces etc) and you still get a warning like 'Git repository is not reachable' please ignore it at this time, since the UI may fail to ping the repo sometimes.
+
 Select *Java* as your Builder Image, and be sure to select version *11*.
 
 image::images/nationalparks-import-from-git-url-builder.png[Import from Git]
