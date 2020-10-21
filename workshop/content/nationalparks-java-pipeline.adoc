@@ -46,13 +46,18 @@ on the current Deployment to automatically trigger when there is a new image or 
 
 == Configure Manual Deployments on Dev Application
 
-In the {{project_namespace}} project, click on the `nationalparks` component from Topology view. From the side panel, click on *Actions -> Edit Deployment Config*:
+DeploymentConfigs have triggers that allow automatic deploying when a new image has been pushed into OpenShift Registry. In this case we want the Pipeline to drive the flow of updating the Application, thus we just need to disable those triggers for the moment:
 
-image::images/devops-pipeline-deployment-edit.png[Edit pipeline]
+[source,shell,role=execute-1]
+----
+oc set triggers dc nationalparks --manual -n {{project_namespace}}
+----
 
-In the YAML for the deployment config, find the `triggers` section, delete it, and then click the blue *Save* button.
-
-image::images/devops-pipeline-deployment-triggers.png[Remove triggers]
+You should get an output like this:
+[source,shell]
+----
+deploymentconfig.apps.openshift.io/nationalparks triggers updated
+----
 
 == Create Your Pipeline
 
@@ -110,7 +115,7 @@ spec:
       workspaces:
         - name: output
           workspace: app-source
-    - name: test-and-build
+    - name: build-and-test
       params:
         - name: GOALS
           value:
@@ -136,7 +141,7 @@ spec:
         - name: OUTPUT_IMAGE_STREAM
           value: '$(params.APP_NAME):latest'
       runAfter:
-        - test-and-build
+        - build-and-test
       taskRef:
         kind: Task
         name: s2i-java-11-binary
@@ -167,7 +172,7 @@ A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* ar
 This pipeline has 4 Tasks defined:
 
 - *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
-- *test-and-build*: will test and build our Java application using `maven` `ClusterTask`
+- *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
 - *build-image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it `s2i-java11-binary`
 - *redeploy*: it will deploy the created image on OpenShift using the DeploymentConfig named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
 
