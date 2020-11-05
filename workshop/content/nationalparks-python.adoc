@@ -196,7 +196,6 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
 link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
-----
 
 WARNING: The trailing slash is *required*.
 
