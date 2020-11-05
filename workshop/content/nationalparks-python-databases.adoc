@@ -204,7 +204,7 @@ here:
 
 [source,bash,role=copypaste]
 ----
-https://github.com/openshift-roadshow/nationalparks-py/blob/master/wsgi.py#L11-L18
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-py/src/master/wsgi.py#L11-L18
 ----
 
 In short summary: By referring to bindings to connect to services
