@@ -17,7 +17,7 @@ image::images/nationalparks-pipeline-codechanges-webhook-config.png[Webhook]
 Click *Copy URL with Secret*. Once you have the URL copied to your clipboard, navigate to the code repository
 that you have on Gogs:
 
-link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks[Gogs Repository]
+link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-py[Gogs Repository]
 
 Your Gogs credentials are:
 
