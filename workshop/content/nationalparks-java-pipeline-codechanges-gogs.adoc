@@ -27,7 +27,7 @@ Now let's create them all together for our Pipeline:
 
 [source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-triggers-all-rhpds.yaml-n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-triggers-all-rhpds.yaml -n {{project_namespace}}
 ----
 
 This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.
