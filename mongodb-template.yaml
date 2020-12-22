@@ -26,6 +26,8 @@ metadata:
   name: mongodb-ephemeral
   labels:
     samples.operator.openshift.io/managed: 'false'
+    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/part-of: workshop
 message: >-
   The following service(s) have been created in your project:
   ${DATABASE_SERVICE_NAME}.
