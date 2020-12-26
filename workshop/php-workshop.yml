@@ -10,7 +10,7 @@ modules:
   - common-parksmap-architecture
 #  - common-cli
   - common-explore
-  - parksmap-docker
+  - parksmap-container-image
   - parksmap-scaling
   - parksmap-routes
   - parksmap-logging

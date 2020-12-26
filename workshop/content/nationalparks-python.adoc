@@ -100,7 +100,7 @@ http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-p
 
 Select Python as your Builder Image.
 
-image::images/nationalparks-import-from-git-url-builder.png[Import from Git]
+image::images/nationalparks-import-from-git-url-builder-py.png[Import from Git]
 
 NOTE: All of these builder images shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.

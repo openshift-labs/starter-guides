@@ -174,7 +174,7 @@ And the result?
 
 [source,bash]
 ----
-Items inserted in database: 2762
+Items inserted in database: 2893
 ----
 
 If you then go back to `/ws/data/all` you will see tons of JSON data now.
