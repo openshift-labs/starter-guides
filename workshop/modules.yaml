@@ -34,6 +34,8 @@ modules:
         name: Deploying PHP Code
     nationalparks-python:
         name: Deploying Python Code
+    nationalparks-dotnet:
+        name: Deploying .NET C# Code
     nationalparks-java-databases:
         name: Adding a Database (MongoDB)
     nationalparks-javascript-databases:
@@ -41,6 +43,8 @@ modules:
     nationalparks-python-databases:
         name: Adding a Database (MongoDB)
     nationalparks-php-databases:
+        name: Adding a Database (MongoDB)
+    nationalparks-dotnet-databases:
         name: Adding a Database (MongoDB)
     nationalparks-application-health:
         name: Application Health
@@ -53,6 +57,8 @@ modules:
     nationalparks-php-codechanges-gogs:
         name: Trigger Automatic Rebuilds on Code Changes
     nationalparks-python-codechanges-gogs:
+        name: Trigger Automatic Rebuilds on Code Changes
+    nationalparks-dotnet-codechanges-gogs:
         name: Trigger Automatic Rebuilds on Code Changes
     nationalparks-java-pipeline:
         name: Automate Build and Deployment with Pipelines

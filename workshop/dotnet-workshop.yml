@@ -1,0 +1,27 @@
+---
+name: Starter Labs (.NET)
+description: Developing .NET Core Applications on OpenShift - Starter Lab
+
+modules:
+  activate:
+  - common-workshop-summary
+  - common-environment
+  - common-using-homeroom
+  - common-parksmap-architecture
+#  - common-cli
+  - common-explore
+  - parksmap-container-image
+  - parksmap-scaling
+  - parksmap-routes
+  - parksmap-logging
+  - parksmap-permissions
+  - parksmap-rsh
+  - nationalparks-dotnet
+  - nationalparks-dotnet-databases
+  - nationalparks-application-health
+  - nationalparks-dotnet-codechanges-gogs
+#  - mlbparks-templates
+#  - mlbparks-binary-build
+#  - mlbparks-debugging
+  - common-further-resources
+  - common-workshop-links
