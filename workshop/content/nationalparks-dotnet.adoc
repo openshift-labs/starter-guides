@@ -64,7 +64,7 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-js.git[Gogs Repository]
+link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-dotnet.git[Gogs Repository]
 
 Your Gogs credentials are:
 
@@ -98,7 +98,7 @@ http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-j
 
 Select Node.js as your Builder Image.
 
-image::images/nationalparks-import-from-git-url-builder-js.png[Import from Git]
+image::images/nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
 
 NOTE: All of these builder images shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
@@ -201,7 +201,7 @@ You will see a simple JSON string:
 
 [source,json]
 ----
-{"id":"nationalparks-js","displayName":"National Parks (JS)","center":{"latitude":"47.039304","longitude":"14.505178"},"zoom":4}
+{"id":"nationalparks","displayName":"National Parks","center":{"latitude":47.039304,"longitude":14.505178},"zoom":4}
 ----
 
 Earlier we said:
