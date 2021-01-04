@@ -14,7 +14,7 @@ modules:
         name: Installing the *oc* client tool
     common-explore:
         name: Exploring the CLI and Web Console
-    parksmap-docker:
+    parksmap-container-image:
         name: Deploying Your First Container Image
     parksmap-scaling:
         name: Scaling and Self Healing
