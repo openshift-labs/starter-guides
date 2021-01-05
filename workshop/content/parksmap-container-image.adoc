@@ -33,7 +33,7 @@ Make sure to have the correct values in:
 * *Application Name* : workshop
 * *Name* : parksmap
 
-Pick *Deployment Config* from *Resource* section.
+Ensure *Deployment* is selected from *Resource* section.
 
 Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
@@ -119,8 +119,7 @@ You should see output that looks similar to:
 [source,text]
 ----
 NAME                READY   STATUS      RESTARTS   AGE
-parksmap-1-deploy   0/1     Completed   0          4m56s
-parksmap-1-gxbgq    1/1     Running     0          4m48s
+parksmap-65c4f8b676-k5gkk    1/1     Running     0          20s
 ----
 
 The above output lists all of the *Pods* in the current *Project*, including the
@@ -133,7 +132,7 @@ NOTE: Make sure you use the correct *Pod* name from your output.
 
 [source,bash,role=copy-and-edit]
 ----
-oc get pod parksmap-1-gxbgq -o yaml
+oc get pod parksmap-65c4f8b676-k5gkk -o yaml
 ----
 
 You should see something like the following output (which has been truncated due
@@ -145,28 +144,36 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    k8s.v1.cni.cncf.io/networks-status: |-
+    k8s.v1.cni.cncf.io/network-status: |-
       [{
-          "name": "openshift-sdn",
+          "name": "",
           "interface": "eth0",
           "ips": [
-              "10.130.2.68"
+              "10.131.0.93"
           ],
           "default": true,
           "dns": {}
       }]
-    openshift.io/deployment-config.latest-version: "1"
-    openshift.io/deployment-config.name: parksmap
-    openshift.io/deployment.name: parksmap-1
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "",
+          "interface": "eth0",
+          "ips": [
+              "10.131.0.93"
+          ],
+          "default": true,
+          "dns": {}
+      }]
     openshift.io/generated-by: OpenShiftWebConsole
     openshift.io/scc: restricted
-  creationTimestamp: 2020-09-20T17:45:45Z
-  generateName: parksmap-1-
+  creationTimestamp: "2021-01-05T17:00:32Z"
+  generateName: parksmap-65c4f8b676-
   labels:
     app: parksmap
-    deployment: parksmap-1
+    component: parksmap
     deploymentconfig: parksmap
-  name: parksmap-1-gxbgq
+    pod-template-hash: 65c4f8b676
+    role: frontend
 ...............
 ----
 
@@ -309,16 +316,15 @@ You should see output similar to the following:
 
 [source,bash]
 ----
-NAME                READY   STATUS      RESTARTS   AGE
-parksmap-1-deploy   0/1     Completed   0          12m
-parksmap-1-gxbgq    1/1     Running     0          12m
+NAME                        READY   STATUS    RESTARTS   AGE
+parksmap-65c4f8b676-k5gkk   1/1     Running   0          5m12s
 ----
 
 Now you can view the detailed data for your *Pod* with the following command:
 
 [source,bash,role=copy-and-edit]
 ----
-oc get pod parksmap-1-gxbgq -o yaml
+oc get pod parksmap-65c4f8b676-k5gkk -o yaml
 ----
 
 Under the `metadata` section you should see the following:
@@ -334,7 +340,6 @@ Under the `metadata` section you should see the following:
 * The *Service* has `selector` stanza that refers to `deploymentconfig=parksmap`.
 * The *Pod* has multiple *Labels*:
 ** `app=parksmap`
-** `deployment=parksmap-1`
 ** `deploymentconfig=parksmap`
 
 *Labels* are just key/value pairs. Any *Pod* in this *Project* that has a *Label* that
