@@ -1,65 +1,58 @@
-== Background: Deployment Configurations and Replication Controllers
+== Background: Deployments and ReplicaSets
 
 While *Services* provide routing and load balancing for *Pods*, which may go in and
-out of existence, *ReplicationControllers* (RC) are used to specify and then
+out of existence, *ReplicaSet* (RS) and *ReplicationController* (RC) are used to specify and then
 ensure the desired number of *Pods* (replicas) are in existence. For example, if
 you always want your application server to be scaled to 3 *Pods* (instances), a
-*ReplicationController* is needed. Without an RC, any *Pods* that are killed or
-somehow die/exit are not automatically restarted. *ReplicationControllers* are
-how OpenShift "self heals".
+*ReplicaSet* is needed. Without an RS, any *Pods* that are killed or
+somehow die/exit are not automatically restarted. *ReplicaSets* and *ReplicationController* are how OpenShift "self heals" and while *Deployments* control *ReplicaSets*, *ReplicationController* here are controlled by *DeploymentConfigs*.
 
-A *DeploymentConfiguration* (DC) defines how something in OpenShift should be
-deployed. From the https://{{DOCS_URL}}/applications/deployments/what-deployments-are.html[deployments documentation]:
+From the https://{{DOCS_URL}}/applications/deployments/what-deployments-are.html[deployments documentation]:
 
 [quote]
 __
-Building on replication controllers, OpenShift adds expanded support for the
-software development and deployment lifecycle with the concept of deployments.
-In the simplest case, a deployment just creates a new replication controller and
-lets it start up pods. However, OpenShift deployments also provide the ability
-to transition from an existing deployment of an image to a new one and also
-define hooks to be run before or after creating the replication controller.
+Similar to a replication controller, a ReplicaSet is a native Kubernetes API object that ensures a specified number of pod replicas are running at any given time. The difference between a replica set and a replication controller is that a replica set supports set-based selector requirements whereas a replication controller only supports equality-based selector requirements.
 __
 
-In almost all cases, you will end up using the *Pod*, *Service*,
-*ReplicationController* and *DeploymentConfiguration* resources together. And, in
+In Kubernetes, a *Deployment* (D) defines how something should be deployed. In almost all cases, you will end up using the *Pod*, *Service*,
+*ReplicaSet* and *Deployment* resources together. And, in
 almost all of those cases, OpenShift will create all of them for you.
 
-There are some edge cases where you might want some *Pods* and an *RC* without a *DC*
+There are some edge cases where you might want some *Pods* and an *RS* without a *D*
 or a *Service*, and others, so feel free to ask us about them after the labs.
 
 == Exercise: Exploring Deployment-related Objects
 
-Now that we know the background of what a *ReplicatonController* and
-*DeploymentConfig* are, we can explore how they work and are related. Take a
-look at the *DeploymentConfig* (DC) that was created for you when you told
+Now that we know the background of what a *ReplicaSet* and
+*Deployment* are, we can explore how they work and are related. Take a
+look at the *Deployment* (D) that was created for you when you told
 OpenShift to stand up the `parksmap` image:
 
 [source,bash,role=execute-1]
 ----
-oc get dc
+oc get deployment
 ----
 
 [source,bash]
 ----
-NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
-parksmap   1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+parksmap   1/1     1            1           20m
 ----
 
-To get more details, we can look into the *ReplicationController* (*RC*).
+To get more details, we can look into the *ReplicaSet* (*RS*).
 
-Take a look at the *ReplicationController* (RC) that was created for you when
+Take a look at the *ReplicaSet* (RS) that was created for you when
 you told OpenShift to stand up the `parksmap` image:
 
 [source,bash,role=execute-1]
 ----
-oc get rc
+oc get rs
 ----
 
 [source,bash]
 ----
-NAME         DESIRED   CURRENT   READY     AGE
-parksmap-1   1         1         0         4h
+NAME                  DESIRED   CURRENT   READY   AGE
+parksmap-65c4f8b676   1         1         1       21m
 ----
 
 This lets us know that, right now, we expect one *Pod* to be deployed
@@ -79,10 +72,10 @@ the `scale` command. You could also do this by incrementing the Desired Count in
 
 [source,bash,role=execute-1]
 ----
-oc scale --replicas=2 dc/parksmap
+oc scale --replicas=2 deployment/parksmap
 ----
 
-You can also scale up to two pods in the Developer Perspective. From the Topology view, first click the `parksmap` deployment config and select the *Details* tab:
+You can also scale up to two pods in the *Developer Perspective*. From the Topology view, first click the `parksmap` deployment config and select the *Details* tab:
 
 image::images/parksmap-details.png[Details]
 
@@ -94,13 +87,13 @@ To verify that we changed the number of replicas, issue the following command:
 
 [source,bash,role=execute-1]
 ----
-oc get rc
+oc get rs
 ----
 
 [source,bash]
 ----
-NAME         DESIRED   CURRENT   READY     AGE
-parksmap-1   2         2         0         4h
+NAME                  DESIRED   CURRENT   READY   AGE
+parksmap-65c4f8b676   2         2         2       23m
 ----
 
 You can see that we now have 2 replicas. Let's verify the number of pods with
@@ -113,10 +106,9 @@ oc get pods
 
 [source,bash]
 ----
-NAME                READY   STATUS      RESTARTS   AGE
-parksmap-1-deploy   0/1     Completed   0          59m
-parksmap-1-gxbgq    1/1     Running     0          59m
-parksmap-1-j2lw9    1/1     Running     0          31m
+NAME                        READY   STATUS    RESTARTS   AGE
+parksmap-65c4f8b676-fxcrq   1/1     Running   0          92s
+parksmap-65c4f8b676-k5gkk   1/1     Running   0          24m
 ----
 
 And lastly, let's verify that the *Service* that we learned about in the
@@ -132,20 +124,21 @@ You will see something like the following output:
 [source,bash]
 ----
 Name:              parksmap
-Namespace:         lab-getting-started-starter-workshop-apb-test-user1
+Namespace:         user1
 Labels:            app=workshop
                    app.kubernetes.io/component=parksmap
                    app.kubernetes.io/instance=parksmap
                    app.kubernetes.io/part-of=workshop
+                   app.openshift.io/runtime-version=latest
                    component=parksmap
                    role=frontend
 Annotations:       openshift.io/generated-by: OpenShiftWebConsole
 Selector:          app=parksmap,deploymentconfig=parksmap
 Type:              ClusterIP
-IP:                172.30.22.209
+IP:                172.30.136.210
 Port:              8080-tcp  8080/TCP
 TargetPort:        8080/TCP
-Endpoints:         10.128.2.90:8080,10.131.0.40:8080
+Endpoints:         10.128.2.138:8080,10.131.0.93:8080
 Session Affinity:  None
 Events:            <none>
 ----
@@ -180,7 +173,7 @@ is already cached on the node.
 
 == Application "Self Healing"
 
-Because OpenShift's *RCs* are constantly monitoring to see that the desired number
+Because OpenShift's *RSs* are constantly monitoring to see that the desired number
 of *Pods* actually are running, you might also expect that OpenShift will "fix" the
 situation if it is ever not right. You would be correct!
 
@@ -190,16 +183,15 @@ name. Then, do the following:
 
 [source,bash,role=copy-and-edit]
 ----
-oc delete pod parksmap-1-2fp7t && oc get pods
+oc delete pod parksmap-65c4f8b676-k5gkk && oc get pods
 ----
 
 [source,bash]
 ----
-pod "parksmap-1-2fp7t" deleted
-NAME                READY   STATUS              RESTARTS   AGE
-parksmap-1-bwwkw    0/1     ContainerCreating   0          3s
-parksmap-1-deploy   0/1     Completed           0          47m
-parksmap-1-qfn7l    1/1     Running             0          46m
+pod "parksmap-65c4f8b676-k5gkk" deleted
+NAME                        READY   STATUS    RESTARTS   AGE
+parksmap-65c4f8b676-bjz5g   1/1     Running   0          13s
+parksmap-65c4f8b676-fxcrq   1/1     Running   0          4m48s
 ----
 
 Did you notice anything? One container has been deleted, and there's a new container already being created. 
