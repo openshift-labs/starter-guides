@@ -130,4 +130,4 @@ config:
       value: "parksmap"
     - name: PARKSMAP_VERSION
       desc: Version of parksmap to use
-      value: "1.3.0"
+      value: "latest"
