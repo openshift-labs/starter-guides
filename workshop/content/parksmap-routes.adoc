@@ -19,9 +19,20 @@ create a *Route*.
 == Exercise: Creating a Route
 
 You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 
-create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the Administrator Perspective, just click *Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
+create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the *Administrator Perspective*, just click *Networking -> Routes* and then the *Create Route* button. 
 
-image::images/parksmap-route-create.png[Create Route,align="center"]
+Insert *parksmap* in *Name* field.
+
+From *Service* field, select *parksmap*. For *Target Port*, select *8080*.
+
+In *Security* section, check *Secure route*. Select *Edge* from *TLS Termination* list.
+
+Leave all other fields blank and click *Create*:
+
+image::images/parksmap-route-create-1.png[Create Route1,align="center"]
+
+image::images/parksmap-route-create-2.png[Create Route2,align="center"]
+
 
 When creating a *Route*, some other options can be provided, like the hostname for the *Route* or the TLS configuration for the *Route*.
 
@@ -71,15 +82,17 @@ oc get route
 
 [source,bash]
 ----
-NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
-parksmap   parksmap-{{project_namespace}}.{{cluster_subdomain}}             parksmap   8080-tcp
+NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION   WILDCARD
+parksmap   parksmap-{{project_namespace}}.{{cluster_subdomain}}             parksmap   8080-tcp   edge          None
 ----
 
-You can also verify the *Route* in the Developer Perspective under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
+You can also verify the *Route* in the *Developer Perspective* under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
 
 image::images/parksmap-route-created.png[Route created]
 
-This application is now available at the URL shown in the Developer Perspective. Click the link and you will see:
+This application is now available at the URL shown in the Developer Perspective. Click the link and you will see it.
+
+NOTE: At first time, the Browser will ask permission to get your position. This is needed by the Frontend app to center the world map to your location, if you don't allow it, it will just use a default location.
 
 image::images/parksmap-route-empty-map.png[Empty map]
 
