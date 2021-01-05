@@ -93,7 +93,7 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-js.git
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-dotnet.git
 ----
 
 Select Node.js as your Builder Image.
