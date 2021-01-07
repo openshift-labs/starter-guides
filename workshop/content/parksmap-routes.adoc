@@ -34,7 +34,7 @@ image::images/parksmap-route-create-1.png[Create Route1,align="center"]
 image::images/parksmap-route-create-2.png[Create Route2,align="center"]
 
 
-When creating a *Route*, some other options can be provided, like the hostname for the *Route* or the TLS configuration for the *Route*.
+When creating a *Route*, some other options can be provided, like the hostname and path for the *Route* or the other TLS configurations.
 
 When using the command line, we can first verify that we don't already have any existing *Routes*:
 
@@ -65,7 +65,7 @@ Once we know the *Service* name, creating a *Route* is a simple one-command task
 
 [source,bash,role=execute-1]
 ----
-oc expose service parksmap
+oc create route edge parksmap --service=parksmap
 ----
 
 [source,bash]

@@ -44,20 +44,6 @@ https://{{DOCS_URL}}/applications/deployments/what-deployments-are.html#deployme
 As we want the Tekton pipeline to control when builds and deployments happen, we need to disable the ability
 on the current Deployment to automatically trigger when there is a new image or a configuration change.
 
-== Configure Manual Deployments on Dev Application
-
-DeploymentConfigs have triggers that allow automatic deploying when a new image has been pushed into OpenShift Registry. In this case we want the Pipeline to drive the flow of updating the Application, thus we just need to disable those triggers for the moment:
-
-[source,shell,role=execute-1]
-----
-oc set triggers dc nationalparks --manual -n {{project_namespace}}
-----
-
-You should get an output like this:
-[source,shell]
-----
-deploymentconfig.apps.openshift.io/nationalparks triggers updated
-----
 
 == Create Your Pipeline
 
@@ -69,6 +55,37 @@ For this example, we're going to deploy our pipeline which is stored in the same
 [source,shell,role=execute-1]
 ----
 oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n {{project_namespace}}
+----
+
+Verify the Tasks you created:
+
+[source,shell,role=execute-1]
+----
+oc get tasks -n {{project-namespace}}
+----
+
+You should see something similar:
+
+[source,bash]
+----
+NAME                 AGE
+redeploy             13s
+s2i-java-11-binary   13s
+----
+
+Verify the Pipeline you created:
+
+[source,shell,role=execute-1]
+----
+oc get pipelines -n {{project-namespace}}
+----
+
+You should see something like this:
+
+[source,bash]
+----
+NAME                     AGE
+nationalparks-pipeline   8s
 ----
 
 Now let's review our Tekton Pipeline:
@@ -174,7 +191,7 @@ This pipeline has 4 Tasks defined:
 - *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
 - *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
 - *build-image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it `s2i-java11-binary`
-- *redeploy*: it will deploy the created image on OpenShift using the DeploymentConfig named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
+- *redeploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
 
 From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline* to see the pipeline you just created.
 

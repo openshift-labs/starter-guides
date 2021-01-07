@@ -72,9 +72,10 @@ image::images/parksmap-permissions-membership-serviceaccount-done.png[Service ac
 One more step is required. We need to re-deploy the `parksmap` application because it's
 given up trying to query the API.
 
-This time we'll use the web console. In the Developer Perspective, in Topology view, click the `parksmap` entry. Then, in the *Actions* dropdown menu, select *Start Rollout*.
-
-image::images/parksmap-permissions-start-rollout.png[Start rollout]
+[source,bash,role=execute-1]
+----
+oc rollout restart deployment/parksmap
+----
 
 A new deployment is immediately started. Return to Topology view and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *Latest Version* number.
 
@@ -82,7 +83,7 @@ image::images/parksmap-permissions-redeployed.png[Application deployed]
 
 If you look at the logs for the application now, you should see no errors.  That's great.
 
-== Exercise: Grant User View Permissions
+== (Optional) Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
 access to your project using the following command:

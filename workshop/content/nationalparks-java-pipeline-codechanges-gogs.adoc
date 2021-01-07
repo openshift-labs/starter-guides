@@ -27,7 +27,7 @@ Now let's create them all together for our Pipeline:
 
 [source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-triggers-all-rhpds.yaml -n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml -n {{project_namespace}}
 ----
 
 This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.
@@ -143,40 +143,38 @@ NOTE: To see this in the map's legend itself, you will need to scale down your p
 OpenShift allows you to move between different versions of an application
 without the need to rebuild each time. Every version (past builds) of the
 application exists as an image in the OpenShift registry. Using
-the `oc rollback` and `oc deploy` commands you can move back- or forward between
+the `oc rollout` commands you can move back- or forward between
 various versions of applications.
 
-In order to perform a rollback, you need to know the name of the *Deployment Config*
+In order to perform a rollback, you need to know the name of the *Deployment*
 which has deployed the application:
 
 [source,bash,role=execute-1]
 ----
-oc get dc
+oc get deployment
 ----
 
 The output will be similar to the following:
 
 [source,bash]
 ----
-NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb              1          1         1         config,image(mongodb:3.6)
-parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
-nationalparks        9          1         1         config,image(nationalparks:master)
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+el-nationalparks   1/1     1            1           7m51s
+nationalparks      1/1     1            1           25m
+parksmap           1/1     1            1           37m
 ----
 Now run the following command to rollback the latest code change:
 
 [source,bash,role=execute-1]
 ----
-oc rollback nationalparks
+oc rollout undo deployment/nationalparks
 ----
 
 You will see output like the following:
 
 [source,bash]
 ----
-#5 rolled back to nationalparks-3
-Warning: the following images triggers were disabled: nationalparks:latest
-  You can re-enable them with: oc set triggers dc/nationalparks --auto
+deployment.apps/nationalparks rolled back
 ----
 
 Once the deploy is complete, verify that the page header is reverted to the
@@ -185,17 +183,6 @@ original header by viewing the application in your browser.
 
 link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
 
-[NOTE]
-====
-Automatic deployment of new images is disabled as part of the rollback
-to prevent unwanted deployments soon after the rollback is complete. To re-enable
-the automatic deployments run this:
-
-[source,bash,role=execute-1]
-----
-oc set triggers dc/nationalparks --auto
-----
-====
 
 == Exercise: Rollforward
 

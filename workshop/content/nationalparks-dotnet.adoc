@@ -96,7 +96,7 @@ Enter the following for Git Repo URL:
 http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-dotnet.git
 ----
 
-Select Node.js as your Builder Image.
+Select .NET Core as your Builder Image.
 
 image::images/nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
 
@@ -147,9 +147,9 @@ oc logs -f builds/nationalparks-1
 After the build has completed and successfully:
 
 * The S2I process will push the resulting container image to the internal OpenShift registry
-* The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
+* The *Deployment* (D) will detect that the image has changed, and this
   will cause a new deployment to happen.
-* A *ReplicationController* (RC) will be spawned for this new deployment.
+* A *ReplicaSet* (RS) will be spawned for this new deployment.
 * The RC will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
 
 In the end, when issuing the `oc get pods` command, you will see that the build Pod
@@ -194,8 +194,6 @@ frontend are required to implement a `/ws/info/` endpoint. To test, visit this U
 
 
 link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
-
-WARNING: The trailing slash is *required*.
 
 You will see a simple JSON string:
 
