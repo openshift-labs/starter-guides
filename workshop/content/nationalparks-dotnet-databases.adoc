@@ -139,29 +139,24 @@ oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop compone
 
 
 == Exercise: Exploring OpenShift Magic
-As soon as we changed the *DeploymentConfiguration*, some
+
+As soon as we attached the Secret to the *Deployment*, some
 magic happened. OpenShift decided that this was a significant enough change to
-warrant updating the internal version number of the *DeploymentConfiguration*. You
-can verify this by looking at the output of `oc get dc`:
+warrant updating the internal version number of the *ReplicaSet*. You
+can verify this by looking at the output of `oc get rs`:
+
 
 [source,bash]
 ----
-NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
+NAME                       DESIRED   CURRENT   READY   AGE
+nationalparks-58bd4758fc   0         0         0       4m58s
+nationalparks-7445576cd9   0         0         0       6m42s
+nationalparks-789c6bc4f4   1         1         1       41s
+parksmap-57df75c46d        1         1         1       8m24s
+parksmap-65c4f8b676        0         0         0       18m
 ----
 
-Something that increments the version of a *DeploymentConfiguration*, by default,
-causes a new deployment. You can verify this by looking at the output of `oc get
-rc`:
-
-[source,bash]
-----
-NAME                      DESIRED   CURRENT   READY     AGE
-mongodb-nationalparks-1   1         1         1         24m
-----
-
-We see that the desired and current number of instances for the "-1" deployment
-is 0. The desired and current number of instances for the "-2" deployment is 1.
+We see that the DESIRED and CURRENT number of instances for the current deployment. The desired and current number of the other instances are 0.
 This means that OpenShift has gracefully torn down our "old" application and
 stood up a "new" instance.
 
@@ -208,7 +203,7 @@ a browser problem, and the application is working properly.
 
 [source,bash,role=copypaste]
 ----
-http://parksmap-{{ project_namespace }}.{{cluster_subdomain}}
+https://parksmap-{{ project_namespace }}.{{cluster_subdomain}}
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.

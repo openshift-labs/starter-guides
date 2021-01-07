@@ -160,7 +160,7 @@ has finished (exited) and that an application *Pod* is in a ready and running st
 NAME                    READY     STATUS      RESTARTS   AGE
 nationalparks-1-tkid3   1/1       Running     3          2m
 nationalparks-1-build   0/1       Completed   0          3m
-parksmap-1-4hbtk        1/1       Running     0          2h
+parksmap-57df75c46d-xltcs        1/1       Running     0          2h
 ----
 
 If you look again at the web console, you will notice that, when you create the

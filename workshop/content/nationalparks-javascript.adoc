@@ -147,9 +147,9 @@ oc logs -f builds/nationalparks-1
 After the build has completed and successfully:
 
 * The S2I process will push the resulting container image to the internal OpenShift registry
-* The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
+* The *Deployment* (D) will detect that the image has changed, and this
   will cause a new deployment to happen.
-* A *ReplicationController* (RC) will be spawned for this new deployment.
+* A *ReplicaSet* (RS) will be spawned for this new deployment.
 * The RC will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
 
 In the end, when issuing the `oc get pods` command, you will see that the build Pod
@@ -160,7 +160,7 @@ has finished (exited) and that an application *Pod* is in a ready and running st
 NAME                    READY     STATUS      RESTARTS   AGE
 nationalparks-1-tkid3   1/1       Running     3          2m
 nationalparks-1-build   0/1       Completed   0          3m
-parksmap-1-4hbtk        1/1       Running     0          2h
+parksmap-57df75c46d-xltcs        1/1       Running     0          2h
 ----
 
 If you look again at the web console, you will notice that, when you create the
