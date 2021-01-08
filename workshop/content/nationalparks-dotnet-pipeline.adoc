@@ -36,14 +36,6 @@ In short, in order to create a pipeline, one does the following:
 
 For further details on pipeline concepts, refer to the https://github.com/tektoncd/pipeline/tree/master/docs#learn-more[Tekton documentation] that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.
 
-== Set Up Your Pipeline
-
-A deployment configuration in OpenShift can contain 
-https://{{DOCS_URL}}/applications/deployments/what-deployments-are.html#deployments-and-deploymentconfigs_what-deployments-are[Triggers], which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.
-
-As we want the Tekton pipeline to control when builds and deployments happen, we need to disable the ability
-on the current Deployment to automatically trigger when there is a new image or a configuration change.
-
 
 == Explore your Pipeline
 
@@ -56,7 +48,7 @@ Verify Tasks already available in the OpenShift cluster (ClusterTasks):
 
 [source,shell,role=execute-1]
 ----
-oc get clustertasks -n {{project-namespace}}
+oc get clustertasks -n {{project_namespace}}
 ----
 
 You should see something similar:
@@ -76,7 +68,7 @@ Verify the Pipeline we created:
 
 [source,shell,role=execute-1]
 ----
-oc get pipelines -n {{project-namespace}}
+oc get pipelines -n {{project_namespace}}
 ----
 
 You should see something like this:

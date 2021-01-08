@@ -80,6 +80,7 @@ repository, a new build and deploy will occur inside of OpenShift.  Let's try
 this out.
 
 == Exercise: Using Gogs Web Hooks
+
 Click the *Files* tab in Gogs. This is Gogs's repository view.  
 
 CAUTION: Make sure that the drop-down menu at the upper right is set for 
@@ -102,14 +103,14 @@ Change line number 45:
 
 [source,java]
 ----
-displayName = "National Parks",
+displayName = "National Parks (C#)",
 ----
 
 To
 
 [source,java]
 ----
-displayName = "Amazing National Parks",
+displayName = "Amazing National Parks (C#)",
 ----
 
 Click on Commit changes at the bottom of the screen. Feel free to enter a commit

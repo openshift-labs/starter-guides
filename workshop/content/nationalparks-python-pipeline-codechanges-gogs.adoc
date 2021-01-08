@@ -4,21 +4,50 @@ Most Git repository servers support the concept of web hooks -- calling to an
 external source via HTTP(S) when a change in the code repository happens.
 OpenShift provides an API endpoint that supports receiving hooks from
 remote systems in order to trigger builds. By pointing the code repository's
-hook at the OpenShift API, automated code/build/deploy pipelines can be
+hook at the OpenShift Pipelines resources, automated code/build/deploy pipelines can be
 achieved.
+
+== Adding Triggers to your Pipeline
+
+Tekton *Triggers* enable us to configure Pipelines to respond to external events (Git push events, pull requests etc) such as Web Hooks.
+
+Adding triggering support requires the creation of a `TriggerTemplate`, `TriggerBinding`, and an `EventListener` in our project.
+
+
+
+image::images/devops-pipeline-triggers.png[Triggers]
+
+Let's see each component in detail:
+
+* *TriggerTemplate*: a trigger template is a template for newly created resources. It supports parameters to create specific `PipelineResources` and `PipelineRuns`.
+* *TriggerBinding*: validates events and extracts payload fields
+* *EventListener*: connects `TriggerBindings` and `TriggerTemplates` into an addressable endpoint (the event sink). It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.
+
+Now let's create them all together for our Pipeline:
+
+[source,shell,role=execute-1]
+----
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-py/raw/master/pipelines/nationalparks-triggers-all.yaml -n {{project_namespace}}
+----
+
+This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.
+
+From left side menu, click on *Topology* to verify if a new Deployment *el-nationalparks* for the `EventListener` has ben created:
+
+image::images/devops-pipeline-triggers-eventlistener.png[EventListener created]
+
 
 == Exercise: Configuring Gogs Web Hooks
 
-In this section you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the the Developer perspective in the web console, click *Builds* in the left navigation. Click the `nationalparks` build config and scroll down to the Webhooks section.
+Click on the Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
 
-On this screen you will see webhook information as shown in the following image:
+image::images/devops-pipeline-triggers-route.png[EventListener created]
 
-image::images/nationalparks-pipeline-codechanges-webhook-config.png[Webhook]
+Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:
 
-Click *Copy URL with Secret*. Once you have the URL copied to your clipboard, navigate to the code repository
-that you have on Gogs:
 
 link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-py[Gogs Repository]
+
 
 Your Gogs credentials are:
 
@@ -40,7 +69,7 @@ In the next screen, paste your link into the "Payload URL" field. You can leave 
 secret token field blank -- the secret is already in the URL and does not need
 to be in the payload.
 
-Change the `Content Type` to `application/x-www-form-urlencoded`.
+Change the `Content Type` to `application/json`.
 
 Finally, click on *Add Webhook*.
 
@@ -72,14 +101,14 @@ image::images/nationalparks-codechanges-gogs-python-change-code.png[Webhook]
 
 Change line number 48:
 
-[source,java]
+[source,python]
 ----
  'displayName': 'National Parks (PY)',
 ----
 
 To
 
-[source,java]
+[source,python]
 ----
  'displayName': 'Amazing National Parks (PY)',
 ----
@@ -87,28 +116,23 @@ To
 Click on Commit changes at the bottom of the screen. Feel free to enter a commit
 message.
 
-Once you have committed your changes, a *Build* should almost instantaneously be
-triggered in OpenShift. From the *Topology* view, click `nationalparks` and look at the *Builds* section of the *Resources* tab, or, run the
-following command to verify:
+Once you have committed your changes, a new *PipelineRun* should almost instantaneously be
+triggered in OpenShift. Click *Pipeline* in the left navigation menu then `nationalparks-pipeline`. You should see a new one running: 
+
+image::images/nationalparks-codechanges-pipeline-running.png[Webhook]
+
+or run the following command to verify:
 
 [source,bash,role=execute-1]
 ----
-oc get builds
+oc get PipelineRun
 ----
 
-You should see that a new build is running:
+Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:
 
-[source,bash]
-----
-NAME              TYPE      FROM          STATUS     STARTED          DURATION
-nationalparks-1   Source    Git@b052ae6   Complete   18 hours ago     36s
-nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago
-----
-
-Once the build and deploy has finished, verify your new image was
-automatically deployed by viewing the application in your browser:
 
 link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
+
 
 You should now see the new name you have set in the JSON string returned.
 
@@ -120,58 +144,46 @@ NOTE: To see this in the map's legend itself, you will need to scale down your p
 OpenShift allows you to move between different versions of an application
 without the need to rebuild each time. Every version (past builds) of the
 application exists as an image in the OpenShift registry. Using
-the `oc rollback` and `oc deploy` commands you can move back- or forward between
+the `oc rollout` commands you can move back- or forward between
 various versions of applications.
 
-In order to perform a rollback, you need to know the name of the *Deployment Config*
+In order to perform a rollback, you need to know the name of the *Deployment*
 which has deployed the application:
 
 [source,bash,role=execute-1]
 ----
-oc get dc
+oc get deployment
 ----
 
 The output will be similar to the following:
 
 [source,bash]
 ----
-NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb              1          1         1         config,image(mongodb:3.6)
-parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
-nationalparks        9          1         1         config,image(nationalparks:master)
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+el-nationalparks   1/1     1            1           7m51s
+nationalparks      1/1     1            1           25m
+parksmap           1/1     1            1           37m
 ----
 Now run the following command to rollback the latest code change:
 
 [source,bash,role=execute-1]
 ----
-oc rollback nationalparks
+oc rollout undo deployment/nationalparks
 ----
 
 You will see output like the following:
 
 [source,bash]
 ----
-#5 rolled back to nationalparks-3
-Warning: the following images triggers were disabled: nationalparks:live
-  You can re-enable them with: oc set triggers dc/nationalparks --auto
+deployment.apps/nationalparks rolled back
 ----
 
 Once the deploy is complete, verify that the page header is reverted to the
 original header by viewing the application in your browser.
 
+
 link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
 
-[NOTE]
-====
-Automatic deployment of new images is disabled as part of the rollback
-to prevent unwanted deployments soon after the rollback is complete. To re-enable
-the automatic deployments run this:
-
-[source,bash,role=execute-1]
-----
-oc set triggers dc/nationalparks --auto
-----
-====
 
 == Exercise: Rollforward
 

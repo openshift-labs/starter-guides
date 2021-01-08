@@ -36,23 +36,18 @@ In short, in order to create a pipeline, one does the following:
 
 For further details on pipeline concepts, refer to the https://github.com/tektoncd/pipeline/tree/master/docs#learn-more[Tekton documentation] that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.
 
-== Create Your Pipeline
+== Explore your Pipeline
 
 As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
-For this example, we're going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
+For this example, we're going to deploy our pipeline that we created automatically from Developer Console together with `nationalparks` backend. 
 
 
-[source,shell,role=execute-1]
-----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline-all-new.yaml -n {{project_namespace}}
-----
-
-Verify the Tasks you created:
+Verify Tasks already available in the OpenShift cluster (ClusterTasks):
 
 [source,shell,role=execute-1]
 ----
-oc get tasks -n {{project_namespace}}
+oc get clustertasks -n {{project_namespace}}
 ----
 
 You should see something similar:
@@ -60,11 +55,13 @@ You should see something similar:
 [source,bash]
 ----
 NAME                 AGE
-redeploy             13s
-s2i-java-11-binary   13s
+....
+s2i-python-3               4h58m
+s2i-python-3-pr            4h58m
+....
 ----
 
-Verify the Pipeline you created:
+Verify the Pipeline we created:
 
 [source,shell,role=execute-1]
 ----
@@ -76,45 +73,48 @@ You should see something like this:
 [source,bash]
 ----
 NAME                     AGE
-nationalparks-pipeline   8s
+nationalparks   8s
 ----
 
 Now let's review our Tekton Pipeline:
 
-[source,shell,role=copypaste]
+[source,yaml,role=copypaste]
 ----
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: nationalparks-pipeline
+  name: nationalparks
 spec:
   params:
     - default: nationalparks
-      description: The application name
       name: APP_NAME
       type: string
-    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
-      description: The application git repository url
-      name: APP_GIT_URL
+    - default: >-
+        https://github.com/openshift-roadshow/nationalparks-py.git
+      name: GIT_REPO
       type: string
     - default: master
-      description: The application git repository revision
-      name: APP_GIT_REVISION
+      name: GIT_REVISION
+      type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000/user1/nationalparks'
+      name: IMAGE_NAME
+      type: string
+    - default: .
+      name: PATH_CONTEXT
+      type: string
+    - default: '1'
+      name: MINOR_VERSION
       type: string
   tasks:
-    - name: git-clone
+    - name: fetch-repository
       params:
         - name: url
-          value: $(params.APP_GIT_URL)
+          value: $(params.GIT_REPO)
         - name: revision
-          value: $(params.APP_GIT_REVISION)
-        - name: submodules
-          value: 'true'
-        - name: depth
-          value: '1'
-        - name: sslVerify
-          value: 'true'
+          value: $(params.GIT_REVISION)
+        - name: subdirectory
+          value: ''
         - name: deleteExisting
           value: 'true'
       taskRef:
@@ -122,54 +122,41 @@ spec:
         name: git-clone
       workspaces:
         - name: output
-          workspace: app-source
-    - name: build-and-test
+          workspace: workspace
+    - name: build
       params:
-        - name: GOALS
-          value:
-            - package
-        - name: PROXY_PROTOCOL
-          value: http
-      runAfter:
-        - git-clone
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: app-source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: build-image
-      params:
-        - name: PATH_CONTEXT
-          value: .
+        - name: IMAGE
+          value: $(params.IMAGE_NAME)
         - name: TLSVERIFY
           value: 'false'
-        - name: OUTPUT_IMAGE_STREAM
-          value: '$(params.APP_NAME):latest'
+        - name: PATH_CONTEXT
+          value: $(params.PATH_CONTEXT)
+        - name: MINOR_VERSION
+          value: $(params.MINOR_VERSION)
       runAfter:
-        - build-and-test
+        - fetch-repository
       taskRef:
-        kind: Task
-        name: s2i-java-11-binary
+        kind: ClusterTask
+        name: s2i-python-3
       workspaces:
         - name: source
-          workspace: app-source
-    - name: redeploy
+          workspace: workspace
+    - name: deploy
       params:
-        - name: DEPLOYMENT_CONFIG
-          value: $(params.APP_NAME)
-        - name: IMAGE_STREAM
-          value: '$(params.APP_NAME):latest'
+        - name: SCRIPT
+          value: kubectl $@
+        - name: ARGS
+          value:
+            - rollout
+            - status
+            - deploy/$(params.APP_NAME)
       runAfter:
-        - build-image
+        - build
       taskRef:
-        kind: Task
-        name: redeploy
+        kind: ClusterTask
+        name: openshift-client
   workspaces:
-    - name: app-source
-    - name: maven-settings
+    - name: workspace
 
 ----
 
@@ -179,36 +166,35 @@ A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* ar
 
 This pipeline has 4 Tasks defined:
 
-- *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
-- *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
-- *build-image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it `s2i-java11-binary`
-- *redeploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
+- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *build*: will build and test our Python application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry.
+- *deploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab.
 
-From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline* to see the pipeline you just created.
+From left-side menu, click on *Pipeline*, then click on *nationalparks* to see the pipeline you just created.
 
 image::images/devops-pipeline-created.png[Pipeline created]
 
 The Pipeline is parametric, with default value on the one we need to use.
 
-It is using two *Workspace*:
+It is using one *Workspace*:
 
 - *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
-- *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
+
 
 
 == Run the Pipeline
 
-We can start now the Pipeline from the Web Console. From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
+We can start now the Pipeline from the Web Console. From left-side menu, click on *Pipeline*, then click on *nationalparks*. From top-right *Actions* list, click on *Start*.
 
 image::images/devops-pipeline-start-1.png[Start Pipeline]
 
 You will be prompted with parameters to add the Pipeline, showing default ones. 
 
-Add in *APP_GIT_URL* the `nationalparks` repository you have in Gogs:
+Add in *GIT_URL* the `nationalparks` repository you have in Gogs:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-py.git
 ----
 
 In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
