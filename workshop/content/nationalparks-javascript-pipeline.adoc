@@ -164,7 +164,7 @@ A `Pipeline` is a user-defined model of a CD pipeline. A Pipeline’s code defin
 
 A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* are available to all user within a cluster where OpenShift Pipelines has been installed, while *Tasks* can be custom.
 
-This pipeline has 4 Tasks defined:
+This pipeline has 3 Tasks defined:
 
 - *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
 - *build*: will build and test our NodeJS application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry.
@@ -208,7 +208,7 @@ You can follow the Pipeline execution from *Pipeline* section, watching all the 
 
 image::images/devops-pipeline-run-1.png[Pipeline running]
 
-The click on the `PipelineRun` *national-parks-deploy-run-*:
+Then click on the `PipelineRun` *national-parks-deploy-run-*:
 
 image::images/devops-pipeline-run-2.png[Pipeline running animation]
 

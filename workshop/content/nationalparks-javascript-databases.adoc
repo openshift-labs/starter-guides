@@ -196,6 +196,8 @@ And the result?
 Items inserted in database: 2740
 ----
 
+NOTE: If you get an error 504: Gateway timeout, don't worry about it. Give it a few more seconds and try to go back to `/ws/data/all` again.
+
 If you then go back to `/ws/data/all` you will see tons of JSON data now.
 That's great. Our parks map should finally work!
 
