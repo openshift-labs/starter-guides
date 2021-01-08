@@ -96,6 +96,10 @@ Enter the following for Git Repo URL:
 http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-js.git
 ----
 
+In *Git Type* select *Other*.
+
+NOTE: if you copied the Gogs URL correctly (check spaces etc) and you still get a warning like 'URL is valid but cannot be reached' please ignore it at this time, since the UI may fail to ping the repo sometimes.
+
 Select Node.js as your Builder Image.
 
 image::images/nationalparks-import-from-git-url-builder-js.png[Import from Git]

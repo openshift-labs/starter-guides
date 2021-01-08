@@ -334,7 +334,6 @@ Under the `metadata` section you should see the following:
 ----
   labels:
     app: parksmap
-    deployment: parksmap-1
     deploymentconfig: parksmap
 ----
 

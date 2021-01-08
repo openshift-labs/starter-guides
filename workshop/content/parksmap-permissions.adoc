@@ -77,7 +77,7 @@ given up trying to query the API.
 oc rollout restart deployment/parksmap
 ----
 
-A new deployment is immediately started. Return to Topology view and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *Latest Version* number.
+A new deployment is immediately started. Return to Topology view and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *ReplicaSet* number.
 
 image::images/parksmap-permissions-redeployed.png[Application deployed]
 
