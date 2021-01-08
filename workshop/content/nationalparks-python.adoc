@@ -107,6 +107,10 @@ NOTE: All of these builder images shown are made available via *Templates* and
 
 Scroll down to the *General* section. Select `workshop` as your application, and `nationalparks` as the name.
 
+Inside *Pipeline* section, check *Add pipeline* box. This will create a Tekton Pipeline for us that we will use after in the Pipeline modules.
+
+TIP: Click "Show pipeline visualization" to preview the Pipeline inside Pipeline UI that we are going to use later on.
+
 Expand the Labels section and add 3 labels:
 
 - *__app__=workshop*  (the name we will be giving to the app)
@@ -115,7 +119,7 @@ Expand the Labels section and add 3 labels:
 
 Now click the *Create* button.
 
-image::images/nationalparks-configure-service.png[Runtimes]
+image::images/nationalparks-configure-service-pipelines.png[Runtimes]
 
 To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
 
