@@ -27,6 +27,7 @@ Your screen will end up looking something like this:
 
 image::images/parksmap-image.png[Explore Project]
 
+In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default one, or since this Frontend is made with Spring boot, you can pick *Spring boot* icon.
 
 Make sure to have the correct values in:
 
@@ -35,11 +36,11 @@ Make sure to have the correct values in:
 
 Ensure *Deployment* is selected from *Resource* section.
 
-Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
+*Un-check* the checkbox next to *Create a route to the application*. For learning purposes, we will create a *Route* for the application later in the workshop.
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
-We will add 3 labels. After you enter the name=value pair for each label, press *enter* before typing the next. First the name to be given to the application.
+We will add 3 labels. After you enter the name=value pair for each label, press *tab* or de-focus with mouse before typing the next. First the name to be given to the application.
 
 [source,role=copy]
 ----

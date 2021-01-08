@@ -19,7 +19,8 @@ modules:
   - nationalparks-python
   - nationalparks-python-databases
   - nationalparks-application-health
-  - nationalparks-python-codechanges-gogs
+  - nationalparks-python-pipeline
+  - nationalparks-python-pipeline-codechanges-gogs
 #  - mlbparks-templates
 #  - mlbparks-binary-build
 #  - mlbparks-debugging

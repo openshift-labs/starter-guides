@@ -19,7 +19,8 @@ modules:
   - nationalparks-javascript
   - nationalparks-javascript-databases
   - nationalparks-application-health
-  - nationalparks-javascript-codechanges-gogs
+  - nationalparks-javascript-pipeline
+  - nationalparks-javascript-pipeline-codechanges-gogs
 #  - mlbparks-templates
 #  - mlbparks-binary-build
 #  - mlbparks-debugging

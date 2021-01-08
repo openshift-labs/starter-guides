@@ -50,8 +50,20 @@ modules:
         name: Application Health
     nationalparks-java-pipeline-codechanges-gogs:
         name: Automation for Your Application on Code Changes
+    nationalparks-java-pipeline:
+        name: Automate Build and Deployment with Pipelines
     nationalparks-dotnet-pipeline-codechanges-gogs:
         name: Automation for Your Application on Code Changes
+    nationalparks-dotnet-pipeline:
+        name: Automate Build and Deployment with Pipelines
+    nationalparks-javascript-pipeline-codechanges-gogs:
+        name: Automation for Your Application on Code Changes
+    nationalparks-javascript-pipeline:
+        name: Automate Build and Deployment with Pipelines
+    nationalparks-python-pipeline-codechanges-gogs:
+        name: Automation for Your Application on Code Changes
+    nationalparks-python-pipeline:
+        name: Automate Build and Deployment with Pipelines
     nationalparks-java-codechanges-gogs:
         name: Trigger Automatic Rebuilds on Code Changes
     nationalparks-javascript-codechanges-gogs:
@@ -62,10 +74,7 @@ modules:
         name: Trigger Automatic Rebuilds on Code Changes
     nationalparks-dotnet-codechanges-gogs:
         name: Trigger Automatic Rebuilds on Code Changes
-    nationalparks-dotnet-pipeline:
-        name: Automate Build and Deployment with Pipelines
-    nationalparks-java-pipeline:
-        name: Automate Build and Deployment with Pipelines
+
     mlbparks-templates:
         name: Using Application Templates
     mlbparks-binary-build:

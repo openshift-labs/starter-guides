@@ -19,6 +19,7 @@ modules:
   - nationalparks-dotnet
   - nationalparks-dotnet-databases
   - nationalparks-application-health
+  - nationalparks-dotnet-pipeline
   - nationalparks-dotnet-pipeline-codechanges-gogs
 #  - mlbparks-templates
 #  - mlbparks-binary-build
