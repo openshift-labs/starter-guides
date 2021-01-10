@@ -164,7 +164,7 @@ A `Pipeline` is a user-defined model of a CD pipeline. A Pipeline’s code defin
 
 A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* are available to all user within a cluster where OpenShift Pipelines has been installed, while *Tasks* can be custom.
 
-This pipeline has 4 Tasks defined:
+This pipeline has 3 Tasks defined:
 
 - *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
 - *build*: will build and test our Python application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry.
@@ -178,13 +178,28 @@ The Pipeline is parametric, with default value on the one we need to use.
 
 It is using one *Workspace*:
 
-- *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
+- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
+
+== Exercise: Add Storage for your Pipeline
+
+OpenShift manages Storage with link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volumes] to be attached to Pods running our applications through *Persistent Volume Claim* requests, and it also provides the capability to manage it at ease from Web Console. 
+From *Administrator Perspective*, go to *Storage*->*Persistent Volume Claims*
+
+Inside *Persistent Volume Claim name* insert *app-source-pvc*.
+
+In *Size* section, insert *1* as we are going to create 1 GiB Persistent Volume for our Pipeline, using RWO Single User access mode.
+
+Leave all default settings, and click *Create*.
+
+image::images/nationalparks-codechanges-pipeline-pvc.png[Create PVC]
+
+TIP: The *Storage Class* is the type of storage available in the cluster.
 
 
 
 == Run the Pipeline
 
-We can start now the Pipeline from the Web Console. From left-side menu, click on *Pipeline*, then click on *nationalparks*. From top-right *Actions* list, click on *Start*.
+We can start now the Pipeline from the Web Console.  Switch to *Developer Perspective*, and from left-side menu, click on *Pipeline*, then click on *nationalparks*. From top-right *Actions* list, click on *Start*.
 
 image::images/devops-pipeline-start-1.png[Start Pipeline]
 
