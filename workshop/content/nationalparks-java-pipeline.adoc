@@ -224,12 +224,12 @@ image::images/devops-pipeline-run-1.png[Pipeline running]
 
 The click on the `PipelineRun` *national-parks-deploy-run-*:
 
-image::images/devops-pipeline-run-2.png[Pipeline running animation]
+image::images/devops-pipeline-run-java-2.png[Pipeline running animation]
 
 Then click on the *Task* running to check logs:
 
-image::images/devops-pipeline-run-3.png[Pipeline Task log]
+image::images/devops-pipeline-run-java-3.png[Pipeline Task log]
 
 Verify PipelineRun has been completed with success:
 
-image::images/devops-pipeline-run-4.png[PipelineRun completed]
+image::images/devops-pipeline-run-java-4.png[PipelineRun completed]
