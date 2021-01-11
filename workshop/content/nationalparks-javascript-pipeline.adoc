@@ -183,7 +183,9 @@ It is using one *Workspace*:
 == Exercise: Add Storage for your Pipeline
 
 OpenShift manages Storage with link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volumes] to be attached to Pods running our applications through *Persistent Volume Claim* requests, and it also provides the capability to manage it at ease from Web Console. 
-From *Administrator Perspective*, go to *Storage*->*Persistent Volume Claims*
+From *Administrator Perspective*, go to *Storage*-> *Persistent Volume Claims*.
+
+Go to top-right side and click *Create Persistent Volume Claim* button.
 
 Inside *Persistent Volume Claim name* insert *app-source-pvc*.
 
@@ -204,18 +206,12 @@ image::images/devops-pipeline-start-1.png[Start Pipeline]
 
 You will be prompted with parameters to add the Pipeline, showing default ones. 
 
-Add in *GIT_URL* the `nationalparks` repository you have in Gogs:
-
-[source,role=copypaste]
-----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks-js.git
-----
 
 In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
 
 Click on *Start* to run your Pipeline.
 
-image::images/devops-pipeline-start-2.png[Add parameters]
+image::images/devops-pipeline-start-2-new.png[Add parameters]
 
 
 You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:
