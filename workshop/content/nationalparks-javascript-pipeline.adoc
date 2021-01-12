@@ -202,7 +202,7 @@ TIP: The *Storage Class* is the type of storage available in the cluster.
 
 We can start now the Pipeline from the Web Console. Switch to *Developer Perspective*, and from left-side menu, click on *Pipeline*, then click on *nationalparks*. From top-right *Actions* list, click on *Start*.
 
-image::images/devops-pipeline-start-1.png[Start Pipeline]
+image::images/devops-pipeline-start-1-new.png[Start Pipeline]
 
 You will be prompted with parameters to add the Pipeline, showing default ones. 
 
