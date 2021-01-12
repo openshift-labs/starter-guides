@@ -18,7 +18,7 @@ modules:
   - parksmap-rsh
   - nationalparks-javascript
   - nationalparks-javascript-databases
-  - nationalparks-application-health
+  - nationalparks-javascript-application-health
   - nationalparks-javascript-pipeline
   - nationalparks-javascript-pipeline-codechanges-gogs
 #  - mlbparks-templates

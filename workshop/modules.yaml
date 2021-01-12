@@ -46,7 +46,13 @@ modules:
         name: Adding a Database (MongoDB)
     nationalparks-dotnet-databases:
         name: Adding a Database (MongoDB)
-    nationalparks-application-health:
+    nationalparks-java-application-health:
+        name: Application Health
+    nationalparks-dotnet-application-health:
+        name: Application Health
+    nationalparks-javascript-application-health:
+        name: Application Health
+    nationalparks-python-application-health:
         name: Application Health
     nationalparks-java-pipeline-codechanges-gogs:
         name: Automation for Your Application on Code Changes

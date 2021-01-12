@@ -18,7 +18,7 @@ modules:
   - parksmap-rsh
   - nationalparks-python
   - nationalparks-python-databases
-  - nationalparks-application-health
+  - nationalparks-python-application-health
   - nationalparks-python-pipeline
   - nationalparks-python-pipeline-codechanges-gogs
 #  - mlbparks-templates
