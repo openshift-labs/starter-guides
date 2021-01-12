@@ -34,14 +34,14 @@ This will create a new Pod with a Route that we can use to setup our Webhook on 
 
 From left side menu, click on *Topology* to verify if a new Deployment *el-nationalparks* for the `EventListener` has ben created:
 
-image::images/devops-pipeline-triggers-eventlistener.png[EventListener created]
+image::images/devops-pipeline-triggers-eventlistener-dotnet.png[EventListener created]
 
 
 == Exercise: Configuring Gogs Web Hooks
 
 Click on the Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
 
-image::images/devops-pipeline-triggers-route.png[EventListener created]
+image::images/devops-pipeline-triggers-route-js.png[EventListener created]
 
 Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:
 

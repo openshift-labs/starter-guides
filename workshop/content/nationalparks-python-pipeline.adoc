@@ -172,7 +172,7 @@ This pipeline has 3 Tasks defined:
 
 From left-side menu, click on *Pipeline*, then click on *nationalparks* to see the pipeline you just created.
 
-image::images/devops-pipeline-created.png[Pipeline created]
+image::images/devops-pipeline-created-new.png[Pipeline created]
 
 The Pipeline is parametric, with default value on the one we need to use.
 
@@ -208,7 +208,7 @@ image::images/devops-pipeline-start-1-new.png[Start Pipeline]
 You will be prompted with parameters to add the Pipeline, showing default ones. 
 
 
-In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
+In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the shared volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
 
 Click on *Start* to run your Pipeline.
 
