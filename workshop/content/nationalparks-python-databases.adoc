@@ -302,7 +302,7 @@ If you check your browser now:
 
 [source,bash,role=copypaste]
 ----
-http://parksmap-{{ project_namespace }}.{{cluster_subdomain}}/
+https://parksmap-{{ project_namespace }}.{{cluster_subdomain}}/
 ----
 
 image::images/nationalparks-databases-new-parks.png[MongoDB]

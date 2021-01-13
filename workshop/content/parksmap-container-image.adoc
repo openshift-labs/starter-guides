@@ -27,7 +27,7 @@ Your screen will end up looking something like this:
 
 image::images/parksmap-image.png[Explore Project]
 
-In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default one, or since this Frontend is made with Spring boot, you can pick *Spring boot* icon.
+In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default OpenShift icon, or since this Frontend is made with Spring boot, you can pick Spring boot icon if you want. 
 
 Make sure to have the correct values in:
 

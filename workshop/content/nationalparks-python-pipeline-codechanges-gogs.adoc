@@ -41,7 +41,7 @@ image::images/devops-pipeline-triggers-eventlistener-python.png[EventListener cr
 
 Click on the Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
 
-image::images/devops-pipeline-triggers-route-js.png[EventListener created]
+image::images/devops-pipeline-triggers-route-python.png[EventListener created]
 
 Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:
 
@@ -99,7 +99,7 @@ hand corner as shown here:
 
 image::images/nationalparks-codechanges-gogs-python-change-code.png[Webhook]
 
-Change line number 48:
+Change line number 50:
 
 [source,python]
 ----
