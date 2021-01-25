@@ -18,7 +18,7 @@
 | Supported Number of Users | Up to 100 per cluster |
 | Average Time to Complete | 90 minutes |
 
-This workshop is intended to give you a hands on introduction to using OpenShift from the perspective of a developer. 
+This workshop is intended to give you a hands on introduction to using OpenShift from the perspective of a developer.
 
 Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
 
@@ -58,7 +58,7 @@ The full workshop contains several components:
 An example of the Java lab guide can be found [here](http://lab-getting-started-ocp4-starter-guide.apps.osd4-demo.u6k6.p1.openshiftapps.com/workshop/common-workshop-summary).
 
 ## Deploying the Workshop
-This workshop is designed to be deployed from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). 
+This workshop is designed to be deployed from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com).
 
 ### Deploying on Red Hat Product Demo System
 Upon logging into RHPDS, highlight the **Services** sidebar, and select the **Catalogs** menu. The workshop is found in the catalog under the **Workshops** folder and is named **OCP4 - Getting Started Workshop**.
@@ -122,7 +122,7 @@ WORKSHOP_PROJECT=lab
 workloads=("ocp-workload-etherpad" \
            "ocp-workload-ocp-ops-view" \
            "ocp-workload-gogs" \
-           "ocp4_workload_nexus_operator" \
+           "ocp4-workload-nexus-operator" \
            "ocp-workload-gogs-load-repository" \
            "ocp4-workload-homeroomlab-starter-guides")
 
@@ -146,7 +146,7 @@ done
 ## Running the Workshop
 
 ### Starting the Workshop for Participants
-Once the deployment finishes, navigate to the OpenShift administrator perspective. After, go to the `labs` project and view the Routes there. The structure of the Route URLs is as follows. If your GUID is, for example, `abc-1234`, and the route name is `myroute`, the Route URL will be http://`myroute`-labs.apps.cluster-`abc-1234`.`abc-1234`.example.opentlc.com
+Once the deployment finishes, navigate to the OpenShift administrator perspective. After, go to the `lab` project and view the Routes there. The structure of the Route URLs is as follows. If your GUID is, for example, `abc-1234`, and the route name is `myroute`, the Route URL will be http://`myroute`-lab.apps.cluster-`abc-1234`.`abc-1234`.example.opentlc.com
 
 * The `etherpad` route is for the etherpad deployment. Append `/p/workshop` to the end of this route and share that URL with lab participants so they can claim a username.
 * The `homeroom` route is the one that launches the workshop chooser. Give this URL to lab participants after they've claimed a username.
@@ -221,5 +221,3 @@ To delete the build configuration for the workshop image, run:
 ```
 .workshop/scripts/delete-workshop.sh
 ```
-
-
