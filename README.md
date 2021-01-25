@@ -221,3 +221,7 @@ To delete the build configuration for the workshop image, run:
 ```
 .workshop/scripts/delete-workshop.sh
 ```
+
+## Next
+
+As Homeroom is EOL, new developments are now based on [Antora](https://antora.org). A Stand-alone version to run on any OCP cluster is available [here](https://github.com/redhat-scholars/openshift-starter-guides)
