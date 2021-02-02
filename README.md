@@ -1,6 +1,5 @@
 # Lab - Getting Started with OpenShift for Developers
 
-
 * [Overview](#overview)
 * [Deploying the Workshop](#deploying-the-workshop)
   * [Deploying on Red Hat Product Demo System](#deploying-on-red-hat-product-demo-system)
@@ -22,7 +21,7 @@ This workshop is intended to give you a hands on introduction to using OpenShift
 
 Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
 
-For developers looking to kickstart their projets, OpenShift enables efficient application development through streamlined workflows and validated integrations.
+For developers looking to kickstart their projects, OpenShift enables efficient application development through streamlined workflows and validated integrations.
 
 ### Objectives
 
@@ -41,6 +40,7 @@ For developers looking to kickstart their projets, OpenShift enables efficient a
 * Additional topics may also be covered relevant to the specific programming language used by the applications being deployed.
 
 There are 4 programming language variants of the workshop:
+
 * Java
 * Node.js
 * Python
@@ -49,6 +49,7 @@ There are 4 programming language variants of the workshop:
 ### Components Used
 
 The full workshop contains several components:
+
 * Etherpad - So users can claim a username
 * A GOGS server and GOGS repositories for each user
 * Nexus - Currently only used by the Java version of the workshop
@@ -58,10 +59,12 @@ The full workshop contains several components:
 An example of the Java lab guide can be found [here](http://lab-getting-started-ocp4-starter-guide.apps.osd4-demo.u6k6.p1.openshiftapps.com/workshop/common-workshop-summary).
 
 ## Deploying the Workshop
+
 This workshop is designed to be deployed from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com).
 
 ### Deploying on Red Hat Product Demo System
-Upon logging into RHPDS, highlight the **Services** sidebar, and select the **Catalogs** menu. The workshop is found in the catalog under the **Workshops** folder and is named **OCP4 - Getting Started Workshop**.
+
+Upon logging into RHPDS, highlight the **Services** sidebar, and select the **Catalogs** menu. The workshop is found in the catalog under the **Workshops** folder and is named **OCP4 - Getting Started Workshop**. The `City or Customer` field in the provisioning form will be used to create a GUID that will be visible to the participants in the cluster URLs.
 
 Follow the directions in the [Running the Workshop](#running-the-workshop) section to begin the workshop itself.
 
@@ -69,9 +72,10 @@ Follow the directions in the [Running the Workshop](#running-the-workshop) secti
 
 ### Deploying to an OpenShift Cluster
 
-The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.2 Workshop and deploy the Getting Started workshop via the instructions below.
+The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.6 Workshop and deploy the Getting Started workshop via the instructions below.
 
 **Prerequisites**
+
 * An OpenShift 4.6 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.6 Workshop**.
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
@@ -107,6 +111,7 @@ podman run -it --rm --user 0 -v $(pwd):/opt/app-root/src:Z -v $HOME/.kube:/opt/a
 This will get you a bash shell into an AgnosticD enabled environment. In this environment, you'll be able to run or test AgnosticD workloads.
 
 4. cd into the ansible directory:
+
 ```
 cd ansible
 ```
@@ -146,15 +151,23 @@ done
 ## Running the Workshop
 
 ### Starting the Workshop for Participants
-Once the deployment finishes, navigate to the OpenShift administrator perspective. After, go to the `lab` project and view the Routes there. The structure of the Route URLs is as follows. If your GUID is, for example, `abc-1234`, and the route name is `myroute`, the Route URL will be http://`myroute`-lab.apps.cluster-`abc-1234`.`abc-1234`.example.opentlc.com
 
-* The `etherpad` route is for the etherpad deployment. Append `/p/workshop` to the end of this route and share that URL with lab participants so they can claim a username.
+Once the deployment finishes, navigate to the OpenShift Console. If you provisioned the workshop using the RHPDS OCP4 - Getting Started Workshop, you will receive a email with the student and your administrator login credentials once deployment is complete.
+
+In the left-side menu of the OpenShift Console, go to Networking -> Routes and change the project at the top of the page to `labs`.
+
+* The `etherpad` route is for the Etherpad deployment. Append `/p/workshop` to the end of this route and share that URL with lab participants so they can claim a username.
 * The `homeroom` route is the one that launches the workshop chooser. Give this URL to lab participants after they've claimed a username.
 
+If you need to provide the direct URL to any Routes, the structure of the URL is as follows.
 
-
+* A GUID [was created](#Deploying-on-Red-Hat-Product-Demo-System) as a custom attribute of your RHPDS lab. This GUID is used in two parts of your cluster's domain name: the base domain and the cluster name.
+* The Route URLs are in the form of  
+**ROUTE-NAME**-labs.apps.cluster-**GUID**.**GUID**.example.opentlc.com  
+If your GUID is, for example, `abc-1234`, and the route name is `myroute`, the Route URL will be http://`myroute`-lab.apps.cluster-`abc-1234`.`abc-1234`.example.opentlc.com
 
 ## Deploying the Lab Guides Only
+
 **Note**: For this workshop, you will typically want to deploy the full workshop, per the instructions above. Deploying the lab guides only is normally only done if you are making changes to the lab guide content and want to quickly verify and view your changes.
 
 1. To deploy the lab guides only, first clone this Git repository (or your fork of it, if you are making changes) to your own machine. Use the command:
@@ -208,7 +221,6 @@ If you are running an existing instance of the workshop select "Restart Workshop
 When you are happy with your changes, push them back to the remote Git repository.
 
 ## Deleting the Workshop
-
 
 To delete the spawner and any active sessions, including projects, run:
 
