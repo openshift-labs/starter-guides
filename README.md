@@ -72,7 +72,7 @@ Follow the directions in the [Running the Workshop](#running-the-workshop) secti
 
 ### Deploying to an OpenShift Cluster
 
-The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.2 Workshop and deploy the Getting Started workshop via the instructions below.
+The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.6 Workshop and deploy the Getting Started workshop via the instructions below.
 
 **Prerequisites**
 
