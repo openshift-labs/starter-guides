@@ -27,7 +27,9 @@ Your screen will end up looking something like this:
 
 image::images/parksmap-image.png[Explore Project]
 
-In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default OpenShift icon, or since this Frontend is made with Spring boot, you can pick Spring boot icon if you want. 
+In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default OpenShift icon, or select one from the list.
+
+NOTE: The purpose of this exercise is to deploy a microservice from an agnostic existing container image (Frontend, this was made with Spring Boot). The specific programming language path you have chosen is described and implemented in the next microservice chapter (Backend).
 
 Make sure to have the correct values in:
 

@@ -113,7 +113,7 @@ Scroll down to the *General* section. Select:
 * *Name* : nationalparks
 
 
-In *Resources* section, select *Deployment Config*.
+In *Resources* section, select *Deployment*.
 
 Expand the Labels section and add 3 labels:
 

@@ -107,7 +107,13 @@ image::images/nationalparks-import-from-git-url-builder-dotnet.png[Import from G
 NOTE: All of these builder images shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
-Scroll down to the *General* section. Select `workshop` as your application, and `nationalparks` as the name.
+Scroll down to the *General* section. Select:
+
+* *Application Name* : workshop
+* *Name* : nationalparks
+
+
+In *Resources* section, select *Deployment*.
 
 Inside *Pipeline* section, check *Add pipeline* box. This will create a Tekton Pipeline for us that we will use after in the Pipeline modules.
 
@@ -115,9 +121,26 @@ TIP: Click "Show pipeline visualization" to preview the Pipeline inside Pipeline
 
 Expand the Labels section and add 3 labels:
 
-- *__app__=workshop*  (the name we will be giving to the app)
-- *__component__=nationalparks*  (the name of this deployment)
-- *__role__=backend* (the role this component plays in the overall application)
+The name of the Application group:
+
+[source,role=copy]
+----
+app=workshop
+----
+
+Next the name of this deployment.
+
+[source,role=copy]
+----
+component=nationalparks
+----
+
+And finally, the role this component plays in the overall application.
+
+[source,role=copy]
+----
+role=backend
+----
 
 Now click the *Create* button.
 
