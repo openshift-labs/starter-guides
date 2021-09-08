@@ -77,7 +77,7 @@ The recommended way to deploy this workshop is directly from the RHPDS catalog a
 **Prerequisites**
 
 * An OpenShift 4.8 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.8 Workshop**.
-* Install the OpenShift Pipelines Operator onto this OpenShift 4.8 Workshop cluster in all namespaces.
+* Install the **OpenShift Pipelines Operator** onto this OpenShift 4.8 Workshop cluster in all namespaces.
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
 
