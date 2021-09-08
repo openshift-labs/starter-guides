@@ -81,7 +81,7 @@ The recommended way to deploy this workshop is directly from the RHPDS catalog a
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
 
-1. First, log into the OpenShift cluster where you want to deploy the workshop. You need to log in with cluster admin permissions.
+1. First, using the oc login command, log into the OpenShift cluster where you want to deploy the workshop. You need to log in with cluster admin permissions.
 
 2. Next, clone the AgnosticD repository (or your fork of it, if you are making changes):
 
