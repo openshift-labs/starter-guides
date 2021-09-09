@@ -72,15 +72,16 @@ Follow the directions in the [Running the Workshop](#running-the-workshop) secti
 
 ### Deploying to an OpenShift Cluster
 
-The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.6 Workshop and deploy the Getting Started workshop via the instructions below.
+The recommended way to deploy this workshop is directly from the RHPDS catalog as described above. If you'd like to deploy it manually, you can order the base OpenShift 4.8 Workshop and deploy the Getting Started workshop via the instructions below.
 
 **Prerequisites**
 
-* An OpenShift 4.6 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.6 Workshop**.
+* An OpenShift 4.8 Workshop cluster from [Red Hat Product Demo System (RHPDS)](https://rhpds.redhat.com). This cluster is available in the catalog in the **Workshops** folder and is named **OpenShift 4.8 Workshop**.
+* Install the **OpenShift Pipelines Operator** onto this OpenShift 4.8 Workshop cluster in all namespaces.
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
 
-1. First, log into the OpenShift cluster where you want to deploy the workshop. You need to log in with cluster admin permissions.
+1. First, using the oc login command, log into the OpenShift cluster where you want to deploy the workshop. You need to log in with cluster admin permissions.
 
 2. Next, clone the AgnosticD repository (or your fork of it, if you are making changes):
 
@@ -116,7 +117,7 @@ This will get you a bash shell into an AgnosticD enabled environment. In this en
 cd ansible
 ```
 
-5. Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop.
+5. Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop. (Note: these values must both be the same ie if you want to provision 20 users for your lab set `"num_users": 20, "user_count": 20`)
 
 ```
 TARGET_HOST=localhost
@@ -206,7 +207,7 @@ When the URL for the workshop is accessed you will be prompted for a user name a
 
 ## Development
 
-The deployment created above will use an image from [Quay.io](https://quay.io/) for this workshop, a container automation platform, based on the ``ocp-4.6`` branch of the repository.
+The deployment created above will use an image from [Quay.io](https://quay.io/) for this workshop, a container automation platform, based on the ``ocp-4.8`` branch of the repository.
 
 To make changes to the workshop content and test them, edit the files in the Git repository and then run:
 
