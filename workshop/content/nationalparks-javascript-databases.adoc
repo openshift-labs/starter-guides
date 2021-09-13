@@ -48,7 +48,7 @@ In this step we will create a MongoDB template inside our project, so that is on
 
 [source,bash,role=execute-1]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.6/mongodb-template.yaml -n {{project_namespace}}
+oc create -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.8/mongodb-template.yaml -n {{project_namespace}}
 ----
 
 What just happened? What did you just `create`? The item that we passed to the `create`

@@ -45,23 +45,7 @@ For this example, we're going to deploy our pipeline which is stored in the same
 
 [source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline-all-new.yaml -n {{project_namespace}}
-----
-
-Verify the Tasks you created:
-
-[source,shell,role=execute-1]
-----
-oc get tasks -n {{project_namespace}}
-----
-
-You should see something similar:
-
-[source,bash]
-----
-NAME                 AGE
-redeploy             13s
-s2i-java-11-binary   13s
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline.yaml -n {{project_namespace}}
 ----
 
 Verify the Pipeline you created:
@@ -83,7 +67,6 @@ Now let's review our Tekton Pipeline:
 
 [source,shell,role=copypaste]
 ----
----
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
@@ -91,7 +74,6 @@ metadata:
 spec:
   params:
     - default: nationalparks
-      description: The application name
       name: APP_NAME
       type: string
     - default: 'https://github.com/openshift-roadshow/nationalparks.git'
@@ -117,6 +99,8 @@ spec:
           value: 'true'
         - name: deleteExisting
           value: 'true'
+        - name: verbose
+          value: 'true'
       taskRef:
         kind: ClusterTask
         name: git-clone
@@ -125,6 +109,8 @@ spec:
           workspace: app-source
     - name: build-and-test
       params:
+        - name: MAVEN_IMAGE
+          value: gcr.io/cloud-builders/mvn
         - name: GOALS
           value:
             - package
@@ -142,47 +128,65 @@ spec:
           workspace: maven-settings
     - name: build-image
       params:
-        - name: PATH_CONTEXT
+        - name: IMAGE
+          value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
+        - name: BUILDER_IMAGE
+          value: >-
+            registry.redhat.io/rhel8/buildah@sha256:180c4d9849b6ab0e5465d30d4f3a77765cf0d852ca1cb1efb59d6e8c9f90d467
+        - name: STORAGE_DRIVER
+          value: vfs
+        - name: DOCKERFILE
+          value: ./Dockerfile
+        - name: CONTEXT
           value: .
         - name: TLSVERIFY
-          value: 'false'
-        - name: OUTPUT_IMAGE_STREAM
-          value: '$(params.APP_NAME):latest'
+          value: 'true'
+        - name: FORMAT
+          value: oci
       runAfter:
         - build-and-test
       taskRef:
-        kind: Task
-        name: s2i-java-11-binary
+        kind: ClusterTask
+        name: buildah
       workspaces:
         - name: source
           workspace: app-source
     - name: redeploy
       params:
-        - name: DEPLOYMENT_CONFIG
-          value: $(params.APP_NAME)
-        - name: IMAGE_STREAM
-          value: '$(params.APP_NAME):latest'
+        - name: SCRIPT
+          value: oc $@
+        - name: ARGS
+          value:
+            - rollout
+            - restart
+            - deployment/$(params.APP_NAME)
       runAfter:
         - build-image
       taskRef:
-        kind: Task
-        name: redeploy
+        kind: ClusterTask
+        name: openshift-client
   workspaces:
     - name: app-source
     - name: maven-settings
-
 ----
 
 A `Pipeline` is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.
 
 A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* are available to all user within a cluster where OpenShift Pipelines has been installed, while *Tasks* can be custom.
 
+TIP: You can explore all available *ClusterTasks* in the cluster either from the Web Console than from CLI:
+
+[source,shell,role=execute-1]
+----
+oc get clustertasks
+----
+
 This pipeline has 4 Tasks defined:
 
 - *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
 - *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
-- *build-image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it `s2i-java11-binary`
-- *redeploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
+- *build-image*: this is a link:https://buildah.io/[buildah] ClusterTask that will build an image using a binary file as input in OpenShift, in our case a JAR artifact generated in the previous Task.
+- *redeploy*: it will use an `openshift-client` ClusterTask to deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab, using the  
 
 From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline* to see the pipeline you just created.
 
@@ -194,6 +198,23 @@ It is using two *Workspace*:
 
 - *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
 - *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
+
+== Exercise: Add Storage for your Pipeline
+
+OpenShift manages Storage with link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volumes] to be attached to Pods running our applications through *Persistent Volume Claim* requests, and it also provides the capability to manage it at ease from Web Console. 
+From *Administrator Perspective*, go to *Storage*-> *Persistent Volume Claims*.
+
+Go to top-right side and click *Create Persistent Volume Claim* button.
+
+Inside *Persistent Volume Claim name* insert *app-source-pvc*.
+
+In *Size* section, insert *1* as we are going to create 1 GiB Persistent Volume for our Pipeline, using RWO Single User access mode.
+
+Leave all other default settings, and click *Create*.
+
+image::images/nationalparks-codechanges-pipeline-pvc.png[Create PVC]
+
+TIP: The *Storage Class* is the type of storage available in the cluster.
 
 
 == Run the Pipeline
