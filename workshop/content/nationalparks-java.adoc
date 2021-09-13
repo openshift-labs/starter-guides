@@ -83,7 +83,7 @@ Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple Java S2I image.
 
-In the Developer Perspective, click *+Add* in the left navigation and then choose "From Git"
+In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
 
 image::images/nationalparks-show-add-options.png[Add to Project]
 
@@ -100,11 +100,11 @@ In *Git Type* select *Other*.
 
 NOTE: if you copied the Gogs URL correctly (check spaces etc) and you still get a warning like 'Git repository is not reachable' please ignore it at this time, since the UI may fail to ping the repo sometimes.
 
-Select *Java* as your Builder Image, and be sure to select version *11*.
+Select *Java* as your Builder Image, and be sure to select version *openjdk-11-ubi8* to have OpenJDK 11.
 
 image::images/nationalparks-import-from-git-url-builder.png[Import from Git]
 
-NOTE: All of these runtimes shown are made available via *Templates* and
+NOTE: All of these runtimes shown are also made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
 Scroll down to the *General* section. Select:
@@ -139,6 +139,8 @@ role=backend
 ----
 
 image::images/nationalparks-configure-service.png[Runtimes]
+
+Click *Create* to submit.
 
 To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
 

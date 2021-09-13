@@ -10,7 +10,9 @@ With OpenShift it can be done directly from the web console.
 
 Return to the http://console-openshift-console.{{cluster_subdomain}}/k8s/cluster/projects[Web Console].
 
-If you're no longer on the *Topology* view in the Developer perspective, return there now. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
+If you're no longer on the Developer perspective, return there now. 
+
+From the left menu, click *+Add*. You will see a screen where you have multiple options to deploy application to OpenShift. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
 
 image::images/parksmap-devconsole-container-image.png[Add from Container Image]
 

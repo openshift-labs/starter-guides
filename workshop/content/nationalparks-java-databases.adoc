@@ -68,9 +68,8 @@ persistent storage!). The image will ensure that:
 - The user can access the specified database with the specified password
 
 In the Developer Perspective in your `{{ project_namespace }}` project,
-click *+Add* and then *Database*. In the Databases view, you can click *Mongo* to filter for just MongoDB.
-
-NOTE: Make sure to uncheck *Operator Backed* option from *Type* section
+click *+Add* and go to *Developer Catalog* section and click to *Database*. 
+In the Databases view, you can click *Mongo* to filter for just MongoDB.
 
 image::images/nationalparks-databases-catalog-databases.png[Data Stores]
 
