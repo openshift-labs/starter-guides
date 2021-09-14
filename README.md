@@ -81,7 +81,7 @@ The recommended way to deploy this workshop is directly from the RHPDS catalog a
 
 [AgnosticD](https://github.com/redhat-cop/agnosticd) is used to deploy the workshop, which provides a deploying infrastructure to build and configure application environments.
 
-1. First, using the oc login command, log into the OpenShift cluster where you want to deploy the workshop. You need to log in with cluster admin permissions.
+1. First, using the `oc login` command, log into the OpenShift cluster where you want to deploy the workshop. You need to log in with cluster admin permissions.
 
 2. Next, clone the AgnosticD repository (or your fork of it, if you are making changes):
 
@@ -95,29 +95,30 @@ git clone https://github.com/redhat-cop/agnosticd
 cd agnosticd
 ```
 
-If you are running Docker or Moby, type:
+3. Install dependencies such as Python headers (Python.h), on Fedora:
 
-```
-docker run -it --rm -v $(pwd):/opt/app-root/src -v $HOME/.kube:/opt/app-root/src/.kube \
---entrypoint bash quay.io/osevg/agnosticd-runner
-```
-
-If you are running Podman, type:
-
-```
-podman run -it --rm --user 0 -v $(pwd):/opt/app-root/src:Z -v $HOME/.kube:/opt/app-root/src/.kube:Z \
---entrypoint bash quay.io/osevg/agnosticd-runner
+```bash
+sudo dnf install python3-dev
 ```
 
-This will get you a bash shell into an AgnosticD enabled environment. In this environment, you'll be able to run or test AgnosticD workloads.
+4. Setup Virtual Env:
 
-4. cd into the ansible directory:
+```bash
+cd agnosticd
+python3 -mvenv ~/virtualenv/ansible2.9-python3.6-2021-01-22
+. ~/virtualenv/ansible2.9-python3.6-2021-01-22/bin/activate
+ pip install -r https://raw.githubusercontent.com/redhat-cop/agnosticd/development/tools/virtualenvs/ansible2.9-python3.6-2021-01-22.txt
+```
+
+This will get you a bash shell into an AgnosticD enabled virtual env. In this environment, you'll be able to run or test AgnosticD workloads.
+
+5. cd into the ansible directory:
 
 ```
 cd ansible
 ```
 
-5. Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop. (Note: these values must both be the same ie if you want to provision 20 users for your lab set `"num_users": 20, "user_count": 20`)
+6. Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop. (Note: these values must both be the same ie if you want to provision 20 users for your lab set `"num_users": 20, "user_count": 20`)
 
 ```
 TARGET_HOST=localhost
@@ -126,7 +127,6 @@ ocp_username=opentlc-mgr
 # WORKLOAD SPECIFICS
 WORKSHOP_PROJECT=lab
 workloads=("ocp-workload-etherpad" \
-           "ocp-workload-ocp-ops-view" \
            "ocp-workload-gogs" \
            "ocp4-workload-nexus-operator" \
            "ocp-workload-gogs-load-repository" \
@@ -135,13 +135,12 @@ workloads=("ocp-workload-etherpad" \
 for WORKLOAD in ${workloads[@]}
 do
   ansible-playbook -c local -i ${TARGET_HOST}, configs/ocp-workloads/ocp-workload.yml \
-      -e ansible_python_interpreter=/opt/app-root/bin/python \
+      -e ansible_python_interpreter=python \
       -e ocp_workload=${WORKLOAD} \
       -e guid=${GUID} \
       -e project_name=${WORKSHOP_PROJECT} \
       -e etherpad_project=${WORKSHOP_PROJECT} \
       -e gogs_project=${WORKSHOP_PROJECT} \
-      -e opsview_project=${WORKSHOP_PROJECT} \
       -e ocp4_workload_nexus_operator_project=${WORKSHOP_PROJECT} \
       -e project_name=${WORKSHOP_PROJECT} \
       -e ocp_username=${ocp_username} \
