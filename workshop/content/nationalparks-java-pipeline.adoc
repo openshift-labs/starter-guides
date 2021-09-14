@@ -45,7 +45,7 @@ For this example, we're going to deploy our pipeline which is stored in the same
 
 [source,shell,role=execute-1]
 ----
-oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline.yaml -n {{project_namespace}}
+oc create -f http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks/raw/master/pipeline/nationalparks-pipeline-new.yaml -n {{project_namespace}}
 ----
 
 Verify the Pipeline you created:
@@ -154,12 +154,7 @@ spec:
     - name: redeploy
       params:
         - name: SCRIPT
-          value: oc $@
-        - name: ARGS
-          value:
-            - rollout
-            - restart
-            - deployment/$(params.APP_NAME)
+          value: oc rollout restart deployment/$(params.APP_NAME)
       runAfter:
         - build-image
       taskRef:
