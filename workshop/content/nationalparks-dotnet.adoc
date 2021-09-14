@@ -83,7 +83,7 @@ Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple .NET S2I image.
 
-In the Developer Perspective, click *+Add* in the left navigation and then choose "From Git"
+In the Developer Perspective, click *+Add* in the left navigation and then choose *From Git*
 
 image::images/nationalparks-show-add-options.png[Add to Project]
 
@@ -100,7 +100,7 @@ In *Git Type* select *Other*.
 
 NOTE: if you copied the Gogs URL correctly (check spaces etc) and you still get a warning like 'URL is valid but cannot be reached' please ignore it at this time, since the UI may fail to ping the repo sometimes.
 
-Select *.NET Core* as your Builder Image.
+Select *.NET Core* as your Builder Image and then select version *5.0-ubi8*.
 
 image::images/nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
 
