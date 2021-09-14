@@ -118,11 +118,16 @@ This will get you a bash shell into an AgnosticD enabled virtual env. In this en
 cd ansible
 ```
 
-6. Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop. (Note: these values must both be the same ie if you want to provision 20 users for your lab set `"num_users": 20, "user_count": 20`)
+6. Set you environments GUID
+```
+GUID=<YOUR_GUID>
+```
+7. Run the following script to deploy all the components of the starter workshop. 
+Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop. (Note: these values must both be the same ie if you want to provision 20 users for your lab set `"num_users": 20, "user_count": 20`).
+The target hosts and ocp username can be left as the defaults or change them if needed.
 
 ```
 TARGET_HOST=localhost
-GUID=<YOUR_GUID>
 ocp_username=opentlc-mgr
 # WORKLOAD SPECIFICS
 WORKSHOP_PROJECT=lab
