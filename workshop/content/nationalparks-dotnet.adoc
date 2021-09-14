@@ -115,7 +115,7 @@ Scroll down to the *General* section. Select:
 
 In *Resources* section, select *Deployment*.
 
-Inside *Pipeline* section, check *Add pipeline* box. This will create a Tekton Pipeline for us that we will use after in the Pipeline modules.
+Inside *Pipeline* section, check *Add pipeline* box. This will create a Tekton Pipeline for us that will be used for building the container.
 
 TIP: Click "Show pipeline visualization" to preview the Pipeline inside Pipeline UI that we are going to use later on.
 
@@ -146,7 +146,11 @@ Now click the *Create* button.
 
 image::images/nationalparks-configure-service-pipelines.png[Runtimes]
 
-To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
+At this point, OpenShift will build the app and create a container through the Pipeline we just added.
+
+TIP: We will discuss more in details about OpenShift Pipelines in the *Continuous Integration and Pipelines* module.
+
+To see the build logs, in the Topology view, click the `nationalparks` entry. Inside *Resources* tab, go to *PipelineRuns* section and click to *View Logs* link next to running pipeline.
 
 image::images/nationalparks-dotnet-new-dotnet-build.png[Nationalparks build]
 

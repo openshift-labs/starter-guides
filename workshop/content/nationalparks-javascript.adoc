@@ -100,7 +100,7 @@ In *Git Type* select *Other*.
 
 NOTE: if you copied the Gogs URL correctly (check spaces etc) and you still get a warning like 'URL is valid but cannot be reached' please ignore it at this time, since the UI may fail to ping the repo sometimes.
 
-Select Node.js as your Builder Image.
+Select *Node.js* as your Builder Image and pick *latest* version.
 
 image::images/nationalparks-import-from-git-url-builder-js.png[Import from Git]
 
@@ -148,9 +148,15 @@ Now click the *Create* button.
 
 image::images/nationalparks-configure-service-pipelines.png[Runtimes]
 
-To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
+At this point, OpenShift will build the app and create a container through the Pipeline we just added.
 
-image::images/nationalparks-javascript-new-nodejs-build.png[Nationalparks build]
+TIP: We will discuss more in details about OpenShift Pipelines in the *Continuous Integration and Pipelines* module.
+
+To see the build logs, in the Topology view, click the `nationalparks` entry. Inside *Resources* tab, go to *PipelineRuns* section and click to *View Logs* link next to running pipeline.
+
+image::images/nationalparks-javascript-new-nodejs-pipeline.png[Nationalparks build]
+
+image::images/nationalparks-javascript-new-nodejs-build.png[Nationalparks build log]
 
 The initial build will take a few minutes to download all of the dependencies needed for
 the application. You can see all of this happening in real time!
