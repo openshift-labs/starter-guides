@@ -71,5 +71,8 @@ image::images/explore-perspective-toggle.png[Toggle Between Perspectives]
 
 Select *Developer* to switch to the Developer perspective. Once the Developer perspective loads, you should be in the *Topology* view. Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application here.
 
+image::images/explore-add-application.png[Add New Applications]
+
+
 We will be using a mix of command line tooling and the web console for the labs.
 Get ready!
