@@ -43,6 +43,7 @@ Ensure *Deployment* is selected from *Resource* section.
 *Un-check* the checkbox next to *Create a route to the application*. For learning purposes, we will create a *Route* for the application later in the workshop.
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
+image::images/nationalparks-labels.png[Labels image]
 
 We will add 3 labels. After you enter the name=value pair for each label, press *tab* or de-focus with mouse before typing the next. First the name to be given to the application.
 
