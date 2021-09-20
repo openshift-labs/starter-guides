@@ -36,7 +36,7 @@ other aspects of OpenShift.
 
 A full discussion of S2I is beyond the scope of this class, but you can find
 more information about it either in the
-https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
+https://{{DOCS_URL}}/openshift_images/using_images/using-s21-images.htmlOpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 

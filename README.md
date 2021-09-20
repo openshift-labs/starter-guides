@@ -131,7 +131,7 @@ The target hosts and ocp username can be left as the defaults or change them if 
 TARGET_HOST=localhost
 ocp_username=opentlc-mgr
 # WORKLOAD SPECIFICS
-WORKSHOP_PROJECT=lab
+WORKSHOP_PROJECT=labs
 workloads=("ocp-workload-etherpad" \
            "ocp-workload-gogs" \
            "ocp4-workload-nexus-operator" \
