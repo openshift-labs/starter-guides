@@ -95,7 +95,9 @@ git clone https://github.com/redhat-cop/agnosticd
 cd agnosticd
 ```
 
-3. Install dependencies such as Python headers (Python.h), on Fedora:
+Python headers (Python.h) are required. On Mac OS X you should have it already in place if you have installed Python with Homebrew.
+
+On Fedora:
 
 ```bash
 sudo dnf install python3-dev
@@ -104,7 +106,6 @@ sudo dnf install python3-dev
 4. Setup Virtual Env:
 
 ```bash
-cd agnosticd
 python3 -mvenv ~/virtualenv/ansible2.9-python3.6-2021-01-22
 . ~/virtualenv/ansible2.9-python3.6-2021-01-22/bin/activate
  pip install -r https://raw.githubusercontent.com/redhat-cop/agnosticd/development/tools/virtualenvs/ansible2.9-python3.6-2021-01-22.txt
@@ -118,11 +119,16 @@ This will get you a bash shell into an AgnosticD enabled virtual env. In this en
 cd ansible
 ```
 
-6. Run the following script to deploy all the components of the starter workshop. Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop. (Note: these values must both be the same ie if you want to provision 20 users for your lab set `"num_users": 20, "user_count": 20`)
+6. Set you environments GUID
+```
+GUID=<YOUR_GUID>
+```
+7. Run the following script to deploy all the components of the starter workshop. 
+Change the value of `num_users` and `user_count` to match the number of users you want to provision for the workshop. (Note: these values must both be the same ie if you want to provision 20 users for your lab set `"num_users": 20, "user_count": 20`).
+The target hosts and ocp username can be left as the defaults or change them if needed.
 
 ```
 TARGET_HOST=localhost
-GUID=<YOUR_GUID>
 ocp_username=opentlc-mgr
 # WORKLOAD SPECIFICS
 WORKSHOP_PROJECT=lab
