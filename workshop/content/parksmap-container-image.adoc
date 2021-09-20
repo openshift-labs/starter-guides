@@ -43,6 +43,7 @@ Ensure *Deployment* is selected from *Resource* section.
 *Un-check* the checkbox next to *Create a route to the application*. For learning purposes, we will create a *Route* for the application later in the workshop.
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
+
 image::images/nationalparks-labels.png[Labels image]
 
 We will add 3 labels. After you enter the name=value pair for each label, press *tab* or de-focus with mouse before typing the next. First the name to be given to the application.
@@ -102,7 +103,11 @@ server, a log analyzer, and a file service to help manage uploaded files.
 
 == Exercise: Examining the Pod
 
-If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
+If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. 
+
+image::images/switchtoresources.png[Details Tab image]
+
+On that panel, you will see that there is a single *Pod* that was created by your actions.
 
 image::images/parksmap-overview.png[Pod overview]
 
@@ -189,7 +194,11 @@ find the details page. You can also get there by clicking on the `parksmap` depl
 
 image::images/parksmap-dc-resources.png[Parksmap Resources]
 
-image::images/parksmap-pod.png[Pod list]
+From here you can see configuration, metrics, environment variables, logs, events and get a Terminal shell on the running pod.
+
+image::images/parksmap-pod.png[Pod Details]
+
+image::images/parksmap-pod-events.png[Pod Events]
 
 Getting the `parksmap` image running may take a little while to complete. Each
 OpenShift node that is asked to run the image has to pull (download) it, if the
