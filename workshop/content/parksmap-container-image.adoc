@@ -206,6 +206,12 @@ node does not already have it cached locally. You can check on the status of the
 image download and deployment in the *Pod* details page, or from the command
 line with the `oc get pods` command that you used before.
 
+The default view in the *Developer* console is *Graph View*. You can switch between *Graph* to a *List* views by using the toggle in the top right of the console.
+
+image::images/national-parks-listview.png[List View Toggle]
+
+image::images/national-parks-graphview.png[Topology View Toggle]
+
 == Background: Customizing the Image Lifecycle Behavior
 
 Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Docker daemon or CRI-O) to run an image, the runtime will check to make sure it has the right "version" of the image to run.
