@@ -189,7 +189,7 @@ image::images/devops-pipeline-created.png[Pipeline created]
 
 The Pipeline is parametric, with default value on the one we need to use.
 
-It is using two *Workspace*:
+It is using two *Workspaces*:
 
 - *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
 - *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
