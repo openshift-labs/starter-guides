@@ -19,7 +19,11 @@ create a *Route*.
 == Exercise: Creating a Route
 
 You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 
-create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the *Administrator Perspective*, just click *Networking -> Routes* and then the *Create Route* button. 
+create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line or via the *Administrator Perspective*.
+
+=== Creating a route using the Web Console
+
+In the *Administrator Perspective* click *Networking -> Routes* and then the *Create Route* button. 
 
 Insert *parksmap* in *Name* field.
 
@@ -35,6 +39,8 @@ image::images/parksmap-route-create-2.png[Create Route2,align="center"]
 
 
 When creating a *Route*, some other options can be provided, like the hostname and path for the *Route* or the other TLS configurations.
+
+=== Creating a route using the command line
 
 When using the command line, we can first verify that we don't already have any existing *Routes*:
 

@@ -102,11 +102,11 @@ CAUTION: Make sure to have configured the *`MongoDB Database Name`* parameter wi
 
 Once you have entered in the above information, click on *Create* to go to the next step which will allow us to add a binding.
 
-From left-side menu, click to *Secrets*.
+From left-side menu, click to *Secrets*. Secrets are a mechanism to hold sensitive information such as passwords, configuration files, private source repository credentials, and so on. Secrets decouple sensitive content from the pods. 
 
 image::images/nationalparks-databases-list-secrets.png[List Secrets]
 
-Click the secret name listed that we will use for *Parameters*. The secret can be used in other components, such as the `nationalparks` backend, to authenticate to the database.
+Click the secret that begins *mongodb-ephemeral-parameters* like the one listed in the image above, that we will use for *Parameters*. The secret can be used in other components, such as the `nationalparks` backend, to authenticate to the database.
 
 Now that the connection and authentication information stored in a secret in our project, we need to add it to the `nationalparks` backend. Click the *Add Secret to Workload* button.
 
@@ -118,7 +118,7 @@ image::images/nationalparks-databases-binding-add-binding-to-nationalparks.png[A
 
 This change in configuration will trigger a new deployment of the `nationalparks` application with the environment variables properly injected.
 
-Back in the *Topology* view, click and drag with Shift key the  `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it.
+Back in the *Topology* view, if required, whilst holding the shift key down, click and drag the `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it. (Note: Shift click and drag - this is how you move components in and out of the application boundary. You may also edit the *part-of* label for the component, for example all the components in this *workshop* application have this label *app.kubernetes.io/part-of=workshop* ).
 
 image::images/nationalparks-databases-add-mongodb-to-workshop-app.png[Add mongodb to the workshop app]
 
