@@ -137,19 +137,14 @@ spec:
         - fetch-repository
       taskRef:
         kind: ClusterTask
-        name: s2i-nodejs-12
+        name: s2i-nodejs
       workspaces:
         - name: source
           workspace: workspace
     - name: deploy
       params:
         - name: SCRIPT
-          value: kubectl $@
-        - name: ARGS
-          value:
-            - rollout
-            - status
-            - deploy/$(params.APP_NAME)
+          value: oc rollout status deploy/$(params.APP_NAME)
       runAfter:
         - build
       taskRef:

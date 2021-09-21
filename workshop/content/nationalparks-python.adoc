@@ -36,7 +36,7 @@ other aspects of OpenShift.
 
 A full discussion of S2I is beyond the scope of this class, but you can find
 more information about it either in the
-https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
+https://{{DOCS_URL}}/openshift_images/using_images/using-s21-images.html[OpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
@@ -148,35 +148,20 @@ Now click the *Create* button.
 
 image::images/nationalparks-configure-service-pipelines.png[Runtimes]
 
-To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
+At this point, OpenShift will build the app and create a container through the Pipeline we just added.
 
-image::images/nationalparks-python-new-python-build.png[Nationalparks build]
+TIP: We will discuss more in details about OpenShift Pipelines in the *Continuous Integration and Pipelines* module.
+
+To see the build logs, in the Topology view, click the `nationalparks` entry. Inside *Resources* tab, go to *PipelineRuns* section and click to *View Logs* link next to running pipeline.
+
+image::images/nationalparks-dotnet-new-dotnet-build.png[Nationalparks build]
+
+Your newly created pipeline is running to build the backend from he source code and push the resulting  container image to the OpenShift Registry.
+
+image::images/nationalparks-javascript-new-nodejs-build.png[Nationalparks build log]
 
 The initial build will take a few minutes to download all of the dependencies needed for
-the application. You can see all of this happening in real time!
-
-
-From the command line, you can also see the *Builds*:
-
-[source,bash,role=execute-1]
-----
-oc get builds
-----
-
-You'll see output like:
-
-[source,bash]
-----
-NAME              TYPE      FROM          STATUS     STARTED              DURATION
-nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
-----
-
-You can also view the build logs with the following command:
-
-[source,bash,role=execute-1]
-----
-oc logs -f builds/nationalparks-1
-----
+the application.
 
 After the build has completed and successfully:
 
@@ -186,15 +171,15 @@ After the build has completed and successfully:
 * A *ReplicaSet* (RS) will be spawned for this new deployment.
 * The RC will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
 
-In the end, when issuing the `oc get pods` command, you will see that the build Pod
-has finished (exited) and that an application *Pod* is in a ready and running state:
+In the end, when issuing the `oc get pods` command, you will see that the each step of the pipeline has been executed inside a Pod (Completed) and that an application *Pod* is in a ready and running state:
 
 [source,bash]
 ----
 NAME                    READY     STATUS      RESTARTS   AGE
-nationalparks-1-tkid3   1/1       Running     3          2m
-nationalparks-1-build   0/1       Completed   0          3m
-parksmap-57df75c46d-xltcs        1/1       Running     0          2h
+nationalparks-757df44bd4-hnrxc                          1/1     Running     0          2m23s
+nationalparks-vrn52h-build-m5nmf-pod-r4p2z              0/4     Completed   0          4m26s
+nationalparks-vrn52h-deploy-pv6nx-pod-vwx62             0/1     Completed   0          2m22s
+nationalparks-vrn52h-fetch-repository-4wjkm-pod-4zxm6   0/1     Completed   0          5m27s
 ----
 
 If you look again at the web console, you will notice that, when you create the

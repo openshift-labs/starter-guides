@@ -6,7 +6,7 @@ public cloud. The environment consists of the following systems:
 * Master node(s)
 * Infrastructure node(s)
 * Worker or "application" nodes
-* An NFS server
+* Dynamic Provisioned Storage
 
 The infrastructure node is providing several services:
 

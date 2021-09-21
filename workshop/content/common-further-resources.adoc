@@ -28,16 +28,8 @@ Online or other OpenShift related products and services.
 be used to install a local OpenShift cluster on your own computer, running
 in a virtual machine.
 
-* *link:https://manage.openshift.com/[OpenShift Online]* - A shared public
-hosting environment for running your applications using OpenShift.
-
-* *link:https://www.openshift.com/dedicated[OpenShift Dedicated]* - A
-dedicated hosting environment for running your applications, managed and
-supported for you by Red Hat.
-
-* *link:https://www.openshift.com/[OpenShift Container Platform]* - The Red
-Hat supported OpenShift product for installation on premise or in hosted
-cloud environments.
+* *link:https://www.openshift.com/try[Try OpenShift Container Platform]* - Try Red
+Hat supported OpenShift on Developer Sandbox, Managed and Self-Managed offering.
 
 * *link:https://commons.openshift.org[OpenShift Commons]* - A community for users, partners, customers, and contributors to come together to collaborate and work together on OpenShift.
 

@@ -95,7 +95,9 @@ git clone https://github.com/redhat-cop/agnosticd
 cd agnosticd
 ```
 
-3. Install dependencies such as Python headers (Python.h), on Fedora:
+Python headers (Python.h) are required. On Mac OS X you should have it already in place if you have installed Python with Homebrew.
+
+On Fedora:
 
 ```bash
 sudo dnf install python3-dev
@@ -104,7 +106,6 @@ sudo dnf install python3-dev
 4. Setup Virtual Env:
 
 ```bash
-cd agnosticd
 python3 -mvenv ~/virtualenv/ansible2.9-python3.6-2021-01-22
 . ~/virtualenv/ansible2.9-python3.6-2021-01-22/bin/activate
  pip install -r https://raw.githubusercontent.com/redhat-cop/agnosticd/development/tools/virtualenvs/ansible2.9-python3.6-2021-01-22.txt
@@ -130,7 +131,7 @@ The target hosts and ocp username can be left as the defaults or change them if 
 TARGET_HOST=localhost
 ocp_username=opentlc-mgr
 # WORKLOAD SPECIFICS
-WORKSHOP_PROJECT=lab
+WORKSHOP_PROJECT=labs
 workloads=("ocp-workload-etherpad" \
            "ocp-workload-gogs" \
            "ocp4-workload-nexus-operator" \
