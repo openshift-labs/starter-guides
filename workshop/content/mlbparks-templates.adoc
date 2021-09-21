@@ -124,8 +124,6 @@ several app servers, databases, and more.  You could deploy the entire set of
 resources with one command, and then hack on them to develop new features,
 microservices, fix bugs, and more.
 
-In Topology view, you can drag `mlbparks` and `mongodb-mlbparks` into the `workshop` application grouping.
-
 image::images/mlbparks-templates-complete-overview.png[Complete overview]
 
 In addition to being able to instantiate templates from the command line as we did above, templates can also be instantiated from the Developer Perspective in the web console. Click *+Add*, then *From Catalog* and search for `mlb`. You should see a result for `MLBparks`.
