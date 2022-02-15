@@ -33,7 +33,7 @@ Hat supported OpenShift on Developer Sandbox, Managed and Self-Managed offering.
 
 * *link:https://commons.openshift.org[OpenShift Commons]* - A community for users, partners, customers, and contributors to come together to collaborate and work together on OpenShift.
 
-Free link:https://developers.redhat.com/e-books[online eBooks are also available for download]
+Free https://developers.redhat.com/e-books[online e-Books] are also available for download
 
 Including the following e-books related to OpenShift.
 
