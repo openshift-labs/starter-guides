@@ -36,7 +36,7 @@ Hat supported OpenShift on Developer Sandbox, Managed and Self-Managed offering.
 The following free online eBooks are also available for download related to
 OpenShift.
 
-* *link:https://www.openshift.com/for-developers/[OpenShift
+* *link:https://developers.redhat.com/e-books[OpenShift
 for Developers]*
 
 image::images/further-resources-openshift-for-developers.png[OpenShift for Developers]
