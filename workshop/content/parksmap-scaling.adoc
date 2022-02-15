@@ -212,7 +212,7 @@ application instance wasn't alive, it would kill the instance and then restart
 it, always ensuring that the desired number of replicas was in place.
 
 More information on probing applications is available in the
-https://{{DOCS_URL}}/nodes/containers/nodes-containers-health.html[Application
+https://{{DOCS_URL}}/applications/application-health.html[Application
 Health] section of the documentation and later in this guide.
 
 == Exercise: Scale Down

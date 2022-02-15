@@ -218,7 +218,7 @@ Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Do
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://{{DOCS_URL}}/applications/application_life_cycle_management/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli[specifying an image]
+https://{{DOCS_URL}}/applications/creating_applications/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli[specifying an image]
 as well as
 https://{{DOCS_URL}}/openshift_images/managing_images/image-pull-policy.html[image pull policy].
 

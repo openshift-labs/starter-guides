@@ -261,7 +261,7 @@ API and asking about the *Routes* and *Services* in the project. If any of them 
 *Label* that is `type=parksmap-backend`, the application knows to interrogate
 the endpoints to look for map data.
 You can see the code that does this
-link:https://github.com/openshift-roadshow/parksmap-web/blob/{{PARKSMAP_VERSION}}/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20[here].
+link:https://github.com/openshift-roadshow/parksmap-web/blob/master/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java[here].
 
 
 Fortunately, the command line provides a convenient way for us to manipulate
