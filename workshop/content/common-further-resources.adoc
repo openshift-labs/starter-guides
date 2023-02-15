@@ -42,7 +42,7 @@ for Developers]*
 
 image::images/further-resources-openshift-for-developers.png[OpenShift for Developers]
 
-* *link:https://www.openshift.com/devops-with-openshift/[DevOps with OpenShift]*
+* *link:https://www.redhat.com/en/engage/devops-culture-practice-openshift-ebooks[DevOps Culture & Practice with OpenShift]*
 
 image::images/further-resources-devops-with-openshift.png[DevOps with OpenShift]
 
