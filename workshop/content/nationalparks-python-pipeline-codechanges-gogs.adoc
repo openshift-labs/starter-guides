@@ -83,7 +83,7 @@ this out.
 
 Click the *Files* tab in Gogs. This is Gogs's repository view.  
 
-CAUTION: Make sure that the drop-down menu at the upper right is set for 
+CAUTION: Make sure that the drop-down menu at the upper left is set for 
 the *`master`* branch. Navigate to the
 following path:
 
