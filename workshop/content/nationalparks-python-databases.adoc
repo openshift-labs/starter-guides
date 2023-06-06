@@ -203,7 +203,7 @@ a browser problem, and the application is working properly.
 
 [source,bash,role=copypaste]
 ----
-https://parksmap-{{ project_namespace }}.{{cluster_subdomain}}
+http://parksmap-{{ project_namespace }}.{{cluster_subdomain}}
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
@@ -302,7 +302,7 @@ If you check your browser now:
 
 [source,bash,role=copypaste]
 ----
-https://parksmap-{{ project_namespace }}.{{cluster_subdomain}}/
+http://parksmap-{{ project_namespace }}.{{cluster_subdomain}}/
 ----
 
 image::images/nationalparks-databases-new-parks.png[MongoDB]
