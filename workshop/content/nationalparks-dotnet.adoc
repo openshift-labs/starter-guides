@@ -100,7 +100,7 @@ In *Git Type* select *Other*.
 
 NOTE: if you copied the Gogs URL correctly (check spaces etc) and you still get a warning like 'URL is valid but cannot be reached' please ignore it at this time, since the UI may fail to ping the repo sometimes.
 
-Select *.NET Core* as your Builder Image and then select version *3.0-ubi8*.
+Select *.NET Core* as your Builder Image and then select version *3.1-ubi8*.
 
 image::images/nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
 
