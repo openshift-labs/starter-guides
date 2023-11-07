@@ -100,7 +100,7 @@ Python headers (Python.h) are required. On Mac OS X you should have it already i
 On Fedora:
 
 ```bash
-sudo dnf install python3-dev
+sudo dnf install python3-devel
 ```
 
 4. Setup Virtual Env:
